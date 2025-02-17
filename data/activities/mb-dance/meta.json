@@ -1,0 +1,8 @@
+{
+    "author": "MicroBlocks",
+    "level": 1,
+    "boards": [ "board_microbit" ],
+    "time": [ 90, 120 ],
+    "topics": [ "tpc_robotics" ],
+    "components": [ "cmp_cr_servo", "cmp_ext_board" ]
+}

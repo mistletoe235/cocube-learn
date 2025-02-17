@@ -1,0 +1,9 @@
+{
+    "draft": true,
+    "author": "Jane Doe",
+    "level": 1,
+    "boards": [ "board_microbit", "board_cpx" ],
+    "time": [ 90, 120 ],
+    "topics": [ "tpc_music", "tpc_colors" ],
+    "components": [ "cmp_led_rgb", "cmp_piezzo" ]
+}

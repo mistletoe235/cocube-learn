@@ -1,0 +1,160 @@
+<form id="activity-filters" class="c_filters">
+    <div class="c_filters__wrapper">
+
+        <div class="c_filters__mobile">
+            <h3 class="c_filters__mobile-title">Activity Filters</h3>
+            <div class="c_filters__mobile-close" role="button">
+                {{> svg.icon-hide }}
+            </div>
+        </div>
+
+
+        {{!-- Language --}}
+        <fieldset class="c_filters__group">
+            <legend class="c_title-small c_filters__title">
+                <div class="c_title-small__icon">
+                    {{> svg.icon-language-16x16 }}
+                </div>
+                <div>
+                    {{localize "language"}}
+                </div>
+            </legend>
+
+            <div class="c_filters__input-wrapper">
+                <label for="filters-language" class="visually-hidden">Language</label>
+                <select id="filters-language"
+                    class="locale activity-filter"
+                    onchange="applyFilter('locale', this.value)" >
+                    <option value="">{{localize "locales-all"}}</option>
+                </select>
+            </div>
+
+        </fieldset>
+
+
+        {{!-- Board --}}
+        <fieldset class="c_filters__group">
+            <legend class="c_title-small c_filters__title">
+                <div class="c_title-small__icon">
+                    {{> svg.icon-board-16x16 }}
+                </div>
+                <div>
+                    {{localize "board"}}
+                </div>
+            </legend>
+
+
+            <div class="c_filters__input-wrapper">
+                <label for="filters-board" class="visually-hidden">Board model</label>
+                <select id="filters-board"
+                    class="boards activity-filter"
+                    onchange="applyFilter('boards', this.value)" >
+                    <option value="">{{localize "boards-all"}}</option>
+                </select>
+
+                <label><input
+                    onchange="applyFilter('compatible', this.checked)"
+                    class="activity-toggle"
+                    type="checkbox"> {{localize "chk-compatible"}}
+                </label>
+            </div>
+
+        </fieldset>
+
+
+        {{!-- Componenets --}}
+        <fieldset class="c_filters__group">
+            <legend class="c_title-small c_filters__title">
+                <div class="c_title-small__icon">
+                    {{> svg.icon-components-16x16 }}
+                </div>
+                <div>
+                    {{localize "components"}}
+                </div>
+            </legend>
+
+            <div class="c_filters__input-wrapper">
+                <label for="filters-components" class="visually-hidden">Components</label>
+                <select id="filters-compoenents"
+                    class="components activity-filter"
+                    onchange="applyFilter('components', this.value)">
+                    <option value="">{{localize "components-unset"}}</option>
+                    <option value="none">{{localize "no-components"}}</option>
+                </select>
+            </div>
+        </fieldset>
+
+
+        {{!-- Level and Resources --}}
+        <fieldset class="c_filters__group">
+            <legend class="c_title-small c_filters__title">
+                <div class="c_title-small__icon">
+                    {{> svg.icon-student-16x16 }}
+                </div>
+                <div>
+                    {{localize "level+resources"}}
+                </div>
+            </legend>
+
+            <div class="c_filters__input-wrapper">
+                <label for="filters-level" class="visually-hidden">Level</label>
+                <select id="filters-level"
+                    class="level activity-filter"
+                    onchange="applyFilter(
+                        'level',
+                        this.value === '' ?
+                            this.value :
+                            parseInt(this.value));"
+                >
+                    <option value="">{{localize "levels-all"}}</option>
+                </select>
+
+                <label><input
+                    onchange = "applyFilter('has-card', this.checked)"
+                    class = "activity-toggle"
+                    type="checkbox"> {{localize "chk-card"}}
+                </label>
+
+                <label><input
+                    onchange = "applyFilter('has-guide', this.checked)"
+                    class = "activity-toggle"
+                    type="checkbox"> {{localize "chk-guide"}}
+                </label>
+            </div>
+
+        </fieldset>
+        
+
+        {{!-- Topics --}}
+        <fieldset class="c_filters__group">
+            <legend class="c_title-small c_filters__title">
+                <div class="c_title-small__icon">
+                    {{> svg.icon-topics-16x16 }}
+                </div>
+                <div>
+                    {{localize "topics"}}
+                </div>
+            </legend>
+
+            <div class="c_filters__input-wrapper">
+                <label for="filters-topic" class="visually-hidden">Topic</label>
+                <select id="filters-topic"
+                    class="topics activity-filter"
+                    onchange="applyFilter('topics', this.value)">
+                    <option value="">{{localize "topics-all"}}</option>
+                </select> 
+            </div>
+        </fieldset>
+
+
+        {{!-- Buttons --}}
+        <div>
+            <button
+                onclick="event.preventDefault(); resetFilters();"
+                class="c_filters__button c_filters__button--reset"
+            >{{localize "btn-reset"}}</button>
+        </div>
+
+
+    </div>
+</form>

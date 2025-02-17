@@ -1,0 +1,152 @@
+// 
+// Hero / Hero Yellow
+// ==========================================================================
+
+
+.c_hero-yellow {
+  position: relative;
+  padding: $space-200 $space-100;
+  min-height: $space-1500;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: $color-grey-900;
+  text-align: center;
+
+  background-color: $color-yellow;
+  background-image: url("assets/img/backgrounds/background-on-yellow.png");
+  background-position: center center;
+
+  border-bottom: 4px solid $color-yellow-dark;
+}
+
+
+
+
+
+// Picture
+// ========================================
+
+
+.c_hero-yellow__picture-wrapper {
+  margin-bottom: $space-100; // always have a picture underneath
+  
+  transform: rotate(-2deg);
+  box-shadow: $boxShadow-base;
+
+  @include breakpoint(xxl) {
+    margin-bottom: $space-150;
+  }
+}
+
+
+.c_hero-yellow__picture {
+  position: relative;
+
+  @include ratio(16,9);
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+
+
+
+// Title
+// ========================================
+
+
+.c_hero-yellow__title-wrapper {
+  // margin: $space-150 0;
+}
+
+
+.c_hero-yellow__subtitle {
+  margin-bottom: $space-050;
+
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: $fontSize-125;
+  line-height: $lineHeight-100;
+  color: $color-purple;
+  text-transform: uppercase;
+}
+
+
+.c_hero-yellow__title {
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: $fontSize-250;
+  line-height: $lineHeight-100;
+  color: $color-black;
+}
+
+
+.c_hero-yellow__author {
+  margin-top: $space-025;
+}
+
+
+
+
+
+// Specs
+// ========================================
+
+
+.c_hero-yellow__specs {
+  margin-top: $space-150;
+}
+
+
+.c_hero-yellow__boards {
+  margin-bottom: $space-025;
+}
+
+
+// override and fix c_title-small for inline components?
+.c_hero-yellow__specs .c_title-small {
+  display: inline-flex;
+  align-items: baseline;
+  color: $color-purple-dark;
+
+  &__icon {
+    transform: translateY(2px);
+  }
+}
+
+
+.c_hero-yellow__boards-list,
+.c_hero-yellow__components-list {
+  display: inline-block;
+  font-weight: 700;
+}
+
+
+.c_hero-yellow__links {
+  display: flex;
+  justify-content: center;
+  gap: $space-200;
+
+  a:link,
+  a:visited {
+    font-weight: 700;
+    color: $color-blue;
+    
+    transition: color $trans-0200 $trans-easing;
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+}

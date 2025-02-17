@@ -1,0 +1,155 @@
+{{#> layouts._html-shell
+    pageClass="v_teachers-guide"
+    _pageUrl="https://learn.microblocks.fun/"
+    _pageDescription="MicroBlocks is a live blocks programming language for physical computing."
+}}
+
+
+{{#*inline "main-content"}}
+
+
+<!-- Header -->
+<header class="v_activity__hero c_hero-yellow">
+    <div class="row row--center">
+
+        <div class="col col-px col-12">
+            <div class="c_hero-yellow__title-wrapper">
+                <h2 class="c_hero-yellow__subtitle">{{localize "teachers-guide"}}</h2>
+                <h1 class="c_hero-yellow__title">{{title}}</h1>
+            </div>
+        </div>
+        
+        <div class="col col-px col-12">
+            <div class="c_hero-yellow__specs">
+
+                <div class="c_hero-yellow__links">
+                    <a href="..">{{localize "back-to-activity"}}</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+
+<div class="contents">
+    <div class="row">
+
+
+        <!-- Sidebar Contents -->
+        <div class="col col-px col-12 lg-col-3 xl-col-3">
+            {{#if (or has-project has-card)}}
+            <aside class="v_activity__side-block">
+                <h3 class="v_activity__side-title">
+                    {{localize "resources"}}
+                </h3>
+                <div>
+                    
+                    {{#if has-card}}
+                    {{> _button
+                        href=card-url
+                        title=(localize "activity-card")
+                        icon='svg.icon-scripts-20x20'
+                        arrow='svg.icon-arrow-right-16x16'
+                    }}
+                    {{/if}}
+
+                    {{#if has-project}}
+                    {{> _button
+                        href="./project.ubp"
+                        title=(localize "microblocks-project")
+                        icon='svg.icon-scripts-20x20'
+                        arrow='svg.icon-arrow-down-16x16'
+                        download="project.ubp"
+                    }}
+                    {{/if}}
+
+                </div>
+            </aside>
+            {{/if}}
+
+            <aside class="v_activity__side-block">
+                <h3 class="v_activity__side-title">
+                    {{localize "activity-details"}}
+                </h3>
+                <div class="__v_activity__side-box __v_activity__side-box--details">
+                    
+                    <div class="v_activity__details-group">
+                        <h4 class="v_activity__details-group-title c_title-small">
+                            <div class="c_title-small__icon">
+                                {{> svg.icon-student-16x16 }}
+                            </div>
+                            {{localize "lbl-level"}}
+                        </h4>
+                        <div class="v_activity__details-group-content">
+                            {{localize (join "lvl_" level)}}
+                        </div>
+                    </div>
+
+                    <div class="v_activity__details-group">
+                        <h4 class="v_activity__details-group-title c_title-small">
+                            <div class="c_title-small__icon">
+                                {{> svg.icon-duration-16x16 }}
+                            </div>
+                            {{localize "lbl-duration"}}
+                        </h4>
+                        <div class="v_activity__details-group-content">
+                            {{localize "duration" time.[0] time.[1]}}
+                        </div>
+                    </div>
+
+                    <div class="v_activity__details-group">
+                        <h4 class="v_activity__details-group-title c_title-small">
+                            <div class="c_title-small__icon">
+                                {{> svg.icon-topics-16x16 }}
+                            </div>
+                            {{localize "lbl-topics"}}
+                        </h4>
+                        <div class="v_activity__details-group-content">
+                            {{#each topics}}
+                            <span class="c_comma-separated">{{localize this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            {{#if card-slides-url}}
+            <aside class="v_activity__side-block v_activity__side-block--printable">
+                <h3 class="v_activity__side-title">
+                    Translate
+                </h3>
+                <div>
+                    <p>
+                        Help us translating the contents of the actvity card to your language!
+                    </p>
+                    <a class="c_button-small" href="{{card-slides-url}}">
+                        {{> svg.icon-slides-16x16 }}
+                        <span>Open in Google Slides</span>
+                    </a>
+                </div>
+            </aside>
+            {{/if}}
+
+        </div><!-- Sidebar Contents -->
+
+
+        <!-- Activity Text -->
+        <div class="col col-px col-12 lg-offset-1 lg-col-8 xl-offset-1 xl-col-8">
+            <article class="v_activity__contents wysiwyg">
+
+                {{! insert the compiled markdown for this particular activity }}
+                {{#markdown markdown}}{{/markdown}}
+
+            </article>
+        </div><!-- Activity Text -->
+
+
+    </div>
+ </div>
+
+{{/inline}}
+
+{{/layouts._html-shell }}

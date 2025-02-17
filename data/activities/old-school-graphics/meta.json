@@ -1,0 +1,9 @@
+{
+    "draft": false,
+    "author": "Bernat Romagosa",
+    "level": 2,
+    "boards": [ "board_clue", "board_boardie", "board_ed1", "board_m5stack" ],
+    "time": [ 120, 180 ],
+    "topics": [ "tpc_game" ],
+    "components": [ ]
+}

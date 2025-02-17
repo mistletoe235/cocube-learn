@@ -1,0 +1,16 @@
+[
+    "cmp_cr_servo",
+    "cmp_angle_servo",
+    "cmp_stepper",
+    "cmp_ext_board",
+    "cmp_led",
+    "cmp_led_rgb",
+    "cmp_neopixels",
+    "cmp_speaker",
+    "cmp_alligators",
+    "cmp_ir_remote",
+    "cmp_potentiometer",
+    "cmp_ir_receiver",
+    "cmp_VL53L0X",
+    "cmp_microphone"
+]

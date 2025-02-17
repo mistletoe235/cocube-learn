@@ -1,0 +1,100 @@
+{
+	"activities": [
+		{
+			"title": "hans-pico-lessons-title",
+			"description": "hans-pico-lessons-desc",
+			"langCode": "nl",
+			"href": "https://pianozo.gitbook.io/pico-or-microblocks/"
+		},
+		{
+			"title": "peter-cards-title",
+			"description": "peter-cards-desc",
+			"langCode": "nl",
+			"href": "https://petermathijssen.nl/"
+		},
+		{
+			"title": "finch-title",
+			"description": "finch-desc",
+			"langCode": "en",
+			"href": "https://www.birdbraintechnologies.com/finch/microblocks/"
+		},
+		{
+			"title": "hummingbird-title",
+			"description": "hummingbird-desc",
+			"langCode": "en",
+			"href": "https://www.birdbraintechnologies.com/hummingbirdbit/microblocks/"
+		},
+		{
+			"title": "cobie-cards-title",
+			"description": "cobie-cards-desc",
+			"langCode": "nl",
+			"href": "https://digi-lab.org/downloads/microblocks%20kaarten%20digilab.pdf"
+		},
+		{
+			"title": "sensor-examples-title",
+			"description": "sensor-examples-desc",
+			"langCode": "en",
+			"href": "https://sites.google.com/clongowes.net/microblocksbasicexamples/home"
+		},
+		{
+			"title": "classroom-steam-activites-title",
+			"description": "classroom-steam-activites-desc",
+			"langCode": "es",
+			"href": "https://docs.google.com/presentation/d/1xAg0W0o3ge5c6KzwqmIXiBm6ChAMDaCqUY-IXRlXnyY"
+		},
+		{
+			"title": "cpx-ornament-title",
+			"description": "cpx-ornament-desc",
+			"langCode": "en",
+			"href": "https://learn.adafruit.com/microblocks-circuitplayground-express-ornament"
+		},
+		{
+			"title": "okdo-card-set-title",
+			"description": "okdo-card-set-desc",
+			"langCode": "en",
+			"href": "https://drive.google.com/drive/u/0/folders/1RLumKi6cFZnT9hierxR3J_MEzO8eGXIu"
+		}
+	],
+
+	"articles": [
+		{
+			"title": "black-inventors-title",
+			"description": "black-inventors-desc",
+			"langCode": "en",
+			"href": "https://www.milkeneducatorawards.org/connections/articles/view/black-inventors-stem-curriculum"
+		},
+		{
+			"title": "girls-robotics-kit-title",
+			"description": "girls-robotics-kit-desc",
+			"langCode": "en",
+			"href": "https://katiedays.com/blog/2020/02/24/a-robotics-kit-for-the-every-day-teacher/"
+		}
+	],
+
+	"references": [
+		{
+			"title": "user-guide-title",
+			"description": "user-guide-desc",
+			"langCode": "en",
+			"href": "https://wiki.microblocks.fun/ide"
+		},
+		{
+			"title": "blocks-reference-title",
+			"description": "blocks-reference-desc",
+			"langCode": "en",
+			"href": "https://wiki.microblocks.fun/reference_manual"
+		},
+		{
+			"title": "key-libraries-title",
+			"description": "key-libraries-desc",
+			"langCode": "en",
+			"href": "https://wiki.microblocks.fun/libraries"
+		},
+		{
+			"title": "supported-boards-title",
+			"description": "supported-boards-reference-desc",
+			"langCode": "en",
+			"href": "https://wiki.microblocks.fun/boards/supported"
+		}
+	]
+}

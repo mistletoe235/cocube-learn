@@ -1,0 +1,54 @@
+//
+// Views / Home
+// ================================================================================
+
+
+// Subtitle
+// ========================================
+
+
+.v_home__subtitle .c_title-block {
+  transform: 
+    translateY( calc(-1 * #{ $space-200 } ) )
+    rotate( -2deg )
+  ;
+}
+
+
+
+
+
+// Activities
+// ========================================
+
+
+.v_home__filters-button {
+  margin-bottom: $space-100;
+
+  @include breakpoint(xl) {
+    display: none;
+  }
+}
+
+
+.v_home__activity-count {
+  margin-bottom: $space-100;
+  font-family: $font-display;
+  color: $color-grey-700;
+}
+
+
+.v_home__activity-grid {
+  margin-bottom: $space-200;
+  display: grid;
+  gap: $space-150;
+  grid-template-columns: 1fr;
+
+  @include breakpoint(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include breakpoint(lg) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

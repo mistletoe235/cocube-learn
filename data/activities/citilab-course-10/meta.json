@@ -1,0 +1,8 @@
+{
+    "author": "Citilab Edutec",
+    "level": 1,
+    "boards": [ "board_ed1" ],
+    "components": [ "cmp_cr_servo" ],
+    "time": [ 60, 90 ],
+    "topics": [ ]
+}

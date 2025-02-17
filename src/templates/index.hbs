@@ -1,0 +1,116 @@
+{{#> layouts._html-shell
+    title=locale.pageTitle
+    pageClass="v_home"
+    pageUrl="https://learn.microblocks.fun/"
+    _pageDescription="MicroBlocks is a live blocks programming language for physical computing."
+}}
+
+{{#*inline "main-content"}}
+
+
+<!-- Header -->
+<header class="v_home__hero c_hero-yellow">
+    <div class="c_hero-home">
+
+        <div class="c_hero-home__logo">
+            {{> svg.learn-microblocks-block }}
+            <div class="c_hero-home__bubble c_hero-home__bubble--l">
+                <img src="/assets/img/pictures/duy-loan-le.svg" alt="Duy-Loan Le">
+            </div>
+            <div class="c_hero-home__bubble c_hero-home__bubble--e">
+                <img src="/assets/img/pictures/evelyn-boyd-granville.svg" alt="Evelyn Boyd Granville">
+            </div>
+            <div class="c_hero-home__bubble c_hero-home__bubble--a">
+                <img src="/assets/img/pictures/adele-goldberg.svg" alt="Adele Goldberg">
+            </div>
+            <div class="c_hero-home__bubble c_hero-home__bubble--r">
+                <img src="/assets/img/pictures/rosza-peter.svg" alt="Rósza Péter">
+            </div>
+            <div class="c_hero-home__bubble c_hero-home__bubble--n">
+                <img src="/assets/img/pictures/nashlie-sephus.svg" alt="Nashlie Sephus">
+            </div>
+        </div>
+
+        <div class="c_hero-home__descriptions">
+            <div class="c_hero-home__desc c_hero-home__desc--l">
+{{#markdown}}{{localize "le-txt"
+    (join "**" (localize "le-name") "**")
+}}{{/markdown}}
+            </div>
+            <div class="c_hero-home__desc c_hero-home__desc--e">
+{{#markdown}}{{localize "evelyn-txt"
+    (join "**" (localize "evelyn-name") "**")
+}}{{/markdown}}
+            </div>
+            <div class="c_hero-home__desc c_hero-home__desc--a">
+{{#markdown}}{{localize "adele-txt"
+    (join "**" (localize "adele-name") "**")
+}}{{/markdown}}
+            </div>
+            <div class="c_hero-home__desc c_hero-home__desc--r">
+{{#markdown}}{{localize "rosza-txt"
+    (join "**" (localize "rosza-name") "**")
+}}{{/markdown}}
+            </div>
+            <div class="c_hero-home__desc c_hero-home__desc--n">
+{{#markdown}}{{localize "nashlie-txt"
+    (join "**" (localize "nashlie-name") "**")
+}}{{/markdown}}
+            </div>
+        </div>
+        
+    </div>
+</header><!-- /Header -->
+
+
+<!-- Subtitle -->
+<div class="v_home__subtitle">
+    <div class="row">
+        <div class="col col-px col-12">
+            <h2 class="c_title-block c_title-block--purple">{{localize "top-label"}}</h2>
+        </div>
+    </div>
+</div>
+
+
+<!-- Contents -->
+<div class="row">
+
+
+    <!-- Filters -->
+    <div class="col col-px col-12 xl-col-3">
+        <div class="v_home__filters">
+
+            <div class="v_home__filters-button c_button c_button--filters"
+                role="button" aria-controls="activity-filters" aria-haspopup="true">
+                <div class="c_button__icon">{{> svg.icon-filters-20x20 }}</div>                
+                <span>Filters</span>
+            </div>
+            
+            {{> _activity-filters }}
+
+        </div>
+    </div>
+
+
+    <!-- Cards -->
+    <div class="col col-px col-12 xl-col-9">
+        
+        {{! gets filled from activity-list.js }}
+        <div class="v_home__activity-list">
+            <div class="v_home__activity-count"></div>
+            <div id="activity-grid" class="v_home__activity-grid"></div>
+            <div class="v_home__activity-pagination">
+                <div class="c_pagination"></div>
+            </div>
+        </div>
+        
+        <script>fetchActivities();</script>
+    </div>
+
+
+</div>
+
+
+{{/inline}}
+{{/layouts._html-shell }}

@@ -1,0 +1,32 @@
+{
+    "board_cocube": {
+        "compatible": [ "board_ed1", "board_clue", "board_m5stack", "board_microbit", "board_nodemcu", "board_pico" ]
+    },
+    "board_ed1": {
+        "compatible": [ "board_clue", "board_m5stack", "board_microbit", "board_nodemcu", "board_pico" ]
+    },
+    "board_clue": {
+        "compatible": [ "board_microbit", "board_pico" ]
+    },
+    "board_cpxbf": {
+        "compatible": [ "board_cpx", "board_pico" ]
+    },
+    "board_cpx": {
+        "compatible": [ "board_pico" ]
+    },
+    "board_calliope": {
+        "compatible": [ "board_microbit", "board_pico" ]
+    },
+    "board_microbit": {
+        "compatible": [ "board_pico" ]
+    },
+    "board_pico": {
+        "compatible": [ ]
+    },
+    "board_nodemcu": {
+        "compatible": [ ]
+    },
+    "board_boardie": {
+        "compatible": [ "board_clue", "board_m5stack", "board_microbit", "board_nodemcu", "board_pico", "board_ed1" ]
+    }
+}

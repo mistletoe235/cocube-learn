@@ -1,0 +1,22 @@
+<div class="c_resource-card">
+    <div class="c_resource-card__text-wrapper">
+        <div class="c_resource-card__title">
+            {{localize title}}
+        </div>
+        <div class="c_resource-card__lang">
+            <div class="c_resource-card__lang-icon">
+                {{> svg.icon-language-16x16 }}
+            </div>
+            {{language-name langCode}}
+        </div>
+        <div class="c_resource-card__desc">
+            {{localize description}}
+        </div>
+    </div>
+    <a class="c_resource-card__link" target="_blank" href="{{href}}">
+        {{localize 'visit-resource'}}
+        <div class="c_resource-card__link-icon">
+            {{> svg.icon-arrow-up-right-16x16 }}
+        </div>
+    </a>
+</div>

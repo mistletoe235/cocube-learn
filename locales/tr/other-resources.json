@@ -1,0 +1,52 @@
+{
+	"other-resources": "Başka Kaynaklar",
+	"intro-text": "Birçoğu küresel MicroBlocks topluluğu tarafından sağlanan, eğitimciler için faydalı kaynaklar.",
+	"references-lbl": "Referans",
+	"activities-lbl": "Aktiviteler ve Eğitimler",
+	"articles-lbl": "Makaleler",
+	"courses-lbl": "Müfredat ve Dersler",
+	"manuals-lbl": "Kılavuzlar ve Nasıl Yapılır",
+	"visit-resource": "Kaynağı Görüntüle",
+
+	"sensor-examples-title": "Sensör Kullanımı",
+	"sensor-examples-desc": "John Hegarty'den micro:bit ile sensörlerin kullanımına ilişkin birçok örnek. Sayfaları seçmek için sol üst köşedeki menüyü kullanın.",
+
+	"cobie-cards-title": "Cobie'nin MicroBlocks Kartları",
+	"cobie-cards-desc": "Cobie van de Ven'den güzel aktivite kartları seti.",
+
+	"peter-cards-title": "Peter'ın MicroBlocks Kartları",
+	"peter-cards-desc": "Peter Mathijssen'den güzel aktivite kartları seti.",
+
+	"classroom-steam-activites-title": "ESP32 ile Sınıf için STEAM",
+	"classroom-steam-activites-desc": "Breadboard ve birkaç elektronik bileşen içeren ve ESP32 kullanan basit örnekler. Bağlantı şemaları ve komut dosyaları içerir.",
+
+	"finch-title": "Finch ve MicroBlocks",
+	"finch-desc": "Birdbrain Technologies Finch robotunun MicroBlocks la nasıl kullanılacağı.",
+
+	"hummingbird-title": "Hummingbird ve MicroBlocks",
+	"hummingbird-desc": "MicroBlocks la Birdbrain Technologies Hummingbird zanaat robotik kiti nasıl kullanılır.",
+
+	"cpx-ornament-title": "Circuit Playground Express'le bir Süs",
+	"cpx-ornament-desc": "MicroBlocks ve Adafruit Circuit Playground Express ile renkli bir tatil süsü yaratın.",
+
+	"black-inventors-title": "Zenci Yenilikçiler ve Mucitler",
+	"black-inventors-desc": "Modern trafik sinyalinin mucidi ve başarılı bir kalp nakli gerçekleştiren ilk doktorlardan biri de dahil olmak üzere ilham veren Afrikalı Amerikalı mucitlerin ve yenilikçilerin listesi.",
+
+	"girls-robotics-kit-title": "Düşük Maliyetli Robot Kiti – Kızlar İçin Harika",
+	"girls-robotics-kit-desc": "Yaratıcı robotik etkinliklerde hem kızların hem de erkeklerin ilgisini çekebilecek MicroBlocks, micro:bit ve birkaç ek bileşenin kullanımını açıklar.",
+
+	"okdo-card-set-title": "OKdo Sınıf Kit'ten Etkinlik Kartları",
+	"okdo-card-set-desc": "Bu on kartlık set, OKdo MicroBlocks micro:bit Sınıf Paketi ile birlikte kullanılmak üzere geliştirildi, ancak kartlar kit olmadan da kullanılabilir.",
+
+	"user-guide-title": "Kullanıcı Kılavuzu",
+	"user-guide-desc": " MicroBlocks programlama ortamını belgeler.",
+
+	"blocks-reference-title": "Blok Rehberi",
+	"blocks-reference-desc": "Birçok örnekle birlikte tüm MicroBlocks yerleşik bloklarını belgeler.",
+
+	"key-libraries-title": " Kitaplıklar ",
+	"key-libraries-desc": " En sık kullanılan MicroBlocks kitaplıklarını belgeler.",
+
+	"supported-boards-title": "Kart Kılavuzu ",
+	"supported-boards-reference-desc": " MicroBlocks tarafından desteklenen önerilen mikrodenetleyici kartları."
+}

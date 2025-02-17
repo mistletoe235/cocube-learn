@@ -1,0 +1,17 @@
+//
+// Elements / Body
+// ==============================================================================
+
+
+body {
+    font-family: $font-regular;
+    font-weight: 500;
+    font-size: 16px;
+    color: $color-grey-900;
+    background-color: $color-background;
+
+    & *::selection {
+        color: $color-black;
+        background-color: $color-yellow;
+    }
+}

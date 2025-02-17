@@ -1,0 +1,8 @@
+{
+    "author": "MicroBlocks",
+    "level": 1,
+    "boards": [ "board_microbit" ],
+    "components": [ "cmp_neopixels" ],
+    "time": [ 15, 45 ],
+    "topics": [ "tpc_art" ]
+}
