@@ -530,7 +530,7 @@ function linkActivityAssets(activityDir, assetsDir) {
         (assetPath) => {
             fName = assetPath.split('/').pop();
             if (fName[0] != '.') { // skip .DS_Store on MacOS
-                fse.ensureSymlinkSync(
+                fse.copySync(
                 	`${assetsDir}/${fName}`,
                 	`${activityDir}/${fName}`
                 );
