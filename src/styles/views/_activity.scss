@@ -173,3 +173,114 @@
 .v_activity__cc-icon {
   margin-bottom: $space-050;
 }
+
+
+
+.sidebar {
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  // background-color: #f4f4f4;
+  padding: 15px;
+  border-right: 1px solid #ccc;
+  position: fixed;
+  overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar ul {
+  margin-top: 50px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 18px 0;
+  font-weight: bold;
+}
+
+.sidebar ul li ul {
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+.sidebar ul li ul li {
+  margin: 7px 10px 7px 0;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-weight: normal;
+  cursor: pointer;
+}
+.blue-background {
+  background-color: #5591C7;;
+  color: white;
+  font-weight: bold;
+}
+.contents_toggle {
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block; width: 100%;
+}
+.arrow {
+  transition: transform 0.3s ease;
+  float: right;
+}
+
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #f8f9fa; /* 你可以根据需要调整背景颜色 */
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+      display: none;
+  }
+}
+
+// .contents {
+//   margin-left: 25%; /* 根据侧边栏的宽度调整 */
+// }
+
+@media (max-width: 768px) {
+  .contents {
+      margin-left: 0;
+  }
+}
+
+.v_activity__details-link {
+  display: inline-flex;
+  align-items: center;
+  color: $color-grey-900;
+
+  transition: color $trans-0200 $trans-easing;
+
+  .v_activity__details-link-svg {
+    margin-left: $space-025;
+    width: $space-100;
+    height: $space-100;
+
+    line-height: 0;
+
+    color: $color-grey-400;
+    transition: color $trans-0200 $trans-easing;
+  }
+
+  &:hover {
+    color: $color-blue;
+
+    .v_activity__details-link-svg {
+      color: $color-blue;
+    }
+  }
+}

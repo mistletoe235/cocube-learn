@@ -8,7 +8,7 @@
 {{#*inline "main-content"}}
 
 
-<!-- Header -->
+{{!-- <!-- Header -->
 <header class="v_home__hero c_hero-yellow">
     <div class="c_hero-home">
 
@@ -60,17 +60,17 @@
         </div>
         
     </div>
-</header><!-- /Header -->
+</header><!-- /Header --> --}}
 
 
 <!-- Subtitle -->
-<div class="v_home__subtitle">
+{{!-- <div class="v_home__subtitle">
     <div class="row">
         <div class="col col-px col-12">
             <h2 class="c_title-block c_title-block--purple">{{localize "top-label"}}</h2>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <!-- Contents -->
@@ -78,7 +78,7 @@
 
 
     <!-- Filters -->
-    <div class="col col-px col-12 xl-col-3">
+    {{!-- <div class="col col-px col-12 xl-col-3">
         <div class="v_home__filters">
 
             <div class="v_home__filters-button c_button c_button--filters"
@@ -90,11 +90,11 @@
             {{> _activity-filters }}
 
         </div>
-    </div>
+    </div> --}}
 
 
     <!-- Cards -->
-    <div class="col col-px col-12 xl-col-9">
+    {{!-- <div class="col col-px col-12 xl-col-9">
         
         {{! gets filled from activity-list.js }}
         <div class="v_home__activity-list">
@@ -106,8 +106,17 @@
         </div>
         
         <script>fetchActivities();</script>
+    </div> --}}
+    <div class="container">
+        <div class="text-container">
+            <h1>{{@root.locale.welcome-word}}</h1>
+            <p>Co-Making the Future!</p>
+            <a href="./activities/cocube_basic_01_lcd-{{locale.code}}" class="get-started">{{@root.locale.get-started-buttom}} →</a>
+        </div>
+        <div class="image-container">
+            <img src="../assets/img/logos/main_img.png" alt="CoCube Robot" />
+        </div>
     </div>
-
 
 </div>
 

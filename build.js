@@ -116,6 +116,10 @@ handlebars.registerHelper('json', function (context) {
     return JSON.stringify(context);
 });
 
+handlebars.registerHelper('lan_json_key', function (context, key) {
+    return context[key] || context['en'];
+});
+
 // Thanks to kevlened at StackOverflow for the following boolean helpers
 // https://stackoverflow.com/a/31632215
 
@@ -132,6 +136,10 @@ handlebars.registerHelper('times', function(n, block) {
     for(var i = 0; i < n; ++i)
         accum += block.fn(i);
     return accum;
+});
+
+handlebars.registerHelper('eq', function(a, b, options) {
+    return a == b;
 });
 
 
@@ -368,6 +376,76 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
     // get the slugs for each locale
     // unfortunately we need to do two passes over the directory
     meta.translations = [];
+    meta.contents = {
+        basic:{
+            cocube_basic_01_lcd: {
+                cn: "01 LCD 屏幕编程",
+                en: "01 LCD Screen Programming"
+            },
+            cocube_basic_02_motion: {
+                cn: "02 运动基础",
+                en: "02 Motion Basics"
+            },
+            cocube_basic_03_comap: {
+                cn: "03 定位垫的使用",
+                en: "03 Using the Comap"}
+        },
+        external:{
+            cocube_external_01_lcd: {
+                cn: "01 LCD 屏幕编程",
+                en: "01 LCD Screen Programming"
+            },
+            cocube_external_02_motion: {
+                cn: "01 运动基础",
+                en: "01 Motion Basics"
+            },
+            cocube_external_03_comap: {
+                cn: "03 定位垫的使用",
+                en: "03 Using the Comap"
+            }
+        },
+        advanced:{
+            cocube_advanced_01_lcd: {
+                cn: "01 LCD 屏幕编程",
+                en: "01 LCD Screen Programming"
+            },
+            cocube_advanced_02_motion: {
+                cn: "01 运动基础",
+                en: "01 Motion Basics"
+            },
+            cocube_advanced_03_comap: {
+                cn: "03 定位垫的使用",
+                en: "03 Using the Comap"
+            },
+            cocube_advanced_04_lcd: {
+                cn: "01 LCD 屏幕编程",
+                en: "01 LCD Screen Programming"
+            },
+            cocube_advanced_05_motion: {
+                cn: "01 运动基础",
+                en: "01 Motion Basics"
+            },
+            cocube_advanced_06_comap: {
+                cn: "03 定位垫的使用",
+                en: "03 Using the Comap"
+            },
+            cocube_advanced_07_lcd: {
+                cn: "01 LCD 屏幕编程",
+                en: "01 LCD Screen Programming"
+            },
+            cocube_advanced_08_motion: {
+                cn: "01 运动基础",
+                en: "01 Motion Basics"
+            },
+            cocube_advanced_09_comap: {
+                cn: "03 定位垫的使用",
+                en: "03 Using the Comap"
+            }
+        }
+
+
+
+    }
     doForFilesInDir(
         `data/activities/${activityDir}/locales/`,
         '/',
@@ -408,6 +486,7 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
                 localeDescriptor.level || meta.level || 1;
             localeDescriptor.translations = meta.translations.filter(
                 (each) => { return each.langCode !== langCode });
+            localeDescriptor.contents = meta.contents;
             localeDescriptor.components = meta.components || [];
             localeDescriptor.topics = meta.topics || [];
             localeDescriptor.time = meta.time || [30, 45];

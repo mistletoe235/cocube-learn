@@ -1,8 +1,0 @@
-{
-    "author": "Citilab Edutec",
-    "level": 1,
-    "boards": [ "board_ed1" ],
-    "components": [ "cmp_stepper" ],
-    "time": [ 60, 90 ],
-    "topics": [ ]
-}

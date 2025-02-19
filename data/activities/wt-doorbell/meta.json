@@ -1,8 +1,0 @@
-{
-    "author": "MicroBlocks",
-    "level": 2,
-    "boards": [ "board_microbit" ],
-    "time": [ 30, 60 ],
-    "topics": [ "tpc_iot" ],
-    "components": [ "cmp_speaker", "cmp_webthings-gateway" ]
-}

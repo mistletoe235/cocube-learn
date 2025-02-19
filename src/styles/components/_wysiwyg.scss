@@ -16,7 +16,8 @@
     font-weight: 700;
     font-size: $fontSize-200;
     line-height: $lineHeight-120;
-    color: $color-purple;
+    // color: $color-purple;
+    color: #5591C7;
 
     &:not(:first-child) {
       margin-top: $space-250;

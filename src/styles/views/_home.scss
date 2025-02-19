@@ -52,3 +52,53 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  text-align: left;
+}
+
+.text-container {
+  max-width: 60%;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: bold;
+  color: #000000;
+}
+
+p {
+  padding: 20px 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.get-started {
+  background-color: #5591C7;;
+  color: white;
+  font-size: 1em;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.get-started:hover {
+  background-color: #3b6ed0;
+}
+
+.image-container {
+  max-width: 45%;
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

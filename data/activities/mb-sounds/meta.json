@@ -1,7 +1,0 @@
-{
-    "author": "MicroBlocks",
-    "level": 1,
-    "boards": [ "board_microbit" ],
-    "time": [ 15, 45 ],
-    "topics": [ "tpc_sound", "tpc_music" ]
-}

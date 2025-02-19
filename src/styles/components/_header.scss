@@ -34,3 +34,17 @@
     width: 280px;
   }
 }
+
+.header__logo-text {
+  display: none;
+  color: #5591C7;
+  font-size: 1.5em;
+  font-weight: 700;
+  position: absolute;
+  top: $space-050;
+  left: $space-050;
+
+  @include breakpoint(md) {
+    display: block;
+  }
+}

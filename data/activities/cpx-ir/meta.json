@@ -1,9 +1,0 @@
-{
-    "author": "MicroBlocks",
-    "level": 1,
-    "boards": [ "board_cpx" ],
-    "time": [ 15, 45 ],
-    "topics": [ ],
-    "components": [ "cmp_ir_remote" ],
-    "card-url": "http://microblocks.fun/assets/pdf/cards/cpx_IR_Remote_Control.pdf"
-}

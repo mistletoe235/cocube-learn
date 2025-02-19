@@ -8,7 +8,7 @@
 
 
 <!-- Header -->
-<header class="v_activity__hero c_hero-yellow">
+{{!-- <header class="v_activity__hero c_hero-yellow">
     <div class="row row--center">
 
         <div class="col col-px col-12 sm-col-8 md-col-6 lg-col-3 xl-col-3">
@@ -64,8 +64,9 @@
             </div>
         </div>
 
+
     </div>
-</header>
+</header> --}}
 
 
 <div class="contents">
@@ -74,132 +75,71 @@
 
         <!-- Sidebar Contents -->
         <div class="col col-px col-12 lg-col-3 xl-col-3">
-            {{#if (or has-guide has-card has-project has-video)}}
-            <aside class="v_activity__side-block v_activity__side-block--resources">
-                <h3 class="v_activity__side-title">
-                    {{localize "resources"}}
-                </h3>
-                <div class="v_activity__side-contents">
-
-                    {{#if has-card}}
-                    {{> _button
-                        href=card-url
-                        title=(localize "activity-card")
-                        icon='svg.icon-scripts-20x20'
-                        arrow='svg.icon-arrow-right-16x16'
-                    }}
-                    {{/if}}
-
-                    {{#if has-guide}}
-                    {{> _button
-                        href="./guide"
-                        title=(localize "teachers-guide")
-                        icon='svg.icon-student-16x16'
-                        arrow='svg.icon-arrow-right-16x16'
-                    }}
-                    {{/if}}
-
-                    {{#if has-project}}
-                    {{> _button
-                        href="./project.ubp"
-                        title=(localize "microblocks-project")
-                        icon='svg.icon-scripts-20x20'
-                        arrow='svg.icon-arrow-down-16x16'
-                        download="project.ubp"
-                    }}
-                    {{/if}}
-
-                    {{#if has-video}}
-                    {{> _button
-                        href=video-url
-                        title=(localize "video")
-                        icon='svg.icon-video-20x20'
-                        arrow='svg.icon-arrow-up-right-16x16'
-                        download=true
-                    }}
-                    {{/if}}
-
-                </div>
-            </aside>
-            {{/if}}
-
-            <aside class="v_activity__side-block v_activity__side-block--details">
-                <h3 class="v_activity__side-title">
-                    {{localize "activity-details"}}
-                </h3>
-                <div class="v_activity__side-contents">
-
-                    <div class="v_activity__details-group">
-                        <h4 class="v_activity__details-group-title c_title-small">
-                            <div class="c_title-small__icon">
-                                {{> svg.icon-student-16x16 }}
-                            </div>
-                            {{localize "lbl-level"}}
-                        </h4>
-                        <div class="v_activity__details-group-content">
-                            {{localize (join "lvl_" level)}}
-                        </div>
-                    </div>
-
-                    <div class="v_activity__details-group">
-                        <h4 class="v_activity__details-group-title c_title-small">
-                            <div class="c_title-small__icon">
-                                {{> svg.icon-duration-16x16 }}
-                            </div>
-                            {{localize "lbl-duration"}}
-                        </h4>
-                        <div class="v_activity__details-group-content">
-                            {{localize "duration" time.[0] time.[1]}}
-                        </div>
-                    </div>
-
-                    {{#if topics}}
-                    <div class="v_activity__details-group">
-                        <h4 class="v_activity__details-group-title c_title-small">
-                            <div class="c_title-small__icon">
-                                {{> svg.icon-topics-16x16 }}
-                            </div>
-                            {{localize "lbl-topics"}}
-                        </h4>
-                        <div class="v_activity__details-group-content">
-                            {{#each topics}}
-                            <span class="c_comma-separated">{{localize this}}</span>
-                            {{/each}}
-                        </div>
-                    </div>
-                    {{/if}}
-
-                    <div class="v_activity__details-group">
-                        <h4 class="v_activity__details-group-title c_title-small">
-                            <div class="c_title-small__icon">
-                                {{> svg.icon-language-16x16 }}
-                            </div>
-                            {{localize "lbl-languages"}}
-                        </h4>
-
-                        <div class="v_activity__details-group-content">
-                        {{#if translations}}
-                            <ul>
-                                {{#each translations}}
-                                <li>
-                                    <a class="v_activity__details-link" href="../{{this.slug}}">
-                                        {{language-name this.langCode}}
-                                        <div class="v_activity__details-link-svg">
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <span class="contents_toggle">Basic <span class="arrow">&#9660;</span></span>
+                        <ul class="submenu">
+                            {{#each contents.basic}}
+                                <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
+                                    <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
+                                        {{lan_json_key this ../locale.code}}
+                                        {{!-- <div class="v_activity__details-link-svg">
                                             {{> svg.icon-arrow-right-16x16 }}
-                                        </div>
+                                        </div> --}}
                                     </a>
                                 </li>
-                                {{/each}}
-                            </ul>
-                        {{else}}
-                            <span class="v_activity__details-none">{{localize "no-translations"}}</span>
-                        {{/if}}
-                        </div>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="contents_toggle">External <span class="arrow">&#9660;</span></span>
+                        <ul class="submenu">
+                            {{#each contents.external}}
+                            <li>
+                                <a href="../{{@key}}-{{../locale.code}}/" class="v_activity__details-link">
+                                    {{lan_json_key this ../locale.code}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="contents_toggle">Advanced <span class="arrow">&#9660;</span></span>
+                        <ul class="submenu">
+                            {{#each contents.advanced}}
+                            <li>
+                                <a href="../{{@key}}-{{../locale.code}}/" class="v_activity__details-link">
+                                    {{lan_json_key this ../locale.code}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-                    </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var toggles = document.querySelectorAll('.contents_toggle');
+                    toggles.forEach(function(toggle) {
+                        toggle.addEventListener('click', function() {
+                            var submenu = this.nextElementSibling;
+                            var arrow = this.querySelector('.arrow');
+                            if (submenu.style.display === 'block' || submenu.style.display === '') {
+                                submenu.style.display = 'none';
+                                arrow.innerHTML = '&#9654;'; // 向右箭头
+                            } else {
+                                submenu.style.display = 'block';
+                                arrow.innerHTML = '&#9660;'; // 向下箭头
+                            }
+                        });
+                    });
+                });
+            </script>
 
-                </div>
-            </aside>
+
+
 
             {{#if card-slides-url}}
             <aside class="v_activity__side-block v_activity__side-block--translate">
