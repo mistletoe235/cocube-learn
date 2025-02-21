@@ -35,7 +35,7 @@ CoCube 机器人配备了一块全彩 LCD 显示屏，可以通过不同的显�
 
 你可以尝试更改等待时间，控制流水灯的快慢；也可以尝试使用“帽子积木”——例如“当按键 A/B 被按下”，为流水灯设置不同的显示颜色。
 
-![](<images/Flowing_lights.png>)
+![](Flowing_lights.png)
 
 ![](images/K136bNMWEogdl0xmMQZcDTBEnQe.gif)
 

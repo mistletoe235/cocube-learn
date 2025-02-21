@@ -561,7 +561,10 @@ function collectActivityAssets (descriptor, langCode, activityPath) {
     var pngsWithScripts = [];
     var assetFiles = fs.readdirSync(assetsDir);
     assetFiles.forEach((fileName) => {
-        if (pngHasScript(assetsDir + fileName)) pngsWithScripts.push(fileName);
+        if (pngHasScript(assetsDir + fileName)) {
+            pngsWithScripts.push(fileName);
+            console.log('pngHasScript', assetsDir+fileName);
+        }
     });
     scriptPNGs[descriptor.slug] = pngsWithScripts;
 };
