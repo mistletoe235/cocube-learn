@@ -417,11 +417,11 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
                 cn: "01 NeoPixel 全彩灯板模块",
                 en: "01 NeoPixel RGB LED Module"
             },
-            cocube_external_03_tof: {
+            cocube_external_02_tof: {
                 cn: "02 ToF 激光测距模块",
                 en: "02 ToF Laser Ranging Module"
             },
-            cocube_external_04_gesture: {
+            cocube_external_03_gesture: {
                 cn: "03 3D 手势传感器模块",
                 en: "03 3D Gesture Sensor Module"
             }

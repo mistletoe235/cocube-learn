@@ -4,7 +4,7 @@ CoCube 机器人配合外接模块，能够实现更加复杂的功能，本节�
 
 ### 2. 使用材料
 
-![CoCube 机器人 × 1](robot.png =300x*) ![夹爪模块](image.png =300x*) ![个人电脑 或 平板](PC.png =300x*)
+![CoCube 机器人 × 1](robot.png =200x*) ![夹爪模块](image.png =200x*) ![个人电脑 或 平板](PC.png =250x*)
 
 
 

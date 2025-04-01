@@ -96,11 +96,11 @@
                         <span class="contents_toggle">External <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.external}}
-                            <li>
-                                <a href="../{{@key}}-{{../locale.code}}/" class="v_activity__details-link">
-                                    {{lan_json_key this ../locale.code}}
-                                </a>
-                            </li>
+                                <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
+                                    <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
+                                        {{lan_json_key this ../locale.code}}
+                                    </a>
+                                </li>
                             {{/each}}
                         </ul>
                     </li>
@@ -108,11 +108,11 @@
                         <span class="contents_toggle">Advanced <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.advanced}}
-                            <li>
-                                <a href="../{{@key}}-{{../locale.code}}/" class="v_activity__details-link">
-                                    {{lan_json_key this ../locale.code}}
-                                </a>
-                            </li>
+                                <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
+                                    <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
+                                        {{lan_json_key this ../locale.code}}
+                                    </a>
+                                </li>
                             {{/each}}
                         </ul>
                     </li>
@@ -182,7 +182,7 @@
 					{{> svg.icons-creative-commons }}
 				</div>
 				<p>
-					© <b>{{localize "author" author}}</b> 2019-2022.<br>
+					© <b>{{localize "author" author}}</b> 2024-2025.<br>
 					{{localize "cc-license"}}
 				</p>
 			</div>

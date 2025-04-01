@@ -49,7 +49,7 @@
 
 确保给 CoCube 机器人编写好键盘控制的程序后，断开 CoCube 机器人与 MicroBlocks IDE的连接，然后打开下方链接，并重新通过 BLE 无线连接 CoCube 机器人。
 
-https://keyboard.cocube.fun/
+[键盘页面](https://keyboard.cocube.fun/)
 
 ### 6. 挑战一下
 

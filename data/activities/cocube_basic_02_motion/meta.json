@@ -1,7 +1,7 @@
 {
-    "author": "MicroBlocks",
+    "author": "CoCube",
     "level": 1,
-    "boards": [ "board_microbit" ],
+    "boards": [ "CoCube" ],
     "time": [ 10, 20 ],
     "topics": [ ],
     "components": [ ]
