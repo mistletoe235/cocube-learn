@@ -378,6 +378,10 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
     meta.translations = [];
     meta.contents = {
         basic:{
+            cocube_basic_00_start: {
+                cn: "00 新手指引",
+                en: "00 Getting Started"
+            },
             cocube_basic_01_lcd: {
                 cn: "01 LCD 屏幕编程",
                 en: "01 LCD Screen Programming"
