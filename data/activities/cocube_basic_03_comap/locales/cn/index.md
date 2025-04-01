@@ -4,17 +4,15 @@
 
 ### 2. 使用材料
 
-![CoCube 机器人 × 1](images/立体图.png)
-
-![个人电脑 或 平板](images/PC.png)
-
-![CoCube 定位地图](images/image.png)
+![CoCube 机器人 × 1](robot.png =200x*)
+![个人电脑 或 平板](PC.png =200x*)
+![CoCube 定位地图](image.png =200x*)
 
 ### 3. 软件平台
 
 [MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
-![](images/image-1.png)
+![](image-1.png)
 
 ### 4. 开始编程
 
@@ -22,7 +20,7 @@
 
 CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
-![CoMaps 示例——迷宫挑战主题定位地图](images/地图说明.png)
+![CoMaps 示例——迷宫挑战主题定位地图](comap.png)
 
 拿出一张迷宫挑战主题定位地图仔细观察：
 
@@ -44,17 +42,17 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 这就是“说 \_”积木的功能！它不是让 CoCube 机器人真正去说话，而是会将一些内容呈现在 MicroBlocks IDE 中给你看。
 
-![](images/image-2.png)
+![](image-2.png)
 
-![](images/scriptImage1819646.png)
+![](scriptImage1819646.png)
 
 如果想要同时说两个内容，只需要点击“说 \_”积木右侧的小三角，在新增的输入栏中写上需要输出的内容即可。
 
 我们还可以将“运算”积木库中的积木填写进来，CoCube 会将最终结果输出到 MicroBlocks IDE 上。
 
-![](images/scriptImage2100985.png)
+![](scriptImage2100985.png)
 
-![](images/scriptImage2239731.png)
+![](scriptImage2239731.png)
 
 * **输出 CoCube 坐标**
 
@@ -62,7 +60,7 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 为了实时输出 CoCube 的坐标和角度，可以嵌套一个“重复执行”积木。
 
-![](images/scriptImage2340058.png)
+![](scriptImage2340058.png)
 
 移动一下 CoCube 机器人，观察 MicroBlocks 中的坐标和角度是否跟着变化？
 
@@ -74,21 +72,21 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 2. **使用“绘图”积木：**&#x7F16;写如下的代码并运行，点击 MicroBlocks IDE 右上方的图标绘制按钮，红色、绿色和蓝色曲线分别代表 CoCube 机器人“位置X”、“位置Y”和“方向角”的数值。
 
-![](images/image-3.png)
+![](image-3.png)
 
 #### 4.4 精准移动
 
 &#x20;    在掌握了上述技巧之后，相信你可以自己探索剩下的功能啦。
 
-![](images/image-4.png)
+![](image-4.png)
 
 我们重新编写一个 CoCube 机器人绘制正方形轨迹的程序：
 
-![](images/scriptImage3089043.png)
+![](scriptImage3089043.png)
 
 
 
-![](images/scriptImage3097549.png)
+![](scriptImage3097549.png)
 
 
 
@@ -98,9 +96,9 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 使用定位垫的坐标反馈功能与定点移动功能，从迷宫的入口走向出口。
 
-![](images/scriptImage256581.png)
+![](scriptImage256581.png)
 
-![](<images/c894f182d53640cd5ad5e84a4b741c3f 00_00_01-~1.gif>)
+![](<c894f182d53640cd5ad5e84a4b741c3f 00_00_01-~1.gif>)
 
 参考示例程序：[MicroBlocks——CoCube案例03 迷宫挑战](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 

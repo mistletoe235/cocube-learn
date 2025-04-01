@@ -36,6 +36,6 @@ You can try changing the wait time to control the speed of the flowing lights; y
 
 ![](<images/Flowing_lights.png>)
 
-![](images/K136bNMWEogdl0xmMQZcDTBEnQe.gif)
+![](images/light.gif)
 
 Reference Code Example: [MicroBlocks - CoCube Case 01 Flowing Lights](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20440%2088%20%7B%0AwhenStarted%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0Aforever%20%7B%0A%20%20for%20i%205%20%7B%0A%20%20%20%20for%20j%205%20%7B%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbPlot%5D%27%20i%20j%0A%20%20%20%20%20%20waitMillis%20100%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%7D%0A%0Ascript%20786%2088%20%7B%0AwhenButtonPressed%20%27A%27%0A%27set%20display%20color%27%20%28colorSwatch%20255%200%200%20255%29%0A%7D%0A%0Ascript%20790%20199%20

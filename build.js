@@ -388,58 +388,60 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
             },
             cocube_basic_03_comap: {
                 cn: "03 定位垫的使用",
-                en: "03 Using the Comap"}
+                en: "03 Using the Comap"
+            },
+            cocube_basic_04_music: {
+                cn: "04 音乐编程",
+                en: "04 Music Programming"
+            },
+            cocube_basic_05_gripper: {
+                cn: "05 夹爪外接模块",
+                en: "05 Gripper External Module"
+            },
+            cocube_basic_06_broadcast: {
+                cn: "06 广播事件",
+                en: "06 Broadcast Event"
+            },
+            cocube_basic_07_keyboard: {
+                cn: "07 键盘事件",
+                en: "07 Keyboard Event"
+            },
+            cocube_basic_08_wechat: {
+                cn: "08 微信小程序控制",
+                en: "08 WeChat Mini Program Control"
+            },
+
         },
         external:{
-            cocube_external_01_lcd: {
-                cn: "01 LCD 屏幕编程",
-                en: "01 LCD Screen Programming"
+            cocube_external_01_neopixel: {
+                cn: "01 NeoPixel 全彩灯板模块",
+                en: "01 NeoPixel RGB LED Module"
             },
-            cocube_external_02_motion: {
-                cn: "01 运动基础",
-                en: "01 Motion Basics"
+            cocube_external_03_tof: {
+                cn: "02 ToF 激光测距模块",
+                en: "02 ToF Laser Ranging Module"
             },
-            cocube_external_03_comap: {
-                cn: "03 定位垫的使用",
-                en: "03 Using the Comap"
+            cocube_external_04_gesture: {
+                cn: "03 3D 手势传感器模块",
+                en: "03 3D Gesture Sensor Module"
             }
         },
         advanced:{
-            cocube_advanced_01_lcd: {
-                cn: "01 LCD 屏幕编程",
-                en: "01 LCD Screen Programming"
+            cocube_advanced_01_colordetect: {
+                cn: "01 色块识别",
+                en: "01 Color Detection"
             },
-            cocube_advanced_02_motion: {
-                cn: "01 运动基础",
-                en: "01 Motion Basics"
+            cocube_advanced_02_traffic: {
+                cn: "02 智慧交通",
+                en: "02 Smart Traffic"
             },
-            cocube_advanced_03_comap: {
-                cn: "03 定位垫的使用",
-                en: "03 Using the Comap"
+            cocube_advanced_03_line: {
+                cn: "03 线条检测",
+                en: "03 Line Detection"
             },
-            cocube_advanced_04_lcd: {
-                cn: "01 LCD 屏幕编程",
-                en: "01 LCD Screen Programming"
-            },
-            cocube_advanced_05_motion: {
-                cn: "01 运动基础",
-                en: "01 Motion Basics"
-            },
-            cocube_advanced_06_comap: {
-                cn: "03 定位垫的使用",
-                en: "03 Using the Comap"
-            },
-            cocube_advanced_07_lcd: {
-                cn: "01 LCD 屏幕编程",
-                en: "01 LCD Screen Programming"
-            },
-            cocube_advanced_08_motion: {
-                cn: "01 运动基础",
-                en: "01 Motion Basics"
-            },
-            cocube_advanced_09_comap: {
-                cn: "03 定位垫的使用",
-                en: "03 Using the Comap"
+            cocube_advanced_04_apriltag: {
+                cn: "04 AprilTag 识别",
+                en: "04 AprilTag Detection"
             }
         }
 

@@ -5,13 +5,13 @@
 
 ### 2. 使用材料
 
-![CoCube 机器人 × 1](images/img1.png =300x*) ![个人电脑 或 平板](images/PC.png =300x*)
+![CoCube 机器人 × 1](img1.png =300x*) ![个人电脑 或 平板](PC.png =300x*)
 
 ### 3. 软件平台
 
 [MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
-![](images/image.png)
+![](image.png)
 
 ### 4. 开始编程
 
@@ -25,7 +25,7 @@ CoCube 机器人配备了一块全彩 LCD 显示屏，可以通过不同的显�
 
 4. **显示与清除：**&#x82E5;要清空当前屏幕上的图案，可以使用“清除显示”积木块。直接在积木区中点击“清除显示”积木块，或将“清除显示”积木块拖到工作区并点击，屏幕上的所有内容将被清除。
 
-![](images/simulator.png)
+![](simulator.png)
 
 参考代码示例：[MicroBlocks——CoCube 案例01 显示与清除](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20396%20276%20%7B%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%0Ascript%20395%20132%20%7B%0A%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%7D%0A%0A)
 
@@ -37,7 +37,7 @@ CoCube 机器人配备了一块全彩 LCD 显示屏，可以通过不同的显�
 
 ![](Flowing_lights.png)
 
-![](images/K136bNMWEogdl0xmMQZcDTBEnQe.gif)
+![](light.gif =300x*)
 
 参考代码示例：[MicroBlocks——CoCube 案例01 流水灯](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20440%2088%20%7B%0AwhenStarted%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0Aforever%20%7B%0A%20%20for%20i%205%20%7B%0A%20%20%20%20for%20j%205%20%7B%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbPlot%5D%27%20i%20j%0A%20%20%20%20%20%20waitMillis%20100%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%7D%0A%0Ascript%20786%2088%20%7B%0AwhenButtonPressed%20%27A%27%0A%27set%20display%20color%27%20%28colorSwatch%20255%200%200%20255%29%0A%7D%0A%0Ascript%20790%20199%20%7B%0AwhenButtonPressed%20%27B%27%0A%27set%20display%20color%27%20%28colorSwatch%200%20255%200%20255%29%0A%7D%0A%0Ascript%20787%20318%20%7B%0AwhenButtonPressed%20%27A%2BB%27%0A%27set%20display%20color%27%20%28colorSwatch%200%200%20255%20255%29%0A%7D%0A%0A)
 
