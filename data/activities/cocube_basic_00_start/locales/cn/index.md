@@ -2,7 +2,7 @@ CoCube 桌面级 AI 教育机器人，由上海交通大学与复旦大学的硕
 
 ### 一、CoCube平台亮点
 
-![](image.png)
+![](cocube_platform.png)
 
 ### 二、CoCube 技术规格
 

@@ -2,7 +2,7 @@ CoCube is a desktop AI educational robot, jointly developed by a team of masters
 
 ### I. Highlights of the CoCube Platform
 
-![](image.png)
+![](cocube_platform.png)
 
 ### II. Technical Specifications of CoCube
 
