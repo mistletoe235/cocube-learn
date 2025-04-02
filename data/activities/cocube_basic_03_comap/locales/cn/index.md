@@ -98,7 +98,7 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 ![](scriptImage256581.png)
 
-![](<c894f182d53640cd5ad5e84a4b741c3f 00_00_01-~1.gif>)
+![](comap.gif)
 
 参考示例程序：[MicroBlocks——CoCube案例03 迷宫挑战](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 
