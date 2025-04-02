@@ -62,11 +62,11 @@ The currently supported expansion modules are as follows:
 
 > If you have new application scenarios for CoModule expansion modules, please contact the CoCube team for assistance in development.
 
-### III. MicroBlocks Graphical Programming Platform
+### III. MicroBlocks Blocks Programming Platform
 
 CoCube can be programmed directly in the browser using the MicroBlocks platform without the need for downloading or installing any software.
 
-MicroBlocks is a graphical programming language inspired by Scratch, designed for "physical computing."
+MicroBlocks is a blocks programming language for physical computing inspired by Scratch.
 
 Home Page: [MicroBlocks-Home](https://microblocks.fun/)
 
@@ -118,9 +118,9 @@ On the MicroBlocks page, there are two ways to connect the CoCube device. Wirele
 
 6. If the serial port is not recognized, it may be because the computer has not installed the serial port driver. You need to install the driver for the CH343 serial-to-USB chip.
 
-   [MacOS Driver](https://www.wch.cn/downloads/CH34XSER _MAC_ZIP.html)
+   [MacOS Driver](https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html)
 
-   [Windows Driver](https://www.wch.cn/downloads/CH341SER _ZIP.html)
+   [Windows Driver](https://www.wch.cn/downloads/CH341SER_ZIP.html)
 
 7. If you still cannot connect, check whether the USB cable is functioning properly.
 

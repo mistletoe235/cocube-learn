@@ -125,10 +125,10 @@ MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编�
 6. 若无法正常识别出串口，则可能是电脑没有安装串口驱动，需要安装CH343串口转USB芯片的驱动
 
 
-   [MacOS驱动](https://www.wch.cn/downloads/CH34XSER\_MAC\_ZIP.html)
+   [MacOS驱动](https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html)
 
    
-   [Windows驱动](https://www.wch.cn/downloads/CH341SER\_ZIP.html)
+   [Windows驱动](https://www.wch.cn/downloads/CH341SER_ZIP.html)
 
 7. 若还无法连接，请检查USB线缆是否正常
 
