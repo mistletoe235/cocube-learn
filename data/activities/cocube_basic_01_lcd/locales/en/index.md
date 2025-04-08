@@ -34,7 +34,7 @@ In the "LED Display" library, you can control each LED block individually using 
 
 You can try changing the wait time to control the speed of the flowing lights; you can also try using the "Hat Block" - for example, "When Button A/B is Pressed" to set different display colors for the flowing lights.
 
-![](<Flowing_lights_en.png>)
+![](<Flowing_lights.png>)
 
 ![](light.gif =300x*)
 
