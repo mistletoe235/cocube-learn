@@ -5,7 +5,7 @@
 
 ### 2. 使用材料
 
-![CoCube 机器人 × 1](img1.png =300x*) ![个人电脑 或 平板](PC.png =300x*)
+![CoCube 机器人 × 1](../../../cocube_materials/img1.png =300x*) ![个人电脑 或 平板](../../../cocube_materials/PC.png =300x*)
 
 ### 3. 软件平台
 
