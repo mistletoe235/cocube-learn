@@ -1,59 +1,57 @@
-### 1. 案例目的
+### 1. Purpose of the Case
 
-学习掌握 ToF 模块的使用，并完成更多有趣的互动。
+Learn to use the ToF (Time of Flight) module and create more interesting interactive applications.
 
-ToF (Time of Flight)，通过发射红外激光，测量光线到达物体并反射回来的时间，从而获得精确的距离数据。具有优异的光照适应性，且不受目标的反射率影响，能够在各种光照条件、使用场景下稳定工作。
+ToF (Time of Flight) works by emitting infrared laser light, measuring the time it takes for the light to reach an object and reflect back, thereby obtaining precise distance data. It has excellent adaptability to lighting conditions and is unaffected by the reflectivity of the target, allowing it to work stably in various lighting conditions and usage scenarios.
 
-### 2. 使用材料
+### 2. Materials Used
 
-![CoCube 机器人 × 1](robot.png =200x*)
-![ToF 外接模块](ToF.png =180x*)
-![个人电脑 或 平板](PC.png =250x*)
+![CoCube Robot × 1](robot.png =200x*)
+![ToF External Module](ToF.png =180x*)
+![Personal Computer or Tablet](PC.png =250x*)
 
-### 3. 软件平台
+### 3. Software Platform
 
-[MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+[MicroBlocks——CoCube & CoCube Module](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-1.png)
 
-### 4. 快速体验
+### 4. Quick Experience
 
-1. **连接设备：**&#x901A;过有线或者无线方式，连接 MicroBlocks IDE 与 CoCube 机器人，并将 ToF 模块连接到 CoCube 机器人上。
+1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the ToF module to the CoCube robot.
 
-2. **添加积木库：**&#x5728;“机器人”目录下，添加 “CoCube Module库”——“CoCube Module库”中涵盖了 ToF 外接模块的所有功能——“ToF 已连接”和“ToF 距离(mm)”。
+2. **Add Block Library**: Under the "Robot" directory, add the "CoCube Module Library" — this library includes all the functions of the ToF external module: "ToF Connected" and "ToF Distance (mm)."
 
 ![](image-2.png)
 
 ![](image.png)
 
-* **ToF 已连接：拖拽出“ToF 已连接”**&#x79EF;木块，拖拽到工作区，并单击运行。该积木可判断 CoCube 机器人是否已经连接到 ToF 激光测距模块。
+* **ToF Connected**: Drag out the "ToF Connected" block, place it in the workspace, and click to run. This block checks whether the CoCube robot is connected to the ToF laser rangefinder module.
 
 ![](scriptImage6864473.png)
 
-注意：由于模块上电需要一定时间，所以第一次运行积木时，有一定概率会报“false”，再次点击运行即可。
+**Note**: Since the module requires some time to power up, there’s a chance that the first run might return "false." Simply click to run again.
 
-* **ToF 距离(mm)：**&#x62D6;拽出“ToF 距离(mm)”积木，单击运行，即可返回 ToF 激光测距传感器到前方障碍物的距离。
+* **ToF Distance (mm)**: Drag out the "ToF Distance (mm)" block and click to run. This will return the distance from the ToF laser rangefinder sensor to the obstacle in front.
 
-如果希望实时输出测量结果，你可以编写下面的程序。
+If you want to output the measurement results in real-time, you can write the following program:
 
 ![](scriptImage6901001.png)
 
-### 5. 进阶功能
+### 5. Advanced Features
 
-能否编写一个控制 CoCube 机器人跟手的程序？当 CoCube 与前方障碍足够远的话，就向前移动；当 CoCube 与障碍距离足够近时，就向后倒车。
+Can you write a program that controls the CoCube robot to follow your hand? If the CoCube is far enough from the obstacle in front, it moves forward; if the CoCube is close to the obstacle, it reverses.
 
-###### 示例程序——要思考+动手后再看呀！
+###### Example Program – Think and Try First!
 
 ![](scriptImage8014138.png)
 
+### 6. Challenge Yourself
 
+Using materials at hand, build a simple 3D maze! Then try writing code to make the CoCube robot autonomously navigate out of the maze using the ToF laser rangefinder module.
 
-### 6. 挑战一下
+### 7. Reference Code Examples
 
-用你手边的材料，搭建一个简易的立体迷宫吧！并尝试编写代码，让 CoCube 机器人借助 ToF 激光测距模块，自主走出迷宫。
+All tutorial code examples above:
 
-### 7. 参考代码示例
-
-以上所有教程代码示例：
-
-[MicroBlocks —— ToF 激光测距模块案例](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
+[MicroBlocks —— ToF Laser Rangefinder Module Cases](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)

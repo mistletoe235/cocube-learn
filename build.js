@@ -392,7 +392,7 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
             },
             cocube_basic_03_comap: {
                 cn: "03 定位垫的使用",
-                en: "03 Using the Comap"
+                en: "03 Using the CoMap"
             },
             cocube_basic_04_music: {
                 cn: "04 音乐编程",

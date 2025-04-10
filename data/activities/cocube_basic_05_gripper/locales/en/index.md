@@ -1,44 +1,41 @@
-### 1. 案例目的
+### 1. Purpose of the Case
 
-CoCube 机器人配合外接模块，能够实现更加复杂的功能，本节介绍了如何编程使用夹爪模块。
+When combined with external modules, the CoCube robot can achieve more complex functions. This section introduces how to program the use of the gripper module.
 
-### 2. 使用材料
+### 2. Materials Used
 
-![CoCube 机器人 × 1](robot.png =200x*) ![夹爪模块](image.png =200x*) ![个人电脑 或 平板](PC.png =250x*)
+![CoCube Robot × 1](robot.png =200x*) ![Gripper Module](image.png =200x*) ![Personal Computer or Tablet](PC.png =250x*)
 
+### 3. Software Platform
 
-
-### 3. 软件平台
-
-[MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+[MicroBlocks——CoCube & CoCube Module](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-1.png)
 
-### 4. 开始编程
+### 4. Start Programming
 
-1. **连接设备：**&#x901A;过有线或者无线方式，连接 MicroBlocks IDE 与 CoCube 机器人。并将舵机夹爪拓展到 CoCube 机器人上。
+1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection. Then attach the servo gripper module to the CoCube robot.
 
-2. **载入外接模块积木库：**&#x6309;图示次序点击，加载CoCube的外接模块库。
+2. **Load External Module Block Library**: Click in the order shown in the image to load the CoCube external module library.
 
-![](image-2.png)
+![](image-2.png =200x*)
 
-![](image-3.png)
+![](image-3.png =200x*)
 
-![](image-4.png)
+![](image-4.png =200x*)
 
-* **找到夹爪积木：**&#x70B9;击左侧积木库的“CoCube Module”卡片，拖动、“夹爪张开”、“夹爪闭合”、“夹爪角度”三个积木块至右侧工作区。
+* **Find Gripper Blocks**: Click on the "CoCube Module" tab in the block library on the left, and drag the "gripper open" "gripper close" and "gripper degrees" blocks into the workspace on the right.
 
-* **运行夹爪积木：**&#x5DE6;键点击“夹爪张开”或“夹爪闭合”积木块，当积木块周围亮起绿色光环时，表示程序已成功执行，可以看到夹爪张开和闭合。在“夹爪角度”模块里填入（0到70）的角度数字，夹爪转向对应角度。
+* **Run Gripper Blocks**: Left-click the "gripper open" or "gripper close" block. When a green halo appears around the block, it indicates that the program has been successfully executed, and you will see the gripper open or close. Input an angle value (between 0 and 70) into the "gripper degrees" block to move the gripper to the corresponding angle.
 
 ![](scriptImage257997.png)
 
-### 5. 挑战一下
+### 5. Challenge
 
-尝试使用夹爪模块般取一些身边的小物件吧，将配件盒中的小泡沫圆柱，从迷宫地图的C点搬运到E点。
+Try using the gripper module to pick up some small objects around you. Move a small foam cylinder from point C to point E on the maze map.
 
 ![](scriptImage225548.png)
 
-![](<c7635be25d2040f3c514dd4f9c9cef5d 00_00_00-00_00_30.gif>)
+![](c7635be25d2040f3c514dd4f9c9cef5d_00_00_00-00_00_30.gif)
 
-参考示例程序：[MicroBlocks——CoCube案例05 搬运机器人](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%0A%0Ascript%20408%20121%20%7B%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20to%27%20100%20120%2050%0A%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%27ccmodule_gripper%20degree%27%2010%0A%27CoCube%20move%20to%27%20200%20150%2050%0AwaitMillis%201000%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20for%20msecs%27%20%27cocube%3Bbackward%27%2040%201000%0A%7D%0A%0A)
-
+Reference Example Program: [MicroBlocks——CoCube Case 05 Transport Robot](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%0A%0Ascript%20408%20121%20%7B%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20to%27%20100%20120%2050%0A%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%27ccmodule_gripper%20degree%27%2010%0A%27CoCube%20move%20to%27%20200%20150%2050%0AwaitMillis%201000%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20for%20msecs%27%20%27cocube%3Bbackward%27%2040%201000%0A%7D%0A%0A)

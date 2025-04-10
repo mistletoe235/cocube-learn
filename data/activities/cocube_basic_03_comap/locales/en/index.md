@@ -1,106 +1,94 @@
-### 1. 案例目的
+### 1. Purpose of the Case
 
-为 CoCube 机器人编程，学习定位垫的坐标定位功能与机器人的定点定向移动，在此期间了解 MicroBlocks 中的输出功能。
+To program the CoCube robot to learn the coordinate positioning function of the positioning mat and the robot's point-to-point directional movement, and to understand the output functions in MicroBlocks during this process.
 
-### 2. 使用材料
+### 2. Materials Used
 
-![CoCube 机器人 × 1](robot.png =200x*)
-![个人电脑 或 平板](PC.png =200x*)
-![CoCube 定位地图](image.png =200x*)
+![CoCube Robot × 1](robot.png =200x*)
+![Personal Computer or Tablet](PC.png =200x*)
+![CoCube Positioning Map](image.png =200x*)
 
-### 3. 软件平台
+### 3. Software Platform
 
-[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image-1.png)
 
-### 4. 开始编程
+### 4. Start Programming
 
-#### 4.1 认识 CoMaps 定位地图
+#### 4.1 Understanding CoMaps Positioning Map
 
-CoMaps 可以为 CoCube 机器人提供精准的定位功能。
+CoMaps can provide precise positioning functions for the CoCube robot.
 
-![CoMaps 示例——迷宫挑战主题定位地图](comap.png)
+![CoMaps Example —— Maze Challenge Themed Positioning Map](comap.png)
 
-拿出一张迷宫挑战主题定位地图仔细观察：
+Take out a maze challenge themed positioning map and observe it carefully:
 
-地图左上角坐标为 (0,0)，右下角坐标为 (300,200)，X轴从左到右（0\~300），Y轴从上到下（0\~200）。
+- The top-left corner of the map has coordinates (0,0), and the bottom-right corner has coordinates (300,200).
+- The X-axis runs from left to right (0~300), and the Y-axis runs from top to bottom (0~200).
+- The robot faces 0 degrees when pointing in the positive direction of the Y-axis, and 180 degrees when pointing in the negative direction of the Y-axis. The angle increases in a counterclockwise direction.
+- Dotted lines are printed every 50 units on the map to help quickly locate coordinates.
 
-机器人朝 Y 轴正方向时为 0 度，机器人面朝 Y 轴负方向时为180度，逆时针旋转角度增加。
+#### 4.2 **Let CoCube Announce Its Position**
 
-地图上每隔50单位印有虚线，可以辅助快速定位坐标位置。
+How can we obtain the precise position and angle of the CoCube robot on the CoMaps map?
 
-#### 4.2 **让 CoCube 说出自己的位置**
+1. **Connect Devices**: Connect the Microblocks IDE to the CoCube robot via Bluetooth and place the CoCube robot on the positioning mat.
 
-如何才能获取 CoCube 机器人在 CoMaps 地图上更加精确地位置和角度呢？
+2. **Use the "Say" Block**
 
-1. **连接设备**：通过蓝牙连接的方式，连接 Microblocks IDE 与 CoCube 机器人，并将 CoCube 机器人放置在定位垫上。
+   - Open the "Output" block library and drag out the "Say 123" block. Click to run it, and you will see a small bubble in the top-right corner of the block in the MicroBlocks IDE, displaying "123".
+   - This is the function of the "say \_" block! It does not make the CoCube robot speak but displays content in the MicroBlocks IDE for you to see.
 
-2. **使用“说”积木**
-
-连接打开“输出”积木库，拖出“说 123”积木，并点击运行，可以看到在 MicroBlocks IDE 中，积木右上角出现一个小气泡，写有“123”。
-
-这就是“说 \_”积木的功能！它不是让 CoCube 机器人真正去说话，而是会将一些内容呈现在 MicroBlocks IDE 中给你看。
-
-![](image-2.png)
-
+![](image-2.png)  
 ![](scriptImage1819646.png)
 
-如果想要同时说两个内容，只需要点击“说 \_”积木右侧的小三角，在新增的输入栏中写上需要输出的内容即可。
+- If you want to say two pieces of content simultaneously, simply click the small triangle on the right side of the "say \_" block and enter the content you want to output in the new input field.
+- You can also fill in blocks from the "Math" block library, and CoCube will output the final result to the MicroBlocks IDE.
 
-我们还可以将“运算”积木库中的积木填写进来，CoCube 会将最终结果输出到 MicroBlocks IDE 上。
-
-![](scriptImage2100985.png)
-
+![](scriptImage2100985.png)  
 ![](scriptImage2239731.png)
 
-* **输出 CoCube 坐标**
+- **Output CoCube Coordinates**
 
-将 CoCube 积木库中的“位置X”、“位置Y”和“方向角”积木拖拽出来，放置在“说 \_”积木中。单击积木，即可说出 CoCube 当下的坐标。
-
-为了实时输出 CoCube 的坐标和角度，可以嵌套一个“重复执行”积木。
+  - Drag out the "X Position," "Y Position," and "Direction Angle" blocks from the CoCube block library and place them in the "say \_" block. Click the block to announce CoCube's current coordinates.
+  - To continuously output CoCube's coordinates and angle, nest a "Repeat" block.
 
 ![](scriptImage2340058.png)
 
-移动一下 CoCube 机器人，观察 MicroBlocks 中的坐标和角度是否跟着变化？
+- Move the CoCube robot and observe whether the coordinates and angle in MicroBlocks change accordingly.
 
-#### 4.3 绘制 CoCube 位置
+#### 4.3 Plotting CoCube's Position
 
-如果觉得“说 \_”积木不够直观，还可以借助“绘图”积木，在数据图表中显示 CoCube 的坐标。
+If you find the "say \_" block not intuitive enough, you can also use the "Plot" block to display CoCube's coordinates on a data chart.
 
-1. **连接设备：**&#x901A;过蓝牙连接的方式，连接 Microblocks IDE 与 CoCube 机器人，并将 CoCube 机器人放置在定位垫上。
+1. **Connect Devices**: Connect the Microblocks IDE to the CoCube robot via Bluetooth and place the CoCube robot on the positioning mat.
 
-2. **使用“绘图”积木：**&#x7F16;写如下的代码并运行，点击 MicroBlocks IDE 右上方的图标绘制按钮，红色、绿色和蓝色曲线分别代表 CoCube 机器人“位置X”、“位置Y”和“方向角”的数值。
+2. **Use the "Plot" Block**: Write the following code and run it. Click the plot button in the top-right corner of the MicroBlocks IDE. The red, green, and blue curves represent the values of CoCube's "X Position," "Y Position," and "Direction Angle," respectively.
 
 ![](image-3.png)
 
-#### 4.4 精准移动
+#### 4.4 Precise Movement
 
-&#x20;    在掌握了上述技巧之后，相信你可以自己探索剩下的功能啦。
+After mastering the above skills, you should be able to explore the remaining functions on your own.
 
 ![](image-4.png)
 
-我们重新编写一个 CoCube 机器人绘制正方形轨迹的程序：
+We will rewrite a program for the CoCube robot to draw a square trajectory:
 
-![](scriptImage3089043.png)
-
-
+![](scriptImage3089043.png)  
 
 ![](scriptImage3097549.png)
 
+Reference program example: [MicroBlocks —— CoCube Case 03 Drawing a Square Trajectory](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20971%20248%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20rotate%20to%20angle%27%200%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20180%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20270%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%7D%0A%7D%0A%0Ascript%20596%20312%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20by%20degree%27%20%27cocube%3Bleft%27%2030%2090%0A%7D%0A%7D%0A%0A)
 
+### 5. Challenge
 
-参考程序示例：[MicroBlocks —— CoCube 案例03 绘制正方形轨迹](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20971%20248%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20rotate%20to%20angle%27%200%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20180%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20270%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%7D%0A%7D%0A%0Ascript%20596%20312%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20by%20degree%27%20%27cocube%3Bleft%27%2030%2090%0A%7D%0A%7D%0A%0A)
+Use the coordinate feedback function and point-to-point movement function of the positioning mat to navigate from the entrance to the exit of the maze.
 
-### 1. 挑战一下
-
-使用定位垫的坐标反馈功能与定点移动功能，从迷宫的入口走向出口。
-
-![](scriptImage256581.png)
-
+![](scriptImage256581.png)  
 ![](comap.gif)
 
-参考示例程序：[MicroBlocks——CoCube案例03 迷宫挑战](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
+Reference example program: [MicroBlocks —— CoCube Case 03 Maze Challenge](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 
-你可能会发现，CoCube 在转弯时速度过快，不够平稳，我们可以每到达一个坐标点后，以更小的速度朝向特定角度后，再移动。自己试试看吧！
-
+You may find that CoCube turns too quickly and is not stable enough. We can slow down the speed and move after facing a specific angle at each coordinate point. Give it a try!

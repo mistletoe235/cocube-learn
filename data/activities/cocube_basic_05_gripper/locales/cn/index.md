@@ -38,7 +38,7 @@ CoCube 机器人配合外接模块，能够实现更加复杂的功能，本节�
 
 ![](scriptImage225548.png)
 
-![](<c7635be25d2040f3c514dd4f9c9cef5d 00_00_00-00_00_30.gif>)
+![](c7635be25d2040f3c514dd4f9c9cef5d_00_00_00-00_00_30.gif)
 
 参考示例程序：[MicroBlocks——CoCube案例05 搬运机器人](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%0A%0Ascript%20408%20121%20%7B%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20to%27%20100%20120%2050%0A%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%27ccmodule_gripper%20degree%27%2010%0A%27CoCube%20move%20to%27%20200%20150%2050%0AwaitMillis%201000%0A%27ccmodule_gripper%20open%27%0A%27CoCube%20move%20for%20msecs%27%20%27cocube%3Bbackward%27%2040%201000%0A%7D%0A%0A)
 

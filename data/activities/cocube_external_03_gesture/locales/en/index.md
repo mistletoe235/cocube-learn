@@ -1,66 +1,65 @@
-### 1. 案例目的
+"""
+### 1. Purpose of the Case
 
-学习掌握 3D 手势模块的使用，并完成更多有趣的互动。
+Learn to use the 3D gesture module and create more interesting interactive applications.
 
-集成高精度、低功耗的手势识别传感器，支持三维空间内的手势识别，实现与机器人的互动控制。
+The module integrates a high-precision, low-power gesture recognition sensor that supports gesture recognition in three-dimensional space, enabling interactive control with the robot.
 
-**注意：使用 3D 手势模块时，请勿将 CoCube 机器人放置在 CoMaps 定位地图上。**
+**Note: When using the 3D gesture module, do not place the CoCube robot on the CoMaps positioning map.**
 
-### 2. 使用材料
+### 2. Materials Used
 
-![CoCube 机器人 × 1](robot.png =200x*)
-![3D 手势模块](3Dgesture.png =180x*)
-![个人电脑 或 平板](PC.png =250x*)
+![CoCube Robot × 1](robot.png =200x*)
+![3D Gesture Module](3Dgesture.png =180x*)
+![Personal Computer or Tablet](PC.png =250x*)
 
-### 3. 软件平台
+### 3. Software Platform
 
-[MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+[MicroBlocks——CoCube & CoCube Module](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-2.png)
 
-### 4. 快速体验
+### 4. Quick Experience
 
-1. **连接设备：**&#x901A;过有线或者无线方式，连接 MicroBlocks IDE 与 CoCube 机器人，并将 3D 手势传感器模块连接到 CoCube 机器人上。
+1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the 3D gesture sensor module to the CoCube robot.
 
-2. **添加积木库：**&#x5728;“机器人”目录下，添加 “CoCube Module库”——“CoCube Module库”中涵盖了 ToF 外接模块的所有功能——“3D 手势传感器已连接”和“3D 手势传感器读取数据”。
+2. **Add Block Library**: Under the "Robot" directory, add the "CoCube Module Library" — this library includes all functions of the external modules: "3D Gesture Connected" and "3D Gesture Read."
 
 ![](image-1.png)
 
 ![](image.png)
 
-* **3D 手势传感器已连接：**&#x62D6;拽出“3D 手势传感器已连接”积木块，拖拽到工作区，并单击运行。该积木可判断 CoCube 机器人是否已经连接到 3D 手势传感器模块。
+* **3D Gesture Sensor Connected**: Drag out the "3D Gesture Connected" block, place it in the workspace, and click to run. This block checks whether the CoCube robot is connected to the 3D gesture sensor module.
 
 ![](scriptImage9339087.png)
 
-**注意：由于模块上电需要一定时间，所以第一次运行积木时，有一定概率会报“false”，请多等待一段时间后再测试。**
+**Note: Since the module requires some time to power up, there’s a chance that the first run might return "false." Please wait a little longer before testing again.**
 
-* **3D 手势传感器读取数据：**&#x62D6;拽出“3D 手势传感器读取数据”积木，用手在前方挥动的同时单击运行，发现很有可能读取到一个“?” (也有可能十分幸运，读取到了left、right、或者其他手势)。模仿 ToF 激光测距传感器的做法，循环读取，也只能读取到一个个“?”。显然这样的做法是不太正确的。
+* **3D Gesture Sensor Read Data**: Drag out the "3D Gesture Read" block, wave your hand in front while clicking to run, and you will likely read a "?" (though you might be lucky and read "left," "right," or another gesture). Mimicking the approach used with the ToF laser rangefinder, looping the reading will still only give you individual "?". Clearly, this approach is not ideal.
 
 ![](scriptImage9438390.png)
 
-
-
 ![](scriptImage9501061.png)
 
-3D 手势传感器默认支持 **9种手势识别**, 最大更新频率可达 **240Hz**，只有捕捉到手势的情况下才有正确的输入，否则均输出“?”。因此，如果希望实时输出测量结果，你需要编写下面的程序。
+The 3D gesture sensor supports **9 types of gesture recognition by default**, with a maximum update frequency of **240Hz**. It only provides correct input when a gesture is captured; otherwise, it outputs "?". Therefore, if you want to output measurement results in real-time, you need to write the following program:
 
 ![](scriptImage9927037.png)
 
-### 5. 进阶功能
+### 5. Advanced Features
 
-能否编写一个手势控制机器人的程序？例如向一侧挥手，机器人就像该测旋转。
+Can you write a program to control the robot with gestures? For example, waving to one side makes the robot rotate in that direction.
 
-###### 示例程序——要思考+动手后再看呀！
+###### Example Program – Think and Try First!
 
 ![](scriptImage11809588.png)
 
-### 6. 挑战一下
+### 6. Challenge Yourself
 
-再尝试用其他手势控制 CoCube 机器人播放音乐、做运动吧！
+Try controlling the CoCube robot to play music or perform movements using other gestures!
 
-### 7. 参考代码示例
+### 7. Reference Code Examples
 
-以上所有教程代码示例：
+All tutorial code examples above:
 
-[MicroBlocks —— 3D 手势模块案例](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20711%2082%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20local%20%27var%27%20%28%27ccmodule_gesture%20read%27%29%0A%20%20if%20%28var%20%21%3D%20%27%3F%27%29%20%7B%0A%20%20%20%20if%20%28var%20%3D%3D%20%27left%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27left%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204488452%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bright%27%2030%20500%0A%20%20%20%20%7D%20%28var%20%3D%3D%20%27right%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27right%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204291652%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bleft%27%2030%20500%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
-
+[MicroBlocks —— 3D Gesture Module Cases](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20711%2082%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20local%20%27var%27%20%28%27ccmodule_gesture%20read%27%29%0A%20%20if%20%28var%20%21%3D%20%27%3F%27%29%20%7B%0A%20%20%20%20if%20%28var%20%3D%3D%20%27left%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27left%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204488452%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bright%27%2030%20500%0A%20%20%20%20%7D%20%28var%20%3D%3D%20%27right%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27right%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204291652%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bleft%27%2030%20500%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
+"""

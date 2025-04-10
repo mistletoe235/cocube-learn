@@ -1,161 +1,155 @@
-### 1. 案例目的
+### 1. Purpose of the Case
 
-学习 AI 视觉感知模块的色块识别功能，并用 CoCube 跟随蓝色圆柱移动。
+Learn the color blob recognition function of the AI vision perception module and use CoCube to follow a blue cylinder.
 
 <video width="320" height="240" controls>
   <source src="video720p.mp4" type="video/mp4">
 </video>
 
-### 2. 使用材料
+### 2. Materials Used
 
-![个人电脑 或 平板](PC.png =300x*)
-![CoCube机器人 + AI 视觉感知模块](Sentry2.png =300x*)
+![Personal Computer or Tablet](PC.png =300x*)
+![CoCube Robot + AI Vision Perception Module](Sentry2.png =300x*)
 
-### 3. 软件平台
+### 3. Software Platform
 
 [MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
-或直接打开添加有 AI 视觉感知模组的编程环境：[MicroBlocks-AI Camera](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
+Or directly open the programming environment with the AI vision perception module added: [MicroBlocks-AI Camera](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
 
-### 4. 算法知识
+### 4. Algorithm Knowledge
 
-#### 算法简介
+#### Algorithm Overview
 
 ![](image-1.png)
 
-用户指定检测一个或多个颜色，判断图像中是否有该颜色的色块，返回其坐标和大小，支持多颜色多色块检测，颜色分类标签与颜色识别中的定义相同。
+The user specifies one or more colors to detect whether there are blobs of that color in the image, returning their coordinates and size. It supports multi-color and multi-blob detection, and the color classification tags are the same as those in color recognition.
 
-#### 视频教程
+#### Video Tutorial
 
-视频教程：[Sentry2视觉传感器-色块检测算法介绍\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1KM411C73u/)
+Video Tutorial: [Sentry2 Vision Sensor - Color Blob Detection Algorithm Introduction](https://www.bilibili.com/video/BV1KM411C73u/)
 
-#### 配置参数
+#### Configuration Parameters
 
-用户需要指定待检测的颜色标签，最多可同时开启全部6种颜色检测，但速度会有所下降。用户还可以通过设置色块的最小宽度w和高度h来过滤那些小于该值的色块，以减少误报。
+Users need to specify the color labels to be detected, allowing up to six colors to be detected simultaneously, but the speed will decrease. Users can also filter out blobs smaller than the specified minimum width w and height h to reduce false positives.
 
-当通过主控设置寄存器时，有以下参数需要设置：
+When setting registers via the main controller, the following parameters need to be set:
 
-| **参数** | **含义**                                                                              |
-| ------ | ----------------------------------------------------------------------------------- |
-| 1      | 无                                                                                   |
-| 2      | 无                                                                                   |
-| 3      | 有效色块最小宽度w                                                                           |
-| 4      | 有效色块最小高度h                                                                           |
-| 5      | 待检测的颜色分类标签1～6。特殊用法：通过往参数 5 中写⼊大于6的 RGB565 颜⾊值可以识别特定的颜⾊，例如写⼊0xFB00 为橙⾊，写⼊ 0xA11E 为紫⾊ |
+| **Parameter** | **Meaning**                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------- |
+| 1             | None                                                                                     |
+| 2             | None                                                                                     |
+| 3             | Minimum width w of valid blobs                                                           |
+| 4             | Minimum height h of valid blobs                                                          |
+| 5             | Color classification labels 1~6. Special usage: Writing an RGB565 color value greater than 6 into parameter 5 can identify specific colors, e.g., writing 0xFB00 for orange, writing 0xA11E for purple |
 
-**在UI界面中，有几种预置的参数可以使用：**
+**In the UI interface, there are several preset parameters available:**
 
-**算法性能：**
+**Algorithm Performance:**
 
-根据不同的应用需求来选择合适能算法性能，有3个选项可以设置，分别为“灵敏”、“均衡”、“准确”
+Select an appropriate algorithm performance based on different application needs; there are three options: "Sensitive," "Balanced," and "Accurate."
 
-在灵敏模式下识别速度快，帧率高。准确模式下可以检测远处的色块，但速度会降低。默认为均衡性能
+In sensitive mode, the recognition speed is fast, and the frame rate is high. In accurate mode, distant blobs can be detected, but the speed will decrease. The default is balanced performance.
 
-特殊的：在准确模式下对色块有较好的识别和跟踪效果，但只能识别一个色块
+Special: In accurate mode, there is good recognition and tracking effect for blobs, but only one blob can be recognized.
 
-**同时检测的最大数量：**
+**Maximum Number of Simultaneous Detections:**
 
-单个颜色的最大检测数量支持1～5个的输出
+Supports outputting 1~5 blobs per single color.
 
-当设置为1时，只返回一个最优结果，如果图像中有多个色块，则返回最大的那个，如果大小相近，则优先返回左上角的那个
+When set to 1, only the best result is returned. If there are multiple blobs in the image, the largest one is returned. If sizes are similar, the one in the upper-left corner is prioritized.
 
-当设置大于1时，返回色块的数量不会超过这个值。
+When set to greater than 1, the number of returned blobs will not exceed this value.
 
-**最小色块的区域大小：**
+**Minimum Blob Area Size:**
 
-如果背景中存在相同颜色的小色块，可以通过合理的设置最小值实现过滤功能
+If small blobs of the same color exist in the background, they can be filtered by setting a reasonable minimum value.
 
-绝对值坐标系下的预设值为：2x2、4x4、8x8、16x16、32x32、64x64、128x128像素
+Preset values in the absolute coordinate system: 2x2, 4x4, 8x8, 16x16, 32x32, 64x64, 128x128 pixels
 
-百分比坐标系下的预设值为：1x1、2x3、3x4、6x8、9x12、21x28、42x56 %
+Preset values in the percentage coordinate system: 1x1, 2x3, 3x4, 6x8, 9x12, 21x28, 42x56 %
 
-**待检测的颜色：**
+**Colors to Detect:**
 
-以按键形式提供用户选择，开启某个颜色后会显示一个小眼睛图标，未开启的颜色则会显示一个带斜杠的眼睛图标，可以同时开启一个或多种颜色
+Provided in button form for user selection. When a color is enabled, a small eye icon is displayed; if not enabled, a slashed eye icon is shown. One or more colors can be enabled simultaneously.
 
-#### 返回结果
+#### Return Results
 
 ![](image.png)
 
-识别到指定色块后会在UI界面上进行标识，显示其位置、大小、分类标签、名称等信息
+Identified blobs will be marked on the UI interface, showing their position, size, classification label, name, etc.
 
-当通过主控读取寄存器时，将会返回以下的数据：
+When reading registers via the main controller, the following data will be returned:
 
-| **结果** | **含义**  |
-| ------ | ------- |
-| 1      | 色块中心x坐标 |
-| 2      | 色块中心y坐标 |
-| 3      | 色块宽度w   |
-| 4      | 色块高度h   |
-| 5      | 颜色分类标签  |
+| **Result** | **Meaning**     |
+| ---------- | --------------- |
+| 1          | Blob center x-coordinate |
+| 2          | Blob center y-coordinate |
+| 3          | Blob width w    |
+| 4          | Blob height h   |
+| 5          | Color classification label |
 
-#### **使用技巧**
+#### **Usage Tips**
 
-1. 当确定需要跟踪一个物体时，比如检测白色的道路或是跟踪小球，可以将色块数量设置为1，可以提高速度，减少误报
+1. When it is determined that a single object needs to be tracked, such as detecting a white road or tracking a ball, the number of blobs can be set to 1 to improve speed and reduce false positives.
+2. Using a smaller recognition area and accurate performance mode allows seeing objects farther away.
+3. When recognizing large areas of color blobs, the frame rate will significantly drop. Use sensitive mode in this case.
+4. When there is color bias in the picture, the white balance function needs to be locked.
 
-2. 采用较小的识别区域并使用准确性能模式，可以看到更远处的物体
+#### **Explanation of Blocks Needed**
 
-3. 识别大面积的色块时，运行帧率会明显下降，此时可以用灵敏模式
+1. **Sentry2 Initialization Block**
 
-4. 当画面存在偏色时，需要锁定白平衡功能
+An optional parameter is the i2c address. Default is 96 (0x60).
 
-#### **需要使用到的积木说明**
-
-1. **Sentry2 初始化积木**
-
-一个可选参数是 i2c 地址。默认为 96。（0x60）
-
-在使用 Sentry2 前需要先执行初始化积木。通常会放在“当启动时”帽子积木下。
+Before using Sentry2, the initialization block must be executed first. It is usually placed under the "when started" hat block.
 
 ![](init.png)
 
-2. **Sentry2 设置模式积木**
+2. **Sentry2 Set Mode Block**
 
 ![](setmode.png)
 
-需要设置模式为blob，即色块检测模式。
+The mode needs to be set to blob, i.e., color blob detection mode.
 
-3. **Sentry2 检测结果**
+3. **Sentry2 Detection Result**
 
 ![](result.png)
 
-使用这个积木前需要确定blob算法模式已开启。
+This block must be used to trigger the detection before obtaining results. 
 
-这块积木也是用来触发检测的积木，只有先使用这块积木，才能获得检测结果。
+It returns the number of results identified by the current blob algorithm.
 
-返回的结果为当前blob算法识别到的结果数量。
+The number of results will be affected by the corresponding algorithm parameter settings.
 
-结果的数量会受对应算法的参数设置影响。
-
-4. **Sentry2 检测对象属性**
+4. **Sentry2 Detected Object Properties**
 
 ![](property.png)
 
-返回检测对象id的属性，包括色块中心x坐标、色块中心y坐标、色块宽度w、色块高度h以及颜色分类标签
+Returns the properties of the detected object id, including the blob center x-coordinate, blob center y-coordinate, blob width w, blob height h, and color classification label.
 
-其中颜色分类标签为1\~5，分别代表黑色、白色、红色、绿色和蓝色。
+The color classification labels are 1~5, representing black, white, red, green, and blue respectively.
 
 
 
-### 5. 开始编程
+### 5. Start Programming
 
-1. **连接设备：**&#x901A;过有线或者无线方式，连接 MicroBlocks IDE 与 CoCube 机器人，并将 AI 视觉感知模块拓展在 CoCube 机器人前方。
+1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the AI vision perception module to the front of the CoCube robot.
 
-2. **载入积木库：**&#x5982;未添加 Sentry2 AI 摄像头库和 CoCube 外接模块库，可先加载CoCube的外接模块库和Sentry2 AI 摄像头库。
+2. **Load Block Library**: If the Sentry2 AI camera library and CoCube external module library have not been added, load them first.
 
-3. **摄像头模块初始化：**&#x9009;择启动时先启用外接模块电源，然后等4秒后摄像头模块启动成功再初始化I2C接口，然后再将摄像头的算法模式设置为blob模式用于色块识别。
+3. **Camera Module Initialization**: Choose to enable the external module power supply at startup, then wait 4 seconds for the camera module to start successfully before initializing the I2C interface, and then set the camera's algorithm mode to blob mode for color blob recognition.
 
 ![](scriptImage4423397.png)
 
-* **色块识别：**&#x5FAA;环判断是否有检测到Blob色块，当检测到的色块数量为1时，输出该色块的5种属性。你可以实时观察该色块的位置、大小以及颜色标签。
+* **Color Blob Recognition**: Continuously check if any Blob color blobs are detected. When the number of detected blobs is 1, output the five attributes of that blob. You can observe the position, size, and color label of the blob in real-time.
 
 ![](result2.png)
 
-* **编写自己的程序：**&#x6709;了上述的调试代码，不妨自己试试组合更多的功能吧！
+* **Write Your Own Program**: With the above debugging code, try combining more functions yourself!
 
-### 6. 挑战一下
+### 6. Challenge Yourself
 
-基于色块识别功能，实现跟随蓝色圆柱移动的功能。
+Based on the color blob recognition function, implement the feature of following a blue cylinder.
 
-注意，需要手动设置Sentry2摄像头的色块识别的参数，将识别色块的颜色由出厂默认红色，更改为蓝色。
-
+Note: Manually set the color blob recognition parameters of the Sentry2 camera, changing the recognized blob color from the factory default red to blue.
