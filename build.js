@@ -691,6 +691,12 @@ function copyAssets () {
         { overwrite: true },
         (err) => { if (err) { console.error(err); } }
     );
+    fse.copySync(
+        `${__dirname}/authorization`,
+        `${__dirname}/dist/`,
+        { overwrite: true },
+        (err) => { if (err) { console.error(err); } }
+    );
 };
 
 function concatJS () {
