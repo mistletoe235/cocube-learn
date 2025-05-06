@@ -380,72 +380,88 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
         basic:{
             cocube_basic_00_start: {
                 cn: "00 新手指引",
-                en: "00 Getting Started"
+                en: "00 Getting Started",
+                es: "00 Introducción"
             },
             cocube_basic_01_lcd: {
                 cn: "01 LCD 屏幕编程",
-                en: "01 LCD Screen Programming"
+                en: "01 LCD Screen Programming",
+                es: "01 Programación de pantalla LCD"
             },
             cocube_basic_02_motion: {
                 cn: "02 运动基础",
-                en: "02 Motion Basics"
+                en: "02 Motion Basics",
+                es: "02 Fundamentos del Movimiento"
             },
             cocube_basic_03_comap: {
                 cn: "03 定位垫的使用",
-                en: "03 Using the CoMap"
+                en: "03 Using the CoMap",
+                es: "03 Uso de superficies de posicionamiento"
             },
             cocube_basic_04_music: {
                 cn: "04 音乐编程",
-                en: "04 Music Programming"
+                en: "04 Music Programming",
+                es: "04 Programación musical"
             },
             cocube_basic_05_gripper: {
                 cn: "05 夹爪外接模块",
-                en: "05 Gripper External Module"
+                en: "05 Gripper External Module",
+                es: "05 Módulo externo de la pinza"
             },
             cocube_basic_06_broadcast: {
                 cn: "06 广播事件",
-                en: "06 Broadcast Event"
+                en: "06 Broadcast Event",
+                es: "06 Evento de transmisión"
             },
             cocube_basic_07_keyboard: {
                 cn: "07 键盘事件",
-                en: "07 Keyboard Event"
+                en: "07 Keyboard Event",
+                es: "07 Evento de teclado"
             },
             cocube_basic_08_wechat: {
                 cn: "08 微信小程序控制",
-                en: "08 WeChat Mini Program Control"
+                en: "08 WeChat Mini Program Control",
+                es: "08 Control de applets de WeChat"
             },
 
         },
         external:{
             cocube_external_01_neopixel: {
                 cn: "01 NeoPixel 全彩灯板模块",
-                en: "01 NeoPixel RGB LED Module"
+                en: "01 NeoPixel RGB LED Module",
+                es: "01 NeoPixel"
             },
             cocube_external_02_tof: {
                 cn: "02 ToF 激光测距模块",
-                en: "02 ToF Laser Ranging Module"
+                en: "02 ToF Laser Ranging Module",
+                es: "02 Módulo de medición de distancia"
             },
             cocube_external_03_gesture: {
                 cn: "03 3D 手势传感器模块",
-                en: "03 3D Gesture Sensor Module"
+                en: "03 3D Gesture Sensor Module",
+                es: "03 Módulo sensor de gestos"
             }
         },
         advanced:{
             cocube_advanced_01_colordetect: {
                 cn: "01 色块识别",
-                en: "01 Color Detection"
+                en: "01 Color Detection",
+                es: "01 Identificación de bloques de color"
             },
             cocube_advanced_02_traffic: {
                 cn: "02 智慧交通",
-                en: "02 Smart Traffic"
+                en: "02 Smart Traffic",
+                es: "02 Tráfico inteligente"
             },
             cocube_advanced_03_line: {
                 cn: "03 线条检测",
-                en: "03 Line Detection"
+                en: "03 Line Detection",
+                es: "03 Detección de líneas"
             },
             cocube_advanced_04_apriltag: {
                 cn: "04 AprilTag 识别",
-                en: "04 AprilTag Detection"
+                en: "04 AprilTag Detection",
+                es: "04 Identificación de etiquetas"
             }
         }
 

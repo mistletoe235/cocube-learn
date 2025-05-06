@@ -1,4 +1,3 @@
-"""
 ### 1. Purpose of the Case
 
 Learn to use the 3D gesture module and create more interesting interactive applications.
@@ -62,4 +61,3 @@ Try controlling the CoCube robot to play music or perform movements using other 
 All tutorial code examples above:
 
 [MicroBlocks —— 3D Gesture Module Cases](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20711%2082%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20local%20%27var%27%20%28%27ccmodule_gesture%20read%27%29%0A%20%20if%20%28var%20%21%3D%20%27%3F%27%29%20%7B%0A%20%20%20%20if%20%28var%20%3D%3D%20%27left%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27left%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204488452%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bright%27%2030%20500%0A%20%20%20%20%7D%20%28var%20%3D%3D%20%27right%27%29%20%7B%0A%20%20%20%20%20%20sayIt%20%27right%27%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204291652%0A%20%20%20%20%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bleft%27%2030%20500%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
-"""
