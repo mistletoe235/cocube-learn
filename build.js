@@ -442,7 +442,7 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
                 es: "03 Módulo sensor de gestos"
             }
         },
-        advanced:{
+        sentry2:{
             cocube_advanced_01_colordetect: {
                 cn: "01 色块识别",
                 en: "01 Color Detection",
@@ -462,7 +462,19 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
                 cn: "04 AprilTag 识别",
                 en: "04 AprilTag Detection",
                 es: "04 Identificación de etiquetas"
-            }
+            },
+        },
+        snap:{
+            cocube_snap_websockets: {
+                cn: "01 集群控制准备工作",
+                en: "01 Multi-robot Control Preparation",
+                es: "01 Preparación para el control de robots en grupo"
+            },
+            cocube_snap_example: {
+                cn: "02 集群控制案例",
+                en: "02 Multi-robot Control Example",
+                es: "02 Ejemplo de control de robots en grupo"
+            },
         }
 
 

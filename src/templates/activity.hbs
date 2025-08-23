@@ -105,9 +105,21 @@
                         </ul>
                     </li>
                     <li>
-                        <span class="contents_toggle">Advanced <span class="arrow">&#9660;</span></span>
+                        <span class="contents_toggle">Sentry2 <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
-                            {{#each contents.advanced}}
+                            {{#each contents.sentry2}}
+                                <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
+                                    <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
+                                        {{lan_json_key this ../locale.code}}
+                                    </a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="contents_toggle">Snap! <span class="arrow">&#9660;</span></span>
+                        <ul class="submenu">
+                            {{#each contents.snap}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
