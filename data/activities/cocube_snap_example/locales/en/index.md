@@ -8,7 +8,6 @@ Master multi-robot cluster control technology by programming four CoCube robots 
 ![Base Station](cudy.png =250x*)
 
 ![300x200 Map](map_300200.png =400x*)
-![600x600 Map](map_large.png =200x*)
 
 ### 3. Software Platforms
 
