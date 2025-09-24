@@ -708,6 +708,12 @@ function buildActivity (descriptor, langCode, activityPath) {
 
 function copyAssets () {
     fse.copySync(
+        `${__dirname}/src/privacy`,
+        `${__dirname}/dist/privacy`,
+        { overwrite: true },
+        (err) => { if (err) { console.error(err); } }
+    );
+    fse.copySync(
         `${__dirname}/src/assets`,
         `${__dirname}/dist/assets`,
         { overwrite: true },
