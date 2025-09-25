@@ -15,14 +15,14 @@ CoCube is a desktop AI educational robot, jointly developed by a team of masters
 | ------ | --------------------------------------------- |
 | Main Controller   | ESP32 Xtensa® 32-bit LX6 single/dual-core processor |
 | Wi-Fi  | 802.11 b/g/n (2.4Ghz)                         |
-| Bluetooth | Bluetooth V4.2 BR/EDR and BLE standard                       |
+| Bluetooth | BLE standard                       |
 | Mobility     | Dual-track differential chassis, maximum speed 50 units/s |
 | Positioning  | High frame rate, millimeter-level absolute positioning, angle resolution 1° |
 | TFT Screen   | 1.54-inch full-color screen @240\*240                          |
 | Buttons      | Power button (bottom, long press 3s to power on/off), AB buttons (rear of the robot) |
 | Buzzer       | Passive buzzer                                         |
 | Magnetic Connector | CoCube 4Pin magnetic connector (I2C + I/O + UART), 5V @ 600mA |
-| Lithium Battery | 450mAh @ 7.4V                                 |
+| Lithium Battery | 400mAh @ 7.4V                                 |
 | Charging Voltage | Type C interface, 5V @ 1.2A                            |
 | Battery Life | No limit in wired programming mode, about 2 hours in Bluetooth wireless programming mode, about 1 hour in Wi-Fi mode |
 | Product Dimensions | 45 × 45 × 38mm                                |

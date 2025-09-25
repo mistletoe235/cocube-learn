@@ -22,7 +22,7 @@ CoCube es un robot educativo de IA de nivel de escritorio, desarrollado conjunta
 | Tecla      | Botón de encendido (abajo, mantenga presionado durante 3 segundos para encender), botón AB (detrás del fuselaje) |
 | zumbador       | Zumbador pasivo                                         |
 | Interfaz magnética | CoCube 4Pin Interfaz de sujeción magnética (I2C + I/O + UART),5V @ 600mA |
-| batería de litio | 450mAh @ 7.4V                                 |
+| batería de litio | 400mAh @ 7.4V                                 |
 | Voltaje de carga | Interfaz Tipo C,5V @ 1.2A                            |
 | Duración de la batería | Modo de programación por cable, modo de programación inalámbrica Bluetooth ilimitado, aproximadamente 2 horas Modo Wi-Fi, aproximadamente 1 hora |
 | Dimensiones del producto | 45 × 45 × 38 mm                                |
