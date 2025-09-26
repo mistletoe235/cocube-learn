@@ -46,7 +46,7 @@
 
 ### 6. 第三步：用Snap控制你的机器人
 
-1. **导入控制程序：** 打开Snap网站，将 `cocube_websokets.xml` 文件拖进去。你会在左上角看到 "CoCube WebSockets" 积木库出现了！
+1. **导入控制程序：** 打开Snap网站，将 `cocube_websokets.xml` 文件拖进去。你会在左上角看到 "CoCube WebSockets" 积木库出现了！<a href="cocube_websokets.xml" download="cocube_websokets.xml">点击下载cocube_websokets.xml</a>
 
 ![](img6.png)
 

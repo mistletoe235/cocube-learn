@@ -46,7 +46,7 @@ If you see the block displaying your robot's IP address (like in the image below
 
 ### 6. Step 3: Control Your Robot with Snap
 
-1. **Import Control Program:** Open the Snap website and drag the `cocube_websokets.xml` file into it. You'll see the "CoCube WebSockets" block library appear in the upper left corner!
+1. **Import Control Program:** Open the Snap website and drag the `cocube_websokets.xml` file into it. You'll see the "CoCube WebSockets" block library appear in the upper left corner! <a href="cocube_websokets.xml" download="cocube_websokets.xml">Click to download cocube_websokets.xml</a>
 
 ![](img6.png)
 

@@ -46,7 +46,7 @@ Si ves que el bloque muestra la dirección IP de tu robot (como en la imagen de 
 
 ### 6. Paso 3: Controla tu Robot con Snap
 
-1. **Importar Programa de Control:** Abre el sitio web de Snap y arrastra el archivo `cocube_websokets.xml` hacia él. ¡Verás aparecer la biblioteca de bloques "CoCube WebSockets" en la esquina superior izquierda!
+1. **Importar Programa de Control:** Abre el sitio web de Snap y arrastra el archivo `cocube_websokets.xml` hacia él. ¡Verás aparecer la biblioteca de bloques "CoCube WebSockets" en la esquina superior izquierda!  <a href="cocube_websokets.xml" download="cocube_websokets.xml">Haz clic para descargar cocube_websokets.xml</a>
 
 ![](img6.png)
 

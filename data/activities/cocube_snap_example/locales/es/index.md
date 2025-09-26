@@ -1,15 +1,15 @@
-### 1. 案例目的
-掌握多机器人集群控制技术，通过编程实现四个 CoCube 机器人在不同规格地图上的协同编队和循环运动，体验精确的多机器人协调控制！
+### 1. Propósito del Caso
+Dominar la tecnología de control de enjambre de múltiples robots, programando para lograr que cuatro robots CoCube realicen formación coordinada y movimiento cíclico en mapas de diferentes especificaciones, ¡experimentando el control preciso de múltiples robots!
 
-### 2. 使用材料
+### 2. Materiales Necesarios
 
-![CoCube 机器人 × 4](robot.png =200x*)
-![个人电脑 或 平板](PC.png =250x*)
-![基站](cudy.png =250x*)
+![CoCube Robot × 4](robot.png =200x*)
+![Computadora o Tableta](PC.png =250x*)
+![Estación Base](cudy.png =250x*)
 
-![300x200 地图](map_300200.png =400x*)
+![Mapa 300x200](map_300200.png =400x*)
 
-### 3. 软件平台
+### 3. Plataforma de Software
 
 1. [MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
@@ -19,77 +19,77 @@
 
 ![](img3.png)
 
-### 4. 环境准备
+### 4. Preparación del Entorno
 
-1. **铺设地图：** 选择合适的平坦区域，铺设 300x200 或 600x600 规格的定位地图
-2. **启动基站：** 按照基础教程的方法启动基站，并将电脑连接到基站网络
-   - 💡 **小提示**：可以选择有线连接或WiFi连接，确保网络稳定
+1. **Colocar el mapa:** Seleccione un área plana adecuada y coloque un mapa de localización de 300x200 o 600x600.
+2. **Iniciar la estación base:** Siga el tutorial básico para iniciar la estación base y conecte la computadora a la red de la estación base.
+   - 💡 **Consejo:** Puede elegir conexión por cable o WiFi, asegurándose de que la red sea estable.
 
 ![](map_setup.png)
 
-### 5. 配置四个机器人
+### 5. Configuración de los Cuatro Robots
 
-为了便于管理，我们给四个机器人分别设置ID：1, 2, 3, 4
+Para facilitar la gestión, asignamos un ID a cada uno de los cuatro robots: 1, 2, 3, 4.
 
-1. **逐个连接机器人：** 用数据线或蓝牙连接每个 CoCube 机器人到 MicroBlocks 编程环境
-2. **设置机器人参数：** 为每个机器人依次设置：
-   - 唯一的机器人ID（1号、2号、3号、4号）
-   - 相同的WiFi连接信息
-   - 相同的路由器地址（默认192.168.10.1）
-3. **验证连接：** 确保四个机器人都成功获得IP地址并显示在积木块上
+1. **Conectar los robots uno por uno:** Conecte cada robot CoCube al entorno de programación MicroBlocks mediante un cable de datos o Bluetooth.
+2. **Configurar los parámetros del robot:** Configure cada robot con:
+   - Un ID único (Robot 1, Robot 2, Robot 3, Robot 4).
+   - La misma información de conexión WiFi.
+   - La misma dirección del router (por defecto 192.168.10.1).
+3. **Verificar la conexión:** Asegúrese de que los cuatro robots hayan obtenido una dirección IP y se muestren en los bloques de construcción.
 
-⚠️ **重要提醒**：每个机器人的ID必须不同，但WiFi信息要完全一样！
+⚠️ **Recordatorio Importante:** Cada robot debe tener un ID diferente, pero la información WiFi debe ser idéntica.
 
-### 6. 300x200地图直线编队控制
+### 6. Control de Formación en Línea Recta en el Mapa 300x200
 
-#### 6.1 导入控制程序
+#### 6.1 Importar el Programa de Control
 
-1. **下载示例程序：** <a href="cocube_snap_example1.xml" download="cocube_snap_example1.xml">点击下载示例程序 1</a>
-2. **导入到Snap：** 打开 Snap网站，将 `cocube_snap_example1.xml` 文件拖到窗口中
-3. **查看机器人角色：** 你会看到文件已经创建好了带有编号的四个机器人角色！
+1. **Descargar el programa de ejemplo:** <a href="cocube_snap_example1.xml" download="cocube_snap_example1.xml">Haga clic aquí para descargar el programa de ejemplo 1</a>
+2. **Importar a Snap:** Abra el sitio web de Snap y arrastre el archivo `cocube_snap_example1.xml` a la ventana.
+3. **Ver los roles de los robots:** Verá que el archivo ya ha creado cuatro roles de robots numerados.
 
 ![](snap1.png)
 
-#### 6.2 开始执行编队控制
+#### 6.2 Comenzar el Control de Formación
 
-1. **了解控制按键：** 点击右侧的舞台，可以看到预设的控制指令：
-   - 点击小绿旗：连接四个机器人
-   - 按键盘"1"：移动到起始点  
-   - 按键盘"2"：开始排成直线
-   - 按键盘"3"：排列成圆形
-   - 按键盘"4"：圆形环绕运动
+1. **Conocer las teclas de control:** Haga clic en el escenario a la derecha para ver los comandos de control preestablecidos:
+   - Haga clic en la bandera verde: Conectar los cuatro robots.
+   - Presione la tecla "1": Moverse al punto de inicio.
+   - Presione la tecla "2": Comenzar a alinearse en línea recta.
+   - Presione la tecla "3": Formar un círculo.
+   - Presione la tecla "4": Movimiento circular alrededor.
 
 ![](snap2.png =600x*)
 
-2. **开始控制：** 
-   - 首先点击右上角小绿旗按钮连接机器人
-   - 连接成功后，Snap右上角会显示机器人实时位置，移动实体机器人会看到位置同步变化！
-   
+2. **Comenzar el control:**
+   - Primero haga clic en el botón de la bandera verde en la esquina superior derecha para conectar los robots.
+   - Una vez conectados, Snap mostrará la posición en tiempo real de los robots en la esquina superior derecha. ¡Mover los robots físicos mostrará cambios sincronizados en la posición!
+
 ![](snap3.png =300x*)
 
-   - 然后按下键盘数字键"1-4"来执行不同的编队动作,实现下面视频的效果
+   - Luego presione las teclas numéricas "1-4" para ejecutar diferentes acciones de formación y lograr los efectos del video a continuación.
 
 <video width="320" height="240" controls>
   <source src="video_720p.mp4" type="video/mp4">
 </video>
 
-3. **自定义编程：** 想要修改动作？点击任意机器人角色，然后拖动左边的积木块来创建你自己的编队程序！
+3. **Programación personalizada:** ¿Quiere modificar las acciones? Haga clic en cualquier rol de robot y arrastre los bloques de construcción de la izquierda para crear su propio programa de formación.
 
-### 7. 第四步：600x600地图探索挑战
+### 7. Cuarto Paso: Desafío del Mapa 600x600
 
-通过上面的例子，你已经掌握了多机器人集群控制的基本方法！现在来挑战更大的地图吧！
+Con el ejemplo anterior, ¡ya ha dominado los métodos básicos de control de enjambre de múltiples robots! Ahora, ¡desafíese con un mapa más grande!
 
-**下载大地图程序：** <a href="cocube_snap_example2.xml" download="cocube_snap_example2.xml">点击下载示例程序 2</a>
+**Descargar el programa del mapa grande:** <a href="cocube_snap_example2.xml" download="cocube_snap_example2.xml">Haga clic aquí para descargar el programa de ejemplo 2</a>
 
-这个程序包含了：
-- 600x600地图的坐标映射
-- 八个机器人的基础控制框架  
-- 可扩展的编程积木组合
+Este programa incluye:
+- Mapeo de coordenadas para el mapa 600x600.
+- Marco básico de control para ocho robots.
+- Combinaciones de bloques de construcción programables y extensibles.
 
-### 8. 挑战时间 🚀
+### 8. Hora del Desafío 🚀
 
-现在你已经是多机器人控制专家了！试试这些高级挑战：
-- 编程让四个机器人组成方阵进行复杂图形运动
-- 创建机器人"蛇形"编队，让它们像游戏贪吃蛇一样移动
-- 设计机器人接力赛，让它们依次完成不同的任务点
-- 你能想出什么更酷的集群控制玩法吗？快来创造吧！
+¡Ahora ya es un experto en control de múltiples robots! Intente estos desafíos avanzados:
+- Programe para que cuatro robots formen un cuadrado y realicen movimientos de figuras complejas.
+- Cree una formación de "serpiente" con los robots, haciéndolos moverse como el juego de la serpiente.
+- Diseñe una carrera de relevos de robots, haciendo que completen diferentes puntos de tarea uno tras otro.
+- ¿Puede pensar en formas más geniales de control de enjambre? ¡Sea creativo!
