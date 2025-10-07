@@ -15,7 +15,7 @@ CoCube es un robot educativo de IA de nivel de escritorio, desarrollado conjunta
 | ------ | --------------------------------------------- |
 | Control maestro   | ESP32 Xtensa® 32-bit LX6 Procesadores de núcleo simple/dual |
 | Wi-Fi  | 802.11 b/g/n (2.4Ghz)                         |
-| Bluetooth | Bluetooth V4.2 BR/EDR la norma BLE                     |
+| Bluetooth | Protocolo estándar BLE                     |
 | mover     | Chasis diferencial de doble vía con una velocidad máxima de movimiento de 50 unidades/s |
 | posicionamiento  | Alta velocidad de fotogramas, posicionamiento absoluto a nivel milimétrico, resolución angular de 1° |
 | Pantalla TFT   | Pantalla a todo color de 1.54 pulgadas @240\*240                          |

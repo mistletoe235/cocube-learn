@@ -440,6 +440,11 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
                 cn: "03 3D 手势传感器模块",
                 en: "03 3D Gesture Sensor Module",
                 es: "03 Módulo sensor de gestos"
+            },
+            cocube_external_04_asr: {
+                cn: "04 ASR 语音识别模块",
+                en: "04 ASR Speech Recognition Module",
+                es: "04 ASR Módulo de Reconocimiento de Voz"
             }
         },
         sentry2:{
@@ -966,5 +971,5 @@ build();
 if (debugMode) {
     watch();
     serve();
-    console.log("\nHTTP Server: '127.0.0.1:3000/en'");
+    console.log("\nHTTP Server: 'http://127.0.0.1:3000/en'");
 }
