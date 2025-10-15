@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Control the CoCube robot using a keyboard.
 

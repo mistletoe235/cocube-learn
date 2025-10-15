@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 To program the CoCube robot to learn the coordinate positioning function of the positioning mat and the robot's point-to-point directional movement, and to understand the output functions in MicroBlocks during this process.
 

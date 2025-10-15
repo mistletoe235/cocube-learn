@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 When combined with external modules, the CoCube robot can achieve more complex functions. This section introduces how to program the use of the gripper module.
 

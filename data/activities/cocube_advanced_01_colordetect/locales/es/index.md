@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Aprenda la función de reconocimiento de bloques de color del módulo de percepción visual de IA y use el CoCube para seguir el movimiento del cilindro azul.
 

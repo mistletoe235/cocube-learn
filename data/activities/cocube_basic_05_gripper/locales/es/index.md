@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 El robot CoCube se puede utilizar junto con módulos externos para implementar funciones más complejas, y en esta sección se explica cómo programar el uso del módulo de agarre.
 

@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Conozca la función de reconocimiento AprilTag del módulo de percepción visual de IA.
 

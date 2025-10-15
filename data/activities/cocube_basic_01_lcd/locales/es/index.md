@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Programación del robot CoCube para implementar la función de visualización LED de la pantalla LCD.
 

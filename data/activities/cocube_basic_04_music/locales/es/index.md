@@ -1,4 +1,4 @@
-### 1. Objeto del asunto
+### 1. Propósito
 
 Programación del robot CoCube para la programación musical.
 

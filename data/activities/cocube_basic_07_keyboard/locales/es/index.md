@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 Utilice el teclado para controlar el robot CoCube.
 
 ### 2. Materiales utilizados

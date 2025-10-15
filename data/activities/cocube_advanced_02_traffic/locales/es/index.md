@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Programación del robot CoCube para completar la función de reconocimiento de tarjetas de señales de tráfico y acción automática, realizando la mesa de arena creativa del transporte inteligente.
 

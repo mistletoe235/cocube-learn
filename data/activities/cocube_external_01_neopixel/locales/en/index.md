@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Learn to use the NeoPixel RGB LED panel module and further understand loops and other logic.
 

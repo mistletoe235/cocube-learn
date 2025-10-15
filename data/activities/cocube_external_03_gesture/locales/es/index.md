@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Aprenda a dominar el uso de los módulos de gestos 3D y complete interacciones más divertidas.
 

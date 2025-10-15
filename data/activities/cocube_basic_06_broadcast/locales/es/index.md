@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Programación del robot CoCube para sincronizar el proceso vía broadcast.
 

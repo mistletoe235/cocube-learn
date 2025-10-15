@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 To learn the AprilTag recognition function of the AI visual perception module.
 

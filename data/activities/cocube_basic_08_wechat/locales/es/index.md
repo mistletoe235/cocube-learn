@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Realice el robot de control remoto CoCube del applet de WeChat.
 

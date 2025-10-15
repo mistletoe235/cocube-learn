@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Aprenda la función de detección de líneas del módulo de percepción visual de IA y use CoCube para implementar la función de inspección automática de líneas.
 

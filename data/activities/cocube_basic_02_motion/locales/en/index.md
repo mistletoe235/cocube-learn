@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Program the CoCube robot to achieve basic movement functions.
 

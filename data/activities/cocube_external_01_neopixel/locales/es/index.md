@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Aprenda a usar el módulo de tablero de luz a todo color de NeoPixel y obtenga más información sobre la lógica, como los bucles.
 

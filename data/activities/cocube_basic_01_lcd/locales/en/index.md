@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Program the CoCube robot to implement the LED display function of the LCD screen.
 

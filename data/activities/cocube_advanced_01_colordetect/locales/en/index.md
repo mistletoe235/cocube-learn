@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Learn the color blob recognition function of the AI vision perception module and use CoCube to follow a blue cylinder.
 

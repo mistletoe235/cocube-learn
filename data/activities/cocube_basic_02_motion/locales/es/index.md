@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Programe el robot CoCube para implementar las funciones básicas de movimiento del robot.
 

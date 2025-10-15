@@ -1,4 +1,4 @@
-### 1. Objetivo de la práctica
+### 1. Propósito
 
 Programe el robot CoCube para que aprenda la función de posicionamiento de coordenadas de la plataforma de posicionamiento y el movimiento direccional de punto fijo del robot, mientras aprende sobre la función de salida en MicroBlocks.
 

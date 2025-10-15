@@ -1,4 +1,4 @@
-### 1. Purpose of the Case
+### 1. Goal
 
 Learn to use the ToF (Time of Flight) module and create more interesting interactive applications.
 
