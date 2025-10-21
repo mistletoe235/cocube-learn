@@ -719,6 +719,12 @@ function copyAssets () {
         (err) => { if (err) { console.error(err); } }
     );
     fse.copySync(
+        `${__dirname}/src/app`,
+        `${__dirname}/dist/app`,
+        { overwrite: true },
+        (err) => { if (err) { console.error(err); } }
+    );
+    fse.copySync(
         `${__dirname}/src/assets`,
         `${__dirname}/dist/assets`,
         { overwrite: true },

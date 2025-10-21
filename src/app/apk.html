@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载 CoCube APK</title>
+</head>
+<body>
+    <h1>正在准备下载...</h1>
+    <p>如果下载没有自动开始,请<a href="cocube-latest.apk" download="cocube-latest.apk" id="downloadLink">点击这里</a>手动下载。</p>
+    
+    <script>
+        // 页面加载后自动触发下载
+        window.onload = function() {
+            // 直接使用页面上已有的链接
+            const link = document.getElementById('downloadLink');
+            
+            // 添加延迟以确保页面完全加载
+            setTimeout(function() {
+                link.click();
+                document.querySelector('h1').textContent = '下载已开始';
+            }, 100);
+        };
+    </script>
+</body>
+</html>
