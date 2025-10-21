@@ -26,26 +26,65 @@
 <body>
     <div id="wechat-tip">
         <span class="icon">⋯</span>
-        请点击右上角 <b>⋯</b> 图标，选择<br>
-        <b>在浏览器中打开</b>，以完成下载。
+        <span id="wechat-tip-text"></span>
     </div>
-    <h1>正在准备下载...</h1>
-    <p>如果下载没有自动开始,请<a href="cocube-latest.apk" download="cocube-latest.apk" id="downloadLink">点击这里</a>手动下载。</p>
+    <h1 id="main-title">正在准备下载...</h1>
+    <p>
+        <span id="manual-tip">如果下载没有自动开始,请</span>
+        <a href="cocube-latest.apk" download="cocube-latest.apk" id="downloadLink">点击这里</a>
+        <span id="manual-tip2">手动下载。</span>
+    </p>
     
     <script>
         function isWeChat() {
             return /micromessenger/i.test(navigator.userAgent);
         }
 
+        // 多语言内容
+        const langMap = {
+            zh: {
+                wechatTip: '请点击右上角 <b>⋯</b> 图标，选择<br><b>在浏览器中打开</b>，以完成下载。',
+                mainTitle: '正在准备下载...',
+                manualTip: '如果下载没有自动开始,请',
+                manualTip2: '手动下载。'
+            },
+            en: {
+                wechatTip: 'Please tap the <b>⋯</b> icon at the top right, then choose<br><b>Open in Browser</b> to complete the download.',
+                mainTitle: 'Preparing your download...',
+                manualTip: 'If the download does not start automatically,',
+                manualTip2: 'click here to download manually.'
+            },
+            es: {
+                wechatTip: 'Por favor, toca el icono <b>⋯</b> en la esquina superior derecha y selecciona<br><b>Abrir en el navegador</b> para completar la descarga.',
+                mainTitle: 'Preparando la descarga...',
+                manualTip: 'Si la descarga no comienza automáticamente,',
+                manualTip2: 'haz clic aquí para descargar manualmente.'
+            }
+        };
+
+        function getLang() {
+            const lang = navigator.language || navigator.userLanguage || 'en';
+            if (lang.startsWith('zh')) return 'zh';
+            if (lang.startsWith('es')) return 'es';
+            return 'en';
+        }
+
         window.onload = function() {
+            const lang = getLang();
+            const text = langMap[lang] || langMap['en'];
+            document.getElementById('wechat-tip-text').innerHTML = text.wechatTip;
+            document.getElementById('main-title').textContent = text.mainTitle;
+            document.getElementById('manual-tip').textContent = text.manualTip;
+            document.getElementById('manual-tip2').textContent = text.manualTip2;
+
             if (isWeChat()) {
                 document.getElementById('wechat-tip').style.display = 'block';
-                document.querySelector('h1').textContent = '请在浏览器中打开本页面';
+                document.getElementById('main-title').textContent = text.mainTitle + (lang === 'zh' ? '请在浏览器中打开本页面' : (lang === 'es' ? 'Por favor, abre esta página en el navegador.' : 'Please open this page in your browser.'));
             } else {
                 const link = document.getElementById('downloadLink');
                 setTimeout(function() {
                     link.click();
-                    document.querySelector('h1').textContent = '下载已开始';
+                    document.getElementById('main-title').textContent = (langMap[lang]?.mainTitle || langMap['en'].mainTitle) + (lang === 'zh' ? '下载已开始' : (lang === 'es' ? 'La descarga ha comenzado.' : 'Download started.'));
                 }, 100);
             }
         };
