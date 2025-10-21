@@ -4,22 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>下载 CoCube APK</title>
+    <style>
+        #wechat-tip {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            z-index: 9999;
+            text-align: center;
+            padding-top: 30%;
+            font-size: 1.2em;
+        }
+        #wechat-tip .icon {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 1em;
+        }
+    </style>
 </head>
 <body>
+    <div id="wechat-tip">
+        <span class="icon">⋯</span>
+        请点击右上角 <b>⋯</b> 图标，选择<br>
+        <b>在浏览器中打开</b>，以完成下载。
+    </div>
     <h1>正在准备下载...</h1>
     <p>如果下载没有自动开始,请<a href="cocube-latest.apk" download="cocube-latest.apk" id="downloadLink">点击这里</a>手动下载。</p>
     
     <script>
-        // 页面加载后自动触发下载
+        function isWeChat() {
+            return /micromessenger/i.test(navigator.userAgent);
+        }
+
         window.onload = function() {
-            // 直接使用页面上已有的链接
-            const link = document.getElementById('downloadLink');
-            
-            // 添加延迟以确保页面完全加载
-            setTimeout(function() {
-                link.click();
-                document.querySelector('h1').textContent = '下载已开始';
-            }, 100);
+            if (isWeChat()) {
+                document.getElementById('wechat-tip').style.display = 'block';
+                document.querySelector('h1').textContent = '请在浏览器中打开本页面';
+            } else {
+                const link = document.getElementById('downloadLink');
+                setTimeout(function() {
+                    link.click();
+                    document.querySelector('h1').textContent = '下载已开始';
+                }, 100);
+            }
         };
     </script>
 </body>
