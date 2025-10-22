@@ -3,3 +3,5 @@ node_modules
 package-lock.json
 dist/*
 data/activities.json
+wiki_web_todo/
+wiki_web_todo.zip

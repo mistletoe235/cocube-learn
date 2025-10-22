@@ -3,7 +3,7 @@
 Learn the color blob recognition function of the AI vision perception module and use CoCube to follow a blue cylinder.
 
 <video width="320" height="240" controls>
-  <source src="video720p.mp4" type="video/mp4">
+  <source src="colordetect.mp4" type="video/mp4">
 </video>
 
 ### 2. Materials Used

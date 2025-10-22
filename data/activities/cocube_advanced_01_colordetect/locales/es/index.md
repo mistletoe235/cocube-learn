@@ -3,7 +3,7 @@
 Aprenda la función de reconocimiento de bloques de color del módulo de percepción visual de IA y use el CoCube para seguir el movimiento del cilindro azul.
 
 <video width="320" height="240" controls>
-  <source src="video720p.mp4" type="video/mp4">
+  <source src="colordetect.mp4" type="video/mp4">
 </video>
 
 ### 2. Materiales utilizados

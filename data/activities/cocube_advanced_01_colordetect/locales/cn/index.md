@@ -3,7 +3,7 @@
 学习 AI 视觉感知模块的色块识别功能，并用 CoCube 跟随蓝色圆柱移动。
 
 <video width="320" height="240" controls>
-  <source src="video720p.mp4" type="video/mp4">
+  <source src="colordetect.mp4" type="video/mp4">
 </video>
 
 ### 2. 使用材料
