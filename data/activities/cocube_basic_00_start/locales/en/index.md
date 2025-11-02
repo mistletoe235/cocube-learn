@@ -78,7 +78,6 @@ Don't be intimidated; believe me, a second-grade elementary school student can l
 
 ![](microblocks.jpeg)
 
-Note: Currently, the MicroBlocks platform has better compatibility on PCs (Windows, MacOS, Linux) and is not recommended for use with an iPad to connect to the CoCube robot.
 
 #### 1. Connecting the CoCube Robot
 

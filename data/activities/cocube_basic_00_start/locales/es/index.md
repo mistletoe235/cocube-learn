@@ -80,7 +80,6 @@ No te dejes intimidar, créeme, ¡solo se necesitan 5 minutos para que los niño
 
 ![](microblocks.jpeg)
 
-Nota: La plataforma MicroBlocks es actualmente compatible con PC (Windows, MacOS, Linux).
 
 #### 1. Conecta el robot CoCube
 

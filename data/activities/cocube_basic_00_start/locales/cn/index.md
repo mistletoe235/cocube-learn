@@ -82,7 +82,7 @@ MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编�
 
 ![](image-2.png)
 
-注意：目前 MicroBlocks 平台在PC（Windows、MacOS、Linux）上兼容性较好，暂不推荐用iPad连接CoCube机器人。
+
 
 
 
