@@ -64,5 +64,17 @@
     "lvl_2" : "有经验",
 
     "og_description": "学习与讲授 MicroBlocks 的活动和资源。" ,
-    "og_image_alt": "Microblocks 标志与一个微笑的主板"
+    "og_image_alt": "Microblocks 标志与一个微笑的主板",
+
+    "mobile-notice-title": "📱 移动端用户提示",
+    "mobile-notice-intro": "为了获得最佳学习体验,强烈建议使用电脑访问本教程:",
+    "mobile-notice-step1": "在电脑浏览器中访问",
+    "mobile-notice-step2": "推荐使用 Chrome 或 Edge 浏览器",
+    "mobile-notice-step2-hint": "(支持蓝牙连接)",
+    "mobile-notice-quick-access": "💡 快速访问:",
+    "mobile-notice-quick-access-hint": "点击下方按钮复制网址,发送到电脑",
+    "mobile-notice-copy-btn": "复制网址",
+    "mobile-notice-copied": "✅ 已复制!",
+    "mobile-notice-copy-failed": "复制失败,请手动复制:"
+    
 }

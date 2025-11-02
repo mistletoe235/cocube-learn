@@ -68,5 +68,16 @@
     "lvl_2": "Iniciado",
 
     "og_description": "Actividades y recursos para aprender y enseñar MicroBlocks.",
-    "og_image_alt": "Logo de Microblocks y una placa de leds sonriendo"
+    "og_image_alt": "Logo de Microblocks y una placa de leds sonriendo",
+
+    "mobile-notice-title": "📱 Aviso para Usuarios Móviles",
+    "mobile-notice-intro": "Para obtener la mejor experiencia de aprendizaje, recomendamos encarecidamente usar una computadora:",
+    "mobile-notice-step1": "Accede desde el navegador de tu computadora",
+    "mobile-notice-step2": "Navegador Chrome o Edge recomendado",
+    "mobile-notice-step2-hint": "(compatible con Bluetooth)",
+    "mobile-notice-quick-access": "💡 Acceso Rápido:",
+    "mobile-notice-quick-access-hint": "Haz clic en el botón para copiar la URL y enviarla a tu computadora",
+    "mobile-notice-copy-btn": "Copiar URL",
+    "mobile-notice-copied": "✅ ¡Copiado!",
+    "mobile-notice-copy-failed": "Error al copiar, por favor copia manualmente:"
 }

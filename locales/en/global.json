@@ -70,5 +70,16 @@
     "lvl_2" : "Experienced",
 
     "og_description": "Activities and resources to learn and teach MicroBlocks." ,
-    "og_image_alt": "Microblocks logo and a leds board smiling"
+    "og_image_alt": "Microblocks logo and a leds board smiling",
+
+    "mobile-notice-title": "📱 Mobile User Notice",
+    "mobile-notice-intro": "For the best learning experience, we strongly recommend using a computer:",
+    "mobile-notice-step1": "Visit on a computer browser",
+    "mobile-notice-step2": "Chrome or Edge browser recommended",
+    "mobile-notice-step2-hint": "(Bluetooth support)",
+    "mobile-notice-quick-access": "💡 Quick Access:",
+    "mobile-notice-quick-access-hint": "Click the button below to copy the URL and send it to your computer",
+    "mobile-notice-copy-btn": "Copy URL",
+    "mobile-notice-copied": "✅ Copied!",
+    "mobile-notice-copy-failed": "Copy failed, please copy manually:"
 }

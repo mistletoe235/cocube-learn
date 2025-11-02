@@ -1,3 +1,4 @@
+<!-- show-mobile-notice -->
 CoCube es un robot educativo de IA de nivel de escritorio, desarrollado conjuntamente por un equipo de maestría y doctorado de la Universidad Jiao Tong de Shanghái y la Universidad de Fudan, con el objetivo de abrir la puerta a la inteligencia artificial para los jóvenes y crear una plataforma creativa llena de interactividad, logros y diversión. CoCube estimula la curiosidad y la creatividad de los estudiantes al involucrarlos en el diseño de robots de IA, desde la programación simple hasta la construcción de sistemas interactivos complejos, ayudándolos a convertir sus ideas e inspiraciones en realidad.
 
 ### I. Aspectos destacados de la plataforma CoCube

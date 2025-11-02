@@ -166,6 +166,29 @@
         <div class="col col-px col-12 lg-offset-1 lg-col-8 xl-offset-1 xl-col-8">
 
             <article class="v_activity__contents wysiwyg">
+                {{! 移动端提示 - 通过 JS 检测 markdown 中的标记来显示 }}
+                <div class="mobile-only-notice" style="display: none;">
+                    <div class="notice-content">
+                        <h3>{{localize "mobile-notice-title"}}</h3>
+                        <p>{{localize "mobile-notice-intro"}}</p>
+                        <ol>
+                            <li><strong>{{localize "mobile-notice-step1"}}</strong>: <a href="https://wiki.cocube.fun">wiki.cocube.fun</a></li>
+                            <li><strong>{{localize "mobile-notice-step2"}}</strong> {{localize "mobile-notice-step2-hint"}}</li>
+                        </ol>
+                        <div class="notice-copy-section">
+                            <p><strong>{{localize "mobile-notice-quick-access"}}</strong> {{localize "mobile-notice-quick-access-hint"}}</p>
+                            <button class="copy-url-btn" 
+                                    data-url="https://wiki.cocube.fun"
+                                    data-copy-text="{{localize "mobile-notice-copy-btn"}}"
+                                    data-copied-text="{{localize "mobile-notice-copied"}}"
+                                    data-failed-text="{{localize "mobile-notice-copy-failed"}}">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">{{localize "mobile-notice-copy-btn"}}</span>
+                            </button>
+                            <span class="copy-feedback" style="display: none;">{{localize "mobile-notice-copied"}}</span>
+                        </div>
+                    </div>
+                </div>
                 {{! insert the compiled markdown for this particular activity }}
                 {{#markdown markdown}}{{/markdown}}
             </article>
@@ -189,6 +212,87 @@
 <!-- 移动端侧边栏控制脚本 -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // 检测是否为移动设备
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        // 检测 markdown 内容中是否有 show-mobile-notice 标记
+        var articleContent = document.querySelector('.v_activity__contents');
+        var mobileNotice = document.querySelector('.mobile-only-notice');
+        
+        if (articleContent && mobileNotice) {
+            // 查找 HTML 注释
+            var hasNoticeMarker = articleContent.innerHTML.indexOf('show-mobile-notice') !== -1;
+            
+            // 如果是移动设备且有标记,则显示提示
+            if (isMobileDevice() && hasNoticeMarker) {
+                mobileNotice.style.display = 'block';
+            }
+        }
+
+        // 复制网址功能
+        var copyBtn = document.querySelector('.copy-url-btn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', function() {
+                var url = this.getAttribute('data-url');
+                var failedText = this.getAttribute('data-failed-text');
+                var feedback = document.querySelector('.copy-feedback');
+                
+                // 使用现代 Clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(function() {
+                        // 复制成功
+                        showCopyFeedback(feedback, copyBtn);
+                    }).catch(function(err) {
+                        // 如果失败,使用备用方法
+                        fallbackCopy(url, feedback, copyBtn, failedText);
+                    });
+                } else {
+                    // 不支持 Clipboard API,使用备用方法
+                    fallbackCopy(url, feedback, copyBtn, failedText);
+                }
+            });
+        }
+
+        // 显示复制成功反馈
+        function showCopyFeedback(feedback, btn) {
+            if (feedback) {
+                feedback.style.display = 'inline';
+                btn.style.opacity = '0.6';
+                
+                setTimeout(function() {
+                    feedback.style.display = 'none';
+                    btn.style.opacity = '1';
+                }, 2000);
+            }
+        }
+
+        // 备用复制方法(兼容旧浏览器)
+        function fallbackCopy(text, feedback, btn, failedText) {
+            var textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyFeedback(feedback, btn);
+                } else {
+                    alert(failedText + ' ' + text);
+                }
+            } catch (err) {
+                alert(failedText + ' ' + text);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
         // 目录折叠功能
         var toggles = document.querySelectorAll('.contents_toggle');
         toggles.forEach(function(toggle) {
@@ -213,13 +317,10 @@
         if (sidebarToggle) {
             sidebarToggle.addEventListener('click', function(e) {
                 e.preventDefault();
-                // Toggle 功能:检查是否已打开
                 if (sidebar.classList.contains('sidebar--open')) {
-                    console.log('Toggle: Closing sidebar');
                     sidebar.classList.remove('sidebar--open');
                     document.body.style.overflow = '';
                 } else {
-                    console.log('Toggle: Opening sidebar');
                     sidebar.classList.add('sidebar--open');
                     document.body.style.overflow = 'hidden';
                 }
@@ -229,7 +330,6 @@
         if (sidebarClose) {
             sidebarClose.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('Close clicked'); // 调试用
                 sidebar.classList.remove('sidebar--open');
                 document.body.style.overflow = '';
             });
@@ -238,7 +338,6 @@
         // 点击侧边栏外部关闭
         document.addEventListener('click', function(e) {
             if (sidebar.classList.contains('sidebar--open')) {
-                // 如果点击的不是侧边栏内容也不是切换按钮
                 if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
                     sidebar.classList.remove('sidebar--open');
                     document.body.style.overflow = '';

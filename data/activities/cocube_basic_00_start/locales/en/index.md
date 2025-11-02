@@ -1,3 +1,4 @@
+<!-- show-mobile-notice -->
 CoCube is a desktop AI educational robot, jointly developed by a team of masters and doctoral students from Shanghai Jiao Tong University and Fudan University. It aims to open the door to artificial intelligence for teenagers and create an interactive, fulfilling, and fun creative platform. By engaging students in the design of AI robots, from simple programming to the construction of complex interactive systems, CoCube helps them turn their ideas and inspirations into reality, thereby stimulating their curiosity and creativity.
 
 ### I. Highlights of the CoCube Platform
