@@ -142,7 +142,6 @@
 
 
 
-
 // Activity Text
 // ========================================
 
@@ -175,29 +174,108 @@
 }
 
 
+// Sidebar Styles
+// ========================================
 
+// 移动端切换按钮
+.sidebar-toggle {
+  display: none; // 桌面端隐藏
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background-color: #5591C7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken(#5591C7, 10%);
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.sidebar-toggle__icon {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+// 侧边栏样式
 .sidebar {
   left: 0;
   top: 0;
   width: 300px;
   height: 100%;
-  // background-color: #f4f4f4;
   padding: 15px;
   border-right: 1px solid #ccc;
   position: fixed;
   overflow-y: auto;
-}
+  background-color: white;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 
-@media (max-width: 1024px) {
-  .sidebar {
-    display: none;
+  // 移动端样式
+  @media (max-width: 1024px) {
+    transform: translateX(-100%); // 默认隐藏到左侧
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    
+    // 打开状态
+    &.sidebar--open {
+      transform: translateX(0); // 滑入显示
+    }
   }
 }
 
+// 关闭按钮
+.sidebar-close {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  z-index: 10;
+
+  &:hover {
+    color: #5591C7;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+}
+
+// 侧边栏菜单
 .sidebar ul {
   margin-top: 50px;
   list-style-type: none;
   padding: 0;
+
+  @media (max-width: 1024px) {
+    margin-top: 100px; // 移动端为关闭按钮留空间
+  }
 }
 
 .sidebar ul li {
@@ -216,45 +294,45 @@
   border-radius: 10px;
   font-weight: normal;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover:not(.blue-background) {
+    background-color: rgba(85, 145, 199, 0.1);
+  }
 }
+
 .blue-background {
-  background-color: #5591C7;;
+  background-color: #5591C7;
   color: white;
   font-weight: bold;
 }
+
 .contents_toggle {
   cursor: pointer;
   font-weight: bold;
-  display: inline-block; width: 100%;
+  display: inline-block;
+  width: 100%;
+  user-select: none; // 防止选中文本
 }
+
 .arrow {
   transition: transform 0.3s ease;
   float: right;
 }
 
+// 子菜单初始状态
+.submenu {
+  display: block; // 默认展开
+}
+
+// 移除不需要的样式
 .sidebar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow-y: auto;
-  background-color: #f8f9fa; /* 你可以根据需要调整背景颜色 */
-  z-index: 1000;
+  display: none; // 这个类不再需要
 }
-
-@media (max-width: 768px) {
-  .sidebar-container {
-      display: none;
-  }
-}
-
-// .contents {
-//   margin-left: 25%; /* 根据侧边栏的宽度调整 */
-// }
 
 @media (max-width: 768px) {
   .contents {
-      margin-left: 0;
+    margin-left: 0;
   }
 }
 
@@ -262,6 +340,7 @@
   display: inline-flex;
   align-items: center;
   color: $color-grey-900;
+  text-decoration: none;
 
   transition: color $trans-0200 $trans-easing;
 

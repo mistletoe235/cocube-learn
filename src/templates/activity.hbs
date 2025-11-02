@@ -72,10 +72,21 @@
 <div class="contents">
     <div class="row">
 
+        <!-- 移动端目录切换按钮 -->
+        <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+            <span class="sidebar-toggle__icon"></span>
+            <span class="sidebar-toggle__icon"></span>
+            <span class="sidebar-toggle__icon"></span>
+        </button>
 
         <!-- Sidebar Contents -->
         <div class="col col-px col-12 lg-col-3 xl-col-3">
-            <div class="sidebar">
+            <div class="sidebar" id="sidebar">
+                <!-- 关闭按钮(仅移动端显示) -->
+                <button class="sidebar-close" aria-label="Close Sidebar">
+                    <span>&times;</span>
+                </button>
+                
                 <ul>
                     <li>
                         <span class="contents_toggle">Basic <span class="arrow">&#9660;</span></span>
@@ -84,9 +95,6 @@
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
-                                        {{!-- <div class="v_activity__details-link-svg">
-                                            {{> svg.icon-arrow-right-16x16 }}
-                                        </div> --}}
                                     </a>
                                 </li>
                             {{/each}}
@@ -131,33 +139,8 @@
                 </ul>
             </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var toggles = document.querySelectorAll('.contents_toggle');
-                    toggles.forEach(function(toggle) {
-                        toggle.addEventListener('click', function() {
-                            var submenu = this.nextElementSibling;
-                            var arrow = this.querySelector('.arrow');
-                            if (submenu.style.display === 'block' || submenu.style.display === '') {
-                                submenu.style.display = 'none';
-                                arrow.innerHTML = '&#9654;'; // 向右箭头
-                            } else {
-                                submenu.style.display = 'block';
-                                arrow.innerHTML = '&#9660;'; // 向下箭头
-                            }
-                        });
-                    });
-                });
-            </script>
-
-
-
-
             {{#if card-slides-url}}
             <aside class="v_activity__side-block v_activity__side-block--translate">
-                {{!-- <h3 class="v_activity__side-title">
-                    {{localize "lbl-translate"}}
-                </h3> --}}
                 <div class="v_activity__side-contents">
                     <p>
 {{#markdown}}
@@ -182,29 +165,88 @@
         <!-- Activity Text -->
         <div class="col col-px col-12 lg-offset-1 lg-col-8 xl-offset-1 xl-col-8">
 
-			<article class="v_activity__contents wysiwyg">
-
+            <article class="v_activity__contents wysiwyg">
                 {{! insert the compiled markdown for this particular activity }}
                 {{#markdown markdown}}{{/markdown}}
-
             </article>
 
-			<div class="v_activity__cc">
-				<div class="v_activity__cc-icon">
-					{{> svg.icons-creative-commons }}
-				</div>
-				<p>
-					© <b>{{localize "author" author}}</b> 2024-2025.<br>
+            <div class="v_activity__cc">
+                <div class="v_activity__cc-icon">
+                    {{> svg.icons-creative-commons }}
+                </div>
+                <p>
+                    © <b>{{localize "author" author}}</b> 2024-2025.<br>
                     {{localize "thanks"}}<br>
-					{{localize "cc-license"}}
-				</p>
-			</div>
+                    {{localize "cc-license"}}
+                </p>
+            </div>
 
         </div><!-- Activity Text -->
 
-
     </div>
 </div>
+
+<!-- 移动端侧边栏控制脚本 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 目录折叠功能
+        var toggles = document.querySelectorAll('.contents_toggle');
+        toggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                var submenu = this.nextElementSibling;
+                var arrow = this.querySelector('.arrow');
+                if (submenu.style.display === 'block' || submenu.style.display === '') {
+                    submenu.style.display = 'none';
+                    arrow.innerHTML = '&#9654;';
+                } else {
+                    submenu.style.display = 'block';
+                    arrow.innerHTML = '&#9660;';
+                }
+            });
+        });
+
+        // 移动端侧边栏切换
+        var sidebarToggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.getElementById('sidebar');
+        var sidebarClose = document.querySelector('.sidebar-close');
+        
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Toggle 功能:检查是否已打开
+                if (sidebar.classList.contains('sidebar--open')) {
+                    console.log('Toggle: Closing sidebar');
+                    sidebar.classList.remove('sidebar--open');
+                    document.body.style.overflow = '';
+                } else {
+                    console.log('Toggle: Opening sidebar');
+                    sidebar.classList.add('sidebar--open');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        }
+        
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Close clicked'); // 调试用
+                sidebar.classList.remove('sidebar--open');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // 点击侧边栏外部关闭
+        document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('sidebar--open')) {
+                // 如果点击的不是侧边栏内容也不是切换按钮
+                if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                    sidebar.classList.remove('sidebar--open');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    });
+</script>
 
 {{/inline}}
 
