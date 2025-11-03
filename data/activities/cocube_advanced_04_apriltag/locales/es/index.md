@@ -17,8 +17,8 @@ También es posible generar e imprimir etiquetas AprilTag con las especificacion
 
 ### 3. Plataformas de software
 
-- [MicroBloques-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)  
-- O abrir el entorno de programación directamente con los módulos de conciencia visual AI añadido: [MicroBlocks-AI Camera](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
+- [MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)  
+- O abrir el entorno de programación directamente con los módulos de conciencia visual AI añadido: [MicroBlocks-AI Camera](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
 
 ### 4. Conocimiento de algoritmos
 

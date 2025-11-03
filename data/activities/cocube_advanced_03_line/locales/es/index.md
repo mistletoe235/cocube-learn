@@ -17,9 +17,9 @@ Mapa de patrulla, descargable e impreso en papel A3.
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
-O abrir el entorno de programación directamente para añadir módulos de concienciación visual de la IA: [MicroBlocks-AI Camera](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
+O abrir el entorno de programación directamente para añadir módulos de concienciación visual de la IA: [MicroBlocks-AI Camera](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
 
 ### 4. Conocimiento de algoritmos
 

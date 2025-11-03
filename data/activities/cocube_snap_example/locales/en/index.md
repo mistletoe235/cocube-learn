@@ -11,11 +11,11 @@ Master multi-robot cluster control technology by programming four CoCube robots 
 
 ### 3. Software Platforms
 
-1. [MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+1. [MicroBlocks——CoCube & CoCube Module](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-2.png)
 
-2. [Snap](http://snap.codelab.club/snap.html)
+2. [Snap](http://https://snap.berkeley.edu//snap.html)
 
 ![](img3.png)
 
