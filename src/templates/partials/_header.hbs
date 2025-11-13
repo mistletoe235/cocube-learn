@@ -68,7 +68,11 @@
 
         <!-- Black area contents -->
         <div class="menu__black">
+            {{#if (eq @root.locale.code 'cn')}}
+            <a href="https://microblocks.cocube.fun/" class="menu__black-link" target="_blank">{{@root.locale.run-nav-item}}</a>
+            {{else}}
             <a href="https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27" class="menu__black-link" target="_blank">{{@root.locale.run-nav-item}}</a>
+            {{/if}}
         </div>
 
 
