@@ -11,7 +11,7 @@
 
 ### 3. 软件平台
 
-[MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+[MicroBlocks——CoCube & CoCube Module](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-2.png)
 

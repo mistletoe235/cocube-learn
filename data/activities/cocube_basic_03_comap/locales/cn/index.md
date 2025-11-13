@@ -10,7 +10,7 @@
 
 ### 3. 软件平台
 
-[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image-1.png)
 
@@ -90,7 +90,7 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 
 
-参考程序示例：[MicroBlocks —— CoCube 案例03 绘制正方形轨迹](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20971%20248%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20rotate%20to%20angle%27%200%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20180%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20270%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%7D%0A%7D%0A%0Ascript%20596%20312%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20by%20degree%27%20%27cocube%3Bleft%27%2030%2090%0A%7D%0A%7D%0A%0A)
+参考程序示例：[MicroBlocks —— CoCube 案例03 绘制正方形轨迹](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20971%20248%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20rotate%20to%20angle%27%200%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%2090%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20180%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20to%20angle%27%20270%2030%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%7D%0A%7D%0A%0Ascript%20596%20312%20%7B%0Aforever%20%7B%0A%20%20%27CoCube%20move%20by%20step%27%20%27cocube%3Bforward%27%2040%2050%0A%20%20%27CoCube%20rotate%20by%20degree%27%20%27cocube%3Bleft%27%2030%2090%0A%7D%0A%7D%0A%0A)
 
 ### 1. 挑战一下
 
@@ -100,7 +100,7 @@ CoMaps 可以为 CoCube 机器人提供精准的定位功能。
 
 ![](comap.gif)
 
-参考示例程序：[MicroBlocks——CoCube案例03 迷宫挑战](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
+参考示例程序：[MicroBlocks——CoCube案例03 迷宫挑战](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 
 你可能会发现，CoCube 在转弯时速度过快，不够平稳，我们可以每到达一个坐标点后，以更小的速度朝向特定角度后，再移动。自己试试看吧！
 

@@ -9,7 +9,7 @@
 
 ### 3. 软件平台
 
-[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image.png)
 
@@ -27,7 +27,7 @@ CoCube 机器人配备了一块全彩 LCD 显示屏，可以通过不同的显�
 
 ![](simulator.png)
 
-参考代码示例：[MicroBlocks——CoCube 案例01 显示与清除](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20396%20276%20%7B%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%0Ascript%20395%20132%20%7B%0A%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%7D%0A%0A)
+参考代码示例：[MicroBlocks——CoCube 案例01 显示与清除](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20396%20276%20%7B%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%0Ascript%20395%20132%20%7B%0A%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%7D%0A%0A)
 
 ### 5. 挑战一下：流水灯
 
@@ -39,5 +39,5 @@ CoCube 机器人配备了一块全彩 LCD 显示屏，可以通过不同的显�
 
 ![](light.gif =300x*)
 
-参考代码示例：[MicroBlocks——CoCube 案例01 流水灯](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20440%2088%20%7B%0AwhenStarted%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0Aforever%20%7B%0A%20%20for%20i%205%20%7B%0A%20%20%20%20for%20j%205%20%7B%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbPlot%5D%27%20i%20j%0A%20%20%20%20%20%20waitMillis%20100%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%7D%0A%0Ascript%20786%2088%20%7B%0AwhenButtonPressed%20%27A%27%0A%27set%20display%20color%27%20%28colorSwatch%20255%200%200%20255%29%0A%7D%0A%0Ascript%20790%20199%20%7B%0AwhenButtonPressed%20%27B%27%0A%27set%20display%20color%27%20%28colorSwatch%200%20255%200%20255%29%0A%7D%0A%0Ascript%20787%20318%20%7B%0AwhenButtonPressed%20%27A%2BB%27%0A%27set%20display%20color%27%20%28colorSwatch%200%200%20255%20255%29%0A%7D%0A%0A)
+参考代码示例：[MicroBlocks——CoCube 案例01 流水灯](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27LED%20Display%27%0A%0Ascript%20440%2088%20%7B%0AwhenStarted%0A%27%5Bdisplay%3AmbDisplayOff%5D%27%0Aforever%20%7B%0A%20%20for%20i%205%20%7B%0A%20%20%20%20for%20j%205%20%7B%0A%20%20%20%20%20%20%27%5Bdisplay%3AmbPlot%5D%27%20i%20j%0A%20%20%20%20%20%20waitMillis%20100%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20%27%5Bdisplay%3AmbDisplayOff%5D%27%0A%7D%0A%7D%0A%0Ascript%20786%2088%20%7B%0AwhenButtonPressed%20%27A%27%0A%27set%20display%20color%27%20%28colorSwatch%20255%200%200%20255%29%0A%7D%0A%0Ascript%20790%20199%20%7B%0AwhenButtonPressed%20%27B%27%0A%27set%20display%20color%27%20%28colorSwatch%200%20255%200%20255%29%0A%7D%0A%0Ascript%20787%20318%20%7B%0AwhenButtonPressed%20%27A%2BB%27%0A%27set%20display%20color%27%20%28colorSwatch%200%200%20255%20255%29%0A%7D%0A%0A)
 

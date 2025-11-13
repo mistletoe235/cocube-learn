@@ -8,7 +8,7 @@
 
 ### 3. 软件平台
 
-[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image.png)
 
@@ -32,7 +32,7 @@
 
 ![](circle.gif)
 
-参考代码示例：[MicroBlocks——CoCube 案例02 基础运动控制](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20649%20268%20%7B%0AwhenButtonPressed%20%27A%27%0A%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0AwaitMillis%201000%0A%27CoCube%20wheels%20stop%27%0A%7D%0A%0Ascript%20929%20263%20%7B%0AwhenButtonPressed%20%27B%27%0A%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0AwaitMillis%201000%0A%27CoCube%20wheels%20break%27%0A%7D%0A%0Ascript%20648%20456%20%7B%0AwhenButtonPressed%20%27A%2BB%27%0A%27CoCube%20set%20wheel%27%2040%2020%0A%7D%0A%0A)
+参考代码示例：[MicroBlocks——CoCube 案例02 基础运动控制](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20649%20268%20%7B%0AwhenButtonPressed%20%27A%27%0A%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0AwaitMillis%201000%0A%27CoCube%20wheels%20stop%27%0A%7D%0A%0Ascript%20929%20263%20%7B%0AwhenButtonPressed%20%27B%27%0A%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0AwaitMillis%201000%0A%27CoCube%20wheels%20break%27%0A%7D%0A%0Ascript%20648%20456%20%7B%0AwhenButtonPressed%20%27A%2BB%27%0A%27CoCube%20set%20wheel%27%2040%2020%0A%7D%0A%0A)
 
 ### 5. 挑战一下
 
@@ -46,7 +46,7 @@
 
 参考代码示例：
 
-[MicroBlocks——CoCube案例02 方形轨迹运动](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27LED%20Display%27%0A%0Ascript%20559%20174%20%7B%0AwhenButtonPressed%20%27A%27%0A%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0Aforever%20%7B%0A%20%20%27CoCube%20move%20for%20msecs%27%20%27cocube%3Bforward%27%2040%201000%0A%20%20waitMillis%20250%0A%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bleft%27%2030%20900%0A%20%20waitMillis%20250%0A%7D%0A%7D%0A%0A)
+[MicroBlocks——CoCube案例02 方形轨迹运动](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27LED%20Display%27%0A%0Ascript%20559%20174%20%7B%0AwhenButtonPressed%20%27A%27%0A%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0Aforever%20%7B%0A%20%20%27CoCube%20move%20for%20msecs%27%20%27cocube%3Bforward%27%2040%201000%0A%20%20waitMillis%20250%0A%20%20%27CoCube%20rotate%20for%20msecs%27%20%27cocube%3Bleft%27%2030%20900%0A%20%20waitMillis%20250%0A%7D%0A%7D%0A%0A)
 
 
 

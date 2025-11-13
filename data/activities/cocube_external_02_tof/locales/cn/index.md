@@ -12,7 +12,7 @@ ToF (Time of Flight)，通过发射红外激光，测量光线到达物体并反
 
 ### 3. 软件平台
 
-[MicroBlocks——CoCube & CoCube Module](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
+[MicroBlocks——CoCube & CoCube Module](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27)
 
 ![](image-1.png)
 
@@ -56,4 +56,4 @@ ToF (Time of Flight)，通过发射红外激光，测量光线到达物体并反
 
 以上所有教程代码示例：
 
-[MicroBlocks —— ToF 激光测距模块案例](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
+[MicroBlocks —— ToF 激光测距模块案例](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)

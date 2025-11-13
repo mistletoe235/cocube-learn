@@ -19,9 +19,9 @@
 
 ### 3. 软件平台
 
-[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
-或直接打开添加有 AI 视觉感知模组的编程环境：[MicroBlocks-AI Camera](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
+或直接打开添加有 AI 视觉感知模组的编程环境：[MicroBlocks-AI Camera](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%20Module%27%20%27Sentry2%20AI%20camera%27)
 
 ### 4. 算法知识
 

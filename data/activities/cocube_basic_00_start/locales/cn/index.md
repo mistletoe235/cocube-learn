@@ -75,9 +75,9 @@ CoCube 可基于 MicroBlocks 平台，在浏览器中直接完成图形化编程
 
 MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编程语言。
 
-主页：[MicroBlocks-Home](https://microblocksfun.cn/)
+主页：[MicroBlocks-Home](https://microblocks.cocube.fun/)
 
-编程环境：[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+编程环境：[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 不要被吓到，相信我，小学二年级的小朋友只需要5分钟就可以上手如何为 CoCube 编程了！你也可以！
 
@@ -93,7 +93,7 @@ MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编�
 
 **1.1 无线连接** 
 
-1. 务必使用**Chrome**或**Edge**浏览器，打开[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)编程界面。
+1. 务必使用**Chrome**或**Edge**浏览器，打开[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)编程界面。
 
 2. 确保已开启计算机的蓝牙功能
 
@@ -115,7 +115,7 @@ MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编�
 
 **1.2 有线连接**
 
-1. **推荐使用Chrome或Edge浏览器**，打开[MicroBlocks-CoCube](https://microblocksfun.cn/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)编程界面
+1. **推荐使用Chrome或Edge浏览器**，打开[MicroBlocks-CoCube](https://microblocks.cocube.fun#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)编程界面
 
 2. 用USB线缆连接电脑和CoCube
 
