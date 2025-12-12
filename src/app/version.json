@@ -1,9 +1,15 @@
 {
   "latestVersion": "1.7.3",
   "apkUrl": "https://wiki.cocube.fun/app/CoCube-latest.apk",
-  "releaseNotes": [
-    "1. 新增“物品搬运”、“赛道挑战”功能",
-    "2. 调整部分字体和按钮大小"
-  ],
+  "releaseNotes": {
+    "cn": [
+      "1. 新增“物品搬运”、“赛道挑战”功能",
+      "2. 调整部分字体和按钮大小"
+    ],
+    "en": [
+      "1. Added 'Cargo Transport' and 'Racing Challenge' features",
+      "2. Adjusted some font and button sizes"
+    ]
+  },
   "forceUpdate": false
 }
