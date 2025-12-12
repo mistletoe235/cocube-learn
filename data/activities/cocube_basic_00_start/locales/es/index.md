@@ -136,3 +136,14 @@ Cuando use el dispositivo por primera vez, actualice el firmware más reciente d
 ![](image_upgrade_cocube.png =400x*)
 
 * El proceso de actualización tarda aproximadamente 1 minuto, durante el cual mantenga el IDE de MicroBlocks en la pantalla del navegador. Trate de no hacer nada más durante este período. De lo contrario, la actualización del firmware puede fallar, si la actualización falla, vuelva a actualizar.
+
+### IV. Aplicación Móvil CoCube
+
+CoCube ofrece una aplicación móvil que admite conexión inalámbrica Bluetooth. Puede utilizar su teléfono o tableta para controlar el robot de forma remota y participar en una programación interactiva.
+
+Escanee el código QR a continuación para descargar e instalar:
+
+![CoCube Android App](cocube-android.png =200x*) 
+![CoCube ios App](cocube-ios.png =200x*)
+
+> Nota: Los usuarios de iOS también pueden buscar "CoCube" en la App Store para descargarla.
