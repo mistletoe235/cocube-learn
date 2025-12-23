@@ -1,14 +1,14 @@
 {
-  "latestVersion": "1.7.2",
+  "latestVersion": "1.7.3",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "1. 新增“物品搬运”、“赛道挑战”功能",
-      "2. 调整部分字体和按钮大小"
+      "1. 修复Sengo库的翻译",
+      "2. CoCube库更新到2.17版本"
     ],
     "en": [
-      "1. Added 'Cargo Transport' and 'Racing Challenge' features",
-      "2. Adjusted some font and button sizes"
+      "1. Fixed translation issues in the Sengo library",
+      "2. Updated the CoCube library to version 2.17"
     ]
   },
   "forceUpdate": false
