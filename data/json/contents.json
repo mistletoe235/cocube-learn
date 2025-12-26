@@ -69,25 +69,25 @@
     }
   },
   "sentry2": {
-    "cocube_advanced_01_colordetect": {
-      "cn": "01 色块识别",
-      "en": "01 Color Detection",
-      "es": "01 Identificación de bloques de color"
+    "cocube_advanced_01_traffic": {
+      "cn": "01 智慧交通",
+      "en": "01 Smart Traffic",
+      "es": "01 Tráfico inteligente"
     },
-    "cocube_advanced_02_traffic": {
-      "cn": "02 智慧交通",
-      "en": "02 Smart Traffic",
-      "es": "02 Tráfico inteligente"
+    "cocube_advanced_02_colordetect": {
+      "cn": "02 色块识别",
+      "en": "02 Color Detection",
+      "es": "02 Identificación de bloques de color"
     },
-    "cocube_advanced_03_line": {
-      "cn": "03 线条检测",
-      "en": "03 Line Detection",
-      "es": "03 Detección de líneas"
+    "cocube_advanced_03_ballsort": {
+      "cn": "03 小球分类",
+      "en": "03 Ball Sorting",
+      "es": "03 Clasificación de bolas"
     },
-    "cocube_advanced_04_apriltag": {
-      "cn": "04 AprilTag 识别",
-      "en": "04 AprilTag Detection",
-      "es": "04 Identificación de etiquetas"
+    "cocube_advanced_04_line": {
+      "cn": "04 线条检测",
+      "en": "04 Line Detection",
+      "es": "04 Detección de líneas"
     }
   },
   "snap": {
