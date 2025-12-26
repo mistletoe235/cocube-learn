@@ -31,6 +31,7 @@ var fs = require('fs'),
 
 markdown.setOption('strikethrough', true);
 markdown.setOption('tables', true);
+markdown.setOption('openLinksInNewWindow', true);
 
 markdown.addExtension({
     type: 'output',
