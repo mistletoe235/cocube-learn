@@ -1,14 +1,13 @@
 {
-  "latestVersion": "1.7.3",
+  "latestVersion": "1.7.4",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "1. 修复Sengo库的翻译",
-      "2. CoCube库更新到2.17版本"
+      "1. 改进中文翻译",
+      "2. 修复保存图片、导入图片错误"
     ],
     "en": [
-      "1. Fixed translation issues in the Sengo library",
-      "2. Updated the CoCube library to version 2.17"
+      "1. Fixed errors in saving and importing images"
     ]
   },
   "forceUpdate": false
