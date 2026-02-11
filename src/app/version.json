@@ -1,13 +1,14 @@
 {
-  "latestVersion": "1.7.4",
+  "latestVersion": "1.7.7",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "1. 改进中文翻译",
-      "2. 修复保存图片、导入图片错误"
+      "1. 修复设备选择弹出窗口",
+      "2. 更新 Boardie"
     ],
     "en": [
-      "1. Fixed errors in saving and importing images"
+      "1. Fix device selection pop-up window",
+      "2. Update Boardie"
     ]
   },
   "forceUpdate": false
