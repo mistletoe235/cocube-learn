@@ -1,14 +1,14 @@
 {
-  "latestVersion": "1.7.7",
+  "latestVersion": "1.7.8",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "1. 修复设备选择弹出窗口",
-      "2. 更新 Boardie"
+      "1. 新增足球积木库",
+      "2. 新增 MIDI 音乐等功能"
     ],
     "en": [
-      "1. Fix device selection pop-up window",
-      "2. Update Boardie"
+      "1. Added football blocks library",
+      "2. Added MIDI music and more features"
     ]
   },
   "forceUpdate": false
