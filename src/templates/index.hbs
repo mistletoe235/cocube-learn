@@ -1,8 +1,8 @@
 {{#> layouts._html-shell
-    title=locale.pageTitle
+    title=(localize "page-title")
     pageClass="v_home"
-    pageUrl="https://wiki.cocube.fun/"
-    _pageDescription="CoCube Wiki - Your Gateway to Collaborative Learning and Innovation"
+    pageUrl=(join "https://wiki.cocube.fun/" locale.code "/index.html")
+    pageDescription=(localize "hero-description")
 }}
 
 {{#*inline "main-content"}}
@@ -73,51 +73,67 @@
 </div> --}}
 
 
-<!-- Contents -->
-<div class="row">
-
-
-    <!-- Filters -->
-    {{!-- <div class="col col-px col-12 xl-col-3">
-        <div class="v_home__filters">
-
-            <div class="v_home__filters-button c_button c_button--filters"
-                role="button" aria-controls="activity-filters" aria-haspopup="true">
-                <div class="c_button__icon">{{> svg.icon-filters-20x20 }}</div>                
-                <span>Filters</span>
-            </div>
-            
-            {{> _activity-filters }}
-
+<div class="v_home__shell">
+    <section class="v_home__landing">
+        <div class="v_home__intro">
+            {{!-- <p class="v_home__kicker">{{localize "hero-kicker"}}</p> --}}
+            <h1 class="v_home__title">
+                <span class="v_home__title-line">{{localize "hero-title-line"}}</span>
+                <span class="v_home__title-brand">{{localize "hero-title-brand"}}</span>
+            </h1>
+            {{!-- <p class="v_home__summary">{{localize "hero-description"}}</p> --}}
         </div>
-    </div> --}}
 
-
-    <!-- Cards -->
-    {{!-- <div class="col col-px col-12 xl-col-9">
-        
-        {{! gets filled from activity-list.js }}
-        <div class="v_home__activity-list">
-            <div class="v_home__activity-count"></div>
-            <div id="activity-grid" class="v_home__activity-grid"></div>
-            <div class="v_home__activity-pagination">
-                <div class="c_pagination"></div>
+        <div class="v_home__art">
+            <div class="v_home__art-figure">
+                <span class="v_home__art-pill v_home__art-pill--blocks">{{localize "blocks-badge"}}</span>
+                <img
+                    class="v_home__art-image"
+                    src="/assets/img/logos/main_img.png"
+                    alt="CoCube Robot"
+                />
+                <span class="v_home__art-pill v_home__art-pill--python">{{localize "python-badge"}}</span>
             </div>
         </div>
-        
-        <script>fetchActivities();</script>
-    </div> --}}
-    <div class="container">
-        <div class="text-container">
-            <h1>{{@root.locale.welcome-word}}</h1>
-            <p>Co-Making the Future!</p>
-            <a href="./activities/cocube_basic_00_start-{{locale.code}}" class="get-started">{{@root.locale.get-started-buttom}} →</a>
-        </div>
-        <div class="image-container">
-            <img src="../assets/img/logos/main_img.png" alt="CoCube Robot" />
-        </div>
-    </div>
+    </section>
 
+    <section class="v_home__entries" aria-labelledby="home-entry-title">
+        <div class="v_home__entry-panel">
+            <div class="v_home__entries-head">
+                <h2 id="home-entry-title" class="v_home__entries-title">
+                    {{localize "path-title"}}
+                </h2>
+            </div>
+
+            <div class="v_home__entry-grid">
+                <a
+                    class="v_home__entry-card v_home__entry-card--blocks"
+                    href="./activities/cocube_basic_00_start-{{locale.code}}"
+                >
+                    <span class="v_home__entry-badge">{{localize "blocks-badge"}}</span>
+                    <h3 class="v_home__entry-title">{{localize "blocks-title"}}</h3>
+                    <p class="v_home__entry-copy">{{localize "blocks-description"}}</p>
+                    <div class="v_home__entry-footer">
+                        <span class="v_home__entry-meta">{{localize "blocks-meta"}}</span>
+                        <span class="v_home__entry-cta">{{localize "blocks-cta"}}</span>
+                    </div>
+                </a>
+
+                <a
+                    class="v_home__entry-card v_home__entry-card--python"
+                    href="https://micropython.cocube.fun/"
+                >
+                    <span class="v_home__entry-badge">{{localize "python-badge"}}</span>
+                    <h3 class="v_home__entry-title">{{localize "python-title"}}</h3>
+                    <p class="v_home__entry-copy">{{localize "python-description"}}</p>
+                    <div class="v_home__entry-footer">
+                        <span class="v_home__entry-meta">{{localize "python-meta"}}</span>
+                        <span class="v_home__entry-cta">{{localize "python-cta"}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
 
 

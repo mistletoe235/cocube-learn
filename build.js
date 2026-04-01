@@ -473,39 +473,39 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
 
             debug(`processed activity: ${activityDir} (${langCode})`);
 
-            collectActivityAssets(localeDescriptor, langCode, activityPath);
+            collectActivityScriptPNGs(localeDescriptor, langCode, activityPath);
             buildActivity(localeDescriptor, langCode, activityPath);
         }
     );
 
 };
 
-function collectActivityAssets (descriptor, langCode, activityPath) {
-    // Create a folder containing the assets of each translation of the given ativity.
-
-	var assetsDir = `${__dirname}/dist/activity-assets/${descriptor.slug}/`;
-    Object.keys(locales).forEach(
-        (localeCode) => {
-            // copy image files from both the activity root and locale
-            if (fs.existsSync(`${activityPath}/files/`)) {
-                fse.copySync(`${activityPath}/files/`,assetsDir);
-            }
-            if (fs.existsSync(`${activityPath}/locales/${langCode}/files/`)) {
-                fse.copySync(`${activityPath}/locales/${langCode}/files/`, assetsDir);
-            }
-        }
-    );
-
-    // collect PNG's containing scripts
-    var pngsWithScripts = [];
-    var assetFiles = fs.readdirSync(assetsDir);
-    assetFiles.forEach((fileName) => {
-        if (pngHasScript(assetsDir + fileName)) {
+function collectActivityScriptPNGs (descriptor, langCode, activityPath) {
+    // collect PNG's containing scripts from the source asset folders
+    var pngsWithScripts = [],
+        assetFiles = getActivityAssetFiles(activityPath, langCode);
+    Object.keys(assetFiles).forEach((fileName) => {
+        if (pngHasScript(assetFiles[fileName])) {
             pngsWithScripts.push(fileName);
-            console.log('pngHasScript', assetsDir+fileName);
         }
     });
     scriptPNGs[descriptor.slug] = pngsWithScripts;
+};
+
+function getActivityAssetFiles (activityPath, langCode) {
+    var assetFiles = {};
+    [
+        `${activityPath}/files/`,
+        `${activityPath}/locales/${langCode}/files/`
+    ].forEach((dirPath) => {
+        if (!fs.existsSync(dirPath)) { return; }
+        fs.readdirSync(dirPath).forEach((fileName) => {
+            var fullPath = `${dirPath}${fileName}`;
+            if (fileName[0] === '.' || !fs.statSync(fullPath).isFile()) { return; }
+            assetFiles[fileName] = fullPath;
+        });
+    });
+    return assetFiles;
 };
 
 function pngHasScript(filePath) {
@@ -543,72 +543,68 @@ function indexOfStringInData(aString, data) {
     return -1;
 }
 
-function linkActivityAssets(activityDir, assetsDir) {
-	// Add links in activityDir to each file in assetsDir.
+function copyActivityAssets(activityDir, activityPath, langCode) {
+	// Copy the activity assets directly into the built activity directory.
 
-    var assetFiles = fs.readdirSync(assetsDir);
-    assetFiles.forEach(
-        (assetPath) => {
-            fName = assetPath.split('/').pop();
-            if (fName[0] != '.') { // skip .DS_Store on MacOS
-                fse.copySync(
-                	`${assetsDir}/${fName}`,
-                	`${activityDir}/${fName}`
-                );
+    fse.ensureDirSync(activityDir);
+    [
+        `${activityPath}/files/`,
+        `${activityPath}/locales/${langCode}/files/`
+    ].forEach((dirPath) => {
+        if (!fs.existsSync(dirPath)) { return; }
+        fse.copySync(
+            dirPath,
+            activityDir,
+            {
+                filter: (filePath) => filePath.split('/').pop()[0] !== '.'
             }
-        }
-    );
+        );
+    });
 };
 
 function buildActivity (descriptor, langCode, activityPath) {
-    // we need to build the activity page for all available page locales, even
-    // though the activity may not be available in all of these languages
-    // TODO refactor this humongous thing
+    // Build one activity page per content language.
 
     activityBeingBuilt = descriptor.slug;
-    Object.keys(locales).forEach(
-        (localeCode) => {
-            descriptor.markdown =
-                fs.readFileSync(
-                    `${activityPath}/locales/${langCode}/index.md`,
-                    'utf8'
-                );
-            compileTemplate(
-                'activity',
-                descriptor,
-                localeCode,
-                `activities/${descriptor.slug}`
-            );
-
-            // add links to shared activity assets
-            linkActivityAssets(
-                `${__dirname}/dist/${localeCode}/activities/${descriptor.slug}`,
-                `${__dirname}/dist/activity-assets/${descriptor.slug}`);
-
-            if (descriptor['has-guide']) {
-                var guideDescriptor = {
-                    markdown:
-                        fs.readFileSync(
-                            `${activityPath}/locales/${langCode}/` +
-                                `teachers-guide.md`,
-                            'utf8'
-                        ),
-                    title: descriptor.title,
-                    href: 'index',
-                    slug: descriptor.slug,
-                    time: descriptor.time,
-                    level: descriptor.level,
-                    topics: descriptor.topics
-                };
-                compileTemplate(
-                    'teachers-guide',
-                    guideDescriptor,
-                    localeCode,
-                    `activities/${descriptor.slug}/guide`
-                );
-            }
-        }
+    descriptor.markdown =
+        fs.readFileSync(
+            `${activityPath}/locales/${langCode}/index.md`,
+            'utf8'
+        );
+    compileTemplate(
+        'activity',
+        descriptor,
+        langCode,
+        `activities/${descriptor.slug}`
     );
+
+    copyActivityAssets(
+        `${__dirname}/dist/${langCode}/activities/${descriptor.slug}`,
+        activityPath,
+        langCode);
+
+    if (descriptor['has-guide']) {
+        var guideDescriptor = {
+            markdown:
+                fs.readFileSync(
+                    `${activityPath}/locales/${langCode}/` +
+                        `teachers-guide.md`,
+                    'utf8'
+                ),
+            title: descriptor.title,
+            href: 'index',
+            slug: descriptor.slug,
+            time: descriptor.time,
+            level: descriptor.level,
+            topics: descriptor.topics
+        };
+        compileTemplate(
+            'teachers-guide',
+            guideDescriptor,
+            langCode,
+            `activities/${descriptor.slug}/guide`
+        );
+    }
 };
 
 function copyAssets () {
@@ -797,7 +793,7 @@ function serve () {
             fileName = fileName + '/index.html';
         }
         respondWithFile(res, fileName, getParams(req.url));
-    }).listen(3000);
+    }).listen(4000);
 };
 
 function watchDirs (dirs, action) {
@@ -877,5 +873,5 @@ build();
 if (debugMode) {
     watch();
     serve();
-    console.log("\nHTTP Server: 'http://127.0.0.1:3000/en'");
+    console.log("\nHTTP Server: 'http://127.0.0.1:4000/en'");
 }
