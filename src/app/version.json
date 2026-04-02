@@ -1,14 +1,12 @@
 {
-  "latestVersion": "1.7.8",
+  "latestVersion": "1.7.9",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "1. 新增足球积木库",
-      "2. 新增 MIDI 音乐等功能"
+      "更新 MicroBlocks 版本：IDE 2.0.102 VM 390"
     ],
     "en": [
-      "1. Added football blocks library",
-      "2. Added MIDI music and more features"
+      "Update MicroBlocks version：IDE 2.0.102 VM 390"
     ]
   },
   "forceUpdate": false
