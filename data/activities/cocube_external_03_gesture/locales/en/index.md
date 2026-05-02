@@ -22,7 +22,7 @@ The module integrates a high-precision, low-power gesture recognition sensor tha
 
 1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the 3D gesture sensor module to the CoCube robot.
 
-2. **Add Block Library**: Under the "Robot" directory, add the "CoCube Module Library" — this library includes all functions of the external modules: "3D Gesture Connected" and "3D Gesture Read."
+2. **Add Library**: From "Libraries", add the "CoCube Module" library. This library includes the 3D gesture module blocks: "3D Gesture Connected" and "3D Gesture Read."
 
 ![](image-1.png)
 

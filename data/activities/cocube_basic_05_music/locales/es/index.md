@@ -4,11 +4,11 @@ Programación del robot CoCube para la programación musical.
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =300x*) ![Personal Computer or Tablet](PC.png =300x*)
+![Robot CoCube × 1](robot.png =300x*) ![PC o tablet](PC.png =300x*)
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image.png)
 
@@ -18,7 +18,7 @@ El robot CoCube está equipado con un zumbador, que se puede programar para emit
 
 1. **Conectar dispositivos**: Conecte el IDE de MicroBlocks al robot CoCube a través de medios cableados o inalámbricos.
 
-2. **Localiza el bloque**: Busca el bloque Frecuencia de reproducción (261) Duración (500) ms) en el bloque Tono y arrástralo al espacio de trabajo.
+2. **Localiza el bloque**: En la biblioteca "Tonos", busca el bloque "toca la frecuencia 261 durante 500 ms" y arrástralo al espacio de trabajo.
 
 3. **Para ejecutar el programa**: Haga clic con el botón izquierdo en el bloque. Cuando se enciende un halo verde alrededor de los bloques, significa que el programa se ha ejecutado con éxito y se puede escuchar el timbre del robot CoCube sonando, y se detendrá después de 0,5 segundos.
 
@@ -26,7 +26,7 @@ El robot CoCube está equipado con un zumbador, que se puede programar para emit
 
 5. **Disposición**: Aquí hay un conjunto de notas contralto y correspondencia de frecuencia: Do(523) Re(587) Mi(659) Fa(698) So(784) La(880) Xi (988), también puede verificar la relación entre las notas y frecuencias correspondientes en Internet. Arrastre varios bloques y modifique la frecuencia y la duración de cada bloque para completar el arreglo.
 
-6. **Tono de parada**: Para evitar que suene el timbre, puede utilizar el bloque de tono de parada. Toque el bloque "Tono de parada" directamente en el área del bloque, o arrastre el bloque "Tono de parada" al espacio de trabajo y haga clic en él, y el CoCube dejará de reproducir sonido inmediatamente.
+6. **Detener el sonido**: Para evitar que el zumbador siga sonando, puedes usar el bloque "detén el sonido". Haz clic en él directamente en el área de bloques, o arrástralo al espacio de trabajo y ejecútalo. CoCube dejará de reproducir sonido de inmediato.
 
 ![](1734678667505.png)
 

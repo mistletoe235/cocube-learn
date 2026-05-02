@@ -1,11 +1,14 @@
 var fs = require('fs'),
     fse = require('fs-extra'),
+    path = require('path'),
     sass = require('sass'),
     handlebars = require('handlebars'),
-    http = require('http'),
+    https = require('https'),
+    childProcess = require('child_process'),
     WebSocket = require('ws'),
     autoprefixer = require('autoprefixer'),
     postcss = require('postcss'),
+    buildUtils = require('./build-utils'),
     markdown = new (require('showdown')).Converter(),
     args = process.argv.slice(2),
     debugMode = args.includes('--debug'),
@@ -25,6 +28,7 @@ var fs = require('fs'),
         'activity-card.html'
     ],
     scriptPNGs = [],
+    activityAssetPlans = {},
     activityBeingBuilt = undefined;
 
 // MarkDown additions
@@ -482,11 +486,21 @@ function buildAllActivityPages (activityDir, activityPath, activityDescriptors) 
 
 function collectActivityScriptPNGs (descriptor, langCode, activityPath) {
     // collect PNG's containing scripts from the source asset folders
-    var pngsWithScripts = [],
+    var activitySlug = path.basename(activityPath),
+        pngsWithScripts = [],
         assetFiles = getActivityAssetFiles(activityPath, langCode);
     Object.keys(assetFiles).forEach((fileName) => {
         if (pngHasScript(assetFiles[fileName])) {
-            pngsWithScripts.push(fileName);
+            collectScriptPNGPaths(
+                fileName,
+                activitySlug,
+                langCode,
+                activityPath
+            ).forEach((outputPath) => {
+                if (!pngsWithScripts.includes(outputPath)) {
+                    pngsWithScripts.push(outputPath);
+                }
+            });
         }
     });
     scriptPNGs[descriptor.slug] = pngsWithScripts;
@@ -506,6 +520,89 @@ function getActivityAssetFiles (activityPath, langCode) {
         });
     });
     return assetFiles;
+};
+
+function getActivityAssetPlan(activityPath, activitySlug) {
+    if (!activityAssetPlans[activitySlug]) {
+        activityAssetPlans[activitySlug] =
+            buildUtils.getSharedActivityAssetPlan(activityPath, activitySlug);
+    }
+    return activityAssetPlans[activitySlug];
+};
+
+function getActivityAssetReplacements(
+    activityPath,
+    activitySlug,
+    langCode,
+    destinationDir
+) {
+    var activityPlan = getActivityAssetPlan(activityPath, activitySlug),
+        replacements = {},
+        relativeRootPath = buildUtils.buildRelativeRootPath(destinationDir),
+        localizedFiles = Object.assign(
+            {},
+            activityPlan.localizedUnique[langCode] || {},
+            activityPlan.localizedShared[langCode] || {}
+        );
+
+    Object.keys(activityPlan.common).forEach((fileName) => {
+        if (!localizedFiles[fileName]) {
+            replacements[fileName] =
+                relativeRootPath + activityPlan.common[fileName].outputPath;
+        }
+    });
+
+    Object.keys(activityPlan.localizedShared[langCode] || {}).forEach(
+        (fileName) => {
+            replacements[fileName] =
+                relativeRootPath +
+                activityPlan.localizedShared[langCode][fileName].outputPath;
+        }
+    );
+
+    return replacements;
+};
+
+function rewriteActivityAssetLinks(
+    markdownContents,
+    activityPath,
+    activitySlug,
+    langCode,
+    destinationDir
+) {
+    return buildUtils.rewriteAssetLinks(
+        markdownContents,
+        getActivityAssetReplacements(
+            activityPath,
+            activitySlug,
+            langCode,
+            destinationDir
+        )
+    );
+};
+
+function collectScriptPNGPaths(fileName, activitySlug, langCode, activityPath) {
+    var pngPaths = [fileName],
+        activityReplacement = getActivityAssetReplacements(
+            activityPath,
+            activitySlug,
+            langCode,
+            `activities/${activitySlug}`
+        )[fileName],
+        guideReplacement = getActivityAssetReplacements(
+            activityPath,
+            activitySlug,
+            langCode,
+            `activities/${activitySlug}/guide`
+        )[fileName];
+
+    [activityReplacement, guideReplacement].forEach((replacement) => {
+        if (replacement && !pngPaths.includes(replacement)) {
+            pngPaths.push(replacement);
+        }
+    });
+
+    return pngPaths;
 };
 
 function pngHasScript(filePath) {
@@ -546,30 +643,64 @@ function indexOfStringInData(aString, data) {
 function copyActivityAssets(activityDir, activityPath, langCode) {
 	// Copy the activity assets directly into the built activity directory.
 
+    var activitySlug = path.basename(activityPath),
+        activityPlan = getActivityAssetPlan(activityPath, activitySlug);
+
     fse.ensureDirSync(activityDir);
-    [
-        `${activityPath}/files/`,
-        `${activityPath}/locales/${langCode}/files/`
-    ].forEach((dirPath) => {
-        if (!fs.existsSync(dirPath)) { return; }
-        fse.copySync(
-            dirPath,
-            activityDir,
-            {
-                filter: (filePath) => filePath.split('/').pop()[0] !== '.'
-            }
+
+    Object.keys(activityPlan.common).forEach((fileName) => {
+        copyAssetFile(
+            activityPlan.common[fileName].sourcePath,
+            `${__dirname}/dist/${activityPlan.common[fileName].outputPath}`
         );
     });
+
+    Object.keys(activityPlan.localizedShared[langCode] || {}).forEach(
+        (fileName) => {
+            copyAssetFile(
+                activityPlan.localizedShared[langCode][fileName].sourcePath,
+                `${__dirname}/dist/` +
+                    activityPlan.localizedShared[langCode][fileName]
+                        .outputPath
+            );
+        }
+    );
+
+    Object.keys(activityPlan.localizedUnique[langCode] || {}).forEach(
+        (fileName) => {
+            copyAssetFile(
+                activityPlan.localizedUnique[langCode][fileName],
+                `${activityDir}/${fileName}`
+            );
+        }
+    );
+};
+
+function copyAssetFile(sourcePath, destinationPath) {
+    fse.ensureDirSync(path.dirname(destinationPath));
+    fse.copySync(
+        sourcePath,
+        destinationPath,
+        { overwrite: true }
+    );
 };
 
 function buildActivity (descriptor, langCode, activityPath) {
     // Build one activity page per content language.
 
+    var activitySlug = path.basename(activityPath);
+
     activityBeingBuilt = descriptor.slug;
     descriptor.markdown =
-        fs.readFileSync(
-            `${activityPath}/locales/${langCode}/index.md`,
-            'utf8'
+        rewriteActivityAssetLinks(
+            fs.readFileSync(
+                `${activityPath}/locales/${langCode}/index.md`,
+                'utf8'
+            ),
+            activityPath,
+            activitySlug,
+            langCode,
+            `activities/${descriptor.slug}`
         );
     compileTemplate(
         'activity',
@@ -585,12 +716,17 @@ function buildActivity (descriptor, langCode, activityPath) {
 
     if (descriptor['has-guide']) {
         var guideDescriptor = {
-            markdown:
+            markdown: rewriteActivityAssetLinks(
                 fs.readFileSync(
                     `${activityPath}/locales/${langCode}/` +
                         `teachers-guide.md`,
                     'utf8'
                 ),
+                activityPath,
+                activitySlug,
+                langCode,
+                `activities/${descriptor.slug}/guide`
+            ),
             title: descriptor.title,
             href: 'index',
             slug: descriptor.slug,
@@ -721,13 +857,14 @@ function deleteUnwantedPages () {
 }
 
 function serve () {
-    // Dead simple (and naive) HTTP static server
+    // Dead simple (and naive) HTTPS static server
 
     function respondWithFile (res, fileName, params) {
         // Do we need to do anything at all with params? I don't think so
         fs.readFile(
             pathTo(fileName),
             (err, data) => {
+                setCorsHeaders(res);
                 res.setHeader('Content-Type', mimeTypeFor(fileName));
                 if (err) {
                     res.writeHead(404);
@@ -740,6 +877,13 @@ function serve () {
             });
     };
 
+    function setCorsHeaders(res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', '*');
+        res.setHeader('Access-Control-Allow-Private-Network', 'true');
+    };
+
     function mimeTypeFor (fileName) {
         var extension = fileName.replace(/.*\./,''),
             mimeType = {
@@ -747,6 +891,7 @@ function serve () {
                 png: 'image/png',
                 jpg: 'image/jpg',
                 jpeg: 'image/jpg',
+                ogg: 'audio/ogg',
                 html: 'text/html',
                 htm: 'text/html',
                 css: 'text/css',
@@ -761,7 +906,16 @@ function serve () {
     };
 
     function pathTo (fileName) {
-        return `${__dirname}/dist/${fileName.replace(/\?.*/,'')}`;
+        return `${__dirname}/dist/${decodeRequestPath(fileName)}`;
+    };
+
+    function decodeRequestPath(fileName) {
+        var requestPath = fileName.replace(/\?.*/,'');
+        try {
+            return decodeURIComponent(requestPath);
+        } catch (err) {
+            return requestPath;
+        }
     };
 
     function getParams (url) {
@@ -775,7 +929,45 @@ function serve () {
         );
     };
 
-    http.createServer(function (req, res) {
+    function getDevCertificate() {
+        var certDir = `${__dirname}/.cert`,
+            keyPath = `${certDir}/localhost-key.pem`,
+            certPath = `${certDir}/localhost-cert.pem`;
+
+        if (!fs.existsSync(keyPath) || !fs.existsSync(certPath)) {
+            fse.ensureDirSync(certDir);
+            childProcess.execFileSync(
+                'openssl',
+                [
+                    'req',
+                    '-x509',
+                    '-newkey', 'rsa:2048',
+                    '-nodes',
+                    '-sha256',
+                    '-days', '365',
+                    '-keyout', keyPath,
+                    '-out', certPath,
+                    '-subj', '/CN=127.0.0.1',
+                    '-addext', 'subjectAltName=DNS:localhost,IP:127.0.0.1'
+                ],
+                { stdio: debugMode ? 'inherit' : 'ignore' }
+            );
+        }
+
+        return {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath)
+        };
+    };
+
+    https.createServer(getDevCertificate(), function (req, res) {
+        if (req.method === 'OPTIONS') {
+            setCorsHeaders(res);
+            res.writeHead(204);
+            res.end();
+            return;
+        }
+
         var fileName = req.url;
         if (req.url === '/') {
             fileName = 'index.html';
@@ -873,5 +1065,5 @@ build();
 if (debugMode) {
     watch();
     serve();
-    console.log("\nHTTP Server: 'http://127.0.0.1:4000/en'");
+    console.log("\nHTTPS Server: 'https://127.0.0.1:4000/en'");
 }

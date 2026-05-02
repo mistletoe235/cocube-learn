@@ -1,14 +1,14 @@
 ### 1. Propósito
 
-Programación del robot CoCube para sincronizar el proceso vía broadcast.
+Programa el robot CoCube para sincronizar varias tareas con mensajes.
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =300x*) ![Personal Computer or Tablet](PC.png =300x*)
+![Robot CoCube × 1](robot.png =300x*) ![PC o tablet](PC.png =300x*)
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image.png)
 
@@ -18,7 +18,7 @@ En nuestros estudios anteriores, nos referimos principalmente a las estructuras 
 
 1. **Conectar dispositivos**: Conecte el IDE de MicroBlocks al robot CoCube a través de medios cableados o inalámbricos.
 
-2. **Encuentra los bloques**: Abre la biblioteca de bloques "Control", busca los bloques "Cuando se reciban" y "Difusión" y arrástralos al espacio de trabajo como se muestra en la imagen. La función de transmisión se logra a través de los dos bloques de construcción anteriores.
+2. **Encuentra los bloques**: Abre la categoría "Control", busca los bloques "al recibir _" y "envía _", y arrástralos al espacio de trabajo como se muestra en la imagen. La función de mensajes se construye con estos dos bloques.
 
 ![](image-1.png)
 
@@ -36,4 +36,4 @@ Debe haberse encontrado con un camión rociador en la vida, cuando el rociador e
 
 ![](<broadcast_car.gif>)
 
-Reference Example Program: [MicroBlocks——CoCube Case 06 Sprinkler Truck](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27LED%20Display%27%20%27Tone%27%0A%0Ascript%20354%20110%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20100%2050%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20200%2050%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20200%20150%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20100%20150%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%7D%0A%7D%0A%0Ascript%20733%20107%20%7B%0AwhenBroadcastReceived%20%27go%21%27%0Ascroll_text%20%27careful%27%2020%0A%7D%0A%0Ascript%20733%20253%20%7B%0AwhenBroadcastReceived%20%27go%21%27%0Afor%20i%2050%20%7B%0A%20%20playMIDIKey%20%28i%20%2B%2050%29%2020%0A%7D%0A%7D%0A%0A)
+Programa de ejemplo de referencia: [MicroBlocks——CoCube Caso 06 Camión rociador](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27LED%20Display%27%20%27Tone%27%0A%0Ascript%20354%20110%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20100%2050%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20200%2050%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20200%20150%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%20%20%27CoCube%20move%20to%27%20100%20150%2015%0A%20%20sendBroadcast%20%27go%21%27%0A%7D%0A%7D%0A%0Ascript%20733%20107%20%7B%0AwhenBroadcastReceived%20%27go%21%27%0Ascroll_text%20%27careful%27%2020%0A%7D%0A%0Ascript%20733%20253%20%7B%0AwhenBroadcastReceived%20%27go%21%27%0Afor%20i%2050%20%7B%0A%20%20playMIDIKey%20%28i%20%2B%2050%29%2020%0A%7D%0A%7D%0A%0A)

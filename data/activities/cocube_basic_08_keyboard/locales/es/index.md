@@ -3,11 +3,11 @@ Utilice el teclado para controlar el robot CoCube.
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =300x*) ![Personal Computer or Tablet](PC.png =300x*)
+![Robot CoCube × 1](robot.png =300x*) ![PC o tablet](PC.png =300x*)
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image-3.png)
 
@@ -17,7 +17,7 @@ Utilice el teclado para controlar el robot CoCube.
 
 ![](image-4.png)
 
-* **Conectar dispositivos**: Conecte el IDE de MicroBlocks al robot CoCube de forma inalámbrica. Ampliación del módulo de pinza al robot CoCube.
+* **Conectar dispositivos**: Conecta el IDE de MicroBlocks al robot CoCube de forma inalámbrica.
 
 * **Cargue el programa de interfaz para el robot CoCube**
 
@@ -33,7 +33,7 @@ El código de ejemplo que se abre se muestra en la siguiente ilustración:
 
 ![](allScripts3466150.png)
 
-Al mismo tiempo, el teclado se puede controlar personalizando las teclas, y el nombre correspondiente del evento del teclado se puede escuchar configurando "al recibir" y "Diga" y "Último mensaje", y el evento del teclado correspondiente se puede determinar completando el nombre "al recibir".
+También puedes personalizar las teclas. Combina "al recibir _", "di _" y "último mensaje" para ver el nombre del evento de teclado; después escribe ese nombre en "al recibir _" para responder a la tecla correspondiente.
 
 ![](image.png)
 

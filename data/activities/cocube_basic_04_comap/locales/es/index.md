@@ -4,13 +4,13 @@ Programe el robot CoCube para que aprenda la función de posicionamiento de coor
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =200x*)
-![Personal Computer or Tablet](PC.png =200x*)
-![CoCube Positioning Map](image.png =200x*)
+![Robot CoCube × 1](robot.png =200x*)
+![PC o tablet](PC.png =200x*)
+![Mapa de posicionamiento CoCube](image.png =200x*)
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image-1.png)
 
@@ -34,16 +34,16 @@ Saca un mapa de la ubicación temática del Maze Challenge y míralo más de cer
 
 1. **Conecte el dispositivo**: Conecte el IDE de Microblocks al robot CoCube a través de una conexión Bluetooth y coloque el robot CoCube en la plataforma de posicionamiento.
 
-2. **Usa los bloques "Say"**
+2. **Usa el bloque "di _"**
 
-   - Conéctese para abrir la biblioteca de bloques "Salida", arrastre el bloque "Digamos 123" y haga clic en Ejecutar, puede ver que en el IDE de MicroBlocks, aparece una pequeña burbuja en la esquina superior derecha del bloque, escribiendo "123".
-   - ¡Eso es lo que hace el bloque "Say _"! En lugar de dejar que el bot de CoCube realmente hable, le presentará algo en el IDE de MicroBlocks.
+   - Abre la categoría "Salida", arrastra el bloque "di 123" y haz clic para ejecutarlo. Verás una pequeña burbuja con "123" en la esquina superior derecha del bloque dentro del IDE de MicroBlocks.
+   - Eso es lo que hace el bloque "di _": no hace que CoCube hable de verdad, sino que muestra información en el IDE de MicroBlocks.
 
 ![](image-2.png)  
 
 
-- Si desea decir dos cosas al mismo tiempo, simplemente haga clic en el pequeño triángulo a la derecha del bloque "Decir _" y escriba el contenido que desea generar en el nuevo campo de entrada.
-- También podemos rellenar los bloques de la biblioteca de bloques "Compute", y CoCube enviará el resultado final al IDE de MicroBlocks.
+- Si quieres mostrar dos cosas al mismo tiempo, haz clic en el pequeño triángulo a la derecha del bloque "di _" y escribe el contenido en el nuevo campo de entrada.
+- También puedes insertar bloques de la categoría "Operadores"; CoCube enviará el resultado final al IDE de MicroBlocks.
 
 ![](scriptImage2100985.png)  
 
@@ -51,7 +51,7 @@ Saca un mapa de la ubicación temática del Maze Challenge y míralo más de cer
 
 - **Salidas CoCube Coordenadas**
 
-  - Arrastre los bloques "Posición X", "Posición Y" y "Ángulo de dirección" de la biblioteca de bloques CoCube y colóquelos en el bloque "Say _". Haga clic en el bloque para indicar las coordenadas del CoCube en ese momento.
+  - Arrastra los bloques "posición X", "posición Y" y "dirección" de la biblioteca CoCube y colócalos dentro del bloque "di _". Haz clic en el bloque para mostrar las coordenadas actuales de CoCube.
   - Para generar las coordenadas y los ángulos del CoCube en tiempo real, se puede anidar un bloque "repetido".
 
 ![](scriptImage2340058.png)
@@ -60,11 +60,11 @@ Saca un mapa de la ubicación temática del Maze Challenge y míralo más de cer
 
 #### 4.3 Lugares de dibujo CoCube
 
-Si el bloque "Decir _" no es lo suficientemente intuitivo, también puede usar el bloque "Trazar" para mostrar las coordenadas del CoCube en un gráfico de datos.
+Si el bloque "di _" no es lo suficientemente visual, también puedes usar el bloque "añade al gráfico _" para mostrar las coordenadas de CoCube en un gráfico de datos.
 
 1. **Conecte el dispositivo**: Conecte el IDE de Microblocks al robot CoCube a través de una conexión Bluetooth y coloque el robot CoCube en la plataforma de posicionamiento.
 
-2. **Usando los bloques "Draw"**: Escriba el siguiente código y ejecútelo, haga clic en el icono en la parte superior derecha del IDE de MicroBlocks para dibujar botones, las curvas roja, verde y azul representan los valores de la "posición X", la "posición Y" y el "ángulo de dirección" del robot CoCube, respectivamente.
+2. **Usa el gráfico**: Escribe y ejecuta el siguiente código. Luego haz clic en el icono de gráfico en la parte superior derecha del IDE de MicroBlocks. Las curvas roja, verde y azul representan los valores de "posición X", "posición Y" y "dirección" del robot CoCube.
 
 ![](image-3.png)
 

@@ -20,7 +20,7 @@ The NeoPixel RGB LED panel is driven by the WS2812 chip, which allows independen
 
 1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the NeoPixel RGB LED panel module to the CoCube robot.
 
-2. **Add Block Library**: Under the "Robot" directory, add the "CoCube Module Library" — this library includes the three most commonly used functions for the NeoPixel panel: connect, light up, and turn off.
+2. **Add Library**: From "Libraries", add the "CoCube Module" library. This library includes the three most commonly used functions for the NeoPixel panel: connect, light up, and turn off.
 
 ![](image-1.png)
 ![](image.png)

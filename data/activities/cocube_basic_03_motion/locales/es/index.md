@@ -4,11 +4,11 @@ Programe el robot CoCube para implementar las funciones básicas de movimiento d
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =300x*) ![Personal Computer or Tablet](PC.png =300x*)
+![Robot CoCube × 1](robot.png =300x*) ![PC o tablet](PC.png =300x*)
 
 ### 3. Plataformas de software
 
-[MicroBloques-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ![](image.png)
 
@@ -18,11 +18,11 @@ Programe el robot CoCube para implementar las funciones básicas de movimiento d
 
 1. **Conexión de dispositivos**: Conecte el IDE de Microblocks al robot CoCube a través de Bluetooth.
 
-2. **Controle el robot para que se mueva hacia adelante, hacia atrás, hacia la izquierda, hacia la derecha y hacia atrás**: En la biblioteca de bloques "CoCube", arrastre los dos primeros bloques relacionados con el control del motor. Estos bloques controlan la dirección, la velocidad y la duración del movimiento del robot CoCube.
+2. **Controla el movimiento del robot**: En la biblioteca "CoCube", arrastra los primeros bloques relacionados con el control de los motores. Estos bloques controlan la dirección, la velocidad y la duración del movimiento del robot CoCube.
 
 ![](allScripts112573.png)
 
-* **"Freno de motor" y "Freno de motor"**: ¡Escriba el siguiente código para experimentar la diferencia entre "Freno de motor" y "Freno de motor"! El "freno del motor" detendrá el robot a tiempo, mientras que la "parada del motor" simplemente elimina la potencia del motor, y el robot CoCube continuará deslizándose hacia adelante durante una corta distancia debido a la inercia. Puede haber ciertas tareas en las que necesite usar diferentes bloques de parada.
+* **"frena las ruedas" y "detén las ruedas"**: Escribe el siguiente código para probar la diferencia entre los bloques "frena las ruedas" y "detén las ruedas". "frena las ruedas" detiene el robot de inmediato, mientras que "detén las ruedas" solo corta la alimentación de los motores, por lo que el robot CoCube seguirá deslizándose un poco hacia adelante por la inercia. En algunas tareas necesitarás elegir uno u otro bloque de parada.
 
 ![](allScripts313641.png)
 

@@ -2,6 +2,7 @@
 node_modules
 package-lock.json
 dist/*
+.cert/
 data/activities.json
 wiki_web_todo/
 wiki_web_todo.zip

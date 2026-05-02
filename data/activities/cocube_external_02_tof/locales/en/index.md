@@ -20,7 +20,7 @@ ToF (Time of Flight) works by emitting infrared laser light, measuring the time 
 
 1. **Connect Device**: Connect the MicroBlocks IDE to the CoCube robot via a wired or wireless connection, and attach the ToF module to the CoCube robot.
 
-2. **Add Block Library**: Under the "Robot" directory, add the "CoCube Module Library" — this library includes all the functions of the ToF external module: "ToF Connected" and "ToF Distance (mm)."
+2. **Add Library**: From "Libraries", add the "CoCube Module" library. This library includes the ToF external module blocks: "ToF Connected" and "ToF Distance (mm)."
 
 ![](image-2.png)
 

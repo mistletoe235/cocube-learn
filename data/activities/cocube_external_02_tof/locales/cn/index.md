@@ -20,7 +20,7 @@ ToF (Time of Flight)，通过发射红外激光，测量光线到达物体并反
 
 1. **连接设备：**&#x901A;过有线或者无线方式，连接 MicroBlocks IDE 与 CoCube 机器人，并将 ToF 模块连接到 CoCube 机器人上。
 
-2. **添加积木库：**&#x5728;“机器人”目录下，添加 “CoCube Module库”——“CoCube Module库”中涵盖了 ToF 外接模块的所有功能——“ToF 已连接”和“ToF 距离(mm)”。
+2. **添加积木库：**&#x5728;“积木库”目录下，添加“CoCube 外接模块”——“CoCube 外接模块”中涵盖了 ToF 外接模块的所有功能——“ToF 已连接”和“ToF 距离(mm)”。
 
 ![](image-2.png)
 

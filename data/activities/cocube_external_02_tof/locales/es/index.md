@@ -6,9 +6,9 @@ ToF (tiempo de vuelo) mide el tiempo que tarda la luz en llegar a un objeto y re
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =200x*)
-![ToF External Module](ToF.png =180x*)
-![Personal Computer or Tablet](PC.png =250x*)
+![Robot CoCube × 1](robot.png =200x*)
+![Módulo externo ToF](ToF.png =180x*)
+![PC o tablet](PC.png =250x*)
 
 ### 3. Plataformas de software
 
@@ -20,17 +20,17 @@ ToF (tiempo de vuelo) mide el tiempo que tarda la luz en llegar a un objeto y re
 
 1. **Conectar dispositivos**: Conecte el IDE de MicroBlocks al robot CoCube a través de medios cableados o inalámbricos, y conecte el módulo ToF al robot CoCube.
 
-2. **Agregue una biblioteca de bloques de construcción**: En el directorio "Robot", agregue "Biblioteca de módulos CoCube" - la "Biblioteca de módulos CoCube" cubre todas las funciones del complemento ToF: "ToF conectado" y "Distancia ToF (mm)".
+2. **Añadir biblioteca**: En la carpeta "Bibliotecas", añade la biblioteca "Módulo CoCube". Esta biblioteca incluye las funciones del módulo externo ToF: "ToF conectado" y "distancia ToF (mm)".
 
 ![](image.png)
 
-* **ToF Connected**: Arrastre el bloque ToF Connected, arrástrelo al espacio de trabajo y haga clic en Ejecutar. El bloque de construcción determina si el robot CoCube se ha conectado al módulo de medición de distancia láser ToF.
+* **ToF conectado**: Arrastra el bloque "ToF conectado" al espacio de trabajo y haz clic para ejecutarlo. Este bloque comprueba si el robot CoCube está conectado al módulo ToF de medición láser.
 
 ![](scriptImage6864473.png)
 
 **Nota**: Dado que el módulo tarda una cierta cantidad de tiempo en encenderse, existe una cierta probabilidad de que se informe "falso" al ejecutar el bloque por primera vez, y puede hacer clic en Ejecutar nuevamente.
 
-* **Distancia ToF (mm)**: Arrastre el bloque "Distancia ToF (mm)" y haga clic en Ejecutar para devolver la distancia desde el sensor de distancia láser ToF hasta el obstáculo frente a usted.
+* **distancia ToF (mm)**: Arrastra el bloque "distancia ToF (mm)" y haz clic para ejecutarlo. El bloque devuelve la distancia entre el sensor ToF y el obstáculo que tiene delante.
 
 Si desea generar los resultados de la medición en tiempo real, puede escribir el siguiente programa.
 
@@ -48,8 +48,8 @@ Si desea generar los resultados de la medición en tiempo real, puede escribir e
 
 ¡Usa los materiales a tu disposición para construir un sencillo laberinto tridimensional! E intente escribir código para permitir que el robot CoCube salga del laberinto de forma autónoma con la ayuda del módulo de alcance láser ToF.
 
-### 7. Consulte los ejemplos de código
+### 7. Ejemplos de código de referencia
 
 Todos los ejemplos de código de tutorial anteriores:
 
-[MicroBlocks —— ToF Caja del módulo de rango láser](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)
+[MicroBlocks —— Casos del módulo ToF de medición láser](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%20%27CoCube%20Module%27%20%27LED%20Display%27%0A%0Ascript%20663%20105%20%7B%0AwhenButtonPressed%20%27A%27%0Aforever%20%7B%0A%20%20if%20%28%28%27ccmodule_ToF%20distance%27%29%20%3E%20120%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204347332%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bforward%27%2040%0A%20%20%7D%20%28%28%27ccmodule_ToF%20distance%27%29%20%3C%2080%29%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%204674692%0A%20%20%20%20%27CoCube%20move%27%20%27cocube%3Bbackward%27%2040%0A%20%20%7D%20else%20%7B%0A%20%20%20%20%27%5Bdisplay%3AmbDisplay%5D%27%2015237440%0A%20%20%20%20%27CoCube%20wheels%20stop%27%0A%20%20%7D%0A%7D%0A%7D%0A%0A)

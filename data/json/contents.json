@@ -71,6 +71,16 @@
       "cn": "04 ASR 语音识别模块",
       "en": "04 ASR Speech Recognition Module",
       "es": "04 Módulo ASR de reconocimiento de voz"
+    },
+    "cocube_external_05_midi_intro": {
+      "cn": "05 MIDI 演奏入门指南",
+      "en": "05 MIDI Performance Intro",
+      "es": "05 Introducción a la interpretación MIDI"
+    },
+    "cocube_external_06_midi_map": {
+      "cn": "06 用地图演奏 MIDI 音乐",
+      "en": "06 Playing MIDI Music with a Map",
+      "es": "06 Tocar música MIDI con un mapa"
     }
   },
   "sentry2": {

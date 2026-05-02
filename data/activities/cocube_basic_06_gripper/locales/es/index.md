@@ -4,7 +4,7 @@ El robot CoCube se puede utilizar junto con módulos externos para implementar f
 
 ### 2. Materiales utilizados
 
-![CoCube Robot × 1](robot.png =200x*) ![Gripper Module](image.png =200x*) ![Personal Computer or Tablet](PC.png =250x*)
+![Robot CoCube × 1](robot.png =200x*) ![Módulo de pinza](image.png =200x*) ![PC o tablet](PC.png =250x*)
 
 ### 3. Plataformas de software
 
@@ -14,9 +14,9 @@ El robot CoCube se puede utilizar junto con módulos externos para implementar f
 
 ### 4. Programación
 
-1. **Conectar dispositivos**: Conecte el IDE de MicroBlocks al robot CoCube a través de medios cableados o inalámbricos. Y extienda la servopinza al robot CoCube.
+1. **Conectar dispositivos**: Conecta el IDE de MicroBlocks al robot CoCube por cable o de forma inalámbrica, y monta la pinza en el robot CoCube.
 
-2. **Cargar bloques de complementos**: haga clic en el orden que se muestra para cargar la biblioteca de complementos de CoCube.
+2. **Cargar la biblioteca del módulo externo**: Haz clic en el orden que se muestra para cargar la biblioteca "Módulo CoCube".
 
 ![](image-2.png =200x*)
 
@@ -24,9 +24,9 @@ El robot CoCube se puede utilizar junto con módulos externos para implementar f
 
 ![](image-4.png =200x*)
 
-* **Encuentre el bloque de agarre**: Haga clic en la tarjeta "Módulo CoCube" en la biblioteca de bloques de la izquierda y arrastre los tres bloques de "Mordaza abierta", "Mordaza cerrada" y "Ángulo de mordaza" al espacio de trabajo derecho.
+* **Encuentra los bloques de la pinza**: Haz clic en la tarjeta "Módulo CoCube" de la biblioteca de bloques de la izquierda y arrastra los bloques "abre la pinza", "cierra la pinza" y "pon la pinza a _ (0 a 70) grados" al espacio de trabajo.
 
-* **Ejecute el bloque de agarre**: Haga clic con el botón izquierdo en el bloque "Mandíbula abierta" o "Mandíbula cerrada", cuando se ilumine un halo verde alrededor del bloque, significa que el programa se ha ejecutado con éxito y puede ver la mandíbula abriéndose y cerrándose. Rellene el número de ángulo (0 a 70) en el módulo "Ángulo de la mordaza" y la mordaza se girará al ángulo correspondiente.
+* **Ejecuta los bloques de la pinza**: Haz clic en "abre la pinza" o "cierra la pinza". Cuando aparezca un halo verde alrededor del bloque, el programa se habrá ejecutado y podrás ver cómo la pinza se abre o se cierra. Escribe un ángulo de 0 a 70 en "pon la pinza a _ (0 a 70) grados" para moverla a ese ángulo.
 
 ![](scriptImage257997.png)
 
