@@ -1,0 +1,74 @@
+name: Deploy static site to Azure Front Door
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: azure-frontdoor-static-site
+  cancel-in-progress: true
+
+env:
+  AZURE_CLIENT_ID: b873e76c-d7f4-4db1-9bac-256a53a9b779
+  AZURE_TENANT_ID: 8c199f61-e1ee-4bd9-89d9-28ef099c90f1
+  AZURE_SUBSCRIPTION_ID: 113d08a0-d7bf-47e1-92f7-b333cafb1112
+  AZURE_RESOURCE_GROUP: rg-cocube-learn-static
+  AZURE_STORAGE_ACCOUNT: cocubelearn9fafad
+  AZURE_FRONTDOOR_PROFILE: afd-cocube-learn
+  AZURE_FRONTDOOR_ENDPOINT: cocube-learn-9fafad
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "16"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test build utilities
+        run: node tests/build-utils.test.js
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Sync dist to Azure Storage static website
+        run: |
+          az storage blob sync \
+            --account-name "$AZURE_STORAGE_ACCOUNT" \
+            --container '$web' \
+            --source dist \
+            --auth-mode login \
+            --delete-destination true \
+            --only-show-errors
+
+      - name: Purge Azure Front Door cache
+        run: |
+          az afd endpoint purge \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --profile-name "$AZURE_FRONTDOOR_PROFILE" \
+            --endpoint-name "$AZURE_FRONTDOOR_ENDPOINT" \
+            --content-paths '/*' \
+            --no-wait true \
+            --only-show-errors
