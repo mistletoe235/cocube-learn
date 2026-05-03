@@ -70,4 +70,4 @@ jobs:
             --endpoint-name "$AZURE_FRONTDOOR_ENDPOINT" \
             --content-paths '/*' \
             --no-wait true \
-            --only-show-errors
+            --only-show-errors || echo "Azure Front Door cache purge failed; static files were already synced."
