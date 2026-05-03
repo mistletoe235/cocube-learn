@@ -17,7 +17,7 @@ Use the AI vision module—"Sengo1 AI Camera" or "Sengo2 AI Camera". As shown, t
 
 ### 3. Software Platform
 
-[MicroBlocks-CoCube](https://cocube.fun/#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
+[MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27)
 
 ### 4. Basic Knowledge
 

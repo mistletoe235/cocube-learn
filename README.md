@@ -4,6 +4,8 @@
 
 We welcome high-quality activity submissions from the MicroBlocks community.
 See [submitting activities](SUBMITTING_ACTIVITIES.md) for more information.
+For CoCube translation work, see
+[localizing CoCube activities](LOCALIZING_ACTIVITIES.md).
 
 The rest of this README is for developers who want build, test, debug, or extend the website.
 
@@ -100,4 +102,3 @@ This can be used in a subexpression for, for example, localization:
 ```
 {{localize (join "nav_" item)}}
 ```
-
