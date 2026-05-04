@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting to wiki.cocube.fun</title>
+    <title>Redirecting</title>
     <script>
         // 获取浏览器语言
         var userLang = navigator.language || navigator.userLanguage;
@@ -11,23 +11,27 @@
         var targetUrl;
         if (userLang.indexOf('zh') !== -1) {
             // 中文用户
-            targetUrl = 'https://wiki.cocube.fun/cn';
+            targetUrl = '/cn/';
+        } else if (userLang.indexOf('es') === 0) {
+            // Spanish users
+            targetUrl = '/es/';
         } else {
             // 默认英文
-            targetUrl = 'https://wiki.cocube.fun/en';
+            targetUrl = '/en/';
         }
         
         // 执行重定向
         window.location.href = targetUrl;
     </script>
-    <meta http-equiv="refresh" content="1; URL='https://wiki.cocube.fun/en'" />
+    <meta http-equiv="refresh" content="1; URL='/en/'" />
 </head>
 <body>
-    <p>Redirecting to wiki.cocube.fun. If you are not redirected automatically, please choose your language:</p>
-    <p>正在跳转到 wiki.cocube.fun，如果没有自动跳转，请选择您的语言：</p>
+    <p>Redirecting. If you are not redirected automatically, please choose your language:</p>
+    <p>正在跳转，如果没有自动跳转，请选择您的语言：</p>
     <ul>
-        <li><a href="https://wiki.cocube.fun/en">English</a></li>
-        <li><a href="https://wiki.cocube.fun/cn">中文</a></li>
+        <li><a href="/en/">English</a></li>
+        <li><a href="/cn/">中文</a></li>
+        <li><a href="/es/">Español</a></li>
     </ul>
 </body>
 </html>
