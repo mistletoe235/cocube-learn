@@ -685,6 +685,28 @@ function copyAssetFile(sourcePath, destinationPath) {
     );
 };
 
+function writeActivityLegacyRedirect(descriptor, langCode) {
+    var destinationDir = `${__dirname}/dist/${langCode}/${descriptor.slug}`,
+        targetPath = `/${langCode}/activities/${descriptor.slug}/`;
+
+    fse.ensureDirSync(destinationDir);
+    fs.writeFileSync(
+        `${destinationDir}/index.html`,
+        `<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting</title>
+    <script>window.location.replace('${targetPath}');</script>
+    <meta http-equiv="refresh" content="0; URL='${targetPath}'" />
+</head>
+<body>
+    <p>Redirecting to <a href="${targetPath}">${targetPath}</a>.</p>
+</body>
+</html>
+`
+    );
+};
+
 function buildActivity (descriptor, langCode, activityPath) {
     // Build one activity page per content language.
 
@@ -708,6 +730,7 @@ function buildActivity (descriptor, langCode, activityPath) {
         langCode,
         `activities/${descriptor.slug}`
     );
+    writeActivityLegacyRedirect(descriptor, langCode);
 
     copyActivityAssets(
         `${__dirname}/dist/${langCode}/activities/${descriptor.slug}`,
