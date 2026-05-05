@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>高级 BMP 转换工具</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 500px; }
+        h2 { margin-top: 0; color: #333; font-size: 1.5rem; text-align: center; }
+        .group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #666; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .row { display: flex; gap: 10px; }
+        .upload-box { border: 2px dashed #007bff; padding: 20px; text-align: center; cursor: pointer; border-radius: 8px; transition: 0.3s; margin: 20px 0; background: #f8fbff; }
+        .upload-box:hover { background: #eef6ff; }
+        #preview { width: 100%; border-radius: 4px; display: none; margin-bottom: 15px; border: 1px solid #eee; }
+        button { background: #007bff; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .info { font-size: 0.8rem; color: #999; margin-top: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🖼️ BMP 格式转换器</h2>
+
+    <div class="group">
+        <label>目标尺寸 (宽 x 高)</label>
+        <div class="row">
+            <input type="number" id="width" value="240" placeholder="宽">
+            <input type="number" id="height" value="240" placeholder="高">
+        </div>
+    </div>
+
+    <div class="group">
+        <label>导出位深 (Bit Depth)</label>
+        <select id="bitDepth">
+            <option value="24">24-Bit (真彩色)</option>
+            <option value="8">8-Bit (索引颜色/需减色)</option>
+        </select>
+    </div>
+
+    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+        <span id="uploadText">点击上传 PNG/JPG 图片</span>
+        <input type="file" id="fileInput" accept="image/*" style="display:none">
+    </div>
+
+    <img id="preview">
+
+    <button id="convertBtn" disabled>开始转换并下载</button>
+    <p class="info">注：8-Bit 模式下输出文件名将自动保持一致</p>
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const convertBtn = document.getElementById('convertBtn');
+    const preview = document.getElementById('preview');
+    let sourceImg = new Image();
+    let originalFileName = "output"; // 用于存储原始文件名
+
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // 获取不带后缀的文件名
+        originalFileName = file.name.split('.').slice(0, -1).join('.');
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            sourceImg.onload = () => {
+                preview.src = ev.target.result;
+                preview.style.display = 'block';
+                convertBtn.disabled = false;
+                document.getElementById('uploadText').innerText = file.name;
+            };
+            sourceImg.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
+    convertBtn.onclick = () => {
+        const w = parseInt(document.getElementById('width').value);
+        const h = parseInt(document.getElementById('height').value);
+        const depth = parseInt(document.getElementById('bitDepth').value);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(sourceImg, 0, 0, w, h);
+
+        const imgData = ctx.getImageData(0, 0, w, h);
+        let blob;
+
+        if (depth === 8) {
+            blob = create8BitBmp(imgData, w, h);
+        } else {
+            blob = create24BitBmp(imgData, w, h);
+        }
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+
+        // 修改点：使用原始文件名作为导出名
+        a.download = `${originalFileName}.bmp`;
+
+        a.click();
+        URL.revokeObjectURL(url); // 释放内存
+    };
+
+    function create24BitBmp(imgData, width, height) {
+        const padding = (4 - (width * 3) % 4) % 4;
+        const fileSize = 54 + (width * 3 + padding) * height;
+        const ab = new ArrayBuffer(fileSize);
+        const view = new DataView(ab);
+        writeHeader(view, fileSize, 54, width, height, 24);
+        let offset = 54;
+        for (let y = height - 1; y >= 0; y--) {
+            for (let x = 0; x < width; x++) {
+                const i = (y * width + x) * 4;
+                view.setUint8(offset++, imgData.data[i + 2]); // B
+                view.setUint8(offset++, imgData.data[i + 1]); // G
+                view.setUint8(offset++, imgData.data[i]);     // R
+            }
+            for (let p = 0; p < padding; p++) view.setUint8(offset++, 0);
+        }
+        return new Blob([ab], {type: "image/bmp"});
+    }
+
+    function create8BitBmp(imgData, width, height) {
+        const palette = [];
+        for (let r = 0; r < 6; r++)
+            for (let g = 0; g < 6; g++)
+                for (let b = 0; b < 6; b++)
+                    palette.push([r*51, g*51, b*51]);
+        while(palette.length < 256) palette.push([0,0,0]);
+
+        const padding = (4 - width % 4) % 4;
+        const paletteSize = 256 * 4;
+        const fileSize = 54 + paletteSize + (width + padding) * height;
+        const ab = new ArrayBuffer(fileSize);
+        const view = new DataView(ab);
+        writeHeader(view, fileSize, 54 + paletteSize, width, height, 8);
+        let pOffset = 54;
+        palette.forEach(c => {
+            view.setUint8(pOffset++, c[2]);
+            view.setUint8(pOffset++, c[1]);
+            view.setUint8(pOffset++, c[0]);
+            view.setUint8(pOffset++, 0);
+        });
+        let offset = 54 + paletteSize;
+        for (let y = height - 1; y >= 0; y--) {
+            for (let x = 0; x < width; x++) {
+                const i = (y * width + x) * 4;
+                const r = imgData.data[i], g = imgData.data[i+1], b = imgData.data[i+2];
+                const idx = Math.floor(r/51)*36 + Math.floor(g/51)*6 + Math.floor(b/51);
+                view.setUint8(offset++, idx);
+            }
+            for (let p = 0; p < padding; p++) view.setUint8(offset++, 0);
+        }
+        return new Blob([ab], {type: "image/bmp"});
+    }
+
+    function writeHeader(view, fileSize, offset, w, h, bit) {
+        view.setUint16(0, 0x424D, false);
+        view.setUint32(2, fileSize, true);
+        view.setUint32(10, offset, true);
+        view.setUint32(14, 40, true);
+        view.setInt32(18, w, true);
+        view.setInt32(22, h, true);
+        view.setUint16(26, 1, true);
+        view.setUint16(28, bit, true);
+        view.setUint32(34, 0, true);
+    }
+</script>
+
+</body>
+</html>

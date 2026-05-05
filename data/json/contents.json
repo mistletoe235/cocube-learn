@@ -49,6 +49,16 @@
       "cn": "09 微信小程序控制",
       "en": "09 WeChat Mini Program Control",
       "es": "09 Control de applets de WeChat"
+    },
+    "cocube_basic_10_bmp_image": {
+      "cn": "10 显示 BMP 图片",
+      "en": "10 Displaying BMP Images",
+      "es": "10 Mostrar imágenes BMP"
+    },
+    "cocube_basic_11_turtle_drawing": {
+      "cn": "11 海龟绘图",
+      "en": "11 Turtle Drawing",
+      "es": "11 Dibujo con tortuga"
     }
   },
   "external": {
@@ -81,6 +91,11 @@
       "cn": "06 用地图演奏 MIDI 音乐",
       "en": "06 Playing MIDI Music with a Map",
       "es": "06 Tocar música MIDI con un mapa"
+    },
+    "cocube_external_07_line_tracker": {
+      "cn": "07 5 路寻迹模块",
+      "en": "07 5-Channel Line Tracking Module",
+      "es": "07 Módulo de seguimiento de línea de 5 canales"
     }
   },
   "sentry2": {

@@ -923,6 +923,9 @@ function serve () {
                 woff: 'font/woff',
                 pdf: 'application/pdf',
                 zip: 'application/zip',
+                bmp: 'image/bmp',
+                mp4: 'video/mp4',
+                ubp: 'application/octet-stream',
             }[extension];
         if (!mimeType) { mimeType = 'text/html'; }
         return mimeType;
