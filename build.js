@@ -608,7 +608,7 @@ function collectScriptPNGPaths(fileName, activitySlug, langCode, activityPath) {
 function pngHasScript(filePath) {
 	// Return true if the given PNG file includes a script.
 
-    if (!filePath.endsWith('.png')) return 0;
+    if (path.extname(filePath).toLowerCase() !== '.png') return 0;
 
     // read the PNG file
     var data;

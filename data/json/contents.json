@@ -59,6 +59,21 @@
       "cn": "11 海龟绘图",
       "en": "11 Turtle Drawing",
       "es": "11 Dibujo con tortuga"
+    },
+    "cocube_basic_12_path_replay": {
+      "cn": "12 路径复现",
+      "en": "12 Path Replay",
+      "es": "12 Repetición de ruta"
+    },
+    "cocube_basic_13_fractal_patterns": {
+      "cn": "13 分形图案",
+      "en": "13 Fractal Patterns",
+      "es": "13 Patrones fractales"
+    },
+    "cocube_basic_14_jumpy_ball_game": {
+      "cn": "14 Jumpy Ball",
+      "en": "14 Jumpy Ball",
+      "es": "14 Jumpy Ball"
     }
   },
   "external": {

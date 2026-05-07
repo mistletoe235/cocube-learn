@@ -92,11 +92,13 @@
                         <span class="contents_toggle">Basic <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.basic}}
+                            {{#if (lan_json_key this ../locale.code)}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
                                     </a>
                                 </li>
+                            {{/if}}
                             {{/each}}
                         </ul>
                     </li>
@@ -104,11 +106,13 @@
                         <span class="contents_toggle">CoModules <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.external}}
+                            {{#if (lan_json_key this ../locale.code)}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
                                     </a>
                                 </li>
+                            {{/if}}
                             {{/each}}
                         </ul>
                     </li>
@@ -116,11 +120,13 @@
                         <span class="contents_toggle">AI Camera <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.sentry2}}
+                            {{#if (lan_json_key this ../locale.code)}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
                                     </a>
                                 </li>
+                            {{/if}}
                             {{/each}}
                         </ul>
                     </li>
@@ -128,11 +134,13 @@
                         <span class="contents_toggle">Snap! <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.snap}}
+                            {{#if (lan_json_key this ../locale.code)}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
                                         {{lan_json_key this ../locale.code}}
                                     </a>
                                 </li>
+                            {{/if}}
                             {{/each}}
                         </ul>
                     </li>
