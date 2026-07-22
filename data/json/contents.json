@@ -74,6 +74,21 @@
       "cn": "14 Jumpy Ball",
       "en": "14 Jumpy Ball",
       "es": "14 Jumpy Ball"
+    },
+    "cocube_basic_15_code_snapshot": {
+      "cn": "15 代码快照",
+      "en": "15 Code Snapshot",
+      "es": "15 Instantáneas de código"
+    },
+    "cocube_basic_16_trigonometric_functions": {
+      "cn": "16 三角函数绘图",
+      "en": "16 Trigonometric Functions",
+      "es": "16 Funciones trigonométricas"
+    },
+    "cocube_basic_17_advanced_program_calls": {
+      "cn": "17 高级程序调用",
+      "en": "17 Advanced Program Calls",
+      "es": "17 Llamadas avanzadas de programa"
     }
   },
   "external": {
@@ -145,6 +160,16 @@
       "cn": "02 集群控制案例",
       "en": "02 Multi-robot Control Example",
       "es": "02 Ejemplo de control de robots en grupo"
+    },
+    "cocube_snap_03_espnow_fireflies": {
+      "cn": "03 ESP-NOW 萤火虫同步闪烁",
+      "en": "03 ESP-NOW Fireflies",
+      "es": "03 Luciérnagas con ESP-NOW"
+    },
+    "cocube_snap_04_follow_the_car_ahead": {
+      "cn": "04 跟上前面的车",
+      "en": "04 Follow the Car Ahead",
+      "es": "04 Seguir al coche de delante"
     }
   }
 }
