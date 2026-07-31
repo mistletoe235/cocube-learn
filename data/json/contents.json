@@ -89,6 +89,24 @@
       "cn": "17 高级程序调用",
       "en": "17 Advanced Program Calls",
       "es": "17 Llamadas avanzadas de programa"
+    },
+    "cocube_basic_18_morse_code": {
+      "cn": "18 摩尔斯电码",
+      "en": "18 Morse Code",
+      "es": "18 Código Morse"
+    },
+    "cocube_basic_19_buzzer_music_map": {
+      "cn": "19 用地图演奏蜂鸣器音乐",
+      "en": "19 Play Buzzer Music on the Map",
+      "es": "19 Tocar música con el zumbador sobre el mapa"
+    },
+    "cocube_basic_20_record_replay_music": {
+      "cn": "20 记录并回放音乐",
+      "en": "20 Record and Replay Music",
+      "es": "20 Grabar y reproducir música"
+    },
+    "cocube_basic_21_mqtt_communication": {
+      "cn": "21 MQTT 通信"
     }
   },
   "external": {

@@ -55,6 +55,19 @@
   }
 
 
+  // Tertiary headings
+  h5 {
+    margin-top: $space-200;
+    margin-bottom: $space-100;
+
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: $fontSize-125;
+    line-height: $lineHeight-120;
+    color: $color-black;
+  }
+
+
   // Paragraph
   p {
     margin-bottom: $space-150;
@@ -201,6 +214,11 @@
 
 
   // Code
+  pre,
+  pre code {
+    font-family: $font-regular;
+  }
+
   p code {
     display: inline;
     padding-right: $space-025;
