@@ -274,6 +274,6 @@ CoCube 收到消息后，通过条件判断执行对应的运动积木，就能�
 
 [下载 `CoCube_MQTT_01.ubp`](CoCube_MQTT_01.ubp)
 
-[下载 `mqttfx-1.7.1-windows-x64.exe`](mqttfx-1.7.1-windows-x64.exe)
+[下载 `mqttfx-1.7.1-windows-x64.exe`](https://github.com/mistletoe235/cocube-learn/raw/a3a51f48b37f0122862b0771e8f5d90d7ac2b03a/data/activities/cocube_basic_21_mqtt_communication/files/mqttfx-1.7.1-windows-x64.exe)
 
 > 此 UBP 工程仅供完成教程后对照程序结构、检查积木参数或排查问题。建议先根据教程自行搭建程序，再使用参考工程进行比较。
