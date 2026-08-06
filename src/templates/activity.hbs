@@ -321,6 +321,13 @@
         var sidebarToggle = document.querySelector('.sidebar-toggle');
         var sidebar = document.getElementById('sidebar');
         var sidebarClose = document.querySelector('.sidebar-close');
+        var currentActivity = sidebar && sidebar.querySelector('.blue-background');
+
+        // Keep long activity lists positioned around the current lesson.
+        if (currentActivity) {
+            sidebar.scrollTop = currentActivity.offsetTop -
+                ((sidebar.clientHeight - currentActivity.offsetHeight) / 2);
+        }
         
         if (sidebarToggle) {
             sidebarToggle.addEventListener('click', function(e) {
