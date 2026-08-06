@@ -219,6 +219,11 @@
     font-family: $font-regular;
   }
 
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   p code {
     display: inline;
     padding-right: $space-025;
@@ -282,6 +287,9 @@
   // ========================================
 
   table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
     margin-bottom: $space-150;
     border-collapse: collapse;
   }

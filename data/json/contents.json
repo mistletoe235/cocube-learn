@@ -107,6 +107,10 @@
     },
     "cocube_basic_21_mqtt_communication": {
       "cn": "21 MQTT 通信"
+    },
+    "cocube_basic_22_mqtt_function_control": {
+      "cn": "22 MQTT 函数与参数控制",
+      "en": "22 MQTT Function and Parameter Control"
     }
   },
   "external": {
