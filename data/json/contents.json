@@ -109,11 +109,13 @@
   "iot": {
     "cocube_basic_21_mqtt_communication": {
       "cn": "01 MQTT 通信",
-      "en": "01 MQTT Communication"
+      "en": "01 MQTT Communication",
+      "es": "01 Comunicación MQTT"
     },
     "cocube_basic_22_mqtt_function_control": {
       "cn": "02 MQTT 函数与参数控制",
-      "en": "02 MQTT Function and Parameter Control"
+      "en": "02 MQTT Function and Parameter Control",
+      "es": "02 Control MQTT con funciones y parámetros"
     },
     "cocube_snap_03_espnow_fireflies": {
       "cn": "03 ESP-NOW 萤火虫同步闪烁",
