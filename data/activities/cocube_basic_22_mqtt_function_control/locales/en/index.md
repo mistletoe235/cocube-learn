@@ -72,12 +72,7 @@ In MQTTX, click **New Subscription** and add `cocube_mqtt_send` and `cocube_mqtt
 
 <p align="center"><img src="create_new_topic.png" alt="Add the sending and receiving topics in MQTTX" width="300"></p>
 
-The screenshot also contains `cocube_mqtt`, which was used in the previous lesson. This lesson uses these two new topics:
-
-```text
-cocube_mqtt_send
-cocube_mqtt_receive
-```
+The screenshot also contains **cocube\_mqtt**, which was used in the previous lesson. This lesson uses the two new topics **cocube\_mqtt\_send** and **cocube\_mqtt\_receive**.
 
 MQTT topics do not need to be created in a broker dashboard. A topic becomes usable when a client first subscribes to it or publishes to it. In this lesson, “create two topics” means adding the subscriptions in MQTTX and then using exactly the same topic names in the program.
 

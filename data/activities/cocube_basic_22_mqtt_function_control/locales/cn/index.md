@@ -72,12 +72,7 @@ CoCube move for msecs,cocube;forward,40,1000
 
 <p align="center"><img src="create_new_topic.png" alt="在 MQTTX 中添加发送和接收 Topic" width="300"></p>
 
-截图中还保留了上一课使用的 `cocube_mqtt`。本课实际使用的是下面两个新 Topic：
-
-```text
-cocube_mqtt_send
-cocube_mqtt_receive
-```
+截图中还保留了上一课使用的“cocube\_mqtt”。本课实际使用的是“cocube\_mqtt\_send”和“cocube\_mqtt\_receive”两个新 Topic。
 
 在 MQTT 中，Topic 并不需要在服务器后台预先建立。第一次订阅或发布某个 Topic 时，它就可以用于消息传递。这里所说的“新建两个 Topic”，实际是指在 MQTTX 中添加相应的订阅，并在后面的程序中使用同样的名称。
 
