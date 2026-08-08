@@ -106,7 +106,8 @@
       "es": "20 Grabar y reproducir música"
     },
     "cocube_basic_21_mqtt_communication": {
-      "cn": "21 MQTT 通信"
+      "cn": "21 MQTT 通信",
+      "en": "21 MQTT Communication"
     },
     "cocube_basic_22_mqtt_function_control": {
       "cn": "22 MQTT 函数与参数控制",

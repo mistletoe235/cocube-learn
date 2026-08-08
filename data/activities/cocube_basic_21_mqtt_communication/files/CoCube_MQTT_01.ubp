@@ -4,19 +4,19 @@ version 1 0
 description ''
 variables MESSAGE TOPIC STORAGE NAME LIST 
 
-script 49 49 {
+script 40 40 {
 '[tft:clear]'
 wifiConnect '' ''
-'MQTT connect to' 'e2dd8bbc.ala.dedicated.aliyun.emqxcloud.cn' 128 ('[net:myMAC]') '' ''
+'MQTT connect to' 'broker.emqx.io'
 if ('MQTT connected') {
   '[tft:text]' 'MQTT Server Connected.' 5 5 (colorSwatch 255 255 255 255)
-  'MQTT sub' 'cocube_user_sub'
+  'MQTT sub' 'cocube_mqtt'
   sendBroadcast 'start_sending_message'
   sendBroadcast 'start_receiving_message'
 }
 }
 
-script 558 53 {
+script 586 63 {
 whenBroadcastReceived 'start_receiving_message'
 forever {
   MESSAGE = ('MQTT event payload' ('[net:MQTTLastEvent]'))
@@ -28,10 +28,10 @@ forever {
 }
 }
 
-script 558 394 {
+script 586 404 {
 whenBroadcastReceived 'start_sending_message'
 forever {
-  'MQTT pub' 'cocube_user_pub' ('CoCube battery percentage')
+  'MQTT pub' 'cocube_mqtt' ('CoCube battery percentage')
   waitMicros 1000000
 }
 }
@@ -1196,4 +1196,3 @@ to wifiCreateHotspot ssid password {
   '[net:setDomainName]' 'microblocks'
   sayIt 'My IP address is:' ('[net:myIPAddress]')
 }
-

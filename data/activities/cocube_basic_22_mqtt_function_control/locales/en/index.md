@@ -1,4 +1,4 @@
-In the previous lesson, you completed basic MQTT messaging between CoCube and MQTTX. This lesson builds a more general remote-control system:
+In the previous lesson, [MQTT Communication](../cocube_basic_21_mqtt_communication-en/), you completed basic MQTT messaging between CoCube and MQTTX. This lesson builds a more general remote-control system:
 
 - CoCube reports its position and direction to MQTTX;
 - MQTTX sends a function name and parameters to CoCube;

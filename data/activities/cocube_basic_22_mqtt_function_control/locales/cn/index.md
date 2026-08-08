@@ -10,7 +10,7 @@
 CoCube move for msecs,cocube;forward,40,1000
 ```
 
-它表示：调用 `CoCube move for msecs` 函数，以速度 `40` 向前移动 `1000` 毫秒。
+它表示：调用“CoCube move for msecs”函数，以速度 40 向前移动 1000 毫秒。
 
 ### 1. 为什么本课使用 MQTT，而不是直接使用蓝牙
 
