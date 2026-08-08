@@ -104,14 +104,26 @@
       "cn": "20 记录并回放音乐",
       "en": "20 Record and Replay Music",
       "es": "20 Grabar y reproducir música"
-    },
+    }
+  },
+  "iot": {
     "cocube_basic_21_mqtt_communication": {
-      "cn": "21 MQTT 通信",
-      "en": "21 MQTT Communication"
+      "cn": "01 MQTT 通信",
+      "en": "01 MQTT Communication"
     },
     "cocube_basic_22_mqtt_function_control": {
-      "cn": "22 MQTT 函数与参数控制",
-      "en": "22 MQTT Function and Parameter Control"
+      "cn": "02 MQTT 函数与参数控制",
+      "en": "02 MQTT Function and Parameter Control"
+    },
+    "cocube_snap_03_espnow_fireflies": {
+      "cn": "03 ESP-NOW 萤火虫同步闪烁",
+      "en": "03 ESP-NOW Fireflies",
+      "es": "03 Luciérnagas con ESP-NOW"
+    },
+    "cocube_snap_04_follow_the_car_ahead": {
+      "cn": "04 ESP-NOW 跟上前面的车",
+      "en": "04 ESP-NOW Follow the Car Ahead",
+      "es": "04 Seguir al coche de delante con ESP-NOW"
     }
   },
   "external": {
@@ -183,16 +195,6 @@
       "cn": "02 集群控制案例",
       "en": "02 Multi-robot Control Example",
       "es": "02 Ejemplo de control de robots en grupo"
-    },
-    "cocube_snap_03_espnow_fireflies": {
-      "cn": "03 ESP-NOW 萤火虫同步闪烁",
-      "en": "03 ESP-NOW Fireflies",
-      "es": "03 Luciérnagas con ESP-NOW"
-    },
-    "cocube_snap_04_follow_the_car_ahead": {
-      "cn": "04 跟上前面的车",
-      "en": "04 Follow the Car Ahead",
-      "es": "04 Seguir al coche de delante"
     }
   }
 }
