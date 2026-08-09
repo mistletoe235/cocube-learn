@@ -1,4 +1,3 @@
 # locale	fileName	source	translation
-es	comment.png	How this works...	Así funciona...
-es	one_to_one.png	MQTT Server Connected. Receive Message:	Servidor MQTT conectado. Mensaje recibido:
-es	storage.png	MQTT Server Connected. Receive Message:	Servidor MQTT conectado. Mensaje recibido:
+en	code_connect.png	网络名称	Network_Name
+es	code_connect.png	网络名称	Nombre_de_red

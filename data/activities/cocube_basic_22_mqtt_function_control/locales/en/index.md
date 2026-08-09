@@ -1,464 +1,149 @@
-In the previous lesson, [MQTT Communication](../cocube_basic_21_mqtt_communication-en/), you completed basic MQTT messaging between CoCube and MQTTX. This lesson builds a more general remote-control system:
+In the previous section, we already had CoCube and MQTTX send messages to each other. This time, instead of just displaying the message on the screen, we have CoCube perform actions based on the message it receives.
 
-- CoCube reports its position and direction to MQTTX;
-- MQTTX sends a function name and parameters to CoCube;
-- CoCube splits the message and calls the corresponding block function.
+This tutorial contains two experiments:
 
-This lesson uses control messages such as:
+1. Send `forward`, `backward`, `left`, `right` to control CoCube movement.
+2. Send the function name and parameters to call the existing blocks in CoCube.
+
+If you have not completed the MQTT connection experiment, read [Getting Started with CoCube MQTT](../cocube_basic_21_mqtt_communication-en/) first. For a detailed explanation of function calls, see [Advanced Program Calls](../cocube_basic_17_advanced_program_calls-en/).
+
+### 1. Connect MQTT
+
+This project reuses the connection program from the previous lesson. Enter the Wi-Fi name and password, then press buttons A and B on CoCube at the same time.
+
+<p align="center"><img src="code_connect.png" alt="Connect to Wi-Fi and the MQTT server" width="680"></p>
+
+When CoCube displays a smiley face, it means it is connected to the MQTT server.
+
+The following block libraries are also required in the program:
+
+- `MQTT`
+- `CoCube`
+- `Function Calls`
+
+You can find the **Function Calls** block library under **Add Library** → **Other** → **Function Calls**.
+
+### 2. Control CoCube with simple messages
+
+Let’s start with the most intuitive method: let each message correspond to an action.
+
+<p align="center"><img src="code_simple_control.png" alt="Control CoCube with MQTT messages" width="780"></p>
+
+After pressing the A key, CoCube will subscribe to:
 
 ```text
-CoCube move for msecs,cocube;forward,40,1000
+cocube/control
 ```
 
-This message means: call `CoCube move for msecs`, move forward at speed `40`, and continue for `1000` milliseconds.
+After receiving a message, the program reads the **MQTT event payload**, then uses **if / else if** to determine which action to perform:
 
-### 1. Why use MQTT instead of a direct Bluetooth connection?
-
-Direct Bluetooth is suitable when one nearby controller connects directly to one robot. MQTT uses a broker to separate the controller from the robot. They do not need a direct connection: both sides only need to connect to the same broker and use the agreed topics.
-
-| Comparison | MQTT | Direct Bluetooth/BLE |
-| --- | --- | --- |
-| Communication range | Can work across rooms, a campus, or the Internet when both sides can reach the broker | Normally requires the controller to remain near the robot |
-| Connection model | Supports one-to-many, many-to-one, and many-to-many communication | Commonly used as a direct one-to-one connection |
-| Multiple observers | MQTTX, web apps, and servers can subscribe at the same time | Usually only the currently connected Bluetooth client receives the data directly |
-| Multiple robots | Assign a different topic to each robot | Devices must be discovered, connected, and managed separately |
-| Cloud integration | Easy to connect to databases, dashboards, and automation services | Usually requires an additional Bluetooth gateway |
-| Network requirement | Requires Wi-Fi and an available broker | Does not require the Internet for nearby operation |
-| Power consumption | Wi-Fi normally consumes more power than BLE | BLE is designed for low-power, short-range communication |
-| Latency | Affected by the network and broker | A nearby direct connection is often more consistent |
-
-The main advantage of MQTT is not that it is always faster than Bluetooth. Its advantages are:
-
-- The controller and robot are decoupled and do not need direct pairing;
-- Remote control and monitoring are possible;
-- Several clients can participate at the same time;
-- The project can grow into a multi-robot or broader IoT system.
-
-Bluetooth may still be the better option for nearby, single-robot control when low power, low latency, and offline operation are priorities. This lesson uses MQTT because it is better suited to remote, multi-client, and multi-device architectures.
-
-### 2. Step 1: Create the MQTT connection and two topics
-
-#### 2.1 Create an EMQX broker connection
-
-As in the previous lesson, create a new connection in MQTTX. Here, “create a server” means creating a broker connection profile in MQTTX; it does not mean deploying your own server.
-
-Use these settings:
-
-| Setting | Value |
+| Messages received | CoCube actions |
 | --- | --- |
-| Name | `mqtt_test` |
-| Host | `broker.emqx.io` |
-| Protocol | `mqtt://` |
-| Port | `1883` |
-| Client ID | Use the unique value automatically generated by MQTTX |
-| Username | Leave blank |
-| Password | Leave blank |
-| SSL/TLS | Off |
+| `forward` | Move forward |
+| `backward` | Move backward |
+| `left` | Rotate left |
+| `right` | Rotate right |
 
-Save the profile and click **Connect**. A green indicator beside the connection name means that MQTTX is connected to the public EMQX broker.
+In MQTTX, set the topic to `cocube/control`, send these four messages in sequence, and observe the actions of CoCube.
 
-> `broker.emqx.io` is a public test broker. Do not send passwords, personal information, or other sensitive data, and do not use the public broker for production projects.
+This approach is simple and intuitive, but each new command requires another condition. The program becomes longer as more blocks are made available for remote control.
 
-#### 2.2 Create two topics
+### 3. Use a message to describe the function call
 
-Instead of using one topic for both directions, this lesson uses two topics with clearly defined directions:
+We can put the functions and parameters to be executed into the MQTT message in the format:
 
-| Topic | Direction | Purpose |
-| --- | --- | --- |
-| `cocube_mqtt_send` | CoCube → MQTTX | CoCube publishes its X position, Y position, and direction |
-| `cocube_mqtt_receive` | MQTTX → CoCube | MQTTX publishes control messages to CoCube |
+```text
+call,function_name,parameter1,parameter2...
+```
 
-In MQTTX, click **New Subscription** and add `cocube_mqtt_send` and `cocube_mqtt_receive`. Use QoS `0` for both.
+For example, the following message means: Move the CoCube forward at a speed of `40` for `1000` milliseconds.
 
-<p align="center"><img src="create_new_topic.png" alt="Add the sending and receiving topics in MQTTX" width="300"></p>
+```text
+call,CoCube move for msecs,cocube;forward,40,1000
+```
 
-The screenshot also contains **cocube\_mqtt**, which was used in the previous lesson. This lesson uses the two new topics **cocube\_mqtt\_send** and **cocube\_mqtt\_receive**.
+Separate each part of the message with commas:
 
-MQTT topics do not need to be created in a broker dashboard. A topic becomes usable when a client first subscribes to it or publishes to it. In this lesson, “create two topics” means adding the subscriptions in MQTTX and then using exactly the same topic names in the program.
+| Content | Meaning |
+| --- | --- |
+| `call` | Indicates that this is a function call message |
+| `CoCube move for msecs` | Function name |
+| `cocube;forward` | Direction parameters |
+| `40` | Speed ​​parameter |
+| `1000` | Time parameter in milliseconds |
 
-#### 2.3 Connect CoCube to the broker
+### 4. Parse and call functions
 
-In MicroBlocks, connect to Wi-Fi first and then connect to `broker.emqx.io`.
+Replace the fixed-command program in the previous section with the following general program:
 
-<p align="center"><img src="connect.png" alt="Connect CoCube to Wi-Fi and the MQTT broker" width="760"></p>
+<p align="center"><img src="code_function_call.png" alt="Parse an MQTT message and call a function" width="780"></p>
 
-After the connection succeeds, CoCube must:
+After the program receives the MQTT message, it will be processed in the following order:
 
-1. Subscribe to `cocube_mqtt_receive`;
-2. Start the message-receiving script;
-3. Start the position-reporting script.
+1. Read the message payload and save it to `msg`.
+2. Check whether the first four characters of the message are `call`.
+3. Separate the message with commas.
+4. Use the second item as the function name `cmd_name`.
+5. Take out item 3 and the following contents as parameter list `cmd_args`.
+6. Use the **call** block to execute the function.
 
-The two directions must be configured correctly: CoCube publishes to `cocube_mqtt_send`, but subscribes to `cocube_mqtt_receive`.
+This removes the need to write a separate condition for every action. As long as the message contains the correct function name and parameters, the same program can perform different tasks.
 
-### 3. Step 2: Import Function Calls and inspect function definitions
+> `Code_2.png` and `Code_3.png` are two different stages of receiving procedures. After completing Section 2, replace it with the program from Section 4. Do not run both versions at the same time.
 
-#### 3.1 Import the Function Calls library
+### 5. Test in MQTTX
 
-Dynamic function calls require the **Function Calls** library:
+Keep the topic in MQTTX as:
 
-1. Open the MicroBlocks library window;
-2. Select the **Other** category.
+```text
+cocube/control
+```
 
-<p align="center"><img src="add1.png" alt="Select Other in the MicroBlocks library window" width="330"></p>
+Turn **Retain** off, then send:
 
-3. Select **Function Calls**;
-4. Click **Open** to import it.
+```text
+call,CoCube move for msecs,cocube;forward,40,1000
+call,CoCube move for msecs,cocube;backward,40,1000
+call,CoCube rotate for msecs,cocube;left,30,1000
+call,CoCube rotate for msecs,cocube;right,30,1000
+```
 
-<p align="center"><img src="add2.png" alt="Import the Function Calls library" width="340"></p>
+<p align="center"><img src="mqttx_function_messages.png" alt="Send function-call messages through MQTTX" width="680"></p>
 
-After importing the library, you can use the **call** block:
+These four messages will cause CoCube to move forward, backward, rotate left, and rotate right respectively.
 
-<p align="center"><img src="call_function.png" alt="The call block from the Function Calls library" width="360"></p>
+### 6. Find a block's function name
 
-This block accepts two inputs:
+The function name in the message must be exactly the same as the real function name of the block.
 
-- The name of the function to call;
-- The list of parameters to pass to that function.
+Right-click the block in MicroBlocks, select **Copy to clipboard**, and then paste the content into a comment to view its GP Script.
 
-Later, the first field of the MQTT message will become the function name, while the remaining fields will become the parameter list.
+<p align="center"><img src="code_show_function.png" alt="Inspect a block function name and parameters" width="680"></p>
 
-#### 3.2 What is the **Comment** block used for?
-
-The **Comment** block does not control the robot and does not affect program execution. It is useful for:
-
-- Recording the purpose of a program section;
-- Explaining message formats or parameters;
-- Temporarily storing text;
-- Inspecting the GP Script representation of a block copied to the clipboard.
-
-<p align="center"><img src="comment.png" alt="The MicroBlocks Comment block" width="600"></p>
-
-In this lesson, the **Comment** block is used to inspect the internal function definition of a CoCube block. This is more reliable than guessing a function name from the text shown in the interface.
-
-#### 3.3 Inspect a block's function definition
-
-Use the “move forward at speed 40 for 1000 milliseconds” block as an example:
-
-1. Right-click the target block;
-2. Select **copy to clipboard**.
-
-<p align="center"><img src="first.png" alt="Copy a CoCube movement block to the clipboard" width="550"></p>
-
-3. Create a **Comment** block;
-4. Paste the clipboard contents into the **Comment** block.
-
-<p align="center"><img src="record1.png" alt="Inspect the block's GP Script definition in a Comment" width="760"></p>
-
-The following definition is displayed:
+The blocks in the picture will get:
 
 ```text
 'CoCube move for msecs' 'cocube;forward' 40 1000
 ```
 
-It contains one function name and three parameters:
+therefore:
 
-| Position | Content | Meaning |
-| --- | --- | --- |
-| Function name | `CoCube move for msecs` | Move for a specified time |
-| Parameter 1 | `cocube;forward` | Direction |
-| Parameter 2 | `40` | Speed |
-| Parameter 3 | `1000` | Movement duration in milliseconds |
+- The function name is `CoCube move for msecs`.
+- The parameters are `cocube;forward`, `40` and `1000`.
 
-Remote calls must use these internal values, not translated interface labels. For example, the forward direction must be `cocube;forward`, not `forward` or another translated label.
+Combining them in the format `call,function_name,parameter_list` gives you a complete command that can be sent through MQTT.
 
-### 4. Step 3: Why call functions instead of using command aliases?
+### 7. Try more functions
 
-#### 4.1 Representing actions with single letters
+Select a CoCube block you want to execute remotely, view its function name and parameters, and compose a new `call` message in MQTTX.
 
-A simple approach is to define aliases such as:
+You can also assign different topics to different robots, for example:
 
 ```text
-w = move forward
-a = turn left
-s = move backward
-d = turn right
+cocube/eow/control
+cocube/eop/control
 ```
 
-After receiving an MQTT message, the program can broadcast the message text:
+In this way, multiple CoCubes can be controlled separately from the same MQTTX interface.
 
-<p align="center"><img src="one_to_one.png" alt="Broadcast the content of an incoming MQTT message" width="760"></p>
-
-Each alias then needs a corresponding script. For example, receiving `w` makes CoCube move forward:
-
-<p align="center"><img src="receive_w.png" alt="Move CoCube forward when the w broadcast is received" width="700"></p>
-
-This is easy to understand, but it creates a one-command-to-one-script structure. Every new action requires a new alias and another receiving script.
-
-#### 4.2 Problems with command aliases
-
-If speed and duration must also be adjustable, many more aliases are required:
-
-```text
-w1 = move forward at speed 20 for 500 ms
-w2 = move forward at speed 40 for 1000 ms
-w3 = move forward at speed 50 for 2000 ms
-```
-
-As the number of directions, speeds, durations, and action types grows, the aliases become difficult to remember. The MQTT receiving program also fills up with conditional logic or separate receiving scripts.
-
-#### 4.3 Advantages of function names and parameters
-
-With function calls, each message directly states which function to call and which parameters to pass:
-
-```text
-CoCube move for msecs,cocube;forward,40,1000
-CoCube move for msecs,cocube;backward,30,800
-CoCube rotate for msecs,cocube;left,30,1000
-```
-
-This approach has several advantages:
-
-- One function can perform many actions by using different parameters;
-- A new alias is not needed for every speed and duration combination;
-- Existing movement and rotation functions from the CoCube library can be reused;
-- The MQTT program handles message parsing while the CoCube function handles the action;
-- New callable functions can use the same message structure.
-
-In short, `w` represents one fixed action, while a function name and parameters describe an adjustable category of actions.
-
-### 5. Step 4: Receive commands, call functions, and send status data
-
-This project uses the following message format:
-
-```text
-function_name,parameter1,parameter2,parameter3...
-```
-
-The comma `,` is only the delimiter chosen for this project. MQTT does not require commas. You may use another delimiter such as `|` or `#`, provided that:
-
-- MQTTX and CoCube use the same delimiter;
-- The delimiter does not appear inside a function name or parameter;
-- The delimiter in the MicroBlocks split block is changed at the same time.
-
-A semicolon `;` is not suitable here because values such as `cocube;forward` and `cocube;left` already contain semicolons.
-
-#### 5.1 Receive an MQTT message and call the function
-
-CoCube subscribes to `cocube_mqtt_receive`. The receiving script continuously reads the latest MQTT event and stores its payload in `MESSAGE`. It displays and processes the message only when `MESSAGE` is not empty.
-
-<p align="center"><img src="storage.png" alt="Receive an MQTT payload and store it in MESSAGE" width="780"></p>
-
-For this incoming message:
-
-```text
-CoCube move for msecs,cocube;forward,40,1000
-```
-
-Treat the variable assignments and function call as one continuous process:
-
-1. Split `MESSAGE` by the comma and store the complete result in `STORAGE`;
-2. Store item 1 of `STORAGE` in `NAME`; this is the function name;
-3. Copy `STORAGE` from item 2 onward into `LIST`; this is the parameter list;
-4. Use `call NAME with LIST` to call the function.
-
-<p align="center"><img src="get_message.png" alt="Split the MQTT message into STORAGE" width="780"></p>
-
-<p align="center"><img src="get_function.png" alt="Assign the first STORAGE item to NAME" width="720"></p>
-
-<p align="center"><img src="get_param.png" alt="Assign the remaining STORAGE items to LIST" width="720"></p>
-
-<p align="center"><img src="call_function_by_mqtt.png" alt="Call the function using NAME and LIST" width="650"></p>
-
-The variables contain the following values during this process:
-
-```text
-MESSAGE = CoCube move for msecs,cocube;forward,40,1000
-
-STORAGE = [CoCube move for msecs, cocube;forward, 40, 1000]
-
-NAME = CoCube move for msecs
-
-LIST = [cocube;forward, 40, 1000]
-
-Run: call NAME with LIST
-```
-
-The final result is equivalent to calling:
-
-```text
-'CoCube move for msecs' 'cocube;forward' 40 1000
-```
-
-#### 5.2 Send a control command from MQTTX
-
-Use the following settings in the publishing area at the bottom of MQTTX:
-
-| Setting | Value |
-| --- | --- |
-| Payload format | `Plaintext` |
-| QoS | `0` |
-| Retain | Off |
-| Topic | `cocube_mqtt_receive` |
-| Payload | A control message containing the function name and parameters |
-
-**Before sending, change the publishing target to `cocube_mqtt_receive`.** The publishing area may still contain the topic used in the previous lesson or an earlier test. CoCube will not receive the command if the topic is not changed.
-
-<p align="center"><img src="ps.png" alt="Change the control-message topic in the MQTTX publishing area" width="760"></p>
-
-> The image highlights the location of the Topic field. MQTT topic names are case-sensitive. The reference UBP subscribes to the all-lowercase topic `cocube_mqtt_receive`. Even if the screenshot shows `CoCube_mqtt_receive`, enter the all-lowercase form so that it matches the program.
-
-Send the forward command:
-
-```text
-CoCube move for msecs,cocube;forward,40,1000
-```
-
-CoCube moves forward at speed `40` for `1000` milliseconds.
-
-Send the left-turn command:
-
-```text
-CoCube rotate for msecs,cocube;left,30,1000
-```
-
-CoCube rotates left at speed `30` for `1000` milliseconds. The MQTTX message record and the actual CoCube movement are shown below:
-
-<p align="center"><img src="receive_result.png" alt="Movement and rotation commands in MQTTX" width="600"></p>
-
-<video style="width: 240px; max-width: 100%; height: auto;" controls preload="metadata">
-  <source src="result.mp4" type="video/mp4">
-  This Markdown viewer does not support embedded video. <a href="result.mp4">Open the demonstration video here</a>.
-</video>
-
-#### 5.3 Send CoCube position and direction to MQTTX
-
-The sending script uses `cocube_mqtt_send`:
-
-- When CoCube is on a CoMap, it publishes `X_position,Y_position,direction`;
-- When CoCube is not on a CoMap, it publishes `0,0,0`.
-
-<p align="center"><img src="send_message.png" alt="CoCube publishes its X position, Y position, and direction" width="650"></p>
-
-For example:
-
-```text
-103,56,163
-```
-
-This means X is `103`, Y is `56`, and the direction is `163`. After subscribing to `cocube_mqtt_send`, MQTTX continuously receives this data:
-
-<p align="center"><img src="send_result.png" alt="MQTTX receives CoCube position and direction" width="780"></p>
-
-This again shows the direction of the two topics:
-
-```text
-CoCube publishes status → cocube_mqtt_send    → MQTTX receives
-MQTTX publishes command → cocube_mqtt_receive → CoCube receives
-```
-
-### 6. Step 5: Further ideas and important precautions
-
-#### 6.1 The delimiter is flexible, but it must be consistent
-
-The comma is only the delimiter selected for this lesson. Another character may be used, but it must not conflict with field content. Remember:
-
-- The full-width comma `，` is different from the ASCII comma `,`;
-- Do not add spaces around delimiters unless the parser removes them;
-- A simple split operation cannot safely parse text that contains the delimiter;
-- If parameters may contain commas, use a delimiter such as `|` or move to JSON.
-
-For example, with a vertical bar delimiter, both the sender and receiver must use:
-
-```text
-CoCube move for msecs|cocube;forward|40|1000
-```
-
-#### 6.2 Function name, parameter count, and order must be correct
-
-`CoCube move for msecs` requires three parameters in this order:
-
-```text
-direction,speed,duration
-```
-
-Missing, extra, or reordered parameters may cause the call to fail or produce an incorrect action. The function name and menu values must also exactly match the GP Script definition.
-
-#### 6.3 Validate parameter types and ranges
-
-An MQTT payload is text. Before executing a command, a production program should check:
-
-- Whether speed and duration are numeric;
-- Whether speed is within `0–50`;
-- Whether duration is within a safe range;
-- Whether the direction is an allowed value;
-- Whether the parameter list has the correct length.
-
-For example, limit a single movement to `50–3000` milliseconds so that an invalid message cannot make the robot move for an unsafe length of time.
-
-#### 6.4 Dynamic calls require a function allowlist
-
-The reference project directly runs `call NAME with LIST`. This is suitable for a controlled classroom experiment, but it should not be exposed directly to a public network. A safer program permits only selected functions:
-
-```text
-Allowed: CoCube move for msecs
-Allowed: CoCube rotate for msecs
-Allowed: CoCube wheels stop
-All other functions: reject
-```
-
-The allowlist should also define the permitted parameter count, type, and range for each function.
-
-#### 6.5 Do not enable Retain for movement commands
-
-If Retain is enabled for a movement command, the broker may deliver the old command again when CoCube reconnects or subscribes again. This could cause unexpected movement. Keep Retain off for control commands.
-
-#### 6.6 Use unique topics for each CoCube
-
-Do not let every student group share the same control topic on a public broker. One command could control several robots. Add a device identifier:
-
-```text
-cocube/023/send
-cocube/023/receive
-```
-
-After changing the topic names, update both MQTTX and CoCube.
-
-#### 6.7 Add a delay to the status-publishing loop
-
-The position-reporting loop in the reference UBP does not include a delay and may publish at a very high rate. Add a delay of `100–500` milliseconds after every message:
-
-- Reduce Wi-Fi and broker load;
-- Prevent the MQTTX interface from filling too quickly;
-- Avoid giving the sending task too much execution time.
-
-#### 6.8 QoS and duplicate execution
-
-- QoS `0` is suitable for this lesson and high-rate status data, but messages may be lost;
-- QoS `1` guarantees delivery at least once, so the same control command may arrive more than once;
-- If a control project uses QoS `1`, add a unique command ID and discard duplicates.
-
-Regardless of the QoS level, robot motion control should provide a stop command and timeout protection.
-
-#### 6.9 Add execution-result feedback
-
-Seeing “published” in MQTTX does not prove that the robot successfully executed the command. CoCube can publish a response after processing:
-
-```text
-OK,command_id
-ERROR,command_id,error_reason
-```
-
-The controller can then determine whether the command passed validation and was actually executed.
-
-### 7. Reference project
-
-After completing the steps above, download the reference project to compare its connection, messaging, splitting, and function-call structure:
-
-<a href="CoCube_MQTT_02.ubp" download="CoCube_MQTT_02.ubp">Download the <code>CoCube_MQTT_02.ubp</code> reference project</a>
-
-The core flow of the reference project is:
-
-```text
-CoCube receives cocube_mqtt_receive
-  → Read MESSAGE
-  → Split by comma into STORAGE
-  → Assign item 1 to NAME
-  → Assign items 2 onward to LIST
-  → call NAME with LIST
-
-CoCube publishes cocube_mqtt_send
-  → On a CoMap: X,Y,direction
-  → Off the CoMap: 0,0,0
-```
-
-> Use the reference project only for comparison and troubleshooting after completing the tutorial. Enter your own Wi-Fi information before running it, and remove real Wi-Fi passwords before sharing it. Before using the project with multiple users or over a remote network, add a publishing delay, function allowlist, parameter validation, and emergency stop protection.
+This tutorial uses a public MQTT broker. Choose topics that are unlikely to conflict with other users, do not send personal information, and do not leave robots connected to public topics running unattended.

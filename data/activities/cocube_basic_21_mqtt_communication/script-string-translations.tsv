@@ -1,3 +1,3 @@
 # locale	fileName	source	translation
-es	connect_and_subscribe.png	MQTT Server Connected.	Servidor MQTT conectado.
-es	receive_and_display.png	MQTT Server Connected. Receive Message:	Servidor MQTT conectado. Mensaje recibido:
+en	code_connect.png	网络名称	Network_Name
+es	code_connect.png	网络名称	Nombre_de_red
