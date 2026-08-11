@@ -5,7 +5,7 @@
 1. 发送 `forward`、`backward`、`left`、`right`，控制 CoCube 移动。
 2. 发送函数名和参数，调用 CoCube 中已有的积木。
 
-如果你还没有完成 MQTT 的连接实验，请先阅读：[CoCube MQTT 入门](../cocube_basic_21_mqtt_communication-cn/)。关于函数调用的详细原理，可以参考：[《高级程序调用》](../cocube_basic_17_advanced_program_calls-cn/)。
+如果你还没有完成 MQTT 的连接实验，请先阅读：[《MQTT 通信》](../cocube_basic_21_mqtt_communication-cn/)。关于函数调用的详细原理，可以参考：[《高级程序调用》](../cocube_basic_17_advanced_program_calls-cn/)。
 
 ### 1. 连接 MQTT
 
@@ -89,7 +89,7 @@ call,CoCube move for msecs,cocube;forward,40,1000
 
 这样一来，不需要为每个动作分别编写判断。只要消息中包含正确的函数名和参数，同一段程序就能执行不同任务。
 
-> `Code_2.png` 和 `Code_3.png` 是两个不同阶段的接收程序。完成第 2 节后，请用第 4 节的程序替换它，不要同时运行两个版本。
+> 以上是两个不同阶段的接收程序。完成第 2 节后，请用第 4 节的程序替换它，不要同时运行两个版本。
 
 ### 5. 在 MQTTX 中测试
 
@@ -99,7 +99,7 @@ call,CoCube move for msecs,cocube;forward,40,1000
 cocube/control
 ```
 
-关闭“Retain”，然后依次发送：
+依次发送：
 
 ```text
 call,CoCube move for msecs,cocube;forward,40,1000

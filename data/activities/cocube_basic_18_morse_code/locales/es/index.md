@@ -37,6 +37,10 @@ Por ejemplo, A es `.-`, B es `-...` y C es `-.-.`.
 | H | `....` | Q | `--.-` | Z | `--..` |
 | I | `..` | R | `.-.` |  |  |
 
+Puedes utilizar la imagen siguiente para memorizar rápidamente el código Morse de cada letra y número.
+
+![Tabla para memorizar el código Morse](morse_memory.jpeg =640x*)
+
 CoCube distingue los puntos y las rayas midiendo cuánto tiempo se mantiene pulsado el botón A:
 
 ```text

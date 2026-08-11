@@ -117,25 +117,25 @@
       "en": "03 MQTT Function Calls",
       "es": "03 Llamadas a funciones con MQTT"
     },
-    "cocube_snap_03_espnow_fireflies": {
-      "cn": "04 ESP-NOW 萤火虫同步闪烁",
-      "en": "04 ESP-NOW Fireflies",
-      "es": "04 Luciérnagas con ESP-NOW"
-    },
-    "cocube_snap_04_follow_the_car_ahead": {
-      "cn": "05 ESP-NOW 跟上前面的车",
-      "en": "05 ESP-NOW Follow the Car Ahead",
-      "es": "05 Seguir al coche de delante con ESP-NOW"
-    },
     "cocube_basic_23_udp_communication": {
-      "cn": "06 UDP 通信",
-      "en": "06 UDP Communication",
-      "es": "06 Comunicación UDP"
+      "cn": "04 UDP 通信",
+      "en": "04 UDP Communication",
+      "es": "04 Comunicación UDP"
     },
     "cocube_basic_24_http_server": {
-      "cn": "07 HTTP 服务器",
-      "en": "07 HTTP Server",
-      "es": "07 Servidor HTTP"
+      "cn": "05 HTTP 服务器",
+      "en": "05 HTTP Server",
+      "es": "05 Servidor HTTP"
+    },
+    "cocube_snap_03_espnow_fireflies": {
+      "cn": "06 ESP-NOW 萤火虫同步闪烁",
+      "en": "06 ESP-NOW Fireflies",
+      "es": "06 Luciérnagas con ESP-NOW"
+    },
+    "cocube_snap_04_follow_the_car_ahead": {
+      "cn": "07 ESP-NOW 跟上前面的车",
+      "en": "07 ESP-NOW Follow the Car Ahead",
+      "es": "07 Seguir al coche de delante con ESP-NOW"
     }
   },
   "external": {

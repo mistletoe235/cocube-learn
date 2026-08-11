@@ -37,6 +37,10 @@ For example, A is `.-`, B is `-...`, and C is `-.-.`.
 | H | `....` | Q | `--.-` | Z | `--..` |
 | I | `..` | R | `.-.` |  |  |
 
+You can use the image below to quickly memorize the Morse code for each letter and number.
+
+![Morse code memory chart](morse_memory.jpeg =640x*)
+
 CoCube distinguishes dots and dashes by measuring how long button A is held:
 
 ```text
