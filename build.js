@@ -40,7 +40,14 @@ markdown.setOption('openLinksInNewWindow', true);
 markdown.addExtension({
     type: 'output',
     filter: function (html) {
-        return html.replaceAll(
+        return html.replace(
+            /href="([^"]*)"/g,
+            function (match, href) {
+                // Showdown replaces "..." with an ellipsis, including inside
+                // encoded MicroBlocks script URLs. Restore link targets only.
+                return 'href="' + href.replaceAll('…', '...') + '"';
+            }
+        ).replaceAll(
             /<p>(<img.*)title="(.*)" \/><\/p>/g,
             '<figure class="captioned">$1\/>' +
                 '<figcaption class="caption">$2</figcaption></figure>'

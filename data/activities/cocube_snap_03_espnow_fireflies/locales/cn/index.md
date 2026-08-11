@@ -40,9 +40,7 @@
 
 可以把 `clock` 想象成一圈小钟：
 
-```text
-0, 1, 2, 3, ... 11, 12
-```
+编号依次为 `0, 1, 2, 3, ... 11, 12`。
 
 当 `clock` 增加到 `circle` 时，主板闪光一次，并把 `clock` 重新归零。
 
@@ -50,23 +48,14 @@
 
 核心逻辑可以理解成：
 
-```text
-每过 1 个 tick：
-    clock 增加 1
-
-如果 clock >= circle：
-    发送 ESP-NOW 消息 "light"
-    自己闪光
-    clock = 0
-```
+1. 每过 `1` 个 `tick`，`clock` 增加 `1`。
+2. 当 `clock >= circle` 时，发送 ESP-NOW 消息 `light`。
+3. 自己闪光，并把 `clock` 设回 `0`。
 
 同步的关键在于“听到别人闪光时，轻轻推一下自己的时钟”。
 
-```text
-如果收到 ESP-NOW 消息：
-    如果 clock < circle：
-        clock 增加 1
-```
+1. 收到 ESP-NOW 消息时，检查 `clock < circle` 是否成立。
+2. 如果成立，就让 `clock` 增加 `1`。
 
 ![接收后推进时钟](nudge.png)
 

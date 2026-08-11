@@ -19,17 +19,13 @@ Imagine drawing a line of length `r` from the center of the circle. The endpoint
 
 We can understand it like this:
 
-```text
-cos(θ) = x / r
+cos(θ) = x / r<br>
 sin(θ) = y / r
-```
 
 For programming and drawing, this form is more useful:
 
-```text
-x = r * cos(θ)
-y = r * sin(θ)
-```
+x = r × cos(θ)<br>
+y = r × sin(θ)
 
 In other words:
 

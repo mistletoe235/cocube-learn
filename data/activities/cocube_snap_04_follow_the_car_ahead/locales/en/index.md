@@ -34,17 +34,12 @@ The key idea is to give each robot an `ID`.
 
 Each robot continuously sends its position through ESP-NOW:
 
-```text
-Message content: X coordinate, Y coordinate, direction
-Message number: its own ID
-```
+- Message content: X coordinate, Y coordinate, and direction.
+- Message number: its own `ID`.
 
 When receiving a message, the robot first checks whether the message comes from the robot directly in front:
 
-```text
-If my ID == received ID + 1:
-    this message comes from the robot I should follow
-```
+If my `ID` equals the received `ID + 1`, the message comes from the robot directly in front.
 
 For example:
 
@@ -58,26 +53,20 @@ In this way, all robots can run the same program. By setting different IDs, they
 
 When the program starts, it does several things:
 
-```text
-ID = 1
-D_limit = 60
-set ESP-NOW channel to 13
-set ESP-NOW group to 255
-broadcast "send_pos"
-show the current ID
-```
+1. Set `ID` to `1`.
+2. Set `D_limit` to `60`.
+3. Set the ESP-NOW channel to `13` and the group to `255`.
+4. Broadcast `send_pos`.
+5. Display the current `ID`.
 
 `D_limit` is the following-distance threshold. When the distance between the front robot and the follower is greater than or equal to `60`, the follower starts moving. When the distance is less than `60`, the follower stops.
 
 The `send_pos` script sends the current position every `50` milliseconds:
 
-```text
-Repeat:
-    ESP-NOW send pair:
-        string = X coordinate, Y coordinate, direction
-        number = ID
-    wait 50 milliseconds
-```
+1. Send the position and ID as an ESP-NOW pair message.
+2. Store the X coordinate, Y coordinate, and direction in the string part.
+3. Store `ID` in the number part.
+4. Wait `50` milliseconds and send again.
 
 Using ESP-NOW pair messages has two advantages here:
 
@@ -88,28 +77,25 @@ Using ESP-NOW pair messages has two advantages here:
 
 When a robot receives an ESP-NOW message, it reads the sender's ID `id`.
 
-```text
-If my ID == id + 1:
-    read the front robot's position
-    calculate the distance D between me and the front robot
-    broadcast "go!"
-```
+If my `ID` equals `id + 1`, the program will:
+
+1. Read the position of the front robot.
+2. Calculate the distance `D` between the two robots.
+3. Broadcast `go!`.
 
 The program splits the position string from the front robot into three values:
 
-```text
-robot_x = front robot X coordinate
-robot_y = front robot Y coordinate
-robot_theta = front robot direction
-```
+| Variable | Meaning |
+| --- | --- |
+| `robot_x` | Front robot X coordinate |
+| `robot_y` | Front robot Y coordinate |
+| `robot_theta` | Front robot direction |
 
 This program mainly uses `robot_x` and `robot_y`, which are the position of the front robot. It then calculates the distance using the coordinate difference:
 
-```text
-dx = front robot X - my X
-dy = front robot Y - my Y
-D = sqrt(dx * dx + dy * dy)
-```
+- `dx` = front robot X coordinate - this robot's X coordinate
+- `dy` = front robot Y coordinate - this robot's Y coordinate
+- `D = sqrt(dx * dx + dy * dy)`
 
 If `D` is too large, the follower is falling behind. If `D` is not large, the follower is already close enough.
 
@@ -117,25 +103,17 @@ If `D` is too large, the follower is falling behind. If `D` is not large, the fo
 
 After receiving the `go!` broadcast, the robot decides what to do based on the distance:
 
-```text
-If D >= D_limit:
-    move to target robot_x robot_y 50
-Otherwise:
-    CoCube wheels break
-```
+- If `D >= D_limit`, run `move to target robot_x robot_y 50`.
+- Otherwise, run `CoCube wheels break`.
 
 In other words, the follower does not keep moving all the time. It only moves toward the current position of the front robot when the distance is greater than the threshold.
 
 The program includes an advanced block called **track target**. You need to turn on **Advanced Mode** before it appears in the CoCube library. This block makes the robot first point toward the target, then keep correcting its direction while moving:
 
-```text
-Calculate the distance to the target
-If the distance is greater than 3:
-    point toward the target
-    repeat until the distance is less than 3:
-        recalculate distance and angle error
-        adjust left and right wheel speeds based on the angle error
-```
+1. Calculate the distance to the target.
+2. If the distance is greater than `3`, point toward the target.
+3. Until the distance is less than `3`, keep recalculating the distance and angle error.
+4. Adjust the left and right wheel speeds according to the angle error.
 
 This prevents the follower from rushing in a straight line randomly. Instead, it keeps correcting the left and right wheel speeds according to the direction of the target point. Compared with the **move to target point** function in the CoCube library, **track target** is non-blocking. You can continuously send new coordinates to the robot, and it will always move toward the latest coordinate point.
 

@@ -27,25 +27,23 @@ The simplest method is to let different broadcast messages represent different t
 
 For example:
 
-```text
-receive forward  -> move forward
-receive backward -> move backward
-receive left     -> rotate left
-receive right    -> rotate right
-receive smile    -> show a smile and play tones
-```
+| Received message | Task |
+| --- | --- |
+| `forward` | Move forward |
+| `backward` | Move backward |
+| `left` | Turn left |
+| `right` | Turn right |
+| `smile` | Show a smile and play tones |
 
 This is a good way to understand broadcasts at the beginning. The web page is not sending complex data; it is sending task names. The CoCube program prepares scripts for those task names ahead of time. When a broadcast arrives, the matching task runs.
 
 Try sending these messages from the web page:
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 Check whether CoCube performs the corresponding actions.
 
@@ -63,44 +61,36 @@ We can write one unified receiver script: first read **last message**, then put 
 
 This program means:
 
-```text
-when any broadcast is received
-    save "last message" into variable msg
-    clear the TFT screen
-    write msg on the TFT screen
-    if msg = forward, move forward
-    else if msg = backward, move backward
-    else if msg = left, rotate left
-    else if msg = right, rotate right
-    else if msg = smile, show a smile and play tones
-```
+1. When any broadcast is received, save **last message** in the variable `msg`.
+2. Clear the TFT screen and display `msg`.
+3. If `msg = forward`, move forward.
+4. Otherwise, if `msg = backward`, move backward.
+5. Otherwise, if `msg = left`, turn left.
+6. Otherwise, if `msg = right`, turn right.
+7. Otherwise, if `msg = smile`, show a smile and play tones.
 
 Now send these messages from the web page:
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 CoCube will first display the received message on the screen, then execute the matching action according to `msg`.
 
 The key idea in this section is:
 
-```text
 The broadcast message itself can be read and used by the program.
-```
 
 With **last message**, the program does not need a separate **when I receive xxx** script for every message. All messages can enter one receiver, then an `if` structure can dispatch them to different tasks:
 
-```text
-if msg = forward, move forward
-if msg = backward, move backward
-if msg = left, rotate left
-if msg = right, rotate right
-```
+| Condition | Task |
+| --- | --- |
+| `msg = forward` | Move forward |
+| `msg = backward` | Move backward |
+| `msg = left` | Turn left |
+| `msg = right` | Turn right |
 
 This makes the program structure clearer.
 
@@ -108,14 +98,13 @@ This makes the program structure clearer.
 
 In MicroBlocks, we can define our own blocks. For example, define `myBlock`:
 
-```text
-myBlock:
-    show "heart"
-    wait 500 milliseconds
-    show "small heart"
-```
+The `myBlock` process is:
 
-![Custom block without parameters](3_myBlock_en.png)
+1. Show a heart.
+2. Wait `500` milliseconds.
+3. Show a small heart.
+
+![Custom block without parameters](3_myBlock_en.png =680x*)
 
 Normally, to call this custom block, we can simply drag out the `myBlock` block and run it.
 
@@ -123,19 +112,17 @@ Another way is to add the function-calling library (Add Library - Other - Call F
 
 What may be less obvious is that a direct broadcast message can also act like calling a function with the same name.
 
-![Broadcast calls a function without parameters](4_call_function_en.png)
+![Broadcast calls a function without parameters](4_call_function_en.png =680x*)
 
 At this point, the `myBlock` button in the web remote controller works like a remote button. The web page sends `myBlock`, and CoCube receives it and runs the task with the same name.
 
 This method is suitable for tasks without parameters, such as:
 
-```text
-smile
-blink
-beep
-dance
-reset
-```
+- `smile`
+- `blink`
+- `beep`
+- `dance`
+- `reset`
 
 Using broadcast messages to "call functions" is very direct and lightweight.
 
@@ -165,42 +152,30 @@ call,myBlock2,100
 
 This message means:
 
-```text
-call myBlock2 with parameter 100
-```
+This means: call `myBlock2` with the parameter `100`.
 
 After the program receives the broadcast, it needs to parse `last message` first:
 
-![Parse call message](5_call_function_with_args_en.png)
+![Parse call message](5_call_function_with_args_en.png =680x*)
 
 The parsing idea is:
 
-```text
-receive any broadcast
-    msg = last message
-
-    if the first 4 characters of msg are call
-        split msg by comma
-        item 2 is the function name
-        items from item 3 are the parameter list
-        call function name with parameter list
-```
+1. Receive any broadcast and save **last message** in `msg`.
+2. Check whether the first four characters of `msg` are `call`.
+3. Split `msg` at each comma.
+4. Use item 2 as the function name.
+5. Use item 3 and the following items as the parameter list.
+6. Call the function with that parameter list.
 
 For `call,myBlock2,100`:
 
-```text
-after splitting:
-
-item 1: call
-item 2: myBlock2
-item 3: 100
-```
+- Item 1: `call`
+- Item 2: `myBlock2`
+- Item 3: `100`
 
 So the program will execute:
 
-```text
-call myBlock2 with parameter 100
-```
+The program then calls `myBlock2` with the parameter `100`.
 
 The advantage of this format is that the web page only needs to send different strings to call different functions and pass different parameters.
 
@@ -307,11 +282,9 @@ call,CoCube wheels stop
 
 If a function call fails, first check three things:
 
-```text
-Is the function name exactly correct?
-Is the number of parameters correct?
-Is the parameter order correct?
-```
+- Is the function name exactly correct?
+- Is the number of parameters correct?
+- Is the parameter order correct?
 
 #### 6. Not only web pages: Python host programs can also send messages
 
@@ -321,23 +294,21 @@ But this mechanism is not limited to the web page. As long as something can send
 
 For example, we can use a Python host program:
 
-[https://github.com/wwj718/microblocks_messaging_library](https://github.com/wwj718/microblocks_messaging_library)
+[MicroBlocks Messaging Library project page](https://github.com/wwj718/microblocks_messaging_library)
 
 This library allows Python programs to communicate with devices running MicroBlocks through messages. In other words, anything sent by clicking **Send** on the web page can also be sent by a Python program.
 
 Commands from the web page can be moved to Python:
 
-```text
-forward
-backward
-left
-right
-smile
-myBlock
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-call,CoCube wheels stop
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
+- `myBlock`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
+- `call,CoCube wheels stop`
 
 This makes it possible to build more advanced host-control systems, such as:
 
@@ -349,32 +320,26 @@ This makes it possible to build more advanced host-control systems, such as:
 
 The web page is good for classroom demos, while Python is better for complete projects. The core idea behind both is the same:
 
-```text
-write tasks as broadcast messages;
-let the MicroBlocks program parse the messages;
-then call the corresponding functions.
-```
+1. Write tasks as broadcast messages.
+2. Let the MicroBlocks program parse the messages.
+3. Call the corresponding functions.
 
 #### 7. Not only BLE: the same idea also works with other message systems
 
 In this tutorial, we mainly use BLE broadcast messages to call tasks. The web remote controller and the Python host program both send strings like these:
 
-```text
-forward
-smile
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-```
+- `forward`
+- `smile`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
 
 But the more important part is not BLE itself. It is the design idea of "messages driving tasks":
 
-```text
-an external system sends a message
-the MicroBlocks program receives the message
-it reads the message content
-it parses the command and parameters
-it calls the matching task or function
-```
+1. An external system sends a message.
+2. The MicroBlocks program receives the message.
+3. It reads the message content.
+4. It parses the command and parameters.
+5. It calls the matching task or function.
 
 So even if the message does not come from BLE in the future, we can use a similar structure. For example:
 
@@ -385,11 +350,9 @@ So even if the message does not come from BLE in the future, we can use a simila
 
 In other words, BLE is only the communication entry point used in this lesson. What can really be reused is:
 
-```text
-describe tasks with strings;
-read tasks with last message;
-dispatch tasks with the call mechanism;
-extend tasks with function names and parameter lists.
-```
+- Describe tasks with strings.
+- Read tasks with **last message**.
+- Dispatch tasks with the `call` mechanism.
+- Extend tasks with function names and parameter lists.
 
 The concrete implementations of MQTT, UDP, and other methods will be introduced in later tutorials.

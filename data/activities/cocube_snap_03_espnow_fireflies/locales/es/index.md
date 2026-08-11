@@ -39,9 +39,7 @@ Este programa usa tres variables para simular el ritmo interno de una luciérnag
 
 Podemos imaginar `clock` como un pequeño reloj circular:
 
-```text
-0, 1, 2, 3, ... 11, 12
-```
+Los identificadores son `0, 1, 2, 3, ... 11, 12` en orden.
 
 Cuando `clock` llega a `circle`, la placa parpadea una vez y vuelve a poner `clock` en 0.
 
@@ -49,23 +47,14 @@ Cuando `clock` llega a `circle`, la placa parpadea una vez y vuelve a poner `clo
 
 La lógica principal puede entenderse así:
 
-```text
-Cada 1 tick:
-    clock aumenta en 1
-
-Si clock >= circle:
-    enviar mensaje ESP-NOW "light"
-    parpadear
-    clock = 0
-```
+1. Cada `1` `tick`, aumente `clock` en `1`.
+2. Cuando `clock >= circle`, envíe el mensaje ESP-NOW `light`.
+3. Parpadee y vuelva a establecer `clock` en `0`.
 
 La clave de la sincronización está en "empujar suavemente el reloj propio cuando se escucha el parpadeo de otra placa".
 
-```text
-Si se recibe un mensaje ESP-NOW:
-    Si clock < circle:
-        clock aumenta en 1
-```
+1. Cuando llegue un mensaje ESP-NOW, compruebe si `clock < circle`.
+2. Si se cumple, aumente `clock` en `1`.
 
 ![Adelantar el reloj después de recibir](nudge.png)
 

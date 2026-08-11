@@ -39,13 +39,11 @@
 
 可以在网页中依次发送：
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 观察 CoCube 是否完成对应动作。
 
@@ -73,13 +71,11 @@ MicroBlocks 里有一个很重要的积木：`最后消息`。它可以读取刚
 
 现在通过网页发送：
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 CoCube 会先把收到的消息显示到屏幕上，再根据 `msg` 的内容执行对应动作。
 
@@ -108,7 +104,7 @@ CoCube 会先把收到的消息显示到屏幕上，再根据 `msg` 的内容执
 2. 等待 `500` 毫秒。
 3. 显示“小心脏”。
 
-![无参数自定义积木](3_myBlock.png)
+![无参数自定义积木](3_myBlock.png =680x*)
 
 平时调用这个自定义积木，可以直接把 `myBlock` 积木拖出来执行。
 
@@ -116,19 +112,17 @@ CoCube 会先把收到的消息显示到屏幕上，再根据 `msg` 的内容执
 
 你可能不知道的是，直接广播消息也能起到类似“调用同名函数”的效果。
 
-![广播调用无参数函数](4_call_function.png)
+![广播调用无参数函数](4_call_function.png =680x*)
 
 这时候可以把网页遥控器里的 `myBlock` 按钮看成一个远程按钮。网页发送 `myBlock`，CoCube 收到后执行同名任务。
 
 这种方式适合没有参数的任务，例如：
 
-```text
-smile
-blink
-beep
-dance
-reset
-```
+- `smile`
+- `blink`
+- `beep`
+- `dance`
+- `reset`
 
 通过广播消息实现“调用函数”的优点是非常直观、轻量。
 
@@ -162,7 +156,7 @@ call,myBlock2,100
 
 程序接收到广播后，需要先解析 `最后消息`：
 
-![解析 call 消息](5_call_function_with_args.png)
+![解析 call 消息](5_call_function_with_args.png =680x*)
 
 解析思路如下：
 
@@ -302,23 +296,21 @@ call,CoCube wheels stop
 
 例如，可以使用 Python 上位机：
 
-[https://github.com/wwj718/microblocks_messaging_library](https://github.com/wwj718/microblocks_messaging_library)
+[MicroBlocks Messaging Library 项目页面](https://github.com/wwj718/microblocks_messaging_library)
 
 这个库可以让 Python 程序和运行 MicroBlocks 的设备通过消息通信。也就是说，网页里点击 `Send` 发送的内容，Python 程序也可以发送。
 
 可以把网页中的命令迁移到 Python：
 
-```text
-forward
-backward
-left
-right
-smile
-myBlock
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-call,CoCube wheels stop
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
+- `myBlock`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
+- `call,CoCube wheels stop`
 
 这样就可以做出更复杂的上位机控制系统，例如：
 
@@ -338,12 +330,10 @@ call,CoCube wheels stop
 
 这一篇教程里，我们主要通过 BLE 广播消息实现任务调用。网页遥控器和 Python 上位机发送的都是类似这样的字符串：
 
-```text
-forward
-smile
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-```
+- `forward`
+- `smile`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
 
 但更重要的不是 BLE 本身，而是这套“消息驱动任务”的设计思路：
 

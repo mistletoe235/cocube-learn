@@ -19,17 +19,13 @@ Imagina que dibujamos una línea de longitud `r` desde el centro del círculo. E
 
 Podemos entenderlo así:
 
-```text
-cos(θ) = x / r
+cos(θ) = x / r<br>
 sin(θ) = y / r
-```
 
 Para programar y dibujar, esta forma es más útil:
 
-```text
-x = r * cos(θ)
-y = r * sin(θ)
-```
+x = r × cos(θ)<br>
+y = r × sin(θ)
 
 Es decir:
 

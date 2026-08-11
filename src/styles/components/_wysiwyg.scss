@@ -216,12 +216,33 @@
   // Code
   pre,
   pre code {
-    font-family: $font-regular;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
   }
 
   pre {
     max-width: 100%;
+    margin-bottom: $space-150;
+    padding: $space-100 $space-125;
     overflow-x: auto;
+
+    border: 1px solid $color-grey-300;
+    border-left: $space-025 solid $color-purple;
+    border-radius: $borderRadius-025;
+    background-color: #F5F6F7;
+    color: $color-grey-900;
+    font-size: $fontSize-087;
+    line-height: $lineHeight-150;
+    tab-size: 2;
+
+    code {
+      display: block;
+      min-width: max-content;
+      background: transparent;
+      color: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
   }
 
   p code {
@@ -229,6 +250,9 @@
     padding-right: $space-025;
     padding-left: $space-025;
     border-radius: $borderRadius-025;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
 
     font-family: $font-display;
     font-weight: 500;
