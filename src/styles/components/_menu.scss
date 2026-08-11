@@ -266,3 +266,14 @@
     align-items: center;
   }
 }
+
+
+.menu__black-link--buy {
+  color: $color-grey-900;
+  background-color: $color-yellow;
+
+  &:hover {
+    color: $color-grey-900;
+    background-color: $color-yellow-light;
+  }
+}

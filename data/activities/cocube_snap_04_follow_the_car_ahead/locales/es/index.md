@@ -34,17 +34,12 @@ La clave de este proyecto es dar a cada robot un `ID`.
 
 Cada robot envía continuamente su posición mediante ESP-NOW:
 
-```text
-Contenido enviado: coordenada X, coordenada Y, dirección
-Número enviado: su propio ID
-```
+- Contenido enviado: coordenada X, coordenada Y y dirección.
+- Número enviado: su propio `ID`.
 
 Al recibir un mensaje, el robot primero decide si ese mensaje viene del robot que está justo delante:
 
-```text
-Si mi ID == ID recibido + 1:
-    este mensaje viene del robot que debo seguir
-```
+Si mi `ID` es igual al `ID recibido + 1`, el mensaje viene del robot que está justo delante.
 
 Por ejemplo:
 
@@ -58,26 +53,20 @@ De esta forma, todos los robots ejecutan el mismo programa. Solo hace falta conf
 
 Cuando el programa empieza, realiza varias acciones:
 
-```text
-ID = 1
-D_limit = 60
-establecer el canal ESP-NOW en 13
-establecer el grupo ESP-NOW en 255
-emitir "send_pos"
-mostrar el ID actual
-```
+1. Establecer `ID` en `1`.
+2. Establecer `D_limit` en `60`.
+3. Establecer el canal ESP-NOW en `13` y el grupo en `255`.
+4. Emitir `send_pos`.
+5. Mostrar el `ID` actual.
 
 `D_limit` es el umbral de distancia de seguimiento. Cuando la distancia entre el robot delantero y el robot seguidor es mayor o igual que `60`, el seguidor empieza a avanzar. Cuando la distancia es menor que `60`, el seguidor se detiene.
 
 El script `send_pos` envía la posición actual cada `50` milisegundos:
 
-```text
-Repetir:
-    ESP-NOW envía pair:
-        cadena = coordenada X, coordenada Y, dirección
-        número = ID
-    esperar 50 milisegundos
-```
+1. Enviar la posición y el ID como un mensaje pair de ESP-NOW.
+2. Guardar la coordenada X, la coordenada Y y la dirección en la parte de cadena.
+3. Guardar `ID` en la parte numérica.
+4. Esperar `50` milisegundos y volver a enviar.
 
 Aquí, usar mensajes pair de ESP-NOW tiene dos ventajas:
 
@@ -88,28 +77,25 @@ Aquí, usar mensajes pair de ESP-NOW tiene dos ventajas:
 
 Cuando un robot recibe un mensaje ESP-NOW, lee el ID `id` del emisor.
 
-```text
-Si mi ID == id + 1:
-    leer la posición del robot delantero
-    calcular la distancia D entre el robot delantero y yo
-    emitir "go!"
-```
+Si mi `ID` es igual a `id + 1`, el programa:
+
+1. Lee la posición del robot delantero.
+2. Calcula la distancia `D` entre los dos robots.
+3. Emite `go!`.
 
 El programa separa la cadena enviada por el robot delantero en tres datos:
 
-```text
-robot_x = coordenada X del robot delantero
-robot_y = coordenada Y del robot delantero
-robot_theta = dirección del robot delantero
-```
+| Variable | Significado |
+| --- | --- |
+| `robot_x` | Coordenada X del robot delantero |
+| `robot_y` | Coordenada Y del robot delantero |
+| `robot_theta` | Dirección del robot delantero |
 
 El programa actual usa principalmente `robot_x` y `robot_y`, es decir, la posición del robot delantero. Luego calcula la distancia usando la diferencia de coordenadas:
 
-```text
-dx = X del robot delantero - mi X
-dy = Y del robot delantero - mi Y
-D = sqrt(dx * dx + dy * dy)
-```
+- `dx` = coordenada X del robot delantero - coordenada X de este robot
+- `dy` = coordenada Y del robot delantero - coordenada Y de este robot
+- `D = sqrt(dx * dx + dy * dy)`
 
 Si `D` es demasiado grande, significa que el robot seguidor se ha quedado atrás. Si `D` no es grande, significa que el seguidor ya está suficientemente cerca.
 
@@ -117,25 +103,17 @@ Si `D` es demasiado grande, significa que el robot seguidor se ha quedado atrás
 
 Después de recibir la difusión `go!`, el robot decide qué hacer según la distancia:
 
-```text
-Si D >= D_limit:
-    move to target robot_x robot_y 50
-En caso contrario:
-    CoCube wheels break
-```
+- Si `D >= D_limit`, ejecuta `move to target robot_x robot_y 50`.
+- En caso contrario, ejecuta `CoCube wheels break`.
 
 Es decir, el robot seguidor no se mueve todo el tiempo. Solo se mueve hacia la posición actual del robot delantero cuando la distancia supera el umbral.
 
 El programa incluye un bloque avanzado llamado **track target**. Debes activar el **Modo avanzado** para que aparezca en la biblioteca de CoCube. Este bloque hace que el robot primero apunte hacia el objetivo y luego corrija continuamente su dirección mientras avanza:
 
-```text
-Calcular la distancia al objetivo
-Si la distancia es mayor que 3:
-    apuntar hacia el objetivo
-    repetir hasta que la distancia sea menor que 3:
-        recalcular la distancia y el error de ángulo
-        ajustar las velocidades de las ruedas izquierda y derecha según el error de ángulo
-```
+1. Calcular la distancia al objetivo.
+2. Si la distancia es mayor que `3`, apuntar hacia el objetivo.
+3. Hasta que la distancia sea menor que `3`, volver a calcular la distancia y el error de ángulo.
+4. Ajustar las velocidades de las ruedas izquierda y derecha según el error de ángulo.
 
 Así, el robot seguidor no avanza en línea recta sin control, sino que corrige continuamente las velocidades de sus ruedas según la dirección del punto objetivo. En comparación con la función **move to target point** de la biblioteca de CoCube, **track target** no es bloqueante. Puedes enviar nuevas coordenadas continuamente al robot, y siempre se moverá hacia el punto de coordenadas más reciente.
 

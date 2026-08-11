@@ -27,25 +27,23 @@ La forma más simple es hacer que diferentes mensajes de difusión correspondan 
 
 Por ejemplo:
 
-```text
-recibir forward  -> avanzar
-recibir backward -> retroceder
-recibir left     -> girar a la izquierda
-recibir right    -> girar a la derecha
-recibir smile    -> mostrar una sonrisa y reproducir tonos
-```
+| Mensaje recibido | Tarea |
+| --- | --- |
+| `forward` | Avanzar |
+| `backward` | Retroceder |
+| `left` | Girar a la izquierda |
+| `right` | Girar a la derecha |
+| `smile` | Mostrar una sonrisa y reproducir tonos |
 
 Esta forma es adecuada para empezar a entender las difusiones. La página web no envía datos complejos; envía nombres de tareas. El programa de CoCube prepara de antemano los scripts de esas tareas. Cuando llega una difusión, se ejecuta la tarea correspondiente.
 
 Prueba a enviar estos mensajes desde la página web:
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 Observa si CoCube realiza las acciones correspondientes.
 
@@ -63,44 +61,36 @@ Podemos escribir un solo script receptor: primero leer **último mensaje**, y lu
 
 El programa significa:
 
-```text
-cuando se recibe cualquier difusión
-    guardar "último mensaje" en la variable msg
-    limpiar la pantalla TFT
-    escribir msg en la pantalla TFT
-    si msg = forward, avanzar
-    si no, si msg = backward, retroceder
-    si no, si msg = left, girar a la izquierda
-    si no, si msg = right, girar a la derecha
-    si no, si msg = smile, mostrar una sonrisa y reproducir tonos
-```
+1. Al recibir cualquier difusión, guarde **último mensaje** en la variable `msg`.
+2. Limpie la pantalla TFT y muestre `msg`.
+3. Si `msg = forward`, avance.
+4. Si no, si `msg = backward`, retroceda.
+5. Si no, si `msg = left`, gire a la izquierda.
+6. Si no, si `msg = right`, gire a la derecha.
+7. Si no, si `msg = smile`, muestre una sonrisa y reproduzca tonos.
 
 Ahora envía desde la página web:
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 CoCube primero mostrará el mensaje recibido en la pantalla y luego ejecutará la acción correspondiente según el contenido de `msg`.
 
 La idea principal de esta sección es:
 
-```text
-El propio mensaje de difusión puede ser leído y usado por el programa.
-```
+El propio mensaje de difusión puede ser leído y utilizado por el programa.
 
 Con **último mensaje**, el programa no necesita un script separado de **cuando recibo xxx** para cada mensaje. Todos los mensajes pueden entrar por el mismo receptor, y luego una estructura `if` los distribuye a diferentes tareas:
 
-```text
-si msg = forward, avanzar
-si msg = backward, retroceder
-si msg = left, girar a la izquierda
-si msg = right, girar a la derecha
-```
+| Condición | Tarea |
+| --- | --- |
+| `msg = forward` | Avanzar |
+| `msg = backward` | Retroceder |
+| `msg = left` | Girar a la izquierda |
+| `msg = right` | Girar a la derecha |
 
 Así la estructura del programa queda más clara.
 
@@ -108,14 +98,13 @@ Así la estructura del programa queda más clara.
 
 En MicroBlocks podemos definir nuestros propios bloques. Por ejemplo, definimos `myBlock`:
 
-```text
-myBlock:
-    mostrar "corazón"
-    esperar 500 milisegundos
-    mostrar "corazón pequeño"
-```
+El proceso de `myBlock` es:
 
-![Bloque personalizado sin parámetros](3_myBlock_es.png)
+1. Mostrar un corazón.
+2. Esperar `500` milisegundos.
+3. Mostrar un corazón pequeño.
+
+![Bloque personalizado sin parámetros](3_myBlock_es.png =680x*)
 
 Normalmente, para llamar este bloque personalizado, basta con arrastrar el bloque `myBlock` y ejecutarlo.
 
@@ -123,19 +112,17 @@ Otra posibilidad es añadir la biblioteca de llamada de funciones (Añadir bibli
 
 Lo que quizá no sea tan evidente es que un mensaje de difusión directo también puede funcionar como una llamada a una función con el mismo nombre.
 
-![Difusión llama una función sin parámetros](4_call_function_es.png)
+![Difusión llama una función sin parámetros](4_call_function_es.png =680x*)
 
 En este momento, el botón `myBlock` del control remoto web funciona como un botón remoto. La página web envía `myBlock`, CoCube lo recibe y ejecuta la tarea con el mismo nombre.
 
 Este método es adecuado para tareas sin parámetros, por ejemplo:
 
-```text
-smile
-blink
-beep
-dance
-reset
-```
+- `smile`
+- `blink`
+- `beep`
+- `dance`
+- `reset`
 
 Usar mensajes de difusión para "llamar funciones" es muy directo y ligero.
 
@@ -165,42 +152,30 @@ call,myBlock2,100
 
 Este mensaje significa:
 
-```text
-llamar myBlock2 con el parámetro 100
-```
+Esto significa: llamar a `myBlock2` con el parámetro `100`.
 
 Después de recibir la difusión, el programa debe analizar primero `último mensaje`:
 
-![Analizar mensaje call](5_call_function_with_args_es.png)
+![Analizar mensaje call](5_call_function_with_args_es.png =680x*)
 
 La idea de análisis es:
 
-```text
-recibir cualquier difusión
-    msg = último mensaje
-
-    si los primeros 4 caracteres de msg son call
-        dividir msg por comas
-        el elemento 2 es el nombre de la función
-        desde el elemento 3 empieza la lista de parámetros
-        llamar nombre de función con la lista de parámetros
-```
+1. Recibir cualquier difusión y guardar **último mensaje** en `msg`.
+2. Comprobar si los primeros cuatro caracteres de `msg` son `call`.
+3. Dividir `msg` por las comas.
+4. Usar el elemento 2 como nombre de la función.
+5. Usar el elemento 3 y los siguientes como lista de parámetros.
+6. Llamar a la función con esa lista de parámetros.
 
 Para `call,myBlock2,100`:
 
-```text
-después de dividir:
-
-elemento 1: call
-elemento 2: myBlock2
-elemento 3: 100
-```
+- Elemento 1: `call`
+- Elemento 2: `myBlock2`
+- Elemento 3: `100`
 
 Entonces el programa ejecutará:
 
-```text
-llamar myBlock2 con el parámetro 100
-```
+El programa llama entonces a `myBlock2` con el parámetro `100`.
 
 La ventaja de este formato es que la página web solo necesita enviar diferentes cadenas de texto para llamar diferentes funciones y pasar diferentes parámetros.
 
@@ -307,11 +282,9 @@ call,CoCube wheels stop
 
 Si una llamada falla, revisa primero tres cosas:
 
-```text
-¿El nombre de la función es exactamente correcto?
-¿La cantidad de parámetros es correcta?
-¿El orden de los parámetros es correcto?
-```
+- ¿El nombre de la función es exactamente correcto?
+- ¿La cantidad de parámetros es correcta?
+- ¿El orden de los parámetros es correcto?
 
 #### 6. No solo páginas web: un programa anfitrión en Python también puede enviar mensajes
 
@@ -321,23 +294,21 @@ Pero este mecanismo no está limitado a la página web. Siempre que algo pueda e
 
 Por ejemplo, podemos usar un programa anfitrión en Python:
 
-[https://github.com/wwj718/microblocks_messaging_library](https://github.com/wwj718/microblocks_messaging_library)
+[Página del proyecto MicroBlocks Messaging Library](https://github.com/wwj718/microblocks_messaging_library)
 
 Esta biblioteca permite que programas en Python se comuniquen mediante mensajes con dispositivos que ejecutan MicroBlocks. En otras palabras, todo lo que se envía al hacer clic en **Send** en la página web también puede enviarse desde Python.
 
 Los comandos de la página web pueden trasladarse a Python:
 
-```text
-forward
-backward
-left
-right
-smile
-myBlock
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-call,CoCube wheels stop
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
+- `myBlock`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
+- `call,CoCube wheels stop`
 
 Así se pueden crear sistemas de control más avanzados, por ejemplo:
 
@@ -349,32 +320,26 @@ Así se pueden crear sistemas de control más avanzados, por ejemplo:
 
 La página web es adecuada para demostraciones en clase, mientras que Python es mejor para proyectos completos. La idea central en ambos casos es la misma:
 
-```text
-escribir tareas como mensajes de difusión;
-hacer que el programa de MicroBlocks analice los mensajes;
-luego llamar las funciones correspondientes.
-```
+1. Escribir las tareas como mensajes de difusión.
+2. Hacer que el programa de MicroBlocks analice los mensajes.
+3. Llamar a las funciones correspondientes.
 
 #### 7. No solo BLE: la misma idea también sirve para otros sistemas de mensajes
 
 En este tutorial usamos principalmente mensajes de difusión por BLE para llamar tareas. El control remoto web y el programa anfitrión en Python envían cadenas como estas:
 
-```text
-forward
-smile
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-```
+- `forward`
+- `smile`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
 
 Pero lo más importante no es BLE en sí. Lo importante es la idea de diseño de "mensajes que activan tareas":
 
-```text
-un sistema externo envía un mensaje
-el programa de MicroBlocks recibe el mensaje
-lee el contenido del mensaje
-analiza el comando y los parámetros
-llama la tarea o función correspondiente
-```
+1. Un sistema externo envía un mensaje.
+2. El programa de MicroBlocks recibe el mensaje.
+3. Lee el contenido del mensaje.
+4. Analiza la orden y los parámetros.
+5. Llama a la tarea o función correspondiente.
 
 Por eso, aunque en el futuro el mensaje no venga de BLE, podemos usar una estructura parecida. Por ejemplo:
 
@@ -385,11 +350,9 @@ Por eso, aunque en el futuro el mensaje no venga de BLE, podemos usar una estruc
 
 En otras palabras, BLE es solo la entrada de comunicación usada en esta lección. Lo que realmente se puede reutilizar es:
 
-```text
-describir tareas con cadenas de texto;
-leer tareas con último mensaje;
-distribuir tareas con el mecanismo call;
-extender tareas con nombres de función y listas de parámetros.
-```
+- Describir tareas con cadenas de texto.
+- Leer tareas con **último mensaje**.
+- Distribuir tareas con el mecanismo `call`.
+- Ampliar tareas con nombres de función y listas de parámetros.
 
 Las implementaciones concretas de MQTT, UDP y otros métodos se presentarán en tutoriales posteriores.

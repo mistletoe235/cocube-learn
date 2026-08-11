@@ -23,29 +23,27 @@
 
 最简单的写法是：不同的广播消息对应不同的任务。
 
-![基础广播控制](1_boardcast.png)
+![基础广播控制](1_boardcast.png =680x*)
 
 例如：
 
-```text
-收到 forward  -> 向前移动
-收到 backward -> 向后移动
-收到 left     -> 向左旋转
-收到 right    -> 向右旋转
-收到 smile    -> 显示笑脸并播放提示音
-```
+| 收到的消息 | 执行的任务 |
+| --- | --- |
+| `forward` | 向前移动 |
+| `backward` | 向后移动 |
+| `left` | 向左旋转 |
+| `right` | 向右旋转 |
+| `smile` | 显示笑脸并播放提示音 |
 
 这种写法很适合刚开始理解广播机制。网页发送的不是复杂数据，而是一个个“任务名字”。CoCube 端提前写好对应的任务脚本，收到哪个广播，就执行哪个任务。
 
 可以在网页中依次发送：
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 观察 CoCube 是否完成对应动作。
 
@@ -57,50 +55,42 @@ smile
 
 MicroBlocks 里有一个很重要的积木：`最后消息`。它可以读取刚刚收到的广播内容。
 
-我们可以写一个统一的接收脚本：先读取 `最后消息`，再把消息放进 `if / 否则如果` 判断中，决定机器人要执行哪个任务。
+我们可以写一个统一的接收脚本：先读取 `最后消息`，再把消息放进 `如果 / 否则如果` 判断中，决定机器人要执行哪个任务。
 
 ![最后消息驱动任务](2_last_message_new.png)
 
 这个程序的意思是：
 
-```text
-当收到任意广播时
-    把“最后消息”保存到变量 msg
-    清空 TFT 屏幕
-    在 TFT 屏幕上显示 msg
-    如果 msg = forward，向前移动
-    否则如果 msg = backward，向后移动
-    否则如果 msg = left，向左旋转
-    否则如果 msg = right，向右旋转
-    否则如果 msg = smile，显示笑脸并播放提示音
-```
+1. 当收到任意广播时，把“最后消息”保存到变量 `msg`。
+2. 清空 TFT 屏幕，并在 TFT 屏幕上显示 `msg`。
+3. 如果 `msg = forward`，向前移动。
+4. 否则如果 `msg = backward`，向后移动。
+5. 否则如果 `msg = left`，向左旋转。
+6. 否则如果 `msg = right`，向右旋转。
+7. 否则如果 `msg = smile`，显示笑脸并播放提示音。
 
 现在通过网页发送：
 
-```text
-forward
-backward
-left
-right
-smile
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
 
 CoCube 会先把收到的消息显示到屏幕上，再根据 `msg` 的内容执行对应动作。
 
 这一节的重点是理解一件事：
 
-```text
 广播消息本身可以被程序读取和使用。
-```
 
 有了 `最后消息`，程序就不需要为每条消息都写一个单独的“当收到 xxx”脚本。所有消息可以先进入同一个入口，再由 `if` 判断分发到不同任务：
 
-```text
-如果 msg = forward，向前移动
-如果 msg = backward，向后移动
-如果 msg = left，向左旋转
-如果 msg = right，向右旋转
-```
+| 判断条件 | 执行的任务 |
+| --- | --- |
+| `msg = forward` | 向前移动 |
+| `msg = backward` | 向后移动 |
+| `msg = left` | 向左旋转 |
+| `msg = right` | 向右旋转 |
 
 这样，所有消息都可以进入同一个“消息处理脚本”，程序结构会更清楚。
 
@@ -108,14 +98,13 @@ CoCube 会先把收到的消息显示到屏幕上，再根据 `msg` 的内容执
 
 在 MicroBlocks 里，我们可以定义自己的积木。比如定义一个 `myBlock`：
 
-```text
-myBlock:
-    显示“心”
-    等待 500 毫秒
-    显示“小心脏”
-```
+`myBlock` 的流程是：
 
-![无参数自定义积木](3_myBlock.png)
+1. 显示“心”。
+2. 等待 `500` 毫秒。
+3. 显示“小心脏”。
+
+![无参数自定义积木](3_myBlock.png =680x*)
 
 平时调用这个自定义积木，可以直接把 `myBlock` 积木拖出来执行。
 
@@ -123,19 +112,17 @@ myBlock:
 
 你可能不知道的是，直接广播消息也能起到类似“调用同名函数”的效果。
 
-![广播调用无参数函数](4_call_function.png)
+![广播调用无参数函数](4_call_function.png =680x*)
 
 这时候可以把网页遥控器里的 `myBlock` 按钮看成一个远程按钮。网页发送 `myBlock`，CoCube 收到后执行同名任务。
 
 这种方式适合没有参数的任务，例如：
 
-```text
-smile
-blink
-beep
-dance
-reset
-```
+- `smile`
+- `blink`
+- `beep`
+- `dance`
+- `reset`
 
 通过广播消息实现“调用函数”的优点是非常直观、轻量。
 
@@ -165,42 +152,32 @@ call,myBlock2,100
 
 这条消息可以理解为：
 
-```text
-调用 myBlock2，参数是 100
-```
+调用 `myBlock2`，参数是 `100`。
 
 程序接收到广播后，需要先解析 `最后消息`：
 
-![解析 call 消息](5_call_function_with_args.png)
+![解析 call 消息](5_call_function_with_args.png =680x*)
 
 解析思路如下：
 
-```text
-收到任意广播
-    msg = 最后消息
-
-    如果 msg 的前 4 个字符是 call
-        用逗号分割 msg
-        第 2 项是函数名
-        第 3 项开始是参数列表
-        调用 函数名 参数 参数列表
-```
+1. 收到任意广播。
+2. 将 `msg` 设为“最后消息”。
+3. 如果 `msg` 的前 4 个字符是 `call`，就用逗号分割 `msg`。
+4. 第 2 项是函数名。
+5. 第 3 项开始是参数列表。
+6. 调用对应函数，并传入参数列表。
 
 以 `call,myBlock2,100` 为例：
 
-```text
-分割后得到：
-
-第 1 项：call
-第 2 项：myBlock2
-第 3 项：100
-```
+| 分割位置 | 内容 |
+| --- | --- |
+| 第 1 项 | `call` |
+| 第 2 项 | `myBlock2` |
+| 第 3 项 | `100` |
 
 所以程序会执行：
 
-```text
-调用 myBlock2 参数 100
-```
+调用 `myBlock2`，参数是 `100`。
 
 这种格式的好处是：网页只需要发送不同的字符串，就可以调用不同函数，并且传入不同参数。
 
@@ -307,11 +284,9 @@ call,CoCube wheels stop
 
 如果某个函数调用失败，优先检查三件事：
 
-```text
-函数名是否完全一致
-参数数量是否正确
-参数顺序是否正确
-```
+- 函数名是否完全一致。
+- 参数数量是否正确。
+- 参数顺序是否正确。
 
 #### 6. 不止网页：也可以用 Python 上位机发送消息
 
@@ -321,23 +296,21 @@ call,CoCube wheels stop
 
 例如，可以使用 Python 上位机：
 
-[https://github.com/wwj718/microblocks_messaging_library](https://github.com/wwj718/microblocks_messaging_library)
+[MicroBlocks Messaging Library 项目页面](https://github.com/wwj718/microblocks_messaging_library)
 
 这个库可以让 Python 程序和运行 MicroBlocks 的设备通过消息通信。也就是说，网页里点击 `Send` 发送的内容，Python 程序也可以发送。
 
 可以把网页中的命令迁移到 Python：
 
-```text
-forward
-backward
-left
-right
-smile
-myBlock
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-call,CoCube wheels stop
-```
+- `forward`
+- `backward`
+- `left`
+- `right`
+- `smile`
+- `myBlock`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
+- `call,CoCube wheels stop`
 
 这样就可以做出更复杂的上位机控制系统，例如：
 
@@ -349,32 +322,26 @@ call,CoCube wheels stop
 
 网页适合课堂演示，Python 适合做更完整的项目。两者背后的核心都是同一件事：
 
-```text
-把任务写成广播消息；
-让 MicroBlocks 程序解析消息；
-再调用对应的函数。
-```
+1. 把任务写成广播消息。
+2. 让 MicroBlocks 程序解析消息。
+3. 再调用对应的函数。
 
 #### 7. 不只 BLE：同样的思路也适合其他消息系统
 
 这一篇教程里，我们主要通过 BLE 广播消息实现任务调用。网页遥控器和 Python 上位机发送的都是类似这样的字符串：
 
-```text
-forward
-smile
-call,myBlock2,100
-call,CoCube move for msecs,cocube;forward,40,1000
-```
+- `forward`
+- `smile`
+- `call,myBlock2,100`
+- `call,CoCube move for msecs,cocube;forward,40,1000`
 
 但更重要的不是 BLE 本身，而是这套“消息驱动任务”的设计思路：
 
-```text
-外部系统发送一条消息
-MicroBlocks 程序接收消息
-读取消息内容
-解析命令和参数
-调用对应任务或函数
-```
+1. 外部系统发送一条消息。
+2. MicroBlocks 程序接收消息。
+3. 读取消息内容。
+4. 解析命令和参数。
+5. 调用对应任务或函数。
 
 因此，将来即使消息不是从 BLE 来的，也可以使用类似结构。例如：
 
@@ -385,11 +352,9 @@ MicroBlocks 程序接收消息
 
 也就是说，BLE 只是这节课使用的通信入口。真正可以复用的是：
 
-```text
-用字符串描述任务；
-用最后消息读取任务；
-用 call 机制分发任务；
-用函数名和参数列表扩展任务。
-```
+- 用字符串描述任务。
+- 用“最后消息”读取任务。
+- 用 `call` 机制分发任务。
+- 用函数名和参数列表扩展任务。
 
 MQTT、UDP 等具体实现方式，会在之后的教程中继续介绍。

@@ -85,10 +85,57 @@
       "en": "16 Trigonometric Functions",
       "es": "16 Funciones trigonométricas"
     },
+    "cocube_basic_18_morse_code": {
+      "cn": "17 摩尔斯电码",
+      "en": "17 Morse Code",
+      "es": "17 Código Morse"
+    },
+    "cocube_basic_19_buzzer_music_map": {
+      "cn": "18 用地图演奏蜂鸣器音乐",
+      "en": "18 Play Buzzer Music on the Map",
+      "es": "18 Tocar música con el zumbador sobre el mapa"
+    },
+    "cocube_basic_20_record_replay_music": {
+      "cn": "19 记录并回放音乐",
+      "en": "19 Record and Replay Music",
+      "es": "19 Grabar y reproducir música"
+    }
+  },
+  "iot": {
     "cocube_basic_17_advanced_program_calls": {
-      "cn": "17 高级程序调用",
-      "en": "17 Advanced Program Calls",
-      "es": "17 Llamadas avanzadas de programa"
+      "cn": "01 高级程序调用",
+      "en": "01 Advanced Program Calls",
+      "es": "01 Llamadas avanzadas de programa"
+    },
+    "cocube_basic_21_mqtt_communication": {
+      "cn": "02 MQTT 通信",
+      "en": "02 MQTT Communication",
+      "es": "02 Comunicación MQTT"
+    },
+    "cocube_basic_22_mqtt_function_control": {
+      "cn": "03 MQTT 函数调用",
+      "en": "03 MQTT Function Calls",
+      "es": "03 Llamadas a funciones con MQTT"
+    },
+    "cocube_basic_23_udp_communication": {
+      "cn": "04 UDP 通信",
+      "en": "04 UDP Communication",
+      "es": "04 Comunicación UDP"
+    },
+    "cocube_basic_24_http_server": {
+      "cn": "05 HTTP 服务器",
+      "en": "05 HTTP Server",
+      "es": "05 Servidor HTTP"
+    },
+    "cocube_snap_03_espnow_fireflies": {
+      "cn": "06 ESP-NOW 萤火虫同步闪烁",
+      "en": "06 ESP-NOW Fireflies",
+      "es": "06 Luciérnagas con ESP-NOW"
+    },
+    "cocube_snap_04_follow_the_car_ahead": {
+      "cn": "07 ESP-NOW 跟上前面的车",
+      "en": "07 ESP-NOW Follow the Car Ahead",
+      "es": "07 Seguir al coche de delante con ESP-NOW"
     }
   },
   "external": {
@@ -160,16 +207,6 @@
       "cn": "02 集群控制案例",
       "en": "02 Multi-robot Control Example",
       "es": "02 Ejemplo de control de robots en grupo"
-    },
-    "cocube_snap_03_espnow_fireflies": {
-      "cn": "03 ESP-NOW 萤火虫同步闪烁",
-      "en": "03 ESP-NOW Fireflies",
-      "es": "03 Luciérnagas con ESP-NOW"
-    },
-    "cocube_snap_04_follow_the_car_ahead": {
-      "cn": "04 跟上前面的车",
-      "en": "04 Follow the Car Ahead",
-      "es": "04 Seguir al coche de delante"
     }
   }
 }

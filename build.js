@@ -40,7 +40,14 @@ markdown.setOption('openLinksInNewWindow', true);
 markdown.addExtension({
     type: 'output',
     filter: function (html) {
-        return html.replaceAll(
+        return html.replace(
+            /href="([^"]*)"/g,
+            function (match, href) {
+                // Showdown replaces "..." with an ellipsis, including inside
+                // encoded MicroBlocks script URLs. Restore link targets only.
+                return 'href="' + href.replaceAll('…', '...') + '"';
+            }
+        ).replaceAll(
             /<p>(<img.*)title="(.*)" \/><\/p>/g,
             '<figure class="captioned">$1\/>' +
                 '<figcaption class="caption">$2</figcaption></figure>'
@@ -49,19 +56,19 @@ markdown.addExtension({
         ).replaceAll(
             /\[\[\/.*\]\]<\/p>/g, `</div>`
         ).replaceAll(
-            /\<p>\<img src="(.*?)"/g, markScriptParagraphs
+            /\<p([^>]*)>\<img src="(.*?)"/g, markScriptParagraphs
         ).replaceAll(
             /\<img src="(.*?)"/g, setImageAttributes
         );
     }
 });
 
-function markScriptParagraphs(match, pngName) {
+function markScriptParagraphs(match, paragraphAttributes, pngName) {
     // If a paragraph starts with a script image, set the paragraph's class to "script".
 
     return scriptPNGs[activityBeingBuilt].includes(pngName) ?
-        '<p class="script"> <img src="' + pngName + '"' :
-        '<p><img src="' + pngName + '"';
+        '<p' + paragraphAttributes + ' class="script"> <img src="' + pngName + '"' :
+        '<p' + paragraphAttributes + '><img src="' + pngName + '"';
 }
 
 function setImageAttributes(match, pngName) {
@@ -122,7 +129,7 @@ handlebars.registerHelper('json', function (context) {
 });
 
 handlebars.registerHelper('lan_json_key', function (context, key) {
-    return context[key] || context['en'];
+    return context[key];
 });
 
 // Thanks to kevlened at StackOverflow for the following boolean helpers

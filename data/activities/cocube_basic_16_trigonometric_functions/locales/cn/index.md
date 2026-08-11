@@ -19,17 +19,13 @@
 
 这时可以这样理解：
 
-```text
-cos(θ) = x / r
+cos(θ) = x / r<br>
 sin(θ) = y / r
-```
 
 换一种更适合编程画图的写法：
 
-```text
-x = r * cos(θ)
-y = r * sin(θ)
-```
+x = r × cos(θ)<br>
+y = r × sin(θ)
 
 也就是说：
 

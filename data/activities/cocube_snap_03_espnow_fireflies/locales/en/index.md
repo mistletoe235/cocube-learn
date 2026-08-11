@@ -39,9 +39,7 @@ This program uses three variables to simulate the internal rhythm of one firefly
 
 You can imagine `clock` as a small circular clock:
 
-```text
-0, 1, 2, 3, ... 11, 12
-```
+The IDs are `0, 1, 2, 3, ... 11, 12` in order.
 
 When `clock` reaches `circle`, the board flashes once and resets `clock` to 0.
 
@@ -49,23 +47,14 @@ When `clock` reaches `circle`, the board flashes once and resets `clock` to 0.
 
 The core logic can be understood as:
 
-```text
-Every 1 tick:
-    clock increases by 1
-
-If clock >= circle:
-    send ESP-NOW message "light"
-    flash itself
-    clock = 0
-```
+1. Every `1` `tick`, increase `clock` by `1`.
+2. When `clock >= circle`, send the ESP-NOW message `light`.
+3. Flash and set `clock` back to `0`.
 
 The key to synchronization is: when a board hears another board flash, it gently pushes its own clock forward.
 
-```text
-If an ESP-NOW message is received:
-    If clock < circle:
-        clock increases by 1
-```
+1. When an ESP-NOW message arrives, check whether `clock < circle`.
+2. If it is true, increase `clock` by `1`.
 
 ![Nudge the clock after receiving](nudge.png)
 

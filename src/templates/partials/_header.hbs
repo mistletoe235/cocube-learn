@@ -69,9 +69,14 @@
         <!-- Black area contents -->
         <div class="menu__black">
             {{#if (eq @root.locale.code 'cn')}}
-            <a href="https://cocube.fun/" class="menu__black-link" target="_blank">{{@root.locale.run-nav-item}}</a>
+            <a href="https://cocube.fun/" class="menu__black-link" target="_blank" rel="noopener noreferrer">{{@root.locale.run-nav-item}}</a>
             {{else}}
-            <a href="https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27" class="menu__black-link" target="_blank">{{@root.locale.run-nav-item}}</a>
+            <a href="https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27" class="menu__black-link" target="_blank" rel="noopener noreferrer">{{@root.locale.run-nav-item}}</a>
+            {{/if}}
+            {{#if (eq @root.locale.code 'es')}}
+            <a href="https://cocuberobot.com/es/products/" class="menu__black-link menu__black-link--buy" target="_blank" rel="noopener noreferrer">{{@root.locale.buy-nav-item}}</a>
+            {{else}}
+            <a href="https://cocuberobot.com/products/" class="menu__black-link menu__black-link--buy" target="_blank" rel="noopener noreferrer">{{@root.locale.buy-nav-item}}</a>
             {{/if}}
         </div>
 
