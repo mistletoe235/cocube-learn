@@ -70,35 +70,30 @@
       "en": "13 Fractal Patterns",
       "es": "13 Patrones fractales"
     },
-    "cocube_basic_14_jumpy_ball_game": {
-      "cn": "14 Jumpy Ball",
-      "en": "14 Jumpy Ball",
-      "es": "14 Jumpy Ball"
-    },
     "cocube_basic_15_code_snapshot": {
-      "cn": "15 代码快照",
-      "en": "15 Code Snapshot",
-      "es": "15 Instantáneas de código"
+      "cn": "14 代码快照",
+      "en": "14 Code Snapshot",
+      "es": "14 Instantáneas de código"
     },
     "cocube_basic_16_trigonometric_functions": {
-      "cn": "16 三角函数绘图",
-      "en": "16 Trigonometric Functions",
-      "es": "16 Funciones trigonométricas"
+      "cn": "15 三角函数绘图",
+      "en": "15 Trigonometric Functions",
+      "es": "15 Funciones trigonométricas"
     },
     "cocube_basic_18_morse_code": {
-      "cn": "17 摩尔斯电码",
-      "en": "17 Morse Code",
-      "es": "17 Código Morse"
+      "cn": "16 摩尔斯电码",
+      "en": "16 Morse Code",
+      "es": "16 Código Morse"
     },
     "cocube_basic_19_buzzer_music_map": {
-      "cn": "18 用地图演奏蜂鸣器音乐",
-      "en": "18 Play Buzzer Music on the Map",
-      "es": "18 Tocar música con el zumbador sobre el mapa"
+      "cn": "17 用地图演奏蜂鸣器音乐",
+      "en": "17 Play Buzzer Music on the Map",
+      "es": "17 Tocar música con el zumbador sobre el mapa"
     },
     "cocube_basic_20_record_replay_music": {
-      "cn": "19 记录并回放音乐",
-      "en": "19 Record and Replay Music",
-      "es": "19 Grabar y reproducir música"
+      "cn": "18 记录并回放音乐",
+      "en": "18 Record and Replay Music",
+      "es": "18 Grabar y reproducir música"
     }
   },
   "game": {
@@ -106,6 +101,11 @@
       "cn": "01 游戏合集",
       "en": "01 Game Collection",
       "es": "01 Colección de juegos"
+    },
+    "cocube_basic_14_jumpy_ball_game": {
+      "cn": "02 Jumpy Ball",
+      "en": "02 Jumpy Ball",
+      "es": "02 Jumpy Ball"
     }
   },
   "iot": {
