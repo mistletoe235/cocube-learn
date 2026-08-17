@@ -1,0 +1,605 @@
+module main
+author unknown
+version 1 0 
+description 'Falling-brick Breakout for the CoCube TFT. Each level falls faster.'
+variables screenWidth screenHeight paddleWidth paddleHeight paddleX oldPaddleX paddleY ballX ballY oldBallX oldBallY ballDX ballDY ballRadius bricks brickRows brickColumns brickCellWidth brickCellHeight brickTop bricksLeft score lives gameRunning brickHit level dropCounter dropInterval dropDistance 
+
+  spec ' ' 'start pixel breakout' 'start pixel breakout'
+  spec ' ' 'start breakout level' 'start breakout level'
+  spec ' ' 'draw breakout bricks' 'draw bricks'
+  spec ' ' 'draw breakout brick' 'draw brick row _ column _' 'num num' 1 1
+  spec ' ' 'draw breakout status' 'draw score and lives'
+  spec ' ' 'reset breakout ball' 'reset ball and paddle'
+  spec ' ' 'move breakout paddle' 'move paddle by _ pixels' 'num' 3
+  spec ' ' 'check brick collision' 'check brick collision'
+  spec ' ' 'drop breakout bricks' 'drop bricks'
+  spec ' ' 'update pixel breakout' 'update pixel breakout'
+  spec ' ' 'finish pixel breakout' 'finish breakout won _' 'bool' true
+
+to 'check brick collision' {
+  brickHit = (booleanConstant false)
+  local 'brickIndex' 0
+  for row brickRows {
+    for column brickColumns {
+      brickIndex += 1
+      if (and (not brickHit) ((at brickIndex bricks) == 1)) {
+        local 'brickX' (((column - 1) * brickCellWidth) + 2)
+        local 'brickY' (brickTop + ((row - 1) * brickCellHeight))
+        if (and ((ballX + ballRadius) >= brickX) (and ((ballX - ballRadius) <= (brickX + (brickCellWidth - 4))) (and ((ballY + ballRadius) >= brickY) ((ballY - ballRadius) <= (brickY + (brickCellHeight - 3)))))) {
+          atPut brickIndex bricks 0
+          brickHit = (booleanConstant true)
+          bricksLeft += -1
+          score += 10
+          '[tft:rect]' brickX brickY (brickCellWidth - 4) (brickCellHeight - 3) (colorSwatch 7 12 24 255) true
+          'draw breakout status'
+          ballDY = (0 - ballDY)
+          'play tone' 'nt;e' 1 22
+        }
+      }
+    }
+  }
+}
+
+to 'draw breakout brick' row column {
+  local 'brickColor' (colorSwatch 248 113 113 255)
+  if (row == 2) {
+    brickColor = (colorSwatch 251 146 60 255)
+  }
+  if (row == 3) {
+    brickColor = (colorSwatch 250 204 21 255)
+  }
+  if (row == 4) {
+    brickColor = (colorSwatch 74 222 128 255)
+  }
+  if (row == 5) {
+    brickColor = (colorSwatch 56 189 248 255)
+  }
+  local 'brickX' (((column - 1) * brickCellWidth) + 2)
+  local 'brickY' (brickTop + ((row - 1) * brickCellHeight))
+  '[tft:rect]' brickX brickY (brickCellWidth - 4) (brickCellHeight - 3) brickColor true
+}
+
+to 'draw breakout bricks' {
+  for row brickRows {
+    for column brickColumns {
+      'draw breakout brick' row column
+    }
+  }
+}
+
+to 'draw breakout status' {
+  '[tft:rect]' 0 0 screenWidth 22 (colorSwatch 7 12 24 255) true
+  '[tft:text]' ('[data:join]' 'SCORE ' score) 5 4 (colorSwatch 241 245 249 255) 2 false
+  '[tft:text]' ('[data:join]' 'L' level '  X' lives) (screenWidth - 70) 4 (colorSwatch 241 245 249 255) 2 false
+}
+
+to 'drop breakout bricks' {
+  local 'brickIndex' 0
+  for row brickRows {
+    for column brickColumns {
+      brickIndex += 1
+      if ((at brickIndex bricks) == 1) {
+        local 'brickX' (((column - 1) * brickCellWidth) + 2)
+        local 'brickY' (brickTop + ((row - 1) * brickCellHeight))
+        '[tft:rect]' brickX brickY (brickCellWidth - 4) (brickCellHeight - 3) (colorSwatch 7 12 24 255) true
+      }
+    }
+  }
+  brickTop += dropDistance
+  local 'lowestBrickBottom' 0
+  brickIndex = 0
+  for row brickRows {
+    for column brickColumns {
+      brickIndex += 1
+      if ((at brickIndex bricks) == 1) {
+        'draw breakout brick' row column
+        lowestBrickBottom = (brickTop + (row * brickCellHeight))
+      }
+    }
+  }
+  if (lowestBrickBottom >= (paddleY - 5)) {
+    'finish pixel breakout' (booleanConstant false)
+  }
+}
+
+to 'finish pixel breakout' won {
+  gameRunning = (booleanConstant false)
+  '[tft:rect]' 22 ((screenHeight / 2) - 30) (screenWidth - 44) 60 (colorSwatch 15 23 42 255) true
+  if won {
+    '[tft:text]' 'YOU WIN!' 48 ((screenHeight / 2) - 16) (colorSwatch 74 222 128 255) 3 false
+    '[tft:text]' ('[data:join]' 'SCORE ' score) 66 ((screenHeight / 2) + 12) (colorSwatch 241 245 249 255) 2 false
+    'play tone' 'nt;c' 1 100
+    'play tone' 'nt;e' 1 100
+    'play tone' 'nt;g' 1 280
+    waitMillis 1400
+    level += 1
+    dropInterval = (maximum 60 (dropInterval - 20))
+    'start breakout level'
+  } else {
+    '[tft:text]' 'GAME OVER' 39 ((screenHeight / 2) - 16) (colorSwatch 248 113 113 255) 3 false
+    '[tft:text]' ('[data:join]' 'SCORE ' score) 66 ((screenHeight / 2) + 12) (colorSwatch 241 245 249 255) 2 false
+    'play tone' 'nt;g' 0 160
+    'play tone' 'nt;c' 0 320
+    waitMillis 2000
+    'start pixel breakout'
+  }
+}
+
+to 'move breakout paddle' amount {
+  if gameRunning {
+    paddleX += amount
+    paddleX = (maximum 2 (minimum paddleX ((screenWidth - paddleWidth) - 2)))
+  }
+}
+
+to 'reset breakout ball' {
+  '[tft:circle]' oldBallX oldBallY (ballRadius + 1) (colorSwatch 7 12 24 255) true
+  '[tft:rect]' oldPaddleX paddleY paddleWidth paddleHeight (colorSwatch 7 12 24 255) true
+  paddleX = ((screenWidth - paddleWidth) / 2)
+  oldPaddleX = paddleX
+  ballX = (screenWidth / 2)
+  ballY = (paddleY - 12)
+  oldBallX = ballX
+  oldBallY = ballY
+  if ((random 1 2) == 1) {
+    ballDX = -2
+  } else {
+    ballDX = 2
+  }
+  ballDY = -2
+  '[tft:rect]' paddleX paddleY paddleWidth paddleHeight (colorSwatch 56 189 248 255) true
+  '[tft:circle]' ballX ballY ballRadius (colorSwatch 255 224 92 255) true
+  waitMillis 1000
+}
+
+to 'start breakout level' {
+  gameRunning = (booleanConstant false)
+  brickTop = 28
+  bricks = (newList (brickRows * brickColumns))
+  atPut 'all' bricks 1
+  bricksLeft = (brickRows * brickColumns)
+  dropCounter = 0
+  oldBallX = (screenWidth / 2)
+  oldBallY = (screenHeight / 2)
+  oldPaddleX = ((screenWidth - paddleWidth) / 2)
+  '[tft:rect]' 0 0 screenWidth screenHeight (colorSwatch 7 12 24 255) true
+  'draw breakout bricks'
+  'draw breakout status'
+  'reset breakout ball'
+  gameRunning = (booleanConstant true)
+}
+
+to 'start pixel breakout' {
+  gameRunning = (booleanConstant false)
+  screenWidth = ('[tft:getWidth]')
+  screenHeight = ('[tft:getHeight]')
+  paddleWidth = 46
+  paddleHeight = 6
+  paddleY = (screenHeight - 15)
+  ballRadius = 4
+  brickRows = 5
+  brickColumns = 8
+  brickCellWidth = (screenWidth / brickColumns)
+  brickCellHeight = 15
+  score = 0
+  lives = 3
+  level = 1
+  dropInterval = 200
+  dropDistance = 6
+  'start breakout level'
+}
+
+to 'update pixel breakout' {
+  if gameRunning {
+    if (and (buttonA) (not (buttonB))) {'move breakout paddle' -3}
+    if (and (buttonB) (not (buttonA))) {'move breakout paddle' 3}
+    '[tft:circle]' oldBallX oldBallY (ballRadius + 1) (colorSwatch 7 12 24 255) true
+    '[tft:rect]' oldPaddleX paddleY paddleWidth paddleHeight (colorSwatch 7 12 24 255) true
+    dropCounter += 1
+    if (dropCounter >= dropInterval) {
+      dropCounter = 0
+      'drop breakout bricks'
+    }
+    ballX += ballDX
+    ballY += ballDY
+    if (ballX <= ballRadius) {
+      ballX = ballRadius
+      ballDX = (absoluteValue ballDX)
+      'play tone' 'nt;c' 1 16
+    }
+    if (ballX >= (screenWidth - ballRadius)) {
+      ballX = (screenWidth - ballRadius)
+      ballDX = (0 - (absoluteValue ballDX))
+      'play tone' 'nt;c' 1 16
+    }
+    if (ballY <= (22 + ballRadius)) {
+      ballY = (22 + ballRadius)
+      ballDY = (absoluteValue ballDY)
+      'play tone' 'nt;c' 1 16
+    }
+    if (and (ballDY > 0) (and ((ballY + ballRadius) >= paddleY) (and (ballY < (paddleY + paddleHeight)) (and (ballX >= paddleX) (ballX <= (paddleX + paddleWidth)))))) {
+      ballY = ((paddleY - ballRadius) - 1)
+      ballDY = (0 - (absoluteValue ballDY))
+      ballDX += ((ballX - (paddleX + (paddleWidth / 2))) / 8)
+      ballDX = (maximum -4 (minimum ballDX 4))
+      if (and (ballDX > -1) (ballDX < 1)) {
+        ballDX = 1
+      }
+      'play tone' 'nt;g' 1 22
+    }
+    if (and (ballY >= brickTop) (ballY <= (brickTop + (brickRows * brickCellHeight)))) {
+      'check brick collision'
+    }
+    if (bricksLeft <= 0) {
+      'finish pixel breakout' (booleanConstant true)
+    }
+    if (ballY > (screenHeight + ballRadius)) {
+      lives += -1
+      'draw breakout status'
+      'play tone' 'nt;c' 0 180
+      if (lives <= 0) {
+        'finish pixel breakout' (booleanConstant false)
+      } else {
+        'reset breakout ball'
+      }
+    }
+    if gameRunning {
+      '[tft:rect]' paddleX paddleY paddleWidth paddleHeight (colorSwatch 56 189 248 255) true
+      '[tft:circle]' ballX ballY ballRadius (colorSwatch 255 224 92 255) true
+      oldPaddleX = paddleX
+      oldBallX = ballX
+      oldBallY = ballY
+    }
+  }
+}
+
+script 62 62 {
+whenStarted
+'start pixel breakout'
+forever {
+  'update pixel breakout'
+  waitMillis 25
+}
+}
+
+
+module TFT Output
+author MicroBlocks
+version 1 19 
+description 'Draw graphics and write text on boards with a TFT display, such as the M5Stack, M5Stick, Citilab ED1 or (discontinued) IoT-Bus.'
+
+  spec ' ' '[tft:clear]' 'clear TFT display'
+  space
+  spec ' ' '[tft:rect]' 'draw rectangle on TFT at x _ y _ width _ height _ color _ : filled _' 'num num num num color bool' 10 10 40 30 nil true
+  spec ' ' '[tft:roundedRect]' 'draw rounded rectangle on TFT at x _ y _ width _ height _ radius _ color _ : filled _' 'num num num num num color bool' 10 10 40 30 8 nil true
+  spec ' ' '[tft:circle]' 'draw circle on TFT at x _ y _ radius _ color _ : filled _' 'num num num color bool' 40 40 30 nil true
+  spec ' ' '[tft:triangle]' 'draw triangle on TFT at x _ y _ , x _ y _ , x _ y _ color _ : filled _' 'num num num num num num color bool' 20 20 30 80 60 5 nil true
+  spec ' ' '[tft:line]' 'draw line on TFT from x _ y _ to x _ y _ color _' 'num num num num color' 12 8 25 15
+  spec ' ' 'tft_drawVector' 'draw vector x _ y _ angle _ length _ color _' 'num num num num color' 40 40 45 40
+  space
+  spec ' ' '[tft:text]' 'write _ on TFT at x _ y _ color _ : scale _ wrap _ : bg color _' 'str num num color num bool color' 'Hello World!' 5 5 nil 2 true
+  spec ' ' 'tft_drawText' 'draw text _ on TFT at x _ y _ color _ : scale _ : bg color _' 'str num num color num color' 'Line 1
+Line 2' 50 20 nil 2
+  space
+  spec ' ' '[tft:setPixel]' 'set TFT pixel x _ y _ to _' 'num num color' 10 10
+  spec ' ' '[tft:pixelRow]' 'draw pixel row _ x _ y _ : bytes per pixel _ : palette _' 'auto num num num str' 'aList' 0 0 4
+  spec ' ' '[tft:drawBitmap]' 'draw bitmap _ palette _ on TFT at x _ y _' 'str str num num' 'aBitmap' 'a list of colors' 10 10
+  space
+  spec 'r' 'tft_colorSwatch' '_' 'color'
+  spec 'r' 'makeColor' 'color r _ g _ b _ (0-255)' 'num num num' 0 100 100
+  spec 'r' 'makeGray' 'gray _ %' 'num' 50
+  spec 'r' 'randomColor' 'random color'
+  space
+  spec ' ' 'tft_drawImage' 'draw image _ on TFT at x _ y _ color _ : #BR# scale _' 'str num num color num' '' 0 0 nil 1
+  spec 'r' 'tft_image' 'image _' 'str' '00000
+01010
+00000
+10001
+01110'
+  space
+  spec 'r' '[tft:getWidth]' 'TFT width'
+  spec 'r' '[tft:getHeight]' 'TFT height'
+  space
+  spec ' ' '[tft:setBacklight]' 'set TFT backlight _ (0-10)' 'num' 10
+  spec ' ' '[tft:invertDisplay]' 'invert TFT display _' 'bool' false
+  advanced
+  spec ' ' 'tft_deferOLEDDisplayUpdates' 'defer OLED display updates'
+  spec ' ' 'tft_resumeOLEDDisplayUpdates' 'resume OLED display updates'
+  space
+  spec ' ' '_deferMonochromeDisplayUpdates' '_defer monochrome display updates'
+  spec ' ' '_resumeMonochromeDisplayUpdates' '_resume monochrome display updates'
+
+to '_deferMonochromeDisplayUpdates' {
+  '[tft:deferUpdates]'
+}
+
+to '_resumeMonochromeDisplayUpdates' {
+  '[tft:resumeUpdates]'
+}
+
+to makeColor r g b {
+  r = (maximum 0 (minimum r 255))
+  g = (maximum 0 (minimum g 255))
+  b = (maximum 0 (minimum b 255))
+  return ((r << 16) | ((g << 8) | b))
+}
+
+to makeGray percent {
+  gray = ((percent * 255) / 100)
+  gray = (maximum 0 (minimum gray 255))
+  return ((gray << 16) | ((gray << 8) | gray))
+}
+
+to randomColor {
+  local 'n1' (random 100 200)
+  local 'n2' (random 0 100)
+  if (1 == (random 1 3)) {
+    return ((n1 << 16) | (n2 << 8))
+  } (1 == (random 1 2)) {
+    return ((n2 << 16) | n1)
+  } else {
+    return ((n1 << 8) | n2)
+  }
+}
+
+to tft_colorSwatch color {
+  return color
+}
+
+to tft_deferOLEDDisplayUpdates {
+  '[tft:deferUpdates]'
+}
+
+to tft_drawImage imageString x y c optionalScale {
+  comment 'Draw an image at the given position. An image is represented by a multi-line string
+of 0 and 1 characters where each line is one row of the image. 1 means that pixel on (lit).'
+  local 'scale' (argOrDefault 5 1)
+  local 'left' x
+  for ch ('[data:convertType]' imageString 'byte array') {
+    if (ch == 10) {
+      y += scale
+      x = left
+    } else {
+      if (ch == 49) {'[tft:rect]' x y scale scale c}
+      x += scale
+    }
+  }
+}
+
+to tft_drawText s x y color optionalScale optionalBGColor {
+  s = ('[data:convertType]' s 'string')
+  local 'scale' (argOrDefault 5 2)
+  local 'bgColor' (argOrDefault 6 '')
+  local 'lines' ('[data:split]' s ('[data:unicodeString]' 10))
+  for line ('[data:split]' s ('[data:unicodeString]' 10)) {
+    if (isType bgColor 'number') {
+      '[tft:text]' line x y color scale false bgColor
+    } else {
+      '[tft:text]' line x y color scale false
+    }
+    y += (8 * scale)
+  }
+}
+
+to tft_drawVector x y angle length color {
+  local 'endX' (x + ((length * ('[misc:sin]' (100 * (angle + 90)))) >> 14))
+  local 'endY' (y + ((length * ('[misc:sin]' (100 * angle))) >> 14))
+  '[tft:line]' x y endX endY color
+}
+
+to tft_image s {
+  return ('[data:convertType]' s 'string')
+}
+
+to tft_resumeOLEDDisplayUpdates {
+  '[tft:resumeUpdates]'
+}
+
+
+module Tone Output
+author MicroBlocks
+version 1 11 
+tags tone sound music audio note speaker 
+choices tone_NoteName 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 
+description 'Audio tone generation. Make music with MicroBlocks!
+'
+variables _tonePin _toneInitalized _toneLoopOverhead _toneNoteNames _toneArezzoNotes _toneFrequencies 
+
+  spec ' ' 'play tone' 'play note _ octave _ for _ ms' 'str.tone_NoteName num num' 'nt;c' 0 500
+  spec ' ' 'playMIDIKey' 'play midi key _ for _ ms' 'num num' 60 500
+  spec ' ' 'play frequency' 'play frequency _ for _ ms' 'num num' 261 500
+  space
+  spec ' ' 'startTone' 'start tone _ Hz' 'num' 440
+  spec ' ' 'tone_startNote' 'start note _ octave _' 'str.tone_NoteName num' 'nt;c' 0
+  spec ' ' 'tone_startMIDIKey' 'start midi key _' 'num' 60
+  spec ' ' 'stopTone' 'stop tone'
+  space
+  spec ' ' 'attach buzzer to pin' 'attach buzzer to pin _' 'auto' ''
+  space
+  spec 'r' '_measureLoopOverhead' '_measureLoopOverhead'
+  spec 'r' '_baseFreqForNote' '_baseFreqForNote _' 'auto' 'c'
+  spec 'r' '_baseFreqForSemitone' '_baseFreqForSemitone _' 'num' 0
+  spec ' ' '_toneLoop' '_toneLoop _ for _ ms' 'num num' 440000 100
+  spec 'r' '_trimmedLowercase' '_trimmedLowercase _' 'str' 'A. b C...'
+  spec ' ' '_tone init note names' '_tone init note names'
+
+to '_baseFreqForNote' note {
+  comment 'Return the frequency for the given note in the middle-C octave
+scaled by 1000. For example, return 440000 (440Hz) for A.
+Note names may be upper or lower case. Note names
+may be followed by # for a sharp or b for a flat.'
+  local 'normalized note' ('_trimmedLowercase' note)
+  'normalized note' = (ifExpression ((at 1 (v 'normalized note')) == 'n') (v 'normalized note') ('[data:join]' 'nt;' (v 'normalized note')))
+  '_tone init note names'
+  if (('[data:find]' (v 'normalized note') _toneArezzoNotes) > 0) {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneArezzoNotes))
+  } else {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneNoteNames))
+  }
+}
+
+to '_baseFreqForSemitone' semitone {
+  if (_toneFrequencies == 0) {_toneFrequencies = ('[data:makeList]' 261626 277183 293665 311127 329628 349228 369994 391995 415305 440000 466164 493883 246942 277183 277183 311127 311127 349228 329628 369994 369994 415305 415305 466164 466164 523252)}
+  if (and (1 <= semitone) (semitone <= (size _toneFrequencies))) {
+    return (at semitone _toneFrequencies)
+  } else {
+    comment 'Bad note name; return 10 Hz'
+    return 10000
+  }
+}
+
+to '_measureLoopOverhead' {
+  comment 'Measure the loop overhead on this device'
+  local 'halfCycle' 100
+  local 'startT' (microsOp)
+  repeat 100 {
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+  }
+  local 'usecs' ((microsOp) - startT)
+  return ((usecs - 20000) / 200)
+}
+
+to '_tone init note names' {
+  if (_toneNoteNames == 0) {
+    _toneNoteNames = ('[data:makeList]' 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 'nt;c_' 'nt;db' 'nt;d_' 'nt;eb' 'nt;e_' 'nt;e#' 'nt;f_' 'nt;gb' 'nt;g_' 'nt;ab' 'nt;a_' 'nt;bb' 'nt;b_' 'nt;b#')
+    _toneArezzoNotes = ('[data:makeList]' 'nt;do' 'nt;do#' 'nt;re' 'nt;re#' 'nt;mi' 'nt;fa' 'nt;fa#' 'nt;sol' 'nt;sol#' 'nt;la' 'nt;la#' 'nt;si' 'nt;do_' 'nt;dob' 'nt;re_' 'nt;reb' 'nt;mi_' 'nt;mi#' 'nt;fa_' 'nt;solb' 'nt;sol_' 'nt;lab' 'nt;la_' 'nt;sib' 'nt;si_' 'nt;si#')
+  }
+}
+
+to '_toneLoop' scaledFreq ms {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {
+    '[io:playTone]' _tonePin (scaledFreq / 1000)
+    waitMillis ms
+    '[io:playTone]' _tonePin 0
+  } else {
+    local 'halfCycle' ((500000000 / scaledFreq) - _toneLoopOverhead)
+    local 'cycles' ((ms * 500) / halfCycle)
+    repeat cycles {
+      digitalWriteOp _tonePin true
+      waitMicros halfCycle
+      digitalWriteOp _tonePin false
+      waitMicros halfCycle
+    }
+  }
+}
+
+to '_trimmedLowercase' s {
+  comment 'Return a copy of the given string without whitespace
+or periods and all lowercase.'
+  local 'result' (newList (size s))
+  '[data:delete]' 'all' result
+  for i (size s) {
+    local 'ch' ('[data:unicodeAt]' i s)
+    if (and (ch > 32) (ch != 46)) {
+      if (and (65 <= ch) (ch <= 90)) {ch = (ch + 32)}
+      '[data:addLast]' ch result
+    }
+  }
+  return ('[data:unicodeString]' result)
+}
+
+to 'attach buzzer to pin' pinNumber {
+  if (pinNumber == '') {
+    comment 'Pin number not specified; use default pin for this device'
+    if ((boardType) == 'Citilab ED1') {
+      _tonePin = 26
+    } ((boardType) == 'M5Stack-Core') {
+      _tonePin = 25
+    } ((boardType) == 'M5StickC') {
+      _tonePin = 26
+    } ((boardType) == 'Calliope') {
+      digitalWriteOp 23 true
+      digitalWriteOp 24 true
+      _tonePin = 25
+    } ((boardType) == 'D1-Mini') {
+      _tonePin = 12
+    } ((boardType) == 'CodingBox') {
+      _tonePin = 32
+    } else {
+      _tonePin = -1
+    }
+  } else {
+    _tonePin = pinNumber
+  }
+  _toneLoopOverhead = ('_measureLoopOverhead')
+  _toneInitalized = (booleanConstant true)
+}
+
+to 'play frequency' freq ms {
+  '_toneLoop' (freq * 1000) ms
+}
+
+to 'play tone' note octave ms {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    waitMillis ms
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to playMIDIKey key ms {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to startTone freq {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {'[io:playTone]' _tonePin freq}
+}
+
+to stopTone {
+  startTone 0
+}
+
+to tone_startMIDIKey key {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
+
+to tone_startNote note octave {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
+

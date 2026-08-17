@@ -101,6 +101,13 @@
       "es": "19 Grabar y reproducir música"
     }
   },
+  "game": {
+    "cocube_game_01_collection": {
+      "cn": "01 游戏合集",
+      "en": "01 Game Collection",
+      "es": "01 Colección de juegos"
+    }
+  },
   "iot": {
     "cocube_basic_17_advanced_program_calls": {
       "cn": "01 高级程序调用",
