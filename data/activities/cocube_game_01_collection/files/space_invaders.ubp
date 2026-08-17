@@ -1,0 +1,773 @@
+module main
+author 'Ardutaller / OpenAI'
+version 1 5 
+description 'CoCube Space Invaders v10. Random enemy shots.'
+variables screenWidth screenHeight shipX oldShipX shipY shipWidth shipHeight score lives level gameRunning enemies enemyRows enemyColumns enemyCellWidth enemyCellHeight enemyLeft enemyTop enemyDX enemyStepDown enemyMoveCounter enemyMoveInterval enemiesLeft shotActive shotX shotY oldShotX oldShotY enemyShotActive enemyShotX enemyShotY oldEnemyShotX oldEnemyShotY fireLatch enemyFireCounter enemyFireInterval frameCounter invaderFrame 
+
+  spec ' ' 'start space invaders' 'start space invaders'
+  spec ' ' 'show spaceinvaders cover' 'show spaceinvaders cover'
+  spec ' ' 'start invader wave' 'start invader wave'
+  spec ' ' 'draw invader status' 'draw score and lives'
+  spec ' ' 'draw player ship' 'draw player ship at _' 'num' 90
+  spec ' ' 'erase player ship' 'erase player ship at _' 'num' 90
+  spec ' ' 'move player ship' 'move player ship by _' 'num' 3
+  spec ' ' 'draw invaders' 'draw all invaders'
+  spec ' ' 'draw invader' 'draw invader row _ column _' 'num num' 1 1
+  spec ' ' 'update invader speed' 'update invader speed'
+  spec ' ' 'show level banner' 'show level banner'
+  spec ' ' 'erase invader' 'erase invader row _ column _' 'num num' 1 1
+  spec ' ' 'move invaders' 'move invaders'
+  spec ' ' 'invaders touch player' 'invaders touch player'
+  spec ' ' 'fire player shot' 'fire player shot'
+  spec ' ' 'update player shot' 'update player shot'
+  spec ' ' 'fire enemy shot' 'fire enemy shot'
+  spec ' ' 'update enemy shot' 'update enemy shot'
+  spec ' ' 'hit invader' 'check player shot hit'
+  spec ' ' 'finish space invaders' 'finish space invaders won _' 'bool' true
+  spec ' ' 'update space invaders' 'update space invaders'
+
+to 'draw invader' row column {
+  local 'x' (enemyLeft + ((column - 1) * enemyCellWidth))
+  local 'y' (enemyTop + ((row - 1) * enemyCellHeight))
+  local 'c' (colorSwatch 74 222 128 255)
+  if (row == 2) {
+    c = (colorSwatch 250 204 21 255)
+  }
+  if (row == 3) {
+    c = (colorSwatch 251 146 60 255)
+  }
+  if (row == 4) {
+    c = (colorSwatch 248 113 113 255)
+  }
+  '[tft:rect]' (x + 5) y 12 3 c true
+  '[tft:rect]' (x + 2) (y + 3) 18 8 c true
+  '[tft:rect]' x (y + 6) 22 3 c true
+  '[tft:rect]' (x + 6) (y + 5) 3 3 (colorSwatch 3 7 18 255) true
+  '[tft:rect]' (x + 13) (y + 5) 3 3 (colorSwatch 3 7 18 255) true
+  if (invaderFrame == 0) {
+    '[tft:rect]' (x + 3) (y + 11) 4 3 c true
+    '[tft:rect]' (x + 15) (y + 11) 4 3 c true
+  } else {
+    '[tft:rect]' x (y + 11) 5 3 c true
+    '[tft:rect]' (x + 17) (y + 11) 5 3 c true
+  }
+}
+
+to 'draw invader status' {
+  '[tft:rect]' 0 0 screenWidth 24 (colorSwatch 8 15 35 255) true
+  '[tft:text]' ('[data:join]' 'SCORE ' score) 4 4 (colorSwatch 241 245 249 255) 2 false
+  '[tft:text]' ('[data:join]' 'L' level ' X' lives) (screenWidth - 68) 4 (colorSwatch 241 245 249 255) 2 false
+}
+
+to 'draw invaders' {
+  for row enemyRows {
+    for column enemyColumns {
+      local 'index' (((row - 1) * enemyColumns) + column)
+      if ((at index enemies) == 1) {
+        'draw invader' row column
+      }
+    }
+  }
+}
+
+to 'draw player ship' x {
+  '[tft:rect]' x (shipY + 4) shipWidth (shipHeight - 4) (colorSwatch 56 189 248 255) true
+  '[tft:rect]' (x + 10) shipY 8 5 (colorSwatch 125 211 252 255) true
+  '[tft:rect]' (x + 3) (shipY + 2) 5 4 (colorSwatch 56 189 248 255) true
+  '[tft:rect]' (x + 20) (shipY + 2) 5 4 (colorSwatch 56 189 248 255) true
+}
+
+to 'erase invader' row column {
+  local 'x' (enemyLeft + ((column - 1) * enemyCellWidth))
+  local 'y' (enemyTop + ((row - 1) * enemyCellHeight))
+  '[tft:rect]' x y 23 15 (colorSwatch 3 7 18 255) true
+}
+
+to 'erase player ship' x {
+  '[tft:rect]' x shipY shipWidth shipHeight (colorSwatch 3 7 18 255) true
+}
+
+to 'finish space invaders' won {
+  gameRunning = (booleanConstant false)
+  '[tft:rect]' 18 ((screenHeight / 2) - 34) (screenWidth - 36) 68 (colorSwatch 15 23 42 255) true
+  if won {
+    score += (level * 100)
+    '[tft:text]' 'WAVE CLEAR!' 29 ((screenHeight / 2) - 18) (colorSwatch 74 222 128 255) 3 false
+    '[tft:text]' ('[data:join]' 'SCORE ' score) 65 ((screenHeight / 2) + 14) (colorSwatch 241 245 249 255) 2 false
+    'play tone' 'nt;c' 1 90
+    'play tone' 'nt;e' 1 90
+    'play tone' 'nt;g' 1 250
+    waitMillis 1200
+    level += 1
+    'start invader wave'
+  } else {
+    '[tft:text]' 'GAME OVER' 39 ((screenHeight / 2) - 18) (colorSwatch 248 113 113 255) 3 false
+    '[tft:text]' ('[data:join]' 'SCORE ' score) 65 ((screenHeight / 2) + 14) (colorSwatch 241 245 249 255) 2 false
+    'play tone' 'nt;g' 0 160
+    'play tone' 'nt;c' 0 300
+    waitMillis 1900
+    'start space invaders'
+  }
+}
+
+to 'fire enemy shot' {
+  if (and (not enemyShotActive) (enemiesLeft > 0)) {
+    local 'chosenEnemy' (random 1 enemiesLeft)
+    local 'aliveCount' 0
+    local 'shooterRow' 0
+    local 'shooterColumn' 0
+    for row enemyRows {
+      for column enemyColumns {
+        local 'index' (((row - 1) * enemyColumns) + column)
+        if ((at index enemies) == 1) {
+          aliveCount += 1
+          if (aliveCount == chosenEnemy) {
+            shooterRow = row
+            shooterColumn = column
+          }
+        }
+      }
+    }
+    if (shooterRow > 0) {
+      local 'shooterX' (enemyLeft + ((shooterColumn - 1) * enemyCellWidth))
+      local 'shooterY' (enemyTop + ((shooterRow - 1) * enemyCellHeight))
+      enemyShotX = (shooterX + 11)
+      enemyShotY = (shooterY + 15)
+      oldEnemyShotX = enemyShotX
+      oldEnemyShotY = enemyShotY
+      enemyShotActive = (booleanConstant true)
+      'play tone' 'nt;c' 2 18
+    }
+  }
+}
+
+to 'fire player shot' {
+  if (not shotActive) {
+    shotActive = (booleanConstant true)
+    shotX = (shipX + (shipWidth / 2))
+    shotY = (shipY - 3)
+    oldShotX = shotX
+    oldShotY = shotY
+    'play tone' 'nt;g' 2 24
+  }
+}
+
+to 'hit invader' {
+  local 'hit' (booleanConstant false)
+  for row enemyRows {
+    for column enemyColumns {
+      local 'index' (((row - 1) * enemyColumns) + column)
+      if (and (not hit) ((at index enemies) == 1)) {
+        local 'x' (enemyLeft + ((column - 1) * enemyCellWidth))
+        local 'y' (enemyTop + ((row - 1) * enemyCellHeight))
+        if (and (shotX >= x) (and (shotX <= (x + 23)) (and (shotY <= (y + 15)) ((shotY + 6) >= y)))) {
+          atPut index enemies 0
+          '[tft:rect]' x y 23 15 (colorSwatch 255 255 255 255) true
+          waitMillis 28
+          '[tft:rect]' x y 23 15 (colorSwatch 3 7 18 255) true
+          shotActive = (booleanConstant false)
+          hit = (booleanConstant true)
+          enemiesLeft += -1
+          score += (50 - (row * 5))
+          'update invader speed'
+          'draw invader status'
+          'play tone' 'nt;e' 2 42
+        }
+      }
+    }
+  }
+  if (enemiesLeft <= 0) {
+    'finish space invaders' (booleanConstant true)
+  }
+}
+
+to 'invaders touch player' {
+  local 'touching' (booleanConstant false)
+  for row enemyRows {
+    for column enemyColumns {
+      local 'index' (((row - 1) * enemyColumns) + column)
+      if (and (not touching) ((at index enemies) == 1)) {
+        local 'x' (enemyLeft + ((column - 1) * enemyCellWidth))
+        local 'y' (enemyTop + ((row - 1) * enemyCellHeight))
+        if (and ((x + 23) >= shipX) (and (x <= (shipX + shipWidth)) (and ((y + 15) >= shipY) (y <= (shipY + shipHeight))))) {
+          touching = (booleanConstant true)
+        }
+      }
+    }
+  }
+  if touching {
+    lives += -1
+    'draw invader status'
+    'play tone' 'nt;c' 0 180
+    '[tft:rect]' shipX shipY shipWidth shipHeight (colorSwatch 248 113 113 255) true
+    waitMillis 220
+    if (lives <= 0) {
+      'finish space invaders' (booleanConstant false)
+    } else {
+      '[tft:rect]' 0 24 screenWidth (screenHeight - 24) (colorSwatch 3 7 18 255) true
+      enemyLeft = 15
+      enemyTop = 36
+      enemyDX = (absoluteValue enemyDX)
+      enemyShotActive = (booleanConstant false)
+      shotActive = (booleanConstant false)
+      shipX = ((screenWidth - shipWidth) / 2)
+      oldShipX = shipX
+      'draw invader status'
+      'draw invaders'
+      'draw player ship' shipX
+      waitMillis 350
+    }
+  }
+}
+
+to 'move invaders' {
+  if (invaderFrame == 0) {
+    invaderFrame = 1
+  } else {
+    invaderFrame = 0
+  }
+  local 'formationWidth' (((enemyColumns - 1) * enemyCellWidth) + 23)
+  local 'minimumLeft' 2
+  local 'maximumLeft' (238 - formationWidth)
+  local 'nextEnemyLeft' (enemyLeft + enemyDX)
+  local 'changeDirection' (booleanConstant false)
+  if (enemyDX > 0) {
+    if (nextEnemyLeft >= maximumLeft) {changeDirection = (booleanConstant true)}
+  } else {
+    if (nextEnemyLeft <= minimumLeft) {changeDirection = (booleanConstant true)}
+  }
+  for row enemyRows {
+    for column enemyColumns {
+      local 'index' (((row - 1) * enemyColumns) + column)
+      if ((at index enemies) == 1) {
+        'erase invader' row column
+      }
+    }
+  }
+  if changeDirection {
+    if (enemyDX > 0) {
+      enemyLeft = maximumLeft
+      enemyDX = (0 - (absoluteValue enemyDX))
+    } else {
+      enemyLeft = minimumLeft
+      enemyDX = (absoluteValue enemyDX)
+    }
+    enemyTop = (enemyTop + enemyStepDown)
+  } else {
+    enemyLeft = nextEnemyLeft
+  }
+  'draw invaders'
+  'invaders touch player'
+}
+
+to 'move player ship' amount {
+  if gameRunning {
+    shipX += amount
+    shipX = (maximum 2 (minimum shipX ((screenWidth - shipWidth) - 2)))
+  }
+}
+
+to 'show level banner' {
+  '[tft:rect]' 35 94 170 48 (colorSwatch 15 23 42 255) true
+  '[tft:text]' ('[data:join]' 'LEVEL ' level) 63 106 (colorSwatch 125 211 252 255) 3 false
+  'play tone' 'nt;c' 1 55
+  'play tone' 'nt;g' 1 90
+  waitMillis 550
+  '[tft:rect]' 35 94 170 48 (colorSwatch 3 7 18 255) true
+}
+
+to 'show spaceinvaders cover' {
+  '[tft:clear]'
+  drawBMPfile 'space.bmp' 0 0
+  waitMillis 3000
+  '[tft:clear]'
+}
+
+to 'start invader wave' {
+  gameRunning = (booleanConstant false)
+  '[tft:rect]' 0 0 screenWidth screenHeight (colorSwatch 3 7 18 255) true
+  enemies = (newList (enemyRows * enemyColumns))
+  atPut 'all' enemies 1
+  enemiesLeft = (enemyRows * enemyColumns)
+  enemyLeft = 15
+  enemyTop = 36
+  enemyDX = 3
+  enemyMoveCounter = 0
+  enemyMoveInterval = (maximum 3 (9 - level))
+  enemyFireCounter = 0
+  enemyFireInterval = (maximum 22 (70 - (level * 6)))
+  shipX = ((screenWidth - shipWidth) / 2)
+  oldShipX = shipX
+  shotActive = (booleanConstant false)
+  enemyShotActive = (booleanConstant false)
+  fireLatch = (booleanConstant false)
+  frameCounter = 0
+  invaderFrame = 0
+  'show level banner'
+  'draw invader status'
+  'draw invaders'
+  'draw player ship' shipX
+  gameRunning = (booleanConstant true)
+}
+
+to 'start space invaders' {
+  gameRunning = (booleanConstant false)
+  screenWidth = 240
+  screenHeight = 240
+  shipWidth = 28
+  shipHeight = 9
+  shipY = (screenHeight - 18)
+  enemyRows = 4
+  enemyColumns = 7
+  enemyCellWidth = 30
+  enemyCellHeight = 22
+  enemyStepDown = 9
+  score = 0
+  lives = 3
+  level = 1
+  'start invader wave'
+}
+
+to 'update enemy shot' {
+  if enemyShotActive {
+    '[tft:rect]' oldEnemyShotX oldEnemyShotY 2 6 (colorSwatch 3 7 18 255) true
+    enemyShotY += 4
+    if (enemyShotY >= screenHeight) {
+      enemyShotActive = (booleanConstant false)
+    } (and ((enemyShotY + 6) >= shipY) (and (enemyShotY <= (shipY + shipHeight)) (and ((enemyShotX + 2) >= shipX) (enemyShotX <= (shipX + shipWidth))))) {
+      enemyShotActive = (booleanConstant false)
+      lives += -1
+      'draw invader status'
+      'play tone' 'nt;c' 0 180
+      '[tft:rect]' shipX shipY shipWidth shipHeight (colorSwatch 248 113 113 255) true
+      waitMillis 220
+      'erase player ship' shipX
+      if (lives <= 0) {
+        'finish space invaders' (booleanConstant false)
+      } else {
+        shipX = ((screenWidth - shipWidth) / 2)
+        oldShipX = shipX
+        'draw player ship' shipX
+      }
+    } else {
+      '[tft:rect]' enemyShotX enemyShotY 2 6 (colorSwatch 248 113 113 255) true
+      oldEnemyShotX = enemyShotX
+      oldEnemyShotY = enemyShotY
+    }
+  }
+}
+
+to 'update invader speed' {
+  local 'destroyed' ((enemyRows * enemyColumns) - enemiesLeft)
+  enemyMoveInterval = (maximum 2 ((9 - level) - (truncate (destroyed / 5))))
+  enemyFireInterval = (maximum 18 ((70 - (level * 6)) - destroyed))
+}
+
+to 'update player shot' {
+  if shotActive {
+    '[tft:rect]' oldShotX oldShotY 2 6 (colorSwatch 3 7 18 255) true
+    shotY += -5
+    if (shotY <= 24) {
+      shotActive = (booleanConstant false)
+    } else {
+      'hit invader'
+      if shotActive {
+        '[tft:rect]' shotX shotY 2 6 (colorSwatch 255 255 255 255) true
+        oldShotX = shotX
+        oldShotY = shotY
+      }
+    }
+  }
+}
+
+to 'update space invaders' {
+  if gameRunning {
+    oldShipX = shipX
+    if (and (buttonA) (not (buttonB))) {
+      'move player ship' -4
+    }
+    if (and (buttonB) (not (buttonA))) {
+      'move player ship' 4
+    }
+    if (and (buttonA) (buttonB)) {
+      if (not fireLatch) {'fire player shot'}
+      fireLatch = (booleanConstant true)
+    } else {
+      fireLatch = (booleanConstant false)
+    }
+    if (oldShipX != shipX) {
+      'erase player ship' oldShipX
+      'draw player ship' shipX
+    }
+    enemyMoveCounter += 1
+    if (enemyMoveCounter >= enemyMoveInterval) {
+      enemyMoveCounter = 0
+      'move invaders'
+    }
+    enemyFireCounter += 1
+    if (enemyFireCounter >= enemyFireInterval) {
+      enemyFireCounter = 0
+      'fire enemy shot'
+    }
+    'update player shot'
+    'update enemy shot'
+    frameCounter += 1
+  }
+}
+
+script 84 62 {
+whenStarted
+'[tft:clear]'
+'[tft:text]' 'SPACE' 60 54 (colorSwatch 241 245 249 255) 4 false
+'[tft:text]' 'INVADERS' 25 101 (colorSwatch 250 204 21 255) 4 false
+'[tft:text]' 'A+B:SHOOT' 64 171 (colorSwatch 74 222 128 255) 2 false
+'[tft:text]' 'A/B:MOVE' 69 194 (colorSwatch 148 163 184 255) 2 false
+waitMillis 3000
+'start space invaders'
+forever {
+  'update space invaders'
+  waitMillis 25
+}
+}
+
+
+module TFT Output
+author MicroBlocks
+version 1 19 
+description 'Draw graphics and write text on boards with a TFT display, such as the M5Stack, M5Stick, Citilab ED1 or (discontinued) IoT-Bus.'
+
+  spec ' ' '[tft:clear]' 'clear TFT display'
+  space
+  spec ' ' '[tft:rect]' 'draw rectangle on TFT at x _ y _ width _ height _ color _ : filled _' 'num num num num color bool' 10 10 40 30 nil true
+  spec ' ' '[tft:roundedRect]' 'draw rounded rectangle on TFT at x _ y _ width _ height _ radius _ color _ : filled _' 'num num num num num color bool' 10 10 40 30 8 nil true
+  spec ' ' '[tft:circle]' 'draw circle on TFT at x _ y _ radius _ color _ : filled _' 'num num num color bool' 40 40 30 nil true
+  spec ' ' '[tft:triangle]' 'draw triangle on TFT at x _ y _ , x _ y _ , x _ y _ color _ : filled _' 'num num num num num num color bool' 20 20 30 80 60 5 nil true
+  spec ' ' '[tft:line]' 'draw line on TFT from x _ y _ to x _ y _ color _' 'num num num num color' 12 8 25 15
+  spec ' ' 'tft_drawVector' 'draw vector x _ y _ angle _ length _ color _' 'num num num num color' 40 40 45 40
+  space
+  spec ' ' '[tft:text]' 'write _ on TFT at x _ y _ color _ : scale _ wrap _ : bg color _' 'str num num color num bool color' 'Hello World!' 5 5 nil 2 true
+  spec ' ' 'tft_drawText' 'draw text _ on TFT at x _ y _ color _ : scale _ : bg color _' 'str num num color num color' 'Line 1
+Line 2' 50 20 nil 2
+  space
+  spec ' ' '[tft:setPixel]' 'set TFT pixel x _ y _ to _' 'num num color' 10 10
+  spec ' ' '[tft:pixelRow]' 'draw pixel row _ x _ y _ : bytes per pixel _ : palette _' 'auto num num num str' 'aList' 0 0 4
+  spec ' ' '[tft:drawBitmap]' 'draw bitmap _ palette _ on TFT at x _ y _' 'str str num num' 'aBitmap' 'a list of colors' 10 10
+  space
+  spec 'r' 'tft_colorSwatch' '_' 'color'
+  spec 'r' 'makeColor' 'color r _ g _ b _ (0-255)' 'num num num' 0 100 100
+  spec 'r' 'makeGray' 'gray _ %' 'num' 50
+  spec 'r' 'randomColor' 'random color'
+  space
+  spec ' ' 'tft_drawImage' 'draw image _ on TFT at x _ y _ color _ : #BR# scale _' 'str num num color num' '' 0 0 nil 1
+  spec 'r' 'tft_image' 'image _' 'str' '00000
+01010
+00000
+10001
+01110'
+  space
+  spec 'r' '[tft:getWidth]' 'TFT width'
+  spec 'r' '[tft:getHeight]' 'TFT height'
+  space
+  spec ' ' '[tft:setBacklight]' 'set TFT backlight _ (0-10)' 'num' 10
+  spec ' ' '[tft:invertDisplay]' 'invert TFT display _' 'bool' false
+  advanced
+  spec ' ' 'tft_deferOLEDDisplayUpdates' 'defer OLED display updates'
+  spec ' ' 'tft_resumeOLEDDisplayUpdates' 'resume OLED display updates'
+  space
+  spec ' ' '_deferMonochromeDisplayUpdates' '_defer monochrome display updates'
+  spec ' ' '_resumeMonochromeDisplayUpdates' '_resume monochrome display updates'
+
+to '_deferMonochromeDisplayUpdates' {
+  '[tft:deferUpdates]'
+}
+
+to '_resumeMonochromeDisplayUpdates' {
+  '[tft:resumeUpdates]'
+}
+
+to makeColor r g b {
+  r = (maximum 0 (minimum r 255))
+  g = (maximum 0 (minimum g 255))
+  b = (maximum 0 (minimum b 255))
+  return ((r << 16) | ((g << 8) | b))
+}
+
+to makeGray percent {
+  gray = ((percent * 255) / 100)
+  gray = (maximum 0 (minimum gray 255))
+  return ((gray << 16) | ((gray << 8) | gray))
+}
+
+to randomColor {
+  local 'n1' (random 100 200)
+  local 'n2' (random 0 100)
+  if (1 == (random 1 3)) {
+    return ((n1 << 16) | (n2 << 8))
+  } (1 == (random 1 2)) {
+    return ((n2 << 16) | n1)
+  } else {
+    return ((n1 << 8) | n2)
+  }
+}
+
+to tft_colorSwatch color {
+  return color
+}
+
+to tft_deferOLEDDisplayUpdates {
+  '[tft:deferUpdates]'
+}
+
+to tft_drawImage imageString x y c optionalScale {
+  comment 'Draw an image at the given position. An image is represented by a multi-line string
+of 0 and 1 characters where each line is one row of the image. 1 means that pixel on (lit).'
+  local 'scale' (argOrDefault 5 1)
+  local 'left' x
+  for ch ('[data:convertType]' imageString 'byte array') {
+    if (ch == 10) {
+      y += scale
+      x = left
+    } else {
+      if (ch == 49) {'[tft:rect]' x y scale scale c}
+      x += scale
+    }
+  }
+}
+
+to tft_drawText s x y color optionalScale optionalBGColor {
+  s = ('[data:convertType]' s 'string')
+  local 'scale' (argOrDefault 5 2)
+  local 'bgColor' (argOrDefault 6 '')
+  local 'lines' ('[data:split]' s ('[data:unicodeString]' 10))
+  for line ('[data:split]' s ('[data:unicodeString]' 10)) {
+    if (isType bgColor 'number') {
+      '[tft:text]' line x y color scale false bgColor
+    } else {
+      '[tft:text]' line x y color scale false
+    }
+    y += (8 * scale)
+  }
+}
+
+to tft_drawVector x y angle length color {
+  local 'endX' (x + ((length * ('[misc:sin]' (100 * (angle + 90)))) >> 14))
+  local 'endY' (y + ((length * ('[misc:sin]' (100 * angle))) >> 14))
+  '[tft:line]' x y endX endY color
+}
+
+to tft_image s {
+  return ('[data:convertType]' s 'string')
+}
+
+to tft_resumeOLEDDisplayUpdates {
+  '[tft:resumeUpdates]'
+}
+
+
+module Tone Output
+author MicroBlocks
+version 1 11 
+tags tone sound music audio note speaker 
+choices tone_NoteName 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 
+description 'Audio tone generation. Make music with MicroBlocks!
+'
+variables _tonePin _toneInitalized _toneLoopOverhead _toneNoteNames _toneArezzoNotes _toneFrequencies 
+
+  spec ' ' 'play tone' 'play note _ octave _ for _ ms' 'str.tone_NoteName num num' 'nt;c' 0 500
+  spec ' ' 'playMIDIKey' 'play midi key _ for _ ms' 'num num' 60 500
+  spec ' ' 'play frequency' 'play frequency _ for _ ms' 'num num' 261 500
+  space
+  spec ' ' 'startTone' 'start tone _ Hz' 'num' 440
+  spec ' ' 'tone_startNote' 'start note _ octave _' 'str.tone_NoteName num' 'nt;c' 0
+  spec ' ' 'tone_startMIDIKey' 'start midi key _' 'num' 60
+  spec ' ' 'stopTone' 'stop tone'
+  space
+  spec ' ' 'attach buzzer to pin' 'attach buzzer to pin _' 'auto' ''
+  space
+  spec 'r' '_measureLoopOverhead' '_measureLoopOverhead'
+  spec 'r' '_baseFreqForNote' '_baseFreqForNote _' 'auto' 'c'
+  spec 'r' '_baseFreqForSemitone' '_baseFreqForSemitone _' 'num' 0
+  spec ' ' '_toneLoop' '_toneLoop _ for _ ms' 'num num' 440000 100
+  spec 'r' '_trimmedLowercase' '_trimmedLowercase _' 'str' 'A. b C...'
+  spec ' ' '_tone init note names' '_tone init note names'
+
+to '_baseFreqForNote' note {
+  comment 'Return the frequency for the given note in the middle-C octave
+scaled by 1000. For example, return 440000 (440Hz) for A.
+Note names may be upper or lower case. Note names
+may be followed by # for a sharp or b for a flat.'
+  local 'normalized note' ('_trimmedLowercase' note)
+  'normalized note' = (ifExpression ((at 1 (v 'normalized note')) == 'n') (v 'normalized note') ('[data:join]' 'nt;' (v 'normalized note')))
+  '_tone init note names'
+  if (('[data:find]' (v 'normalized note') _toneArezzoNotes) > 0) {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneArezzoNotes))
+  } else {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneNoteNames))
+  }
+}
+
+to '_baseFreqForSemitone' semitone {
+  if (_toneFrequencies == 0) {_toneFrequencies = ('[data:makeList]' 261626 277183 293665 311127 329628 349228 369994 391995 415305 440000 466164 493883 246942 277183 277183 311127 311127 349228 329628 369994 369994 415305 415305 466164 466164 523252)}
+  if (and (1 <= semitone) (semitone <= (size _toneFrequencies))) {
+    return (at semitone _toneFrequencies)
+  } else {
+    comment 'Bad note name; return 10 Hz'
+    return 10000
+  }
+}
+
+to '_measureLoopOverhead' {
+  comment 'Measure the loop overhead on this device'
+  local 'halfCycle' 100
+  local 'startT' (microsOp)
+  repeat 100 {
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+  }
+  local 'usecs' ((microsOp) - startT)
+  return ((usecs - 20000) / 200)
+}
+
+to '_tone init note names' {
+  if (_toneNoteNames == 0) {
+    _toneNoteNames = ('[data:makeList]' 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 'nt;c_' 'nt;db' 'nt;d_' 'nt;eb' 'nt;e_' 'nt;e#' 'nt;f_' 'nt;gb' 'nt;g_' 'nt;ab' 'nt;a_' 'nt;bb' 'nt;b_' 'nt;b#')
+    _toneArezzoNotes = ('[data:makeList]' 'nt;do' 'nt;do#' 'nt;re' 'nt;re#' 'nt;mi' 'nt;fa' 'nt;fa#' 'nt;sol' 'nt;sol#' 'nt;la' 'nt;la#' 'nt;si' 'nt;do_' 'nt;dob' 'nt;re_' 'nt;reb' 'nt;mi_' 'nt;mi#' 'nt;fa_' 'nt;solb' 'nt;sol_' 'nt;lab' 'nt;la_' 'nt;sib' 'nt;si_' 'nt;si#')
+  }
+}
+
+to '_toneLoop' scaledFreq ms {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {
+    '[io:playTone]' _tonePin (scaledFreq / 1000)
+    waitMillis ms
+    '[io:playTone]' _tonePin 0
+  } else {
+    local 'halfCycle' ((500000000 / scaledFreq) - _toneLoopOverhead)
+    local 'cycles' ((ms * 500) / halfCycle)
+    repeat cycles {
+      digitalWriteOp _tonePin true
+      waitMicros halfCycle
+      digitalWriteOp _tonePin false
+      waitMicros halfCycle
+    }
+  }
+}
+
+to '_trimmedLowercase' s {
+  comment 'Return a copy of the given string without whitespace
+or periods and all lowercase.'
+  local 'result' (newList (size s))
+  '[data:delete]' 'all' result
+  for i (size s) {
+    local 'ch' ('[data:unicodeAt]' i s)
+    if (and (ch > 32) (ch != 46)) {
+      if (and (65 <= ch) (ch <= 90)) {ch = (ch + 32)}
+      '[data:addLast]' ch result
+    }
+  }
+  return ('[data:unicodeString]' result)
+}
+
+to 'attach buzzer to pin' pinNumber {
+  if (pinNumber == '') {
+    comment 'Pin number not specified; use default pin for this device'
+    if ((boardType) == 'Citilab ED1') {
+      _tonePin = 26
+    } ((boardType) == 'M5Stack-Core') {
+      _tonePin = 25
+    } ((boardType) == 'M5StickC') {
+      _tonePin = 26
+    } ((boardType) == 'Calliope') {
+      digitalWriteOp 23 true
+      digitalWriteOp 24 true
+      _tonePin = 25
+    } ((boardType) == 'D1-Mini') {
+      _tonePin = 12
+    } ((boardType) == 'CodingBox') {
+      _tonePin = 32
+    } else {
+      _tonePin = -1
+    }
+  } else {
+    _tonePin = pinNumber
+  }
+  _toneLoopOverhead = ('_measureLoopOverhead')
+  _toneInitalized = (booleanConstant true)
+}
+
+to 'play frequency' freq ms {
+  '_toneLoop' (freq * 1000) ms
+}
+
+to 'play tone' note octave ms {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    waitMillis ms
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to playMIDIKey key ms {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to startTone freq {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {'[io:playTone]' _tonePin freq}
+}
+
+to stopTone {
+  startTone 0
+}
+
+to tone_startMIDIKey key {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
+
+to tone_startNote note octave {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
+

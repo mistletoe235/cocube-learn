@@ -1,0 +1,670 @@
+module main
+author unknown
+version 2 0 
+description 'ESP-NOW Pong for two face-to-face CoCube robots. Both paddles are at the bottom. A moves left and B moves right.'
+variables ID selected gameStarted hasBall screenWidth screenHeight playTop paddleX oldPaddleX paddleY paddleWidth paddleHeight paddleSpeed ballX ballY oldBallX oldBallY ballDX ballDY ballRadius leftScore rightScore roundNumber transferNumber lastTransfer serveFrames readyTimer ballHorizontalSpeed ballVerticalSpeed serveDelayFrames 
+
+  spec ' ' 'choose pong side' 'choose side _ (1 host, 2 guest)' 'num' 1
+  spec ' ' 'draw pong field' 'draw pong field'
+  spec ' ' 'draw pong header' 'draw pong header'
+  spec ' ' 'start pong round' 'start round _ server _' 'num num' 1 1
+  spec ' ' 'send pong message' 'send pong message _' 'str' 'READY'
+  spec ' ' 'receive pong message' 'receive pong message _ from _' 'str num' 'READY' 2
+  spec ' ' 'update pong game' 'update pong game'
+  spec ' ' 'init' 'init'
+
+to 'bounce ball' {
+  if (ballX <= ballRadius) {
+    ballX = ballRadius
+    ballDX = (absoluteValue ballDX)
+  }
+  if (ballX >= (screenWidth - ballRadius)) {
+    ballX = (screenWidth - ballRadius)
+    ballDX = (0 - (absoluteValue ballDX))
+  }
+  if (and (ballDY > 0) (and ((ballY + ballRadius) >= paddleY) (and ((ballY - ballRadius) <= (paddleY + paddleHeight)) (and ((ballX + ballRadius) >= paddleX) ((ballX - ballRadius) <= (paddleX + paddleWidth)))))) {
+    ballY = ((paddleY - ballRadius) - 1)
+    ballDY = (0 - (absoluteValue ballDY))
+    ballDX += ((ballX - (paddleX + (paddleWidth / 2))) / 12)
+    ballDX = (maximum -5 (minimum ballDX 5))
+    'play tone' 'nt;g' 1 24
+  }
+}
+
+to 'choose pong side' side {
+  ID = side
+  selected = true
+  paddleX = ((screenWidth - paddleWidth) / 2)
+  oldPaddleX = paddleX
+  'draw pong field'
+  'send pong message' 'READY'
+}
+
+to 'draw pong field' {
+  '[tft:rect]' 0 0 screenWidth screenHeight (makeColor 5 16 30) true
+  'draw pong header'
+  '[tft:rect]' paddleX paddleY paddleWidth paddleHeight (makeColor 245 248 250) true
+}
+
+to 'draw pong header' {
+  '[tft:text]' ('[data:join]' leftScore ' : ' rightScore) 98 6 (makeColor 255 220 65) 2 false
+  if (ID == 1) {
+    '[tft:text]' 'HOST' 8 6 (makeColor 80 210 255) 2 false
+  } else {
+    '[tft:text]' 'GUEST' 8 6 (makeColor 255 125 155) 2 false
+  }
+}
+
+to 'draw pong score' {
+  '[tft:rect]' 88 4 80 22 (makeColor 5 16 30) true
+  '[tft:text]' ('[data:join]' leftScore ' : ' rightScore) 98 6 (makeColor 255 220 65) 2 false
+}
+
+to init {
+  screenWidth = ('[tft:getWidth]')
+  screenHeight = ('[tft:getHeight]')
+  playTop = 0
+  paddleWidth = 52
+  paddleHeight = 7
+  ballRadius = 5
+  paddleY = ((screenHeight - paddleHeight) - 10)
+  selected = false
+  gameStarted = false
+  hasBall = false
+  leftScore = 0
+  rightScore = 0
+  roundNumber = 0
+  readyTimer = 0
+}
+
+to 'missed ball' {
+  if (ID == 1) {
+    rightScore += 1
+  } else {
+    leftScore += 1
+  }
+  roundNumber += 1
+  local 'message' ('[data:join]' 'RESET,' roundNumber ',' ID ',' leftScore ',' rightScore)
+  'start pong round' roundNumber ID
+  'send pong message' message
+}
+
+to 'move pong paddle' {
+  if (and (buttonA) (not (buttonB))) {paddleX += (0 - paddleSpeed)}
+  if (and (buttonB) (not (buttonA))) {paddleX += paddleSpeed}
+  paddleX = (maximum 2 (minimum paddleX ((screenWidth - paddleWidth) - 2)))
+}
+
+to 'receive pong message' message sender {
+  if (not selected) {return}
+  local 'parts' ('[data:split]' message ',')
+  local 'kind' (at 1 parts)
+  if (and (kind == 'READY') (and (ID == 1) (sender == 2))) {
+    if (not gameStarted) {
+      'start pong round' 1 1
+      'send pong message' ('[data:join]' 'RESET,1,1,' leftScore ',' rightScore)
+    }
+    return
+  }
+  if (and (kind == 'RESET') ((size parts) >= 5)) {
+    local 'newRound' ((at 2 parts) + 0)
+    if (and (sender != ID) (newRound > roundNumber)) {
+      leftScore = ((at 4 parts) + 0)
+      rightScore = ((at 5 parts) + 0)
+      'start pong round' newRound ((at 3 parts) + 0)
+    }
+    return
+  }
+  if (and (kind == 'BALL') ((size parts) >= 8)) {
+    local 'messageRound' ((at 2 parts) + 0)
+    local 'messageTransfer' ((at 3 parts) + 0)
+    if (and gameStarted (and (sender != ID) (and (messageRound == roundNumber) (messageTransfer > lastTransfer)))) {
+      transferNumber = messageTransfer
+      lastTransfer = messageTransfer
+      ballX = (screenWidth - ((at 4 parts) + 0))
+      ballX = (maximum ballRadius (minimum ballX (screenWidth - ballRadius)))
+      ballY = (playTop '+' ballRadius '+' 2)
+      ballDX = (0 - ((at 5 parts) + 0))
+      ballDY = (absoluteValue ((at 6 parts) + 0))
+      leftScore = ((at 7 parts) + 0)
+      rightScore = ((at 8 parts) + 0)
+      oldBallX = ballX
+      oldBallY = ballY
+      serveFrames = 0
+      hasBall = true
+      'draw pong score'
+    }
+  }
+}
+
+to 'send ball' {
+  transferNumber += 1
+  lastTransfer = transferNumber
+  local 'message' ('[data:join]' 'BALL,' roundNumber ',' transferNumber ',' ballX ',' ballDX ',' ballDY ',' leftScore ',' rightScore)
+  hasBall = false
+  '[tft:circle]' oldBallX oldBallY (ballRadius + 1) (makeColor 5 16 30) true
+  'draw pong header'
+  'send pong message' message
+}
+
+to 'send pong message' message {
+  repeat 4 {
+    espNow_send_pair message ID
+    waitMillis 10
+  }
+}
+
+to 'start pong round' round server {
+  roundNumber = round
+  transferNumber = 0
+  lastTransfer = 0
+  gameStarted = true
+  hasBall = (ID == server)
+  paddleX = ((screenWidth - paddleWidth) / 2)
+  oldPaddleX = paddleX
+  serveFrames = serveDelayFrames
+  'draw pong field'
+  if hasBall {
+    ballX = (screenWidth / 2)
+    ballY = ((paddleY - ballRadius) - 4)
+    if ((random 1 2) == 1) {
+      ballDX = (0 - ballHorizontalSpeed)
+    } else {
+      ballDX = ballHorizontalSpeed
+    }
+    ballDY = (0 - ballVerticalSpeed)
+    oldBallX = ballX
+    oldBallY = ballY
+    '[tft:circle]' ballX ballY ballRadius (makeColor 255 215 55) true
+  }
+}
+
+to 'update pong game' {
+  if (not selected) {
+    if (and (buttonA) (not (buttonB))) {
+      'choose pong side' 1
+      waitUntil (not (buttonA))
+    }
+    if (and (buttonB) (not (buttonA))) {
+      'choose pong side' 2
+      waitUntil (not (buttonB))
+    }
+    return
+  }
+  if (not gameStarted) {
+    '[tft:rect]' oldPaddleX paddleY paddleWidth paddleHeight (makeColor 5 16 30) true
+    'move pong paddle'
+    '[tft:rect]' paddleX paddleY paddleWidth paddleHeight (makeColor 245 248 250) true
+    oldPaddleX = paddleX
+    readyTimer += 1
+    if (readyTimer >= 25) {
+      readyTimer = 0
+      'send pong message' 'READY'
+    }
+    return
+  }
+  if hasBall {
+    '[tft:circle]' oldBallX oldBallY (ballRadius + 1) (makeColor 5 16 30) true
+  }
+  '[tft:rect]' oldPaddleX paddleY paddleWidth paddleHeight (makeColor 5 16 30) true
+  'move pong paddle'
+  '[tft:rect]' paddleX paddleY paddleWidth paddleHeight (makeColor 245 248 250) true
+  oldPaddleX = paddleX
+  if (not hasBall) {
+    return
+  }
+  if (serveFrames > 0) {
+    serveFrames += -1
+    ballX = (paddleX + (paddleWidth / 2))
+    ballY = ((paddleY - ballRadius) - 4)
+  } else {
+    ballX += ballDX
+    ballY += ballDY
+    'bounce ball'
+  }
+  if (ballY < (playTop - ballRadius)) {
+    'send ball'
+    return
+  }
+  if (ballY > (screenHeight + ballRadius)) {
+    'missed ball'
+    return
+  }
+  '[tft:circle]' ballX ballY ballRadius (makeColor 255 215 55) true
+  'draw pong header'
+  oldBallX = ballX
+  oldBallY = ballY
+}
+
+script 72 130 {
+whenStarted
+paddleSpeed = 4
+ballHorizontalSpeed = 2
+ballVerticalSpeed = 3
+serveDelayFrames = 50
+init
+'[net:ESPNowSetChannel]' 13
+'[net:ESPNowSetGroup]' 239
+'[tft:clear]'
+'[tft:text]' 'DUAL PONG' 42 45 (makeColor 255 220 70) 3 false
+'[tft:text]' 'HOST: press A' 32 112 (makeColor 80 210 255) 2 false
+'[tft:text]' 'GUEST: press B' 32 150 (makeColor 255 125 155) 2 false
+forever {
+  'update pong game'
+  waitMillis 20
+}
+}
+
+script 385 133 {
+whenCondition (espNow_receive_pair)
+'receive pong message' (espNow_last_string) (espNow_last_number)
+}
+
+
+module 'ESP Now' Comm
+author MicroBlocks
+version 1 3 
+description 'Support for ESP Now peer-to-peer messaging for ESP boards.
+Unencrypted messages are broadcast to all peers within range, so pairing is not necessary and there is no limit to the number of peers.
+
+Delivery is unreliable; messages may be lost, especially when there is a lot of other WiFi and Bluetooth traffic in the 2.4 GHz band. The best channel is one without much traffic.
+
+The "pair" blocks provide functionality similar to the various Radio Libraries with data transported via ESP Now messages.
+
+When using WiFi and ESP Now at the same time, the ESP32 forces ESP Now to use the same channel as WiFi. The ESP8266 allows ESP Now and WiFi to use different channels.
+'
+variables _espNow_lastNumber _espNow_lastString 
+
+  spec ' ' 'espNow_send_pair' 'espNow send pair _ = _' 'str num' 'light' 10
+  spec 'r' 'espNow_receive_pair' 'espNow pair received?'
+  spec 'r' 'espNow_last_number' 'espNow last number'
+  spec 'r' 'espNow_last_string' 'espNow last string'
+  space
+  spec ' ' '[net:ESPNowSetGroup]' 'espNow set group _ (0-255)' 'num' 0
+  spec 'r' '[net:ESPNowGroup]' 'espNow group'
+  space
+  advanced
+  spec ' ' 'espNow_send' 'espNow send raw _' 'str' 'Hello, ESP Now!'
+  spec 'r' '[net:ESPNowReceive]' 'espNow receive raw'
+  space
+  spec ' ' '[net:ESPNowSetChannel]' 'espNow set channel _' 'menu.range:1-13' 1
+  spec 'r' '[net:ESPNowChannel]' 'espNow channel'
+
+to espNow_last_number {
+  return _espNow_lastNumber
+}
+
+to espNow_last_string {
+  return _espNow_lastString
+}
+
+to espNow_receive_pair {
+  comment 'Format of ESP Now "pair" messages:
+	tag: ''NOW'' (3 bytes)
+	separator: |
+	number n as String (variable length)
+	separator: |
+	string data s (variable length)
+Messages that are not in this format are discarded.'
+  local 'msg' ('[net:ESPNowReceive]')
+  if (or ((size msg) < 5) ('NOW' != ('[data:copyFromTo]' msg 1 3))) {
+    return (booleanConstant false)
+  }
+  local 'parts' ('[data:split]' msg '|')
+  if ((size parts) != 3) {
+    return (booleanConstant false)
+  }
+  _espNow_lastNumber = ('[data:convertType]' (at 2 parts) 'number')
+  _espNow_lastString = (at 3 parts)
+  return (booleanConstant true)
+}
+
+to espNow_send msg {
+  comment 'Send an uninterpreted string via ESP Now. Allows users to define their own protocols.'
+  '[net:ESPNowSend]' ('[data:convertType]' msg 'string')
+}
+
+to espNow_send_pair s n {
+  espNow_send ('[data:join]' 'NOW' '|' ('[data:toString]' n) '|' s)
+}
+
+
+module TFT Output
+author MicroBlocks
+version 1 19 
+description 'Draw graphics and write text on boards with a TFT display, such as the M5Stack, M5Stick, Citilab ED1 or (discontinued) IoT-Bus.'
+
+  spec ' ' '[tft:clear]' 'clear TFT display'
+  space
+  spec ' ' '[tft:rect]' 'draw rectangle on TFT at x _ y _ width _ height _ color _ : filled _' 'num num num num color bool' 10 10 40 30 nil true
+  spec ' ' '[tft:roundedRect]' 'draw rounded rectangle on TFT at x _ y _ width _ height _ radius _ color _ : filled _' 'num num num num num color bool' 10 10 40 30 8 nil true
+  spec ' ' '[tft:circle]' 'draw circle on TFT at x _ y _ radius _ color _ : filled _' 'num num num color bool' 40 40 30 nil true
+  spec ' ' '[tft:triangle]' 'draw triangle on TFT at x _ y _ , x _ y _ , x _ y _ color _ : filled _' 'num num num num num num color bool' 20 20 30 80 60 5 nil true
+  spec ' ' '[tft:line]' 'draw line on TFT from x _ y _ to x _ y _ color _' 'num num num num color' 12 8 25 15
+  spec ' ' 'tft_drawVector' 'draw vector x _ y _ angle _ length _ color _' 'num num num num color' 40 40 45 40
+  space
+  spec ' ' '[tft:text]' 'write _ on TFT at x _ y _ color _ : scale _ wrap _ : bg color _' 'str num num color num bool color' 'Hello World!' 5 5 nil 2 true
+  spec ' ' 'tft_drawText' 'draw text _ on TFT at x _ y _ color _ : scale _ : bg color _' 'str num num color num color' 'Line 1
+Line 2' 50 20 nil 2
+  space
+  spec ' ' '[tft:setPixel]' 'set TFT pixel x _ y _ to _' 'num num color' 10 10
+  spec ' ' '[tft:pixelRow]' 'draw pixel row _ x _ y _ : bytes per pixel _ : palette _' 'auto num num num str' 'aList' 0 0 4
+  spec ' ' '[tft:drawBitmap]' 'draw bitmap _ palette _ on TFT at x _ y _' 'str str num num' 'aBitmap' 'a list of colors' 10 10
+  space
+  spec 'r' 'tft_colorSwatch' '_' 'color'
+  spec 'r' 'makeColor' 'color r _ g _ b _ (0-255)' 'num num num' 0 100 100
+  spec 'r' 'makeGray' 'gray _ %' 'num' 50
+  spec 'r' 'randomColor' 'random color'
+  space
+  spec ' ' 'tft_drawImage' 'draw image _ on TFT at x _ y _ color _ : #BR# scale _' 'str num num color num' '' 0 0 nil 1
+  spec 'r' 'tft_image' 'image _' 'str' '00000
+01010
+00000
+10001
+01110'
+  space
+  spec 'r' '[tft:getWidth]' 'TFT width'
+  spec 'r' '[tft:getHeight]' 'TFT height'
+  space
+  spec ' ' '[tft:setBacklight]' 'set TFT backlight _ (0-10)' 'num' 10
+  spec ' ' '[tft:invertDisplay]' 'invert TFT display _' 'bool' false
+  advanced
+  spec ' ' 'tft_deferOLEDDisplayUpdates' 'defer OLED display updates'
+  spec ' ' 'tft_resumeOLEDDisplayUpdates' 'resume OLED display updates'
+  space
+  spec ' ' '_deferMonochromeDisplayUpdates' '_defer monochrome display updates'
+  spec ' ' '_resumeMonochromeDisplayUpdates' '_resume monochrome display updates'
+
+to '_deferMonochromeDisplayUpdates' {
+  '[tft:deferUpdates]'
+}
+
+to '_resumeMonochromeDisplayUpdates' {
+  '[tft:resumeUpdates]'
+}
+
+to makeColor r g b {
+  r = (maximum 0 (minimum r 255))
+  g = (maximum 0 (minimum g 255))
+  b = (maximum 0 (minimum b 255))
+  return ((r << 16) | ((g << 8) | b))
+}
+
+to makeGray percent {
+  gray = ((percent * 255) / 100)
+  gray = (maximum 0 (minimum gray 255))
+  return ((gray << 16) | ((gray << 8) | gray))
+}
+
+to randomColor {
+  local 'n1' (random 100 200)
+  local 'n2' (random 0 100)
+  if (1 == (random 1 3)) {
+    return ((n1 << 16) | (n2 << 8))
+  } (1 == (random 1 2)) {
+    return ((n2 << 16) | n1)
+  } else {
+    return ((n1 << 8) | n2)
+  }
+}
+
+to tft_colorSwatch color {
+  return color
+}
+
+to tft_deferOLEDDisplayUpdates {
+  '[tft:deferUpdates]'
+}
+
+to tft_drawImage imageString x y c optionalScale {
+  comment 'Draw an image at the given position. An image is represented by a multi-line string
+of 0 and 1 characters where each line is one row of the image. 1 means that pixel on (lit).'
+  local 'scale' (argOrDefault 5 1)
+  local 'left' x
+  for ch ('[data:convertType]' imageString 'byte array') {
+    if (ch == 10) {
+      y += scale
+      x = left
+    } else {
+      if (ch == 49) {'[tft:rect]' x y scale scale c}
+      x += scale
+    }
+  }
+}
+
+to tft_drawText s x y color optionalScale optionalBGColor {
+  s = ('[data:convertType]' s 'string')
+  local 'scale' (argOrDefault 5 2)
+  local 'bgColor' (argOrDefault 6 '')
+  local 'lines' ('[data:split]' s ('[data:unicodeString]' 10))
+  for line ('[data:split]' s ('[data:unicodeString]' 10)) {
+    if (isType bgColor 'number') {
+      '[tft:text]' line x y color scale false bgColor
+    } else {
+      '[tft:text]' line x y color scale false
+    }
+    y += (8 * scale)
+  }
+}
+
+to tft_drawVector x y angle length color {
+  local 'endX' (x + ((length * ('[misc:sin]' (100 * (angle + 90)))) >> 14))
+  local 'endY' (y + ((length * ('[misc:sin]' (100 * angle))) >> 14))
+  '[tft:line]' x y endX endY color
+}
+
+to tft_image s {
+  return ('[data:convertType]' s 'string')
+}
+
+to tft_resumeOLEDDisplayUpdates {
+  '[tft:resumeUpdates]'
+}
+
+
+module Tone Output
+author MicroBlocks
+version 1 11 
+tags tone sound music audio note speaker 
+choices tone_NoteName 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 
+description 'Audio tone generation. Make music with MicroBlocks!
+'
+variables _tonePin _toneInitalized _toneLoopOverhead _toneNoteNames _toneArezzoNotes _toneFrequencies 
+
+  spec ' ' 'play tone' 'play note _ octave _ for _ ms' 'str.tone_NoteName num num' 'nt;c' 0 500
+  spec ' ' 'playMIDIKey' 'play midi key _ for _ ms' 'num num' 60 500
+  spec ' ' 'play frequency' 'play frequency _ for _ ms' 'num num' 261 500
+  space
+  spec ' ' 'startTone' 'start tone _ Hz' 'num' 440
+  spec ' ' 'tone_startNote' 'start note _ octave _' 'str.tone_NoteName num' 'nt;c' 0
+  spec ' ' 'tone_startMIDIKey' 'start midi key _' 'num' 60
+  spec ' ' 'stopTone' 'stop tone'
+  space
+  spec ' ' 'attach buzzer to pin' 'attach buzzer to pin _' 'auto' ''
+  space
+  spec 'r' '_measureLoopOverhead' '_measureLoopOverhead'
+  spec 'r' '_baseFreqForNote' '_baseFreqForNote _' 'auto' 'c'
+  spec 'r' '_baseFreqForSemitone' '_baseFreqForSemitone _' 'num' 0
+  spec ' ' '_toneLoop' '_toneLoop _ for _ ms' 'num num' 440000 100
+  spec 'r' '_trimmedLowercase' '_trimmedLowercase _' 'str' 'A. b C...'
+  spec ' ' '_tone init note names' '_tone init note names'
+
+to '_baseFreqForNote' note {
+  comment 'Return the frequency for the given note in the middle-C octave
+scaled by 1000. For example, return 440000 (440Hz) for A.
+Note names may be upper or lower case. Note names
+may be followed by # for a sharp or b for a flat.'
+  local 'normalized note' ('_trimmedLowercase' note)
+  'normalized note' = (ifExpression ((at 1 (v 'normalized note')) == 'n') (v 'normalized note') ('[data:join]' 'nt;' (v 'normalized note')))
+  '_tone init note names'
+  if (('[data:find]' (v 'normalized note') _toneArezzoNotes) > 0) {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneArezzoNotes))
+  } else {
+    return ('_baseFreqForSemitone' ('[data:find]' (v 'normalized note') _toneNoteNames))
+  }
+}
+
+to '_baseFreqForSemitone' semitone {
+  if (_toneFrequencies == 0) {_toneFrequencies = ('[data:makeList]' 261626 277183 293665 311127 329628 349228 369994 391995 415305 440000 466164 493883 246942 277183 277183 311127 311127 349228 329628 369994 369994 415305 415305 466164 466164 523252)}
+  if (and (1 <= semitone) (semitone <= (size _toneFrequencies))) {
+    return (at semitone _toneFrequencies)
+  } else {
+    comment 'Bad note name; return 10 Hz'
+    return 10000
+  }
+}
+
+to '_measureLoopOverhead' {
+  comment 'Measure the loop overhead on this device'
+  local 'halfCycle' 100
+  local 'startT' (microsOp)
+  repeat 100 {
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+    digitalWriteOp _tonePin false
+    waitMicros halfCycle
+  }
+  local 'usecs' ((microsOp) - startT)
+  return ((usecs - 20000) / 200)
+}
+
+to '_tone init note names' {
+  if (_toneNoteNames == 0) {
+    _toneNoteNames = ('[data:makeList]' 'nt;c' 'nt;c#' 'nt;d' 'nt;d#' 'nt;e' 'nt;f' 'nt;f#' 'nt;g' 'nt;g#' 'nt;a' 'nt;a#' 'nt;b' 'nt;c_' 'nt;db' 'nt;d_' 'nt;eb' 'nt;e_' 'nt;e#' 'nt;f_' 'nt;gb' 'nt;g_' 'nt;ab' 'nt;a_' 'nt;bb' 'nt;b_' 'nt;b#')
+    _toneArezzoNotes = ('[data:makeList]' 'nt;do' 'nt;do#' 'nt;re' 'nt;re#' 'nt;mi' 'nt;fa' 'nt;fa#' 'nt;sol' 'nt;sol#' 'nt;la' 'nt;la#' 'nt;si' 'nt;do_' 'nt;dob' 'nt;re_' 'nt;reb' 'nt;mi_' 'nt;mi#' 'nt;fa_' 'nt;solb' 'nt;sol_' 'nt;lab' 'nt;la_' 'nt;sib' 'nt;si_' 'nt;si#')
+  }
+}
+
+to '_toneLoop' scaledFreq ms {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {
+    '[io:playTone]' _tonePin (scaledFreq / 1000)
+    waitMillis ms
+    '[io:playTone]' _tonePin 0
+  } else {
+    local 'halfCycle' ((500000000 / scaledFreq) - _toneLoopOverhead)
+    local 'cycles' ((ms * 500) / halfCycle)
+    repeat cycles {
+      digitalWriteOp _tonePin true
+      waitMicros halfCycle
+      digitalWriteOp _tonePin false
+      waitMicros halfCycle
+    }
+  }
+}
+
+to '_trimmedLowercase' s {
+  comment 'Return a copy of the given string without whitespace
+or periods and all lowercase.'
+  local 'result' (newList (size s))
+  '[data:delete]' 'all' result
+  for i (size s) {
+    local 'ch' ('[data:unicodeAt]' i s)
+    if (and (ch > 32) (ch != 46)) {
+      if (and (65 <= ch) (ch <= 90)) {ch = (ch + 32)}
+      '[data:addLast]' ch result
+    }
+  }
+  return ('[data:unicodeString]' result)
+}
+
+to 'attach buzzer to pin' pinNumber {
+  if (pinNumber == '') {
+    comment 'Pin number not specified; use default pin for this device'
+    if ((boardType) == 'Citilab ED1') {
+      _tonePin = 26
+    } ((boardType) == 'M5Stack-Core') {
+      _tonePin = 25
+    } ((boardType) == 'M5StickC') {
+      _tonePin = 26
+    } ((boardType) == 'Calliope') {
+      digitalWriteOp 23 true
+      digitalWriteOp 24 true
+      _tonePin = 25
+    } ((boardType) == 'D1-Mini') {
+      _tonePin = 12
+    } ((boardType) == 'CodingBox') {
+      _tonePin = 32
+    } else {
+      _tonePin = -1
+    }
+  } else {
+    _tonePin = pinNumber
+  }
+  _toneLoopOverhead = ('_measureLoopOverhead')
+  _toneInitalized = (booleanConstant true)
+}
+
+to 'play frequency' freq ms {
+  '_toneLoop' (freq * 1000) ms
+}
+
+to 'play tone' note octave ms {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    waitMillis ms
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to playMIDIKey key ms {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  '_toneLoop' freq ms
+}
+
+to startTone freq {
+  if (_toneInitalized == 0) {'attach buzzer to pin' ''}
+  if ('[io:hasTone]') {'[io:playTone]' _tonePin freq}
+}
+
+to stopTone {
+  startTone 0
+}
+
+to tone_startMIDIKey key {
+  local 'freq' ('_baseFreqForSemitone' ((key % 12) + 1))
+  local 'octave' ((key / 12) - 5)
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
+
+to tone_startNote note octave {
+  local 'freq' ('_baseFreqForNote' note)
+  if (freq <= 10000) {
+    return 0
+  }
+  if (octave < 0) {
+    repeat (absoluteValue octave) {
+      freq = (freq / 2)
+    }
+  }
+  repeat octave {
+    freq = (freq * 2)
+  }
+  startTone ((freq + 500) / 1000)
+}
