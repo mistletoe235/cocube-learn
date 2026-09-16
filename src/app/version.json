@@ -1,16 +1,12 @@
 {
-  "latestVersion": "1.8.0",
+  "latestVersion": "1.7.9",
   "apkUrl": "https://wiki.cocube.fun/app/apk",
   "releaseNotes": {
     "cn": [
-      "更新 MicroBlocks 与 VM：VM 396",
-      "改进 Android USB 有线连接、断开和重连稳定性",
-      "改进 Android 文件打开与保存体验"
+      "更新 MicroBlocks 版本：IDE 2.0.102 VM 390"
     ],
     "en": [
-      "Update MicroBlocks and VM: VM 396",
-      "Improve Android USB connection, disconnect, and reconnect reliability",
-      "Improve Android file open and save experience"
+      "Update MicroBlocks version：IDE 2.0.102 VM 390"
     ]
   },
   "forceUpdate": false
