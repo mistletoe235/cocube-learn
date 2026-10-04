@@ -142,12 +142,12 @@
       "en": "08 Control CoCube with App Inventor"
     },
     "cocube_appinventor_02_maze_mirror": {
-      "cn": "09 在手机上追踪迷宫里的 CoCube",
-      "en": "09 Follow CoCube Through a Maze"
+      "cn": "09 让手机显示 CoCube 的迷宫位置",
+      "en": "09 See CoCube's Position on a Maze Map"
     },
     "cocube_appinventor_03_remote": {
-      "cn": "10 做一个 CoCube 摇杆遥控器",
-      "en": "10 Build a Joystick Remote for CoCube"
+      "cn": "10 用手机摇杆驾驶 CoCube",
+      "en": "10 Steer CoCube with a Phone Joystick"
     }
   },
   "external": {

@@ -1,6 +1,6 @@
 In this activity, you will make a phone controller for CoCube with MIT App Inventor. Tap the Smile button and CoCube shows a happy face; tap Go and it moves forward a short distance before stopping.
 
-First, connect the phone and CoCube over Bluetooth Low Energy (BLE) and send a message. Then make the robot act on the message it receives.
+Your phone sends a message over Bluetooth Low Energy (BLE). CoCube receives it and responds.
 
 ### 1. Preparation
 
@@ -16,15 +16,15 @@ Connect CoCube to MicroBlocks and add the **LED Display** library. Build this re
 
 ![MicroBlocks: when smile is received, display the happy image](scriptImageSmile.png)
 
-Broadcast `smile` in MicroBlocks and check that CoCube displays a happy face. You do not need the phone yet. If CoCube cannot respond to `smile` on its own, connecting an app will not fix the receiver.
+Broadcast `smile` in MicroBlocks. Does CoCube show a happy face? You don't need the phone yet. If nothing happens, check these blocks before moving on.
 
-`smile` is a message shared by the two programs. The text on the phone and on CoCube must match exactly.
+The phone must send exactly what CoCube is waiting for: `smile`, all lowercase.
 
 ### 3. Connect from App Inventor
 
 Create a project called `CoCubeControlLearn`. Choose **Extension → Import extension** for each downloaded `.aix` file, then drag both extensions into the Designer. They appear below the phone preview. Add one **TextBox**, three **Buttons**, and one **Label** in this order: `DeviceName`, `ConnectButton`, `StatusLabel`, `SmileButton`, `GoButton`. Give the input the hint `CoCube BLE device name`. Set the visible text to `Connect`, `Disconnected`, `Smile`, and `Go`. Uncheck **Enabled** for both `SmileButton` and `GoButton` so neither action can run before a connection.
 
-Check the component names in the Designer. Rename any components still called `Button1` or `TextBox1`. The imported extensions should appear as `BluetoothLE1` and `MicroBlocks1` under **Non-visible components** below the phone preview. Importing an extension is not enough to add its blocks to the project.
+Check the component names in the Designer. Rename any components still called `Button1` or `TextBox1`. Look for `BluetoothLE1` and `MicroBlocks1` under **Non-visible components** below the phone preview. If you can't find their blocks, check that you dragged both extensions into the Designer.
 
 <p align="center"><img src="01-designer.png" alt="App Inventor Designer with English phone controls and two non-visible extensions" width="665"></p>
 
@@ -48,9 +48,9 @@ Next, look at the **connection status** blocks. Tapping Connect requests a conne
 
 The `name` input needs CoCube's **full BLE device name**. Check what MicroBlocks shows when connecting to your robot.
 
-There are **two separate connections** to make:
+**First show the app on your phone, then connect your phone to CoCube.** These are two separate steps:
 
-1. Connect the computer and phone to the same Wi-Fi network. In the App Inventor menu choose **Connect → AI Companion**. Scan the QR code with the Companion on the phone, or enter the code. When the controls appear on your phone, the Wi-Fi preview is working; the phone has not connected to CoCube yet.
+1. Connect the computer and phone to the same Wi-Fi network. In the App Inventor menu choose **Connect → AI Companion**. Scan the QR code with the Companion on the phone, or enter the code. When the buttons appear on your phone, the app preview is ready; the phone has not connected to CoCube yet.
 
 <p align="center"><img src="03-companion-wifi.png" alt="App Inventor Companion showing the Connect, Smile, and Go controls on an Android phone before connecting to CoCube" width="300"></p>
 
@@ -69,9 +69,9 @@ Back in **Blocks**, follow the Smile button example:
 
 Drag out **`when SmileButton.Click`** from the `SmileButton` drawer. Put **`call MicroBlocks1.SendMessage`** inside it, and plug in a text block containing `smile` as its `message` input.
 
-Tap the smile button in the phone preview and watch CoCube display `happy`. The phone sends `smile` over BLE; the robot receives the matching message and runs its script.
+Tap `Smile` on your phone. Does CoCube show a happy face? The phone sends `smile`; CoCube receives it and displays the `happy` picture.
 
-Temporarily change `smile` in the app to `Smile` and test again. Why does the robot stop responding? Change it back. This helps distinguish a message mismatch from a connection problem.
+Change `smile` in the app to `Smile` and tap again. Does CoCube still show a smile? Change it back and try again. The Bluetooth connection can still be working even when the messages don't match.
 
 ### 5. Move CoCube forward
 

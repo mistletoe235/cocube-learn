@@ -1,6 +1,6 @@
 这次，我们用 MIT App Inventor 给 CoCube 制作一个手机控制器。按下 `Smile`，CoCube 显示表情；按下 `Go`，它向前走一小段，然后停下。
 
-我们会先用蓝牙低功耗（BLE）把手机和 CoCube 连接起来，发送第一条消息，再让机器人根据消息执行动作。
+手机通过蓝牙低功耗（BLE）发送消息，CoCube 收到消息后就会做出相应的动作。
 
 ### 1. 准备工作
 
@@ -12,13 +12,13 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 ### 2. 让 CoCube 接收消息
 
-手机还没准备好，先让 CoCube 认识我们的第一条指令。在 MicroBlocks 中连接 CoCube，添加 **LED Display** 积木库，搭建：
+先让 CoCube 认识我们的第一条指令。在 MicroBlocks 中连接 CoCube，添加 **LED Display** 积木库，搭建：
 
 ![MicroBlocks：接收到 smile 后显示开心图案](scriptImageSmile.png)
 
 在 MicroBlocks 中发送一次 `smile` 广播。CoCube 显示笑脸了吗？如果没有，先检查这段程序：机器人自己还听不懂 `smile`，手机发来的 `smile` 也不会起作用。
 
-`smile` 是手机和机器人约定好的暗号，两边的文字必须完全一致。
+手机发出的 `smile` 必须和机器人接收的 `smile` 完全一样，大小写也不能变。
 
 ### 3. 用 App Inventor 连接 CoCube
 
@@ -32,7 +32,7 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 | Button | `SmileButton` | `Smile` |
 | Button | `GoButton` | `Go` |
 
-在右侧组件栏中确认名称与表格一致。如果还是 `Button1`、`TextBox1`，选中组件，点击 **Rename**。两个扩展应该出现在手机预览图下方的 **Non-visible components** 区域，通常叫 `BluetoothLE1` 和 `MicroBlocks1`。找不到 `MicroBlocks1` 的积木，往往就是还没有把扩展拖进去。
+在右侧组件栏中确认名称与表格一致。如果还是 `Button1`、`TextBox1`，选中组件，点击 **Rename**。两个扩展会出现在手机预览图下方的 **Non-visible components** 区域，名字分别是 `BluetoothLE1` 和 `MicroBlocks1`。如果找不到 `MicroBlocks1` 的积木，检查是否把扩展拖进了 Designer。
 
 选中 `SmileButton` 和 `GoButton`，分别在右侧属性中取消勾选 **Enabled**。机器人还没连接时，两个动作按钮都不能点击。
 
@@ -58,16 +58,16 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 `Connect` 的 `name` 需要 CoCube 的**完整蓝牙设备名**，以 MicroBlocks 中看到的名称为准。
 
-**现在要建立两次不同的连接：**先让电脑上的 App Inventor 把正在编写的界面显示到手机；再让手机上的界面连接 CoCube。
+**先把 App 显示在手机上，再让手机连接 CoCube。**这是两件事：
 
-1. 让电脑与手机接入同一个 Wi-Fi。在电脑的 App Inventor 顶部菜单点击 **Connect → AI Companion**，用手机上的 Companion 扫描二维码（或输入屏幕上的代码）。看到手机上出现控制界面，就表示 **Wi-Fi 实时预览成功**；这时还没有连接机器人。
+1. 让电脑与手机接入同一个 Wi-Fi。在电脑的 App Inventor 顶部菜单点击 **Connect → AI Companion**，用手机上的 Companion 扫描二维码（或输入屏幕上的代码）。看到手机上出现按钮，就完成了**手机预览**；这时还没有连接机器人。
 
 <p align="center"><img src="03-companion-wifi.png" alt="安卓手机上的 App Inventor Companion 实机预览，尚未连接 CoCube" width="300"></p>
 
 图中的 `Disconnected` 和灰色按钮表示手机还没连上 CoCube。
 
 2. 在 MicroBlocks IDE 中**断开与 CoCube 的 BLE 连接**，保持 CoCube 上电。手机首次连接时允许蓝牙权限。
-3. 在手机预览的 `DeviceName` 输入框中填写 CoCube 的完整设备名，再按 `Connect`。等 `StatusLabel` 显示 `Connected`，两个动作按钮变得可用，才算完成**手机与 CoCube**的 BLE 连接。
+3. 在手机界面的 `DeviceName` 输入框中填写 CoCube 的完整设备名，再按 `Connect`。等 `StatusLabel` 显示 `Connected`，`Smile` 和 `Go` 按钮可以点击，手机就连上了 CoCube。
 
 <p align="center"><img src="04-cocube-connected.png" alt="手机已连接蓝牙名称为 MicroBlocks GDK 的 CoCube，Smile 与 Go 按钮可用" width="300"></p>
 
@@ -81,9 +81,9 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 从 `SmileButton` 抽屉拖出 **`when SmileButton.Click`**，放入 **`call MicroBlocks1.SendMessage`**，再把 **Text** 抽屉中的文本块填为 `smile`，接到 `message`。
 
-现在点击手机预览中的 `Smile`。如果 CoCube 显示 `happy` 图案，我们的第一条手机指令就成功了：**按钮发送 `smile` → CoCube 收到 `smile` → 执行显示程序**。
+现在点击手机上的 `Smile`。CoCube 显示笑脸了吗？手机发出 `smile`，CoCube 收到相同的消息，就会显示 `happy` 图案。
 
-来做一个小实验：把 App 里的 `smile` 改成 `Smile`，再按一次。笑脸还会出现吗？改回去后呢？蓝牙可能一直连着，但暗号只要有一个字母不同，机器人就不会执行对应程序。
+试着把 App 里的 `smile` 改成 `Smile`，再按一次。笑脸还会出现吗？改回去后呢？蓝牙虽然连着，消息只要有一个字母不同，CoCube 就不会运行这段积木。
 
 ### 5. 让 CoCube 向前走
 
