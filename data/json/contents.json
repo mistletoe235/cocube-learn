@@ -143,6 +143,18 @@
       "cn": "07 ESP-NOW 跟上前面的车",
       "en": "07 ESP-NOW Follow the Car Ahead",
       "es": "07 Seguir al coche de delante con ESP-NOW"
+    },
+    "cocube_appinventor_01_control": {
+      "cn": "08 用 App Inventor 控制 CoCube",
+      "en": "08 Control CoCube with App Inventor"
+    },
+    "cocube_appinventor_02_maze_mirror": {
+      "cn": "09 在手机上追踪迷宫里的 CoCube",
+      "en": "09 Follow CoCube Through a Maze"
+    },
+    "cocube_appinventor_03_remote": {
+      "cn": "10 做一个 CoCube 摇杆遥控器",
+      "en": "10 Build a Joystick Remote for CoCube"
     }
   },
   "external": {
