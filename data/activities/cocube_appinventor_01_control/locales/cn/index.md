@@ -1,10 +1,8 @@
-### 用手机给 CoCube 发指令
-
 这次，我们用 MIT App Inventor 给 CoCube 制作一个手机控制器。按下 `Smile`，CoCube 显示表情；按下 `Go`，它向前走一小段，然后停下。
 
 我们会先用蓝牙低功耗（BLE）把手机和 CoCube 连接起来，发送第一条消息，再让机器人根据消息执行动作。
 
-#### 1. 准备工作
+### 1. 准备工作
 
 准备一台 CoCube、一部 Android 手机和一台电脑。
 
@@ -12,7 +10,7 @@
 
 App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**MicroBlocks** 负责发送消息。先从 [MicroBlocks 的扩展说明](https://wiki.microblocks.fun/en/appinventor/ai2extension)下载这两个 `.aix` 文件。
 
-#### 2. 先教 CoCube 听懂 `smile`
+### 2. 让 CoCube 接收消息
 
 手机还没准备好，先让 CoCube 认识我们的第一条指令。在 MicroBlocks 中连接 CoCube，添加 **LED Display** 积木库，搭建：
 
@@ -22,7 +20,7 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 `smile` 是手机和机器人约定好的暗号，两边的文字必须完全一致。
 
-#### 3. 给手机做一个连接按钮
+### 3. 用 App Inventor 连接 CoCube
 
 在 App Inventor 中新建项目，命名为 `CoCubeControlLearn`。点击 **Extension → Import extension**，分别导入准备好的两个 `.aix` 文件，再将它们拖进 **Designer**。接着按顺序放入五个可见组件，组件名称与屏幕文字都用英文：
 
@@ -62,21 +60,20 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 **现在要建立两次不同的连接：**先让电脑上的 App Inventor 把正在编写的界面显示到手机；再让手机上的界面连接 CoCube。
 
-1. 让电脑与手机接入同一个 Wi-Fi。在电脑的 App Inventor 顶部菜单点击 **Connect → AI Companion**，打开二维码。
-2. 在手机上启动 App Inventor Companion，扫描二维码（或输入屏幕上的代码）。看到手机上出现控制界面，就表示 **Wi-Fi 实时预览成功**；这时还没有连接机器人。
+1. 让电脑与手机接入同一个 Wi-Fi。在电脑的 App Inventor 顶部菜单点击 **Connect → AI Companion**，用手机上的 Companion 扫描二维码（或输入屏幕上的代码）。看到手机上出现控制界面，就表示 **Wi-Fi 实时预览成功**；这时还没有连接机器人。
 
 <p align="center"><img src="03-companion-wifi.png" alt="安卓手机上的 App Inventor Companion 实机预览，尚未连接 CoCube" width="300"></p>
 
 图中的 `Disconnected` 和灰色按钮表示手机还没连上 CoCube。
 
-3. 在 MicroBlocks IDE 中**断开与 CoCube 的 BLE 连接**，保持 CoCube 上电。手机首次连接时允许蓝牙权限。
-4. 在手机预览的 `DeviceName` 输入框中填写 CoCube 的完整设备名，再按 `Connect`。等 `StatusLabel` 显示 `Connected`，两个动作按钮变得可用，才算完成**手机与 CoCube**的 BLE 连接。
+2. 在 MicroBlocks IDE 中**断开与 CoCube 的 BLE 连接**，保持 CoCube 上电。手机首次连接时允许蓝牙权限。
+3. 在手机预览的 `DeviceName` 输入框中填写 CoCube 的完整设备名，再按 `Connect`。等 `StatusLabel` 显示 `Connected`，两个动作按钮变得可用，才算完成**手机与 CoCube**的 BLE 连接。
 
 <p align="center"><img src="04-cocube-connected.png" alt="手机已连接蓝牙名称为 MicroBlocks GDK 的 CoCube，Smile 与 Go 按钮可用" width="300"></p>
 
 如果界面已出现，却始终显示 `Disconnected`，检查机器人设备名和 MicroBlocks 的 BLE 连接，而不是重新扫码。
 
-#### 4. 按一下，让 CoCube 笑出来
+### 4. 发送第一条消息
 
 回到 **Blocks**，对照下图搭建笑脸按钮：
 
@@ -88,7 +85,7 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 来做一个小实验：把 App 里的 `smile` 改成 `Smile`，再按一次。笑脸还会出现吗？改回去后呢？蓝牙可能一直连着，但暗号只要有一个字母不同，机器人就不会执行对应程序。
 
-#### 5. 让机器人走一小段
+### 5. 让 CoCube 向前走
 
 显示表情不需要担心机器人跑出场地；运动就不同了。我们先让它只走 **400 毫秒**，到时间自动刹车。
 
@@ -108,20 +105,22 @@ App Inventor 还需要两个扩展：**BluetoothLE** 负责蓝牙连接，**Micr
 
 > 在地面上测试，不要靠近桌边；也不要用断开蓝牙的方式停车。
 
-#### 6. 遇到问题怎么办？
+### 6. 遇到问题怎么办？
 
-**连接不上 CoCube？**检查手机的蓝牙权限，确认输入的是本机完整设备名，并确保 MicroBlocks IDE 已经断开 BLE。如果找不到扩展的积木，检查两个 `.aix` 文件是否都已导入；必要时重启 Companion。
+#### 找不到或连接不上 CoCube
 
-**手机显示 `Connected`，却没有笑脸？**先回到第 2 步，在 MicroBlocks 中单独测试 `smile`。机器人端没问题，再核对手机发出的文字，特别是大小写。
+检查手机的蓝牙权限，确认输入的是本机完整设备名，并确保 MicroBlocks IDE 已经断开 BLE。如果找不到扩展的积木，检查两个 `.aix` 文件是否都已导入；必要时重启 Companion。
 
-**笑脸能显示，前进却没有反应？**检查 App 是否发送 `go`，CoCube 是否“当接收到 `go`”；也可以在 MicroBlocks 中单独运行限时移动积木，看看电机是否正常。
+#### 手机显示 `Connected`，CoCube 却没有反应
 
-#### 7. 挑战一下
+先回到第 2 步，在 MicroBlocks 中单独测试 `smile`。机器人端没问题，再核对手机发出的文字，特别是大小写。如果笑脸能显示，前进却没有反应，检查 App 是否发送 `go`，CoCube 是否有接收 `go` 的脚本；也可以在 MicroBlocks 中单独运行限时移动积木，看看电机是否正常。
+
+### 7. 挑战一下
 
 为手机加一个“左转”按钮，让 CoCube 转动一小段时间后停下。先猜转过了多少度，再把机器人放在定位垫上读出实际方向。如果猜错了，应该调整转动速度，还是持续时间？试着修改一项，再测一次。
 
 现在，手机已经会向机器人**发指令**了。下一步，试着让 CoCube 把自己的位置**发回手机**。
 
-#### 8. 查看与分享完整作品
+### 8. 查看与分享完整作品
 
 完成后对照 [App Inventor 控制器（.aia）](CoCubeControlLearn.aia)和 [CoCube 接收程序（.ubp）](CoCubeControlLearn.ubp)。下载 `.aia` 后，在 App Inventor 选择 **Projects → Import project (.aia) from my computer**；`.ubp` 在 MicroBlocks 中打开。分享完成版，可以发送这两个下载链接；分享自己修改的 App，则用 **Projects → Export selected project (.aia) to my computer** 导出文件。

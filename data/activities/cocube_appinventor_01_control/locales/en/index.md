@@ -87,7 +87,7 @@ Add this script to CoCube:
 
 Use the **CoCube move ... for ... msecs** block, not the continuous move block. The timed block brakes the robot at the end of the interval. Place CoCube in the open test area, predict how far it will travel, and tap Go.
 
-Try a different duration and measure again. Does the robot travel exactly the same distance on each of three trials? Consider how the surface, speed, and battery might affect the result. This command controls **time**, not a destination on the map. Reaching a maze waypoint will require position feedback.
+Mark the starting point and measure the distance on three trials. Does the robot travel exactly the same distance each time? Change the duration from `400` to `600` milliseconds and try again. This command controls **time**, not a destination on the map. Reaching a maze waypoint will require position feedback.
 
 > Test on the floor, away from table edges. Do not use Bluetooth disconnection as a stop command.
 
