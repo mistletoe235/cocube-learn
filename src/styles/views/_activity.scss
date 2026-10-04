@@ -206,6 +206,12 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .v_activity .sidebar-toggle {
+    position: absolute;
+  }
+}
+
 .sidebar-toggle__icon {
   display: block;
   width: 24px;

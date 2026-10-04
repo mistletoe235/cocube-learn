@@ -245,7 +245,8 @@
     }
   }
 
-  p code {
+  p code,
+  li code {
     display: inline;
     padding-right: $space-025;
     padding-left: $space-025;
@@ -257,6 +258,10 @@
     font-family: $font-display;
     font-weight: 500;
     background-color: $color-script-pane;
+  }
+
+  strong code {
+    font-weight: 700;
   }
 
 
