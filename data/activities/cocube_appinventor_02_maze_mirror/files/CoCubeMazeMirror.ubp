@@ -20,7 +20,7 @@ whenStarted
 forever {
   if ('[ble:bleConnected]') {
     if ('CoCube on the mat') {
-      sendBroadcast ('[data:joinStrings]' ('[data:makeList]' 'pos,' (round ('CoCube position_X')) ',' (round ('CoCube position_Y'))) '')
+      sendBroadcast ('[data:joinStrings]' ('[data:makeList]' 'pos,' ('CoCube position_X') ',' ('CoCube position_Y')) '')
     } else {
       sendBroadcast 'off-map'
     }

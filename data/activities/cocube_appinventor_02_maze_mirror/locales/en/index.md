@@ -4,9 +4,9 @@ This time, show CoCube's real movement on the maze map on your phone. Move CoCub
 
 ### 1. Get the maze ready
 
-You will need CoCube, its maze CoMap, an Android phone, and your App Inventor and MicroBlocks projects from the previous activity. Put the CoMap on a flat surface with **A** near the top left. Start by moving CoCube **by hand**, not by pressing Go.
+You will need CoCube, the production maze CoMap, an Android phone, and your App Inventor and MicroBlocks projects from the previous activity. Put the CoMap on a flat surface with **A** near the top left. Start by moving CoCube **by hand**, not by pressing Go.
 
-Here is the [maze image for the phone](maze-map.png). It is 300 × 200 pixels. On this CoMap, X goes from 0 to 300 across the page and Y goes from 0 to 200 down the page. App Inventor's Canvas also starts counting at the top left. That means you can draw a dot using CoCube's `(X, Y)`. Turn the CoMap around, though, and the dot will no longer match CoCube's real position.
+Here is the [maze image for the phone](maze-map.png), cropped from the [production maze map](comaps-maze-map.png) to match its coordinates. It is 300 × 200 pixels. On this CoMap, X goes from 0 to 300 across the page and Y goes from 0 to 200 down the page. App Inventor's Canvas also starts counting at the top left. That means you can draw a dot using CoCube's `(X, Y)`. Turn the CoMap around, though, and the dot will no longer match CoCube's real position.
 
 ### 2. Make CoCube report its position
 
@@ -14,7 +14,7 @@ Open your CoCube program in MicroBlocks. Keep the `smile` and `go` receivers. Ad
 
 ![MicroBlocks script that sends CoCube's position every half-second while it is on the mat](scriptImagePosition.png)
 
-When CoCube is on the mat and connected, it sends a message like `pos,125,62` every 500 milliseconds. `pos` means position; the next two numbers are X and Y. The commas help the phone separate the three parts. Off the mat, CoCube sends `off-map` instead. Before opening the phone app, try the **CoCube on the mat**, **CoCube position_X**, and **CoCube position_Y** blocks in MicroBlocks while CoCube is on the CoMap. Do the numbers change as you move it by hand?
+When CoCube is on the mat and connected, it sends a message like `pos,125.5,62.25` every 500 milliseconds. `pos` means position; the next two numbers are X and Y, which can have decimal places. The commas help the phone separate the three parts. Off the mat, CoCube sends `off-map` instead. Before opening the phone app, try the **CoCube on the mat**, **CoCube position_X**, and **CoCube position_Y** blocks in MicroBlocks while CoCube is on the CoMap. Do the numbers change as you move it by hand?
 
 Make sure the new script is running on CoCube. Then disconnect MicroBlocks from CoCube so your phone can connect to it.
 

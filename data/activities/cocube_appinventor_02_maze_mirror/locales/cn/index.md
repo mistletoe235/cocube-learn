@@ -4,9 +4,9 @@ CoCube 走在迷宫里，手机上也有一张相同的迷宫图。能不能让�
 
 ### 1. 摆好迷宫
 
-准备 CoCube、迷宫定位垫、Android 手机，以及上一节的 App Inventor 和 MicroBlocks 项目。把定位垫平放，让印有 **A** 的一角位于左上方。先用**手**移动 CoCube，暂时不用 Go。
+准备 CoCube、量产版迷宫定位垫、Android 手机，以及上一节的 App Inventor 和 MicroBlocks 项目。把定位垫平放，让印有 **A** 的一角位于左上方。先用**手**移动 CoCube，暂时不用 Go。
 
-这张[手机迷宫图片](maze-map.png)宽 300、高 200 像素。定位垫上的 X 从左到右是 0～300，Y 从上到下是 0～200。App Inventor 的 Canvas 也从左上角开始数，所以 CoCube 报告的 `(X, Y)` 可以直接用来画圆点。如果把定位垫转了方向，手机上的圆点就对不上实际位置。
+这张[手机迷宫图片](maze-map.png)由[量产版迷宫原图](comaps-maze-map.png)按坐标范围裁出，宽 300、高 200 像素。定位垫上的 X 从左到右是 0～300，Y 从上到下是 0～200。App Inventor 的 Canvas 也从左上角开始数，所以 CoCube 报告的 `(X, Y)` 可以直接用来画圆点。如果把定位垫转了方向，手机上的圆点就对不上实际位置。
 
 ### 2. 让 CoCube 报告位置
 
@@ -14,7 +14,7 @@ CoCube 走在迷宫里，手机上也有一张相同的迷宫图。能不能让�
 
 ![CoCube 位于定位垫上时，每隔半秒发送一次当前位置的 MicroBlocks 积木](scriptImagePosition.png)
 
-CoCube 连上手机、位于定位垫上时，每隔 500 毫秒发送一次类似 `pos,125,62` 的消息。`pos` 表示位置，后面两个数字分别是 X 和 Y；逗号让手机能把三部分分开。CoCube 离开定位垫时，改发 `off-map`。打开手机应用前，先在 MicroBlocks 中试试 **CoCube on the mat**、**CoCube position_X** 和 **CoCube position_Y**：用手移动机器人，数字会变化吗？
+CoCube 连上手机、位于定位垫上时，每隔 500 毫秒发送一次类似 `pos,125.5,62.25` 的消息。`pos` 表示位置，后面两个数字分别是 X 和 Y，坐标可以带小数；逗号让手机能把三部分分开。CoCube 离开定位垫时，改发 `off-map`。打开手机应用前，先在 MicroBlocks 中试试 **CoCube on the mat**、**CoCube position_X** 和 **CoCube position_Y**：用手移动机器人，数字会变化吗？
 
 确认新脚本已经在 CoCube 上运行，然后断开 MicroBlocks 与 CoCube 的连接，让手机连接它。
 
