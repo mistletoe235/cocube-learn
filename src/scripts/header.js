@@ -6,6 +6,7 @@ var menuToggle = function() {
 
   let toggleButton = document.querySelector('.menu-toggle');
   let menu = document.querySelector('.menu');
+  if (!toggleButton || !menu) return;
   var menuVisible = false;
 
   toggleButton.addEventListener('click', function(e) {
