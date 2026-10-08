@@ -238,6 +238,8 @@
   // 移动端样式
   @media (max-width: 1024px) {
     transform: translateX(-100%); // 默认隐藏到左侧
+    top: $space-350;
+    height: calc(100% - #{$space-350});
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     
     // 打开状态
@@ -270,6 +272,9 @@
 
   @media (max-width: 1024px) {
     display: block;
+    position: sticky;
+    margin-left: auto;
+    background-color: white;
   }
 }
 
