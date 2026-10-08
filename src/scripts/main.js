@@ -11,8 +11,15 @@ function autorun(){
 
   // Page Home
   if ( body.classList.contains('v_home') ) {
-    filtersResponsiveness();
-    homeHero();
+    if (document.querySelector('.c_filters') &&
+        document.querySelector('.v_home__filters-button') &&
+        document.querySelector('.c_filters__mobile-close')) {
+      filtersResponsiveness();
+    }
+    if (document.querySelector('svg #MicroBlocks') &&
+        document.querySelector('svg #letter-l')) {
+      homeHero();
+    }
   }
 
   // Page has WYSIWYG elements
