@@ -40,7 +40,14 @@ Items in a list start at **1**, so X is item 2 and Y is item 3. `Clear` removes 
 
 ### 5. Does the dot follow CoCube?
 
-Connect the phone to CoCube as you did in the previous activity. Place CoCube at **A** on the physical map. Does the red dot appear near **A** on the phone? Now move it slowly by hand to **B** and **C**. Before looking at the phone, predict which number should change more: X or Y. Check the numbers below the image as well as the dot.
+First show your app on the phone, then connect to CoCube:
+
+1. Connect the computer and phone to the same Wi-Fi network. In App Inventor, choose **Connect → AI Companion**. Scan the QR code with the Companion on your phone, or enter the six-letter code and tap **connect with code**. Wait for the maze screen to appear on your phone.
+2. Keep CoCube switched on with its position script running, and disconnect the computer's MicroBlocks BLE connection. Enter the full device name shown in MicroBlocks, such as `CoCube QCX`, in the phone's `DeviceName` box and tap Connect. When the status says `Connected`, the position dot should appear.
+
+If the phone stays on the code screen and the computer reports a connection failure, close and reopen the Companion. On the computer, choose **Connect → Reset Connection**, then **AI Companion**, and connect using the new code. Make sure the input contains only the new six-letter code.
+
+Place CoCube at **A** on the physical map. Does the red dot appear near **A** on the phone? Now move it slowly by hand to **B** and **C**. You can also start at **E**, or another spot that's easy to reach. Before looking at the phone, predict which number should change more: X or Y. Check the numbers below the image as well as the dot.
 
 Lift CoCube off the CoMap. The dot should disappear and the label should ask you to put it back. If the dot stays still, check whether the two **CoCube position** blocks change in MicroBlocks; if they do, check the phone's connection and the `pos,` message. If the dot moves in the wrong direction, check the CoMap's orientation and that `centerX` uses item 2, while `centerY` uses item 3.
 

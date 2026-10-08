@@ -40,7 +40,14 @@ CoCube 连上手机、位于定位垫上时，每隔 500 毫秒发送一次类�
 
 ### 5. 看看红点跟得上吗？
 
-像上一节一样用手机连接 CoCube。把 CoCube 放在真实地图的 **A** 点附近，手机上的红点也在 **A** 附近吗？再用手缓缓移动到 **B** 和 **C**。看手机之前，先猜猜：X 和 Y 哪个变化更大？除了红点，也观察图片下方的数字。
+先让手机显示你的 App，再连接 CoCube：
+
+1. 电脑和手机接入同一个 Wi-Fi。在 App Inventor 选择 **Connect → AI Companion**，用手机上的 Companion 扫二维码；也可以输入六位码，再点击 **connect with code**。等迷宫界面出现在手机上。
+2. 保持 CoCube 开机、位置发送脚本运行，让电脑的 MicroBlocks 断开与它的 BLE 连接。在手机的 `DeviceName` 中输入 MicroBlocks 显示的完整设备名，例如 `CoCube QCX`，点击 Connect。状态变成 `Connected` 后，位置圆点就会出现。
+
+如果手机还停在六位码页面、电脑提示连接失败，关闭并重新打开 Companion，在电脑的 **Connect** 菜单中选择 **Reset Connection**，再选择 **AI Companion**，用新码连接。输入框里只保留这一次的六位码。
+
+把 CoCube 放在真实地图的 **A** 点附近，手机上的红点也在 **A** 附近吗？再用手缓缓移动到 **B** 和 **C**。也可以从 **E** 等方便放置的位置开始。看手机之前，先猜猜：X 和 Y 哪个变化更大？除了红点，也观察图片下方的数字。
 
 把 CoCube 从定位垫上拿起来。圆点应该消失，标签应该提示你放回迷宫。如果圆点不动，先在 MicroBlocks 里看两个 **CoCube position** 数字是否变化；如果数字会变，再检查手机连接状态和 `pos,` 消息。如果圆点朝反方向走，看看定位垫有没有放反，并确认 `centerX` 用第 2 项、`centerY` 用第 3 项。
 
