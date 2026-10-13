@@ -15,7 +15,9 @@
 
 ![](image-2.png)
 
-2. [Snap](http://snap.codelab.club/snap.html)
+2. Snap!
+   - [打开“Snap! 在线版”](http://snap.codelab.club/snap.html)
+   - [下载“Snap! Windows 离线版 1.0.1”](https://cocube-downloads-481719140852-ap-east-1.s3.ap-east-1.amazonaws.com/software/Snap_offline_1.0.1.exe)
 
 ![](img3.png)
 
