@@ -13,7 +13,9 @@
 
 ![](image-2.png)
 
-2. [Snap](http://snap.codelab.club/snap.html)
+2. Snap!
+   - [**Abrir la versión en línea**](http://snap.codelab.club/snap.html)
+   - [**Descargar la versión sin conexión para Windows (Snap! offline 1.0.1)**](https://cocube-downloads-481719140852-ap-east-1.s3.ap-east-1.amazonaws.com/software/Snap_offline_1.0.1.exe)
 
 ![](img3.png)
 

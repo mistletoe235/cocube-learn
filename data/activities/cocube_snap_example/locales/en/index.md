@@ -15,7 +15,9 @@ Master multi-robot cluster control technology by programming four CoCube robots 
 
 ![](image-2.png)
 
-2. [Snap](http://https://snap.berkeley.edu//snap.html)
+2. Snap!
+   - [**Open the online version**](http://snap.codelab.club/snap.html)
+   - [**Download the Windows offline version (Snap! offline 1.0.1)**](https://cocube-downloads-481719140852-ap-east-1.s3.ap-east-1.amazonaws.com/software/Snap_offline_1.0.1.exe)
 
 ![](img3.png)
 
