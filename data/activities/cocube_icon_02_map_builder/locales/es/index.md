@@ -49,9 +49,11 @@ Map Builder crea el fondo ilustrado. El robot obtiene su posición del tapete tr
 1. Introduce el mapa impreso, bien plano, en el tapete transparente.
 2. Alinea los bordes de la cuadrícula del papel y del tapete.
 3. Coloca CoCube en el centro de la casilla **Start**.
-4. Crea un programa con ICON para llegar a **End** o pasar por todas las **Reward**.
+4. Crea un programa con ICON o MicroBlocks para llegar a **End** o pasar por todas las **Reward**.
 
 [Lee Primeros pasos con ICON](../cocube_icon_01_start-es/) para aprender a avanzar, girar, ejecutar y depurar.
+
+Para MicroBlocks, consulta [Uso de la CoMap](../cocube_basic_04_comap-es/).
 
 ### 6. Retos para el aula
 

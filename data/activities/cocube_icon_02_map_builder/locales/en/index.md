@@ -47,9 +47,11 @@ Map Builder creates the illustrated background. The robot gets its position from
 1. Insert the printed map flat inside the transparent positioning mat.
 2. Align the grid edges of the print and the mat.
 3. Put CoCube at the center of the **Start** cell.
-4. Build an ICON program to reach **End** or visit every **Reward**.
+4. Build a program in ICON or MicroBlocks to reach **End** or visit every **Reward**.
 
 [Read Getting Started with ICON](../cocube_icon_01_start-en/) to learn movement, turns, running, and debugging.
+
+For MicroBlocks, see [Using the CoMap](../cocube_basic_04_comap-en/).
 
 ### 6. Classroom challenges
 

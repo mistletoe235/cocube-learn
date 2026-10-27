@@ -101,11 +101,13 @@
       "cn": "01 ICON 编程快速入门",
       "en": "01 Getting Started with ICON",
       "es": "01 Primeros pasos con ICON"
-    },
+    }
+  },
+  "maps": {
     "cocube_icon_02_map_builder": {
-      "cn": "02 地图设计软件",
-      "en": "02 Map Builder",
-      "es": "02 Diseñador de mapas"
+      "cn": "地图设计软件",
+      "en": "Map Builder",
+      "es": "Diseñador de mapas"
     }
   },
   "game": {

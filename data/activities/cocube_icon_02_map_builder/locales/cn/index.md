@@ -49,9 +49,11 @@ CoCube Map Builder 是配合透明定位垫使用的在线地图设计工具。�
 1. 将打印地图平整地装进透明定位垫内。
 2. 对齐打印地图和透明定位垫的网格边缘。
 3. 将机器人放在 **Start** 所在格子的中心。
-4. 用 ICON 编写路线，让机器人到达 **End**，或经过所有 **Reward**。
+4. 用 ICON 或 MicroBlocks 编写路线，让机器人到达 **End**，或经过所有 **Reward**。
 
 [阅读 ICON 编程快速入门](../cocube_icon_01_start-cn/)，学习前进、转弯、运行和调试。
+
+使用 MicroBlocks 时，可以参考 [定位垫的使用](../cocube_basic_04_comap-cn/)。
 
 ### 6. 课堂挑战
 
