@@ -73,7 +73,7 @@
     <div class="row">
 
         <!-- 移动端目录切换按钮 -->
-        <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+        <button class="sidebar-toggle" aria-label="{{localize 'contents-open'}}">
             <span class="sidebar-toggle__icon"></span>
             <span class="sidebar-toggle__icon"></span>
             <span class="sidebar-toggle__icon"></span>
@@ -83,7 +83,7 @@
         <div class="col col-px col-12 lg-col-3 xl-col-3">
             <div class="sidebar" id="sidebar">
                 <!-- 关闭按钮(仅移动端显示) -->
-                <button class="sidebar-close" aria-label="Close Sidebar">
+                <button class="sidebar-close" aria-label="{{localize 'contents-close'}}">
                     <span>&times;</span>
                 </button>
                 
@@ -92,6 +92,20 @@
                         <span class="contents_toggle">Basic <span class="arrow">&#9660;</span></span>
                         <ul class="submenu">
                             {{#each contents.basic}}
+                            {{#if (lan_json_key this ../locale.code)}}
+                                <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
+                                    <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">
+                                        {{lan_json_key this ../locale.code}}
+                                    </a>
+                                </li>
+                            {{/if}}
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="contents_toggle">{{localize "contents-icon"}} <span class="arrow">&#9660;</span></span>
+                        <ul class="submenu">
+                            {{#each contents.icon}}
                             {{#if (lan_json_key this ../locale.code)}}
                                 <li class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{/if}}">
                                     <a href="../{{@key}}-{{../locale.code}}/" class="{{#if (eq (lan_json_key this ../locale.code) ../title)}}blue-background{{else}}v_activity__details-link {{/if}}">

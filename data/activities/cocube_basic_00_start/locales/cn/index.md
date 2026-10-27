@@ -81,3 +81,8 @@ MicroBlocks 是受 Scratch 启发，为“物理计算”而生的图形化编�
 不要被吓到，相信我，小学二年级的小朋友只需要5分钟就可以上手如何为 CoCube 编程了！你也可以！
 
 ![](image-2.png)
+
+
+### ICON 图标编程与地图设计
+
+想从图标积木开始？阅读 [ICON 编程快速入门](../cocube_icon_01_start-cn/)。也可以用 [地图设计软件](../cocube_icon_02_map_builder-cn/) 制作自己的主题地图。

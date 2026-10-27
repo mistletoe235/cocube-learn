@@ -24,5 +24,8 @@
     "btn-printable": "Printable Version",
     "cc-license": "This work is licensed under a CC-BY-SA 4.0 license.",
     "contents-iot": "IoT",
-    "contents-game": "Game"
+    "contents-game": "Game",
+    "contents-icon": "ICON programming",
+    "contents-open": "Open contents",
+    "contents-close": "Close contents"
 }

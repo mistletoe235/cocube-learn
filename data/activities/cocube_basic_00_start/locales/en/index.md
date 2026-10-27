@@ -77,3 +77,8 @@ Programming Environment: [MicroBlocks-CoCube](https://microblocks.fun/run/microb
 Don't be intimidated; believe me, a second-grade elementary school student can learn to program CoCube in just 5 minutes! You can do it too!
 
 ![](microblocks.jpeg)
+
+
+### ICON programming and map design
+
+Prefer to start with picture blocks? Read [Getting Started with ICON](../cocube_icon_01_start-en/). Use [Map Builder](../cocube_icon_02_map_builder-en/) to create your own themed maps.

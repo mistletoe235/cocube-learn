@@ -23,5 +23,8 @@
     "printable-txt": "你可以获得一个方便打印的版本或者将之保存为 PDF.",
     "btn-printable": "打印版",
     "contents-iot": "IoT",
-    "contents-game": "Game"
+    "contents-game": "Game",
+    "contents-icon": "ICON 图标编程",
+    "contents-open": "打开目录",
+    "contents-close": "关闭目录"
 }

@@ -92,3 +92,7 @@ Use the coordinate feedback function and point-to-point movement function of the
 Reference example program: [MicroBlocks —— CoCube Case 03 Maze Challenge](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 
 You may find that CoCube turns too quickly and is not stable enough. We can slow down the speed and move after facing a specific angle at each coordinate point. Give it a try!
+
+### ICON programming and map design
+
+Prefer to start with picture blocks? Read [Getting Started with ICON](../cocube_icon_01_start-en/). Use [Map Builder](../cocube_icon_02_map_builder-en/) to create your own themed maps.

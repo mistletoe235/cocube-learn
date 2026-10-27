@@ -93,3 +93,8 @@ Utilice la función de retroalimentación de coordenadas y la función de movimi
 Programa de muestra de referencia: [MicroBlocks--CoCube Case 03 Maze Challenge](https://microblocks.fun/run/microblocks.html#scripts=GP%20Scripts%0Adepends%20%27CoCube%27%0A%0Ascript%20437%20194%20%7B%0A%27CoCube%20move%20to%27%20124%2022%2040%0A%27CoCube%20move%20to%27%20124%2053%2040%0A%27CoCube%20move%20to%27%20155%2053%2040%0A%27CoCube%20move%20to%27%20156%20118%2040%0A%27CoCube%20move%20to%27%20286%20118%2040%0A%27CoCube%20move%20to%27%20286%20180%2040%0A%27CoCube%20move%20to%27%20223%20180%2040%0A%27CoCube%20move%20to%27%20220%20150%2040%0A%27CoCube%20move%20to%27%20155%20150%2040%0A%27CoCube%20move%20to%27%20155%20180%2040%0A%7D%0A%0A)
 
 Es posible que descubras que el CoCube es demasiado rápido y no lo suficientemente suave como para hacer giros, y podemos movernos a una velocidad más pequeña hacia un ángulo específico después de cada punto de coordenadas. ¡Pruébalo tú mismo!
+
+
+### Programación con ICON y diseño de mapas
+
+¿Quieres empezar con bloques de imágenes? Lee [Primeros pasos con ICON](../cocube_icon_01_start-es/). Usa el [diseñador de mapas](../cocube_icon_02_map_builder-es/) para crear tus propios mapas temáticos.

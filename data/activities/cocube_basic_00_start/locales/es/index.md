@@ -79,3 +79,8 @@ página: [MicroBlocks-CoCube](https://microblocks.fun/run/microblocks.html#scrip
 No te dejes intimidar, créeme, ¡solo se necesitan 5 minutos para que los niños de 2º año comiencen a programar CoCube! ¡Tú también puedes!
 
 ![](microblocks.jpeg)
+
+
+### Programación con ICON y diseño de mapas
+
+¿Quieres empezar con bloques de imágenes? Lee [Primeros pasos con ICON](../cocube_icon_01_start-es/). Usa el [diseñador de mapas](../cocube_icon_02_map_builder-es/) para crear tus propios mapas temáticos.

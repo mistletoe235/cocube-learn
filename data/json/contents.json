@@ -96,6 +96,18 @@
       "es": "18 Grabar y reproducir música"
     }
   },
+  "icon": {
+    "cocube_icon_01_start": {
+      "cn": "01 ICON 编程快速入门",
+      "en": "01 Getting Started with ICON",
+      "es": "01 Primeros pasos con ICON"
+    },
+    "cocube_icon_02_map_builder": {
+      "cn": "02 地图设计软件",
+      "en": "02 Map Builder",
+      "es": "02 Diseñador de mapas"
+    }
+  },
   "game": {
     "cocube_game_01_collection": {
       "cn": "01 游戏合集",
